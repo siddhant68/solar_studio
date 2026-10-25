@@ -1,0 +1,174 @@
+{
+ "rectangle": {
+  "result_id": "res_410d496155af5459caa61028",
+  "modules": 24,
+  "tables": 6,
+  "dc_kwp": 13.2,
+  "files": {
+   "json": {
+    "file": "rectangle/layout.json",
+    "sha256": "99e6d83e3648e6b2d44325398e4782cb0494b18dde403528f85732d3e2e149ef"
+   },
+   "csv": {
+    "file": "rectangle/modules.csv",
+    "sha256": "ed455e59f6482c816c20446f955ed791b61fc9cbf6b7c6287c1980fbb0abcc95"
+   },
+   "svg": {
+    "file": "rectangle/plan.svg",
+    "sha256": "b0672c4e7f5b6a11a1e3a6066f6f55f89edc6a3265e1cf9d3231e750b2a8dae9"
+   },
+   "dxf": {
+    "file": "rectangle/plan.dxf",
+    "sha256": "fbf771298289e700b8037236be7a1cc616f7dde684f5b0f6479b946ec87833bb"
+   },
+   "report": {
+    "file": "rectangle/report.md",
+    "sha256": "20f0a8e52d24695dd151977fad4be83c268fba5a818855053cd2938f64f71826"
+   }
+  }
+ },
+ "obstacle": {
+  "result_id": "res_35676bb67db6ca4ba3cf15d4",
+  "modules": 20,
+  "tables": 5,
+  "dc_kwp": 11.0,
+  "files": {
+   "json": {
+    "file": "obstacle/layout.json",
+    "sha256": "f0b0ab5113fc5949a48d5116902c75f01443f6fe9213a6d0dc21210e426fded4"
+   },
+   "csv": {
+    "file": "obstacle/modules.csv",
+    "sha256": "cdaf9eeed57dddba2b70fbb881e9d580b0e6d511e92c159ce975a70807334add"
+   },
+   "svg": {
+    "file": "obstacle/plan.svg",
+    "sha256": "25ac863202acd99850d3285b1c531fbe8dbebd71435326f82b20d98dc81c9411"
+   },
+   "dxf": {
+    "file": "obstacle/plan.dxf",
+    "sha256": "1d387d148afd5765fe42823e4c99905567d3b61581552be333d086f172289822"
+   },
+   "report": {
+    "file": "obstacle/report.md",
+    "sha256": "2ef935eadfb141ffddcf980323c1d9eb67b8dcbd0026afa935e4e0fbc79043f5"
+   }
+  }
+ },
+ "multipolygon": {
+  "result_id": "res_55756be61915e4dee3504beb",
+  "modules": 48,
+  "tables": 12,
+  "dc_kwp": 26.4,
+  "files": {
+   "json": {
+    "file": "multipolygon/layout.json",
+    "sha256": "43bf6415d191f4be73002b46e010de4f52e21fc96ff0585128db63ae932240d4"
+   },
+   "csv": {
+    "file": "multipolygon/modules.csv",
+    "sha256": "96c8bbbf095d157556bc8c9e8caf3e0634b5fa9d92600e9a27df05795d5386b4"
+   },
+   "svg": {
+    "file": "multipolygon/plan.svg",
+    "sha256": "419542e79a90d864fe3c8d8e9fbc6e6dba9e0e0af0523d3d617485d5981570e3"
+   },
+   "dxf": {
+    "file": "multipolygon/plan.dxf",
+    "sha256": "c77c40cce9f248c09bb8ccc4d0778a4b3ee88808aab04776cc24c7294210b610"
+   },
+   "report": {
+    "file": "multipolygon/report.md",
+    "sha256": "cc727ae68e44c98a9e536897a9ac0e90a54bb52c857e84b3fe73fefd3d45565b"
+   }
+  }
+ },
+ "concave-notch": {
+  "result_id": "res_3e27e5b3fad95f3c132daf2b",
+  "modules": 0,
+  "tables": 0,
+  "dc_kwp": 0.0,
+  "files": {
+   "json": {
+    "file": "concave-notch/layout.json",
+    "sha256": "0523143f5d1fe6b1a23d10e3b0e4818e4f036fae851fa1bf87b4e51416904fdd"
+   },
+   "csv": {
+    "file": "concave-notch/modules.csv",
+    "sha256": "73c4a17eda8e645ead74cfcae76c27ea7ba28a34706dacdb9c76b734cc9f073e"
+   },
+   "svg": {
+    "file": "concave-notch/plan.svg",
+    "sha256": "c7b074febcdc37118a64689c3f8e575039fb346252e1a28dce703f34a779eacc"
+   },
+   "dxf": {
+    "file": "concave-notch/plan.dxf",
+    "sha256": "d71f20678e5d529ae62ea6c62ccc34e785f06a97367e02478809b3fbf38082e2"
+   },
+   "report": {
+    "file": "concave-notch/report.md",
+    "sha256": "31ebcb5c2cfe1623df578b185151ee60e1f1fd905c9608d09c5eadb698e291ec"
+   }
+  }
+ },
+ "hole": {
+  "result_id": "res_0227335bfa4c9345d18675d3",
+  "modules": 0,
+  "tables": 0,
+  "dc_kwp": 0.0,
+  "files": {
+   "json": {
+    "file": "hole/layout.json",
+    "sha256": "7125d0a234e165e5beba5a73a11846e45946bb2e67b7853a152f191e785a3ad3"
+   },
+   "csv": {
+    "file": "hole/modules.csv",
+    "sha256": "73c4a17eda8e645ead74cfcae76c27ea7ba28a34706dacdb9c76b734cc9f073e"
+   },
+   "svg": {
+    "file": "hole/plan.svg",
+    "sha256": "0162ff656c8dc60572fd034ba8053faeb9eb4627a6ec4007fc0f259659855f96"
+   },
+   "dxf": {
+    "file": "hole/plan.dxf",
+    "sha256": "0045a579c581987a23b70f368953d83eef2bac5d6ff4cbac05f6738d025f3c24"
+   },
+   "report": {
+    "file": "hole/report.md",
+    "sha256": "d64bbf5c8532e7d0a1bfefd94726e452b22a97344cc824ce5c702e8bc19ee67d"
+   }
+  }
+ },
+ "pitch-3-4-5": {
+  "projected_depth_m": 4.0,
+  "table_rise_m": 3.0,
+  "shadow_clear_gap_m": 3.0000000000000004,
+  "pitch_at_that_elevation_m": 7.0,
+  "recommended_pitch_m": 7.0
+ },
+ "error-example": {
+  "exit": 2,
+  "error": {
+   "code": "UNSUPPORTED_FRAME",
+   "details": {
+    "supported": [
+     "m"
+    ]
+   },
+   "errors": [
+    {
+     "code": "UNSUPPORTED_FRAME",
+     "details": {
+      "supported": [
+       "m"
+      ]
+     },
+     "field": "/frame/units",
+     "message": "Units 'deg' are not supported; coordinates must be metres (\"m\"). Geographic degrees are not accepted"
+    }
+   ],
+   "field": "/frame/units",
+   "message": "Units 'deg' are not supported; coordinates must be metres (\"m\"). Geographic degrees are not accepted"
+  }
+ }
+}

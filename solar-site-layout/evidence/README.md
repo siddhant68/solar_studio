@@ -7,8 +7,7 @@
 | `rea/runtime-scenarios/` | **REA-runtime** | `capture-browser-scenario` Evidence for R03 S1/S2/S3 (`*.evidence.json.gz`), defined by `../references/scenarios/*.rea-scenario.json`. `*/summary.json` is extracted by `../references/probes/extract_rea_scenario.py`. Screenshot PNGs were extracted and verified against REA's SHA-256 (only the key steps for S2). |
 | `rea/execution/` | **REA-runtime** | `observe-web-execution` precise-coverage Evidence: an idle window and a window covering the pitch/tilt change (`*.json.gz`), produced by `../references/probes/agv_rea_execution_probe.cjs`. `coverage-*.json` are produced from that Evidence by `../references/probes/rea_coverage_locate.py`. `first-attempt-*.json` records the first probe, which acted before REA armed. |
 | `runtime/agv/` | **PW-runtime**, not REA | Playwright companion scenarios on the same built reference: live input values, readouts, stored design JSON, screenshots. |
-| `mcp-inspector/` | Second MCP client | MCP Inspector CLI 2.12.0 (TypeScript SDK) calling our stdio server, with wire transcripts. |
-| `acceptance/` | Our acceptance run | JUnit XML, test-case outcomes, browser checks with screenshots, MCP session and wire transcript, S06 memory measurement, run metadata bound to the source commit. |
+| `acceptance/` | Our acceptance run | JUnit XML, test-case outcomes, browser checks with screenshots (`browser/`), MCP SDK session and wire transcript (`mcp/`), second MCP client cross-check with MCP Inspector CLI 2.12.0 (`mcp-inspector/`), S06 memory measurement, and run metadata bound to the source commit. |
 | `examples/` | Calculation examples | CLI-generated results and every export for each analytic fixture, plus the 3-4-5 pitch result and an error example. |
 | `delivery/` | Packaging | Git bundle and source ZIP verification, and the fresh-clone reproduction log. |
 

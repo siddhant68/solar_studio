@@ -1,0 +1,39 @@
+{
+ "assumptions": [
+  "flat ground",
+  "equal lower-edge heights",
+  "infinite rows",
+  "direct sun perpendicular to the row from the facing side",
+  "single specified elevation only"
+ ],
+ "clearance_pitch_m": 4.5,
+ "formulae": {
+  "pitch_at_that_elevation_m": "D + H / tan(alpha)",
+  "projected_depth_m": "L cos(beta)",
+  "recommended_pitch_m": "max(D + minimum_clear_row_gap, D + H / tan(alpha))",
+  "shadow_clear_gap_m": "H / tan(alpha)",
+  "table_rise_m": "L sin(beta)"
+ },
+ "governed_by": "solar_elevation",
+ "inputs": {
+  "minimum_clear_row_gap_m": 0.5,
+  "solar_elevation_deg": 45.0,
+  "table_slope_length_m": 5.0,
+  "tilt_deg": 36.86989764584402
+ },
+ "label": "2D row-spacing estimate at the specified solar elevation",
+ "model": "flat_equal_height_infinite_rows_perpendicular_front_sun",
+ "not_provided": [
+  "all-year or seasonal shading guarantee",
+  "obstacle or terrain shading",
+  "energy or shading-loss estimate",
+  "solar position from a place, date or time"
+ ],
+ "pitch_at_that_elevation_m": 7.0,
+ "pitch_definition": "lower edge to lower edge, horizontal, perpendicular to the rows",
+ "projected_depth_m": 4.0,
+ "recommended_pitch_m": 7.0,
+ "schema_version": "solar.row_pitch.result/1",
+ "shadow_clear_gap_m": 3.0000000000000004,
+ "table_rise_m": 3.0
+}

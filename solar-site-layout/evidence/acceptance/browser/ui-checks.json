@@ -1,0 +1,209 @@
+{
+ "authority": "Playwright + Chromium against the local solar-site-layout server",
+ "base": "http://127.0.0.1:47721",
+ "playwright": "1.63.0",
+ "passed": true,
+ "results": [
+  {
+   "name": "V01 import + edit + generate shows totals",
+   "pass": true,
+   "details": {
+    "nums": {
+     "modules": 20,
+     "tables": 5
+    },
+    "expected_D": "3.939",
+    "statusAfterGen": "current",
+    "importedSetback": "1"
+   }
+  },
+  {
+   "name": "V01 save/reload restores project, inputs and current result",
+   "pass": true,
+   "details": {
+    "projectId": "prj_fc07c935a2bb4b0797ea",
+    "url": "http://127.0.0.1:47721/?project=prj_fc07c935a2bb4b0797ea",
+    "tiltAfter": "10",
+    "statusIn": "saved",
+    "statusRes": "current"
+   }
+  },
+  {
+   "name": "V01 export download (zip bundle)",
+   "pass": true,
+   "details": {
+    "file": "V01-download-res_2e599e535a0cfd6f84a8a1b0-bundle.zip",
+    "bytes": 15844,
+    "sha256": "ff1ae43cd0972ce5a488fd07e8d22b191bc7fe074130b8826173bda873101f36"
+   }
+  },
+  {
+   "name": "V01 no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V02 delayed result labelled historical; new edits remain dirty",
+   "pass": true,
+   "details": {
+    "dirtyWhilePending": "dirty",
+    "resState": "outdated",
+    "banner": "outdated",
+    "inState": "dirty",
+    "tilt": "15"
+   }
+  },
+  {
+   "name": "V02 old response cannot overwrite newer result selection",
+   "pass": true,
+   "details": {
+    "displayed_before_release": "Result res_231a9a2c0cf690833855e879 from rev 2 — current",
+    "displayed_after_release": "Result res_231a9a2c0cf690833855e879 from rev 2 — current",
+    "server_selected": "res_231a9a2c0cf690833855e879",
+    "server_revision": 2
+   }
+  },
+  {
+   "name": "V03 rectangle overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 0,
+    "holes": 1,
+    "modules": 24,
+    "tables": 6,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 39,
+    "scaleText": "Scale 1:43 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 48,
+     "tableEnvelopeArea": 48,
+     "envelopeExceedsModules": 0
+    },
+    "screenshots": [
+     "V03-rectangle-overview.png",
+     "V03-rectangle-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 rectangle no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 concave-notch overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 0,
+    "holes": 1,
+    "modules": 0,
+    "tables": 0,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 39,
+    "scaleText": "Scale 1:30 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 0,
+     "tableEnvelopeArea": 0,
+     "envelopeExceedsModules": 0
+    },
+    "screenshots": [
+     "V03-concave-notch-overview.png",
+     "V03-concave-notch-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 concave-notch no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 hole overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 0,
+    "holes": 2,
+    "modules": 0,
+    "tables": 0,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 39,
+    "scaleText": "Scale 1:30 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 0,
+     "tableEnvelopeArea": 0,
+     "envelopeExceedsModules": 0
+    },
+    "screenshots": [
+     "V03-hole-overview.png",
+     "V03-hole-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 hole no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 projected-rotated overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 1,
+    "holes": 2,
+    "modules": 360,
+    "tables": 30,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 40,
+    "scaleText": "Scale 1:17 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 842.8397052512861,
+     "tableEnvelopeArea": 858.9814094592493,
+     "envelopeExceedsModules": 16.141704207963244
+    },
+    "screenshots": [
+     "V03-projected-rotated-overview.png",
+     "V03-projected-rotated-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 projected-rotated no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  }
+ ]
+}
