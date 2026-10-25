@@ -1,1 +1,128 @@
-<!doctype html><title>placeholder</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar Studio · Site layout</title>
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Solar Studio <span>Module 01 · site to layout</span></div>
+  <div class="status" id="status-inputs" data-testid="status-inputs">Inputs: new (not saved)</div>
+  <div class="status" id="status-result" data-testid="status-result">Result: none</div>
+</header>
+<main class="layout">
+  <aside class="inputs" aria-label="Layout inputs">
+    <section class="card">
+      <h2>Site</h2>
+      <div class="row">
+        <label>Example
+          <select id="example" data-testid="example-select">
+            <option value="rectangle">Analytic rectangle (12 × 14 m)</option>
+            <option value="obstacle">Rectangle with one exclusion</option>
+            <option value="multipolygon">Two site components</option>
+            <option value="concave-notch">Concave notch (adversarial)</option>
+            <option value="hole">Small hole (adversarial)</option>
+            <option value="projected-rotated">Projected UTM, azimuth 197°</option>
+          </select>
+        </label>
+        <button id="load-example" data-testid="load-example" type="button">Load</button>
+      </div>
+      <label class="file">Import request (.json)
+        <input type="file" id="import-file" accept=".json,application/json" data-testid="import-file">
+      </label>
+      <div class="frame" id="frame-info" data-testid="frame-info"></div>
+      <label>Perimeter setback <span class="unit">m</span>
+        <input type="number" step="any" min="0" data-path="perimeter_setback_m" data-testid="in-setback"></label>
+      <details>
+        <summary>Boundary and exclusions (coordinate editor, metres)</summary>
+        <label>Boundary (Polygon/MultiPolygon in the request frame)
+          <textarea id="boundary-json" rows="8" spellcheck="false" data-testid="in-boundary"></textarea></label>
+        <label>Exclusions (list of {id, geometry, keepout_m})
+          <textarea id="exclusions-json" rows="6" spellcheck="false" data-testid="in-exclusions"></textarea></label>
+      </details>
+    </section>
+    <section class="card">
+      <h2>Module</h2>
+      <div class="grid2">
+        <label>Width (short side) <span class="unit">m</span><input type="number" step="any" data-path="module.width_m" data-testid="in-module-width"></label>
+        <label>Length <span class="unit">m</span><input type="number" step="any" data-path="module.length_m" data-testid="in-module-length"></label>
+        <label>Power <span class="unit">Wp</span><input type="number" step="any" data-path="module.power_wp" data-testid="in-module-power"></label>
+        <label>Orientation<select data-path="module.orientation" data-testid="in-orientation"><option>portrait</option><option>landscape</option></select></label>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Table</h2>
+      <div class="grid2">
+        <label>Rows (up slope)<input type="number" step="1" min="1" data-path="table.rows" data-int data-testid="in-rows"></label>
+        <label>Columns<input type="number" step="1" min="1" data-path="table.columns" data-int data-testid="in-columns"></label>
+        <label>Gap across <span class="unit">m</span><input type="number" step="any" min="0" data-path="table.module_gap_x_m" data-testid="in-gap-x"></label>
+        <label>Gap up slope <span class="unit">m</span><input type="number" step="any" min="0" data-path="table.module_gap_y_m" data-testid="in-gap-y"></label>
+        <label>Tilt <span class="unit">°</span><input type="number" step="any" min="0" max="80" data-path="table.tilt_deg" data-testid="in-tilt"></label>
+        <label>Facing azimuth <span class="unit">° from N, clockwise</span><input type="number" step="any" data-path="table.facing_azimuth_deg" data-testid="in-azimuth"></label>
+        <label>Lower edge height <span class="unit">m</span><input type="number" step="any" min="0" data-path="table.lower_edge_height_m" data-testid="in-lower-edge"></label>
+      </div>
+    </section>
+    <section class="card">
+      <h2>Placement</h2>
+      <div class="grid2">
+        <label>Mode<select data-path="placement.mode" data-testid="in-mode"><option value="fixed_lattice">Fixed lattice</option><option value="phase_search_3x3">3×3 phase search</option></select></label>
+        <label>Table gap <span class="unit">m</span><input type="number" step="any" min="0" data-path="placement.table_gap_m" data-testid="in-table-gap"></label>
+        <label>Anchor x (East) <span class="unit">m</span><input type="number" step="any" data-path="placement.anchor_xy_m.0" data-testid="in-anchor-x"></label>
+        <label>Anchor y (North) <span class="unit">m</span><input type="number" step="any" data-path="placement.anchor_xy_m.1" data-testid="in-anchor-y"></label>
+        <label>Row pitch <span class="unit">m, lower edge to lower edge</span><input type="number" step="any" min="0" data-path="placement.row_pitch_m" data-testid="in-pitch"></label>
+        <label>Min clear row gap <span class="unit">m</span><input type="number" step="any" min="0" data-path="placement.minimum_clear_row_gap_m" data-testid="in-min-gap"></label>
+      </div>
+      <details class="pitch-helper">
+        <summary>2D row-spacing estimate at a specified solar elevation</summary>
+        <div class="row">
+          <label>Solar elevation <span class="unit">°</span><input type="number" step="any" id="pitch-elevation" value="20" data-testid="in-solar-elevation"></label>
+          <button type="button" id="pitch-calc" data-testid="pitch-calc">Estimate</button>
+        </div>
+        <div id="pitch-out" class="note" data-testid="pitch-out"></div>
+      </details>
+    </section>
+    <section class="card actions">
+      <div class="row wrap">
+        <button type="button" id="validate" data-testid="validate">Validate</button>
+        <button type="button" id="save" data-testid="save">Save project</button>
+        <button type="button" id="generate" class="primary" data-testid="generate">Generate layout</button>
+      </div>
+      <div class="row wrap">
+        <label class="inline">Project ID <input type="text" id="project-id" placeholder="prj_…" data-testid="project-id"></label>
+        <button type="button" id="open-project" data-testid="open-project">Open</button>
+      </div>
+      <div id="messages" class="messages" data-testid="messages" role="status" aria-live="polite"></div>
+    </section>
+  </aside>
+  <section class="viewer">
+    <div class="toolbar">
+      <button type="button" id="fit" data-testid="fit">Fit to site</button>
+      <button type="button" id="zoom-in" data-testid="zoom-in">Zoom +</button>
+      <button type="button" id="zoom-out" data-testid="zoom-out">Zoom −</button>
+      <span class="sep"></span>
+      <label class="inline"><input type="checkbox" data-layer="layer-admissible" checked> Admissible</label>
+      <label class="inline"><input type="checkbox" data-layer="layer-keepout" checked> Keepouts</label>
+      <label class="inline"><input type="checkbox" data-layer="layer-exclusions" checked> Exclusions</label>
+      <label class="inline"><input type="checkbox" data-layer="layer-tables" checked data-testid="toggle-tables"> Tables</label>
+      <label class="inline"><input type="checkbox" data-layer="layer-modules" checked data-testid="toggle-modules"> Modules</label>
+      <span class="sep"></span>
+      <select id="export-format" data-testid="export-format">
+        <option value="bundle">Bundle (.zip)</option>
+        <option value="json">JSON</option>
+        <option value="csv">CSV (modules)</option>
+        <option value="svg">SVG plan</option>
+        <option value="dxf">DXF plan</option>
+        <option value="report">Calculation report (.md)</option>
+      </select>
+      <a id="export-link" class="button disabled" data-testid="export-link" aria-disabled="true">Download</a>
+    </div>
+    <div id="plan-host" class="plan-host" data-testid="plan-host"><p class="empty">Generate a layout to see the plan.</p></div>
+    <div class="summary" id="summary" data-testid="summary"></div>
+    <div class="history" id="history" data-testid="history"></div>
+  </section>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

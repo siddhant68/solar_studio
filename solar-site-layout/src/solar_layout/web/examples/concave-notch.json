@@ -1,0 +1,84 @@
+{
+  "schema_version": "solar.layout.request/1",
+  "name": "Concave notch missed by corners and centre",
+  "frame": {
+    "kind": "local_cartesian",
+    "id": "local:analytic-site",
+    "units": "m",
+    "axes": {
+      "x": "east",
+      "y": "north"
+    }
+  },
+  "boundary": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          3.5,
+          8
+        ],
+        [
+          3.5,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    ]
+  },
+  "perimeter_setback_m": 0,
+  "exclusions": [],
+  "module": {
+    "model_id": "SYNTHETIC-1x2-550",
+    "width_m": 2,
+    "length_m": 2.0,
+    "power_wp": 550.0,
+    "orientation": "portrait"
+  },
+  "table": {
+    "rows": 2,
+    "columns": 2,
+    "module_gap_x_m": 0.0,
+    "module_gap_y_m": 0.0,
+    "tilt_deg": 0.0,
+    "facing_azimuth_deg": 180.0,
+    "lower_edge_height_m": 0.8
+  },
+  "placement": {
+    "mode": "fixed_lattice",
+    "anchor_xy_m": [
+      2,
+      2
+    ],
+    "table_gap_m": 2,
+    "row_pitch_m": 6,
+    "minimum_clear_row_gap_m": 2
+  }
+}

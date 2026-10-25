@@ -1,0 +1,127 @@
+{
+  "schema_version": "solar.layout.request/1",
+  "name": "Projected UTM example, azimuth 197, hole and keepout",
+  "frame": {
+    "kind": "projected_cartesian",
+    "id": "utm33n-example",
+    "crs": "EPSG:32633",
+    "units": "m",
+    "axes": {
+      "x": "east",
+      "y": "north"
+    }
+  },
+  "boundary": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          446000.0,
+          4412000.0
+        ],
+        [
+          446060.0,
+          4412000.0
+        ],
+        [
+          446066.0,
+          4412030.0
+        ],
+        [
+          446040.0,
+          4412044.0
+        ],
+        [
+          446000.0,
+          4412040.0
+        ],
+        [
+          446000.0,
+          4412000.0
+        ]
+      ],
+      [
+        [
+          446030.0,
+          4412018.0
+        ],
+        [
+          446034.0,
+          4412018.0
+        ],
+        [
+          446034.0,
+          4412022.0
+        ],
+        [
+          446030.0,
+          4412022.0
+        ],
+        [
+          446030.0,
+          4412018.0
+        ]
+      ]
+    ]
+  },
+  "perimeter_setback_m": 2.0,
+  "exclusions": [
+    {
+      "id": "MAST",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              446012.0,
+              4412024.0
+            ],
+            [
+              446014.0,
+              4412024.0
+            ],
+            [
+              446014.0,
+              4412026.0
+            ],
+            [
+              446012.0,
+              4412026.0
+            ],
+            [
+              446012.0,
+              4412024.0
+            ]
+          ]
+        ]
+      },
+      "keepout_m": 2.0
+    }
+  ],
+  "module": {
+    "model_id": "GENERIC-1134x2278-580",
+    "width_m": 1.134,
+    "length_m": 2.278,
+    "power_wp": 580.0,
+    "orientation": "portrait"
+  },
+  "table": {
+    "rows": 2,
+    "columns": 6,
+    "module_gap_x_m": 0.02,
+    "module_gap_y_m": 0.02,
+    "tilt_deg": 25.0,
+    "facing_azimuth_deg": 197.0,
+    "lower_edge_height_m": 0.8
+  },
+  "placement": {
+    "mode": "phase_search_3x3",
+    "anchor_xy_m": [
+      446003.0,
+      4412003.0
+    ],
+    "table_gap_m": 0.5,
+    "row_pitch_m": 6.5,
+    "minimum_clear_row_gap_m": 1.5
+  }
+}

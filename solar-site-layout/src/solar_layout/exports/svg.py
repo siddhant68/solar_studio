@@ -24,6 +24,7 @@ MAX_PLAN_W_MM = 400.0
 MAX_PLAN_H_MM = 270.0
 SIDEBAR_W_MM = 105.0
 MARGIN_MM = 10.0
+SIDE_PANEL_H_MM = 222.0  # height the side panel text needs
 
 STYLE = """
 .site{fill:#f3efe4;stroke:#3b3b3b;stroke-width:1.6px;vector-effect:non-scaling-stroke;fill-rule:evenodd}
@@ -111,7 +112,7 @@ def write_svg(
     scale = choose_scale(ew, eh)
     pw, ph = ew * 1000.0 / scale, eh * 1000.0 / scale
     page_w = MARGIN_MM + pw + MARGIN_MM + SIDEBAR_W_MM + MARGIN_MM
-    page_h = MARGIN_MM + max(ph, 262.0) + MARGIN_MM
+    page_h = MARGIN_MM + max(ph, SIDE_PANEL_H_MM) + MARGIN_MM
     mp = _Mapper(x0, y1)
     q = summary["quantities"]
     dims = summary["dimensions"]
@@ -176,7 +177,16 @@ def write_svg(
 
     name = request.get("name") or "Untitled site"
     text("Solar Studio · site layout", "h1", 6.0)
-    text(name[:48], "h2", 5.0)
+    words, lines_, cur = name.split(), [], ""
+    for word in words:
+        if len(cur) + len(word) + 1 > 46 and cur:
+            lines_.append(cur)
+            cur = word
+        else:
+            cur = (cur + " " + word).strip()
+    lines_.append(cur)
+    for k, line in enumerate(lines_[:2]):
+        text(line if k == 0 or len(lines_) <= 2 else line[:43] + "...", "h2", 5.0)
     text("Preliminary layout under stated assumptions.", "small", 3.4)
     text("Not a construction approval.", "small", 6.0)
 
@@ -192,7 +202,8 @@ def write_svg(
     # scale bar
     bar_m = nice_bar_length(scale)
     bar_mm = bar_m * 1000.0 / scale
-    text(f"Scale 1:{scale} (page in mm, plan in metres)", "t", 4.0)
+    w(f'<text id="scale-text" x="0" y="{y:.2f}" class="t" data-scale="{scale}">Scale 1:{scale} (page in mm, plan in metres)</text>\n')
+    y += 4.0
     w(f'<g id="scale-bar" data-bar-m="{fmt_float(bar_m)}" data-bar-mm="{bar_mm:.4f}" transform="translate(0,{y:.2f})">')
     half = bar_mm / 2
     w(f'<rect x="0" y="0" width="{half:.4f}" height="2" fill="#1f2a33"/>')
