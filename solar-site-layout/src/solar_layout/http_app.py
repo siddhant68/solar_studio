@@ -123,8 +123,13 @@ def create_app(data_dir: str | None = None) -> Starlette:
         rec = await run_in_threadpool(svc.store.get_export, rid, fmt) if fmt in MEDIA_TYPES else None
         if rec is None:
             await run_in_threadpool(svc.export_layout, rid, fmt)
-        path = await run_in_threadpool(verify_export_file, svc.store, rid, fmt)
-        _, rel = export_path(svc.store, rid, fmt)
+        try:
+            path = await run_in_threadpool(verify_export_file, svc.store, rid, fmt)
+        except DomainError:
+            # recorded file missing or altered: rebuild it from the immutable result, then re-check
+            await run_in_threadpool(svc.export_layout, rid, fmt)
+            path = await run_in_threadpool(verify_export_file, svc.store, rid, fmt)
+        export_path(svc.store, rid, fmt)
         return FileResponse(path, media_type=MEDIA_TYPES[fmt], filename=path.name, headers={"X-Content-SHA256": (await run_in_threadpool(svc.store.get_export, rid, fmt))["sha256"]})
 
     async def plan_svg(request: Request):

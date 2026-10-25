@@ -187,6 +187,22 @@ def test_v05_report_reproduces_arithmetic_and_states_assumptions(exported):
     assert str(round(d["table_width_W_m"], 3))[:4] in text
 
 
+def test_v04_tampered_export_is_rebuilt_not_served(tmp_path):
+    from starlette.testclient import TestClient
+
+    from solar_layout.http_app import create_app
+
+    with TestClient(create_app(str(tmp_path / "d"))) as http:
+        rid = http.post("/api/layouts", json={"request": load_fixture("obstacle.request.json")}).json()["result_id"]
+        first = http.get(f"/api/layouts/{rid}/exports/csv")
+        svc = http.app.state.service
+        path = svc.store.export_root / svc.store.get_export(rid, "csv")["path"]
+        path.write_text("tampered\n")
+        again = http.get(f"/api/layouts/{rid}/exports/csv")
+        assert again.status_code == 200 and again.content == first.content
+        assert again.headers["x-content-sha256"] == hashlib.sha256(again.content).hexdigest()
+
+
 def test_v05_empty_layout_report_has_null_ratio(tmp_path):
     svc = SolarService(tmp_path / "d")
     req = load_fixture("rectangle.request.json")
