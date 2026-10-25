@@ -1,0 +1,25 @@
+{"rea_progress":{"phase":"analyze_javascript_application","completed":0,"total":1,"message":"Inventorying and parsing application artifacts","sequence":1}}
+{"rea_progress":{"phase":"read_javascript_artifacts","completed":0,"total":1,"message":"Reading inventoried JavaScript application sources","sequence":2}}
+{"rea_progress":{"phase":"parse_javascript_sources","completed":0,"total":1,"message":"Processing 5 selected application files","sequence":3}}
+{"rea_progress":{"phase":"process_javascript_artifact_metadata","completed":0,"total":1,"message":"Processing metadata for index.html (1/5)","sequence":4}}
+{"rea_progress":{"phase":"parse_javascript_source","completed":0,"total":1,"message":"Parsing and projecting assets/rows-06xZe35N.js (2/5)","sequence":5}}
+{"rea_progress":{"phase":"javascript_worker_parse","completed":0,"total":1,"message":"JavaScript worker parse: assets/rows-06xZe35N.js","sequence":6}}
+{"rea_progress":{"phase":"javascript_worker_static","completed":0,"total":1,"message":"JavaScript worker static: assets/rows-06xZe35N.js","sequence":7}}
+{"rea_progress":{"phase":"javascript_worker_semantic","completed":0,"total":1,"message":"JavaScript worker semantic: assets/rows-06xZe35N.js","sequence":8}}
+{"rea_progress":{"phase":"javascript_worker_projection","completed":0,"total":1,"message":"JavaScript worker projection: assets/rows-06xZe35N.js","sequence":9}}
+{"rea_progress":{"phase":"javascript_worker_transfer","completed":0,"total":1,"message":"JavaScript worker transfer: assets/rows-06xZe35N.js","sequence":10}}
+{"rea_progress":{"phase":"parse_javascript_source","completed":0,"total":1,"message":"Parsing and projecting assets/recommend-CNrji3tC.js (3/5)","sequence":11}}
+{"rea_progress":{"phase":"javascript_worker_parse","completed":0,"total":1,"message":"JavaScript worker parse: assets/recommend-CNrji3tC.js","sequence":12}}
+{"rea_progress":{"phase":"javascript_worker_static","completed":0,"total":1,"message":"JavaScript worker static: assets/recommend-CNrji3tC.js","sequence":13}}
+{"rea_progress":{"phase":"javascript_worker_semantic","completed":0,"total":1,"message":"JavaScript worker semantic: assets/recommend-CNrji3tC.js","sequence":14}}
+{"rea_progress":{"phase":"javascript_worker_projection","completed":0,"total":1,"message":"JavaScript worker projection: assets/recommend-CNrji3tC.js","sequence":15}}
+{"rea_progress":{"phase":"javascript_worker_transfer","completed":0,"total":1,"message":"JavaScript worker transfer: assets/recommend-CNrji3tC.js","sequence":16}}
+{"rea_progress":{"phase":"parse_javascript_source","completed":0,"total":1,"message":"Parsing and projecting assets/entry.worker-BWZeDHYo.js (4/5)","sequence":17}}
+{"rea_progress":{"phase":"javascript_worker_parse","completed":0,"total":1,"message":"JavaScript worker parse: assets/entry.worker-BWZeDHYo.js","sequence":18}}
+{"rea_progress":{"phase":"javascript_worker_static","completed":0,"total":1,"message":"JavaScript worker static: assets/entry.worker-BWZeDHYo.js","sequence":19}}
+{"rea_progress":{"phase":"javascript_worker_semantic","completed":0,"total":1,"message":"JavaScript worker semantic: assets/entry.worker-BWZeDHYo.js","sequence":20}}
+{"rea_progress":{"phase":"javascript_worker_projection","completed":0,"total":1,"message":"JavaScript worker projection: assets/entry.worker-BWZeDHYo.js","sequence":21}}
+{"rea_progress":{"phase":"javascript_worker_transfer","completed":0,"total":1,"message":"JavaScript worker transfer: assets/entry.worker-BWZeDHYo.js","sequence":22}}
+{"rea_progress":{"phase":"parse_javascript_source","completed":0,"total":1,"message":"Parsing and projecting assets/index-8KvU91kB.js (5/5)","sequence":23}}
+{"rea_progress":{"phase":"javascript_worker_parse","completed":0,"total":1,"message":"JavaScript worker parse: assets/index-8KvU91kB.js","sequence":24}}
+{"rea_progress":{"phase":"javascript_worker_static","completed":0,"total":1,"message":"JavaScript worker static: assets/index-8KvU91kB.js","sequence":25}}

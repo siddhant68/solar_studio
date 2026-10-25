@@ -1,0 +1,666 @@
+{
+ "authority": "ordinary Playwright runtime observation (not REA Evidence)",
+ "playwright_version": "1.63.0",
+ "base_url": "http://127.0.0.1:4173/",
+ "results": [
+  {
+   "name": "S1-small-array",
+   "aborted_external_requests": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point"
+   ],
+   "console_errors": 14,
+   "observations": [
+    {
+     "label": "before",
+     "controls": {
+      "control-array-tilt": "25",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "9",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "3",
+      "control-array-modules-per-row": "14",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "39.2%",
+      "readout-array-projected-gcr": "35.5%",
+      "readout-array-max-height": "4.09 m",
+      "readout-array-nameplate": "36.1 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "42ad84a5d331c954ea32366e5b21d6a315a8aff5a7f563a599595528be46a4e4",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 9,
+        "rowLengthM": 16,
+        "rowCount": 3,
+        "modulesPerRow": 14,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 25,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.39155555555555555,
+        "projectedGroundCoverRatio": 0.3548698490574616,
+        "maxHeightM": 4.089306754374225,
+        "nameplateDcKw": 36.12,
+        "nameplateAcKw": 30.099999999999998
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S1-small-array-before.png",
+      "sha256": "3face4043866945f59a64165307476715d6d3a2258d1d8c7a7009a15d351dfed",
+      "bytes": 753955
+     }
+    },
+    {
+     "label": "after",
+     "controls": {
+      "control-array-tilt": "25",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "9",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "2",
+      "control-array-modules-per-row": "4",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "39.2%",
+      "readout-array-projected-gcr": "35.5%",
+      "readout-array-max-height": "4.09 m",
+      "readout-array-nameplate": "6.9 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "f4e901bbd6977b4e2ab684119ec9c7e9f6e289211b048094d30309e373d5d628",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 9,
+        "rowLengthM": 16,
+        "rowCount": 2,
+        "modulesPerRow": 4,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 25,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.39155555555555555,
+        "projectedGroundCoverRatio": 0.3548698490574616,
+        "maxHeightM": 4.089306754374225,
+        "nameplateDcKw": 6.88,
+        "nameplateAcKw": 5.733333333333333
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S1-small-array-after.png",
+      "sha256": "24d9c87b547cfe80ad120c3074dc69c36a98cc708409e6d68b66382cf88da15e",
+      "bytes": 700573
+     }
+    }
+   ],
+   "steps": [
+    "open panels",
+    "rows=2",
+    "modules per row=4"
+   ]
+  },
+  {
+   "name": "S2-change-pitch-tilt",
+   "aborted_external_requests": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point",
+    "https://power.larc.nasa.gov/api/temporal/hourly/point"
+   ],
+   "console_errors": 19,
+   "observations": [
+    {
+     "label": "before",
+     "controls": {
+      "control-array-tilt": "25",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "9",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "3",
+      "control-array-modules-per-row": "14",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "39.2%",
+      "readout-array-projected-gcr": "35.5%",
+      "readout-array-max-height": "4.09 m",
+      "readout-array-nameplate": "36.1 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "0ad11143acfec9039d803b9f8e40d3369c8a224a0b7128fc99297fed5d61f136",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 9,
+        "rowLengthM": 16,
+        "rowCount": 3,
+        "modulesPerRow": 14,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 25,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.39155555555555555,
+        "projectedGroundCoverRatio": 0.3548698490574616,
+        "maxHeightM": 4.089306754374225,
+        "nameplateDcKw": 36.12,
+        "nameplateAcKw": 30.099999999999998
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S2-change-pitch-tilt-before.png",
+      "sha256": "f673db61d1543d8744cdb1cd7f4641635d027511360decc909e88b06c32947ba",
+      "bytes": 747310
+     }
+    },
+    {
+     "label": "after-pitch",
+     "controls": {
+      "control-array-tilt": "25",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "6",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "3",
+      "control-array-modules-per-row": "14",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "58.7%",
+      "readout-array-projected-gcr": "53.2%",
+      "readout-array-max-height": "4.09 m",
+      "readout-array-nameplate": "36.1 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "7bc006e913ca4df9696fd36f4e9bc4094139f3f1a86b744fea5efe6a661a4da1",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 6,
+        "rowLengthM": 16,
+        "rowCount": 3,
+        "modulesPerRow": 14,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 25,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.5873333333333334,
+        "projectedGroundCoverRatio": 0.5323047735861924,
+        "maxHeightM": 4.089306754374225,
+        "nameplateDcKw": 36.12,
+        "nameplateAcKw": 30.099999999999998
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S2-change-pitch-tilt-after-pitch.png",
+      "sha256": "6c44ead0173ecb1ff9b647767d88acf0d2dfaaab5a6d3b9022067d89188adaf8",
+      "bytes": 891750
+     }
+    },
+    {
+     "label": "after-tilt",
+     "controls": {
+      "control-array-tilt": "35",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "6",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "3",
+      "control-array-modules-per-row": "14",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "58.7%",
+      "readout-array-projected-gcr": "48.1%",
+      "readout-array-max-height": "4.62 m",
+      "readout-array-nameplate": "36.1 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "09bf70e2c041d7ee4b4032387e03dbb924ee55b549da4a2b2f9ae9d5047bf717",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 6,
+        "rowLengthM": 16,
+        "rowCount": 3,
+        "modulesPerRow": 14,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 35,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.5873333333333334,
+        "projectedGroundCoverRatio": 0.4811153006790678,
+        "maxHeightM": 4.621283361701087,
+        "nameplateDcKw": 36.12,
+        "nameplateAcKw": 30.099999999999998
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S2-change-pitch-tilt-after-tilt.png",
+      "sha256": "7fdcaecd336057135b6475513965624e47653677ed38b6a93e31814d1e75ee50",
+      "bytes": 914777
+     }
+    }
+   ],
+   "steps": [
+    "open panels",
+    "pitch=6",
+    "tilt=35"
+   ]
+  },
+  {
+   "name": "S3-save-reload",
+   "aborted_external_requests": [
+    "https://power.larc.nasa.gov/api/temporal/daily/point",
+    "https://power.larc.nasa.gov/api/temporal/hourly/point"
+   ],
+   "console_errors": 34,
+   "observations": [
+    {
+     "label": "saved-before-reload",
+     "controls": {
+      "control-array-tilt": "33",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "7.5",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "3",
+      "control-array-modules-per-row": "14",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "47.0%",
+      "readout-array-projected-gcr": "39.4%",
+      "readout-array-max-height": "4.52 m",
+      "readout-array-nameplate": "36.1 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "4c28fddc3d942711933d3247bffbcfb547816e7d297c2aaec72f7d9f207c1615",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 7.5,
+        "rowLengthM": 16,
+        "rowCount": 3,
+        "modulesPerRow": 14,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 33,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.46986666666666665,
+        "projectedGroundCoverRatio": 0.3940633441919566,
+        "maxHeightM": 4.519307959392956,
+        "nameplateDcKw": 36.12,
+        "nameplateAcKw": 30.099999999999998
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S3-save-reload-saved-before-reload.png",
+      "sha256": "9c1e008f0cbe79901e9e8049c90850291963393fef2da7675248028e2b1312e0",
+      "bytes": 824086
+     }
+    },
+    {
+     "label": "after-reload",
+     "controls": {
+      "control-array-tilt": "33",
+      "control-array-azimuth": "180",
+      "control-array-pitch": "7.5",
+      "control-array-collector-width": "3.5",
+      "control-array-clearance": "2.6",
+      "control-array-row-azimuth": "90",
+      "control-array-row-count": "3",
+      "control-array-modules-per-row": "14",
+      "control-array-module-width": "1.134",
+      "control-array-module-height": "1.762",
+      "control-array-module-power": "430"
+     },
+     "readouts": {
+      "readout-array-gcr": "47.0%",
+      "readout-array-projected-gcr": "39.4%",
+      "readout-array-max-height": "4.52 m",
+      "readout-array-nameplate": "36.1 kW",
+      "readout-array-row-azimuth": "90.0°"
+     },
+     "energy_status": "idle",
+     "stored_design_sha256": "04cb9a5835864600f03120ad56b1161b2244305507640601d0db20ca2e58c6f2",
+     "stored_design_top_level_keys": [
+      "location",
+      "locationLabel",
+      "frostPercentile",
+      "plot",
+      "selectedBedId",
+      "selectedArrayId",
+      "preferences",
+      "compatibilityWeights",
+      "maxCropsPerBed",
+      "wildlife",
+      "overlay",
+      "imageryEnabled",
+      "lighting",
+      "effects",
+      "plantYear",
+      "simulation",
+      "answers",
+      "sidebarStep",
+      "lengthUnit",
+      "economyInputs"
+     ],
+     "stored_arrays": [
+      {
+       "id": "array-1",
+       "geometry": {
+        "collectorWidthM": 3.524,
+        "pitchM": 7.5,
+        "rowLengthM": 16,
+        "rowCount": 3,
+        "modulesPerRow": 14,
+        "clearanceHeightM": 2.6,
+        "rowAzimuthDeg": 90,
+        "originM": {
+         "xM": 0,
+         "yM": 0
+        }
+       },
+       "tracker": {
+        "mode": "fixed",
+        "tiltDeg": 33,
+        "surfaceAzimuthDeg": 180
+       },
+       "module": {
+        "widthM": 1.134,
+        "heightM": 1.762,
+        "nameplateWp": 430
+       },
+       "derived": {
+        "groundCoverRatio": 0.46986666666666665,
+        "projectedGroundCoverRatio": 0.3940633441919566,
+        "maxHeightM": 4.519307959392956,
+        "nameplateDcKw": 36.12,
+        "nameplateAcKw": 30.099999999999998
+       }
+      }
+     ],
+     "screenshot": {
+      "file": "S3-save-reload-after-reload.png",
+      "sha256": "5cd1b5aefede93b5b56bddc1187175a8487405a8c365de64b35809c8c9c33fbf",
+      "bytes": 742708
+     }
+    }
+   ],
+   "steps": [
+    "open panels",
+    "tilt=33",
+    "pitch=7.5",
+    "save",
+    "back to panels",
+    "reload",
+    "reopen panels"
+   ],
+   "storage_status_before_reload": "saved",
+   "storage_status_after_reload": "saved"
+  }
+ ]
+}

@@ -1,0 +1,24 @@
+{
+ "evidence_id": "ev_b6b18403f0d6fd23c332f6cb80bfe337a42e2bce7bbb650085257a8fcc908906",
+ "window": {
+  "armed_at": "2026-10-25T19:39:34.340Z",
+  "ended_at": "2026-10-25T19:39:40.343Z",
+  "requested_ms": 6000,
+  "end_reason": "window_elapsed",
+  "producer_started_seconds": 3725.046335,
+  "producer_sampled_seconds": 3731.083671
+ },
+ "coverage_state": "captured",
+ "covered_scripts": 0,
+ "script_inventory": {
+  "main_document_scripts": 4,
+  "not_reported_script_ids": [
+   "4",
+   "5",
+   "7",
+   "9"
+  ],
+  "coverage_absence": "unknown"
+ },
+ "note": "first execution probe: the action ran before REA armed its window, so the action window has no coverage; superseded by execution/ (armed-synchronised)"
+}
