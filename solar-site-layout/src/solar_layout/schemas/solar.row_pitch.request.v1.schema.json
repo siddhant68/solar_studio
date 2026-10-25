@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://solar-studio.local/schemas/solar.row_pitch.request.v1.schema.json",
+  "title": "solar.row_pitch.request/1",
+  "description": "Limited two-dimensional row-spacing estimate at one specified solar elevation. Solar azimuth, dates and time windows are not accepted by this release (UNSUPPORTED_INPUT).",
+  "type": "object",
+  "required": ["schema_version", "table_slope_length_m", "tilt_deg", "solar_elevation_deg", "minimum_clear_row_gap_m", "model"],
+  "properties": {
+    "schema_version": {"const": "solar.row_pitch.request/1"},
+    "table_slope_length_m": {"type": "number", "exclusiveMinimum": 0, "maximum": 100, "description": "Table length L up the slope, in the table plane."},
+    "tilt_deg": {"type": "number", "minimum": 0, "maximum": 80},
+    "solar_elevation_deg": {"type": "number", "description": "Supplied elevation, (0, 90]. Elevations below the declared minimum are refused with a bounded diagnostic."},
+    "minimum_clear_row_gap_m": {"type": "number", "minimum": 0, "maximum": 1000},
+    "model": {"const": "flat_equal_height_infinite_rows_perpendicular_front_sun"}
+  },
+  "additionalProperties": true
+}
