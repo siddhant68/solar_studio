@@ -2,6 +2,8 @@
 
 An open, assistant-accessible solar design platform, beginning with a verified flat-site layout module.
 
+**Build status (25 October 2026):** Module 01 is implemented in [`solar-site-layout/`](solar-site-layout/). See its [delivery report](solar-site-layout/DELIVERY_REPORT.md), [acceptance gates](solar-site-layout/reports/ACCEPTANCE.json) (36/36 recorded pass, bound to source commit `f16944e`) and [README](solar-site-layout/README.md). The handoff text below is unchanged.
+
 **Current state:** research-backed implementation handoff and analytic fixtures. The application has not been built in this repository yet. No application tests or actual REA analysis are claimed by this handoff.
 
 ## Start the build

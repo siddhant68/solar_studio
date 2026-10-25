@@ -1,8 +1,8 @@
 # Delivery report: Solar Studio Module 01 (site to layout)
 
-Source commit under test: `SOURCE_COMMIT` (branch `claude/kind-cerf-gu33em`). The gate table in `reports/ACCEPTANCE.json` is bound to that commit by git tree IDs for `src/`, `tests/`, `scripts/`, the locks, the fixtures and the probes. Later delivery commits change only reports and evidence.
+Source commit under test: `f16944e8e9050aaf1078a3a07fcf2115805bc4e4` (branch `claude/kind-cerf-gu33em`). The gate table in `reports/ACCEPTANCE.json` is bound to that commit by git tree IDs for `src/`, `tests/`, `scripts/`, the locks, the fixtures and the probes. Later delivery commits change only reports and evidence.
 
-**Summary.** GATE_SUMMARY. The module computes, verifies, stores and exports flat-site table layouts through a browser, CLI, HTTP and MCP. It reproduces every analytic fixture exactly.
+**Summary.** `reports/ACCEPTANCE.json` records **all 36 gates as pass**: 207 test cases, 0 failed, 0 skipped. The module computes, verifies, stores and exports flat-site table layouts through a browser, CLI, HTTP and MCP. It reproduces every analytic fixture exactly.
 
 The one material shortfall is in the reference investigation. REA's static JavaScript analysis could not finish the reference's 917 kB main bundle within 300 s, 1,500 s or 2,400 s. That chunk's control path was instead located with REA's runtime execution coverage, and R02 is marked pass on that basis with the limitation stated. Judge it below.
 
@@ -46,8 +46,8 @@ Every item below was run against the source commit; commands and evidence paths 
   - CSV and JSON round-trip every module exactly. The bundle manifest hashes match.
   - Exports are byte-deterministic.
   - The report reproduces the count × power arithmetic and denominators and states its assumptions, with no kWh, AC, electrical or structural numbers.
-- **Performance (D02).** BENCH_D02.
-- **Reproduction and packaging (D01, D05).** REPRO_SUMMARY
+- **Performance (D02).** Machine: Intel(R) Xeon(R) Processor @ 2.80GHz, 4 vCPU, 16091 MiB. 10,192 modules (364 tables, projected UTM site with a hole and a keepout) generated and independently verified in **2.76 s**, or 3.76 s of process wall time including interpreter start. Measured peak process-tree RSS was **86.36 MiB**. Exports were measured separately in a fresh process: 7.4 s for all six formats (DXF 2.2 s, bundle 3.1 s), peak 91.29 MiB. The 25,788-module stress case completed in 6.22 s at a 112.14 MiB peak (D03).
+- **Reproduction and packaging (D01, D05).** The Git bundle and source ZIP of `553b1c1cd0` (same source tree as the tested commit) passed every integrity check: `git bundle verify`, the cloned tree equals HEAD, ZIP CRCs pass, the ZIP equals the tracked files, and no caches, virtual environments, databases, keys or reference checkouts are present. A fresh clone from the bundle with an empty uv cache ran `uv sync --frozen`, then the CLI workflow (rectangle 24 modules, obstacle 20, pitch 7.0 m) and the full test suite: **207 passed, 0 skipped**. The delivered final package is re-verified the same way (`dist/` verification files).
 
 ## Reference-derived observations
 
@@ -82,7 +82,7 @@ These are observations of other software. See `reports/REFERENCE_FINDINGS.md` fo
 
 ## Remaining failures and limitations
 
-FAILURE_LIST
+- **No gate is recorded as fail, blocked or unexecuted.** The items below are limits of the evidence or the environment, not passing results presented as more than they are.
 
 - **R02 limitation (not a recorded failure).** REA static analysis of `assets/index-8KvU91kB.js` did not complete in three attempts. A future run could try a larger budget, a machine with more single-core speed, or a newer REA release. Runtime coverage evidence is the substitute used here.
 - `git push` from the build session was refused because the Claude GitHub App has no access to `siddhant68/solar_studio`. The deliverable is the attached Git bundle.

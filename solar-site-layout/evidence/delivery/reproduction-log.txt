@@ -1,0 +1,438 @@
+$ uv sync --frozen --python 3.12
+# exit 0 in 4.5s
+
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+Using CPython 3.12.3 interpreter at: /usr/bin/python3.12
+Creating virtual environment at: .venv
+   Building solar-site-layout @ file:///tmp/solar-verify-962h09gz/from-bundle/solar-site-layout
+Downloading numpy (16.0MiB)
+Downloading pydantic-core (2.1MiB)
+Downloading ezdxf (5.9MiB)
+Downloading shapely (2.2MiB)
+Downloading cryptography (4.5MiB)
+Downloading fonttools (5.2MiB)
+Downloading pygments (1.2MiB)
+ Downloaded pygments
+ Downloaded pydantic-core
+ Downloaded shapely
+ Downloaded cryptography
+ Downloaded fonttools
+ Downloaded ezdxf
+      Built solar-site-layout @ file:///tmp/solar-verify-962h09gz/from-bundle/solar-site-layout
+ Downloaded numpy
+Prepared 43 packages in 4.33s
+Installed 43 packages in 40ms
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.10.23
+ + cffi==2.1.1
+ + click==8.5.0
+ + cryptography==50.0.2
+ + ezdxf==1.4.5
+ + fonttools==4.67.0
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpcore2==2.16.0
+ + httpx==0.28.1
+ + httpx2==2.16.0
+ + idna==3.20
+ + iniconfig==2.3.1
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + mcp==2.3.0
+ + mcp-types==2.3.0
+ + numpy==2.5.4
+ + opentelemetry-api==1.45.1
+ + packaging==26.3
+ + pluggy==1.7.0
+ + psutil==7.2.2
+ + pycparser==3.12
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + pygments==2.21.0
+ + pyjwt==2.15.1
+ + pyparsing==3.3.3
+ + pytest==9.1.1
+ + python-multipart==0.0.32
+ + referencing==0.37.0
+ + rpds-py==2026.9.1
+ + shapely==2.2.0
+ + solar-site-layout==0.1.0 (from file:///tmp/solar-verify-962h09gz/from-bundle/solar-site-layout)
+ + sse-starlette==3.5.1
+ + starlette==1.10.0
+ + truststore==0.10.5
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + uvicorn==0.54.0
+
+
+$ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/repro-data generate <tmp>/from-bundle/handoffs/module-01/fixtures/rectangle.request.json
+# exit 0 in 2.6s
+"
+   },
+   "input_digest": "9210e69797916b72039bdc1c0f54557138acf6cfd1b08e27de4852e61d2a1c7b",
+   "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
+   "placement": {
+    "anchor_xy_m": [
+     1.0,
+     1.0
+    ],
+    "clear_row_gap_m": 1.0,
+    "lattice_period_u_m": 3.0,
+    "minimum_clear_row_gap_m": 1.0,
+    "mode": "fixed_lattice",
+    "optimality": "fixed_lattice_no_search",
+    "phase_candidates": [
+     {
+      "candidates": 56,
+      "module_count": 24,
+      "offset_u_m": 0.0,
+      "offset_v_m": 0.0,
+      "phase_index": [
+       0,
+       0
+      ],
+      "table_count": 6
+     }
+    ],
+    "row_pitch_m": 5.0,
+    "selected_offset_u_m": 0.0,
+    "selected_offset_v_m": 0.0,
+    "selected_phase_index": [
+     0,
+     0
+    ],
+    "table_gap_m": 1.0
+   },
+   "quantities": {
+    "buildable_area_bounds_m2": [
+     119.99668665411444,
+     120.0
+    ],
+    "buildable_area_m2": 120.0,
+    "dc_capacity_kwp": 13.2,
+    "gross_site_area_m2": 168.0,
+    "module_count": 24,
+    "module_ground_coverage_buildable": 0.4,
+    "module_ground_coverage_gross": 0.2857142857142857,
+    "module_power_wp": 550.0,
+    "modules_per_table": 4,
+    "outer_ring_area_m2": 168.0,
+    "physical_module_area_m2": 48.0,
+    "projected_module_area_m2": 48.0,
+    "table_count": 6,
+    "table_footprint_area_m2": 48.0
+   },
+   "rejections": [
+    {
+     "i": -1,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 0,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 2,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 0,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 1,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 0,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 2,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": 0,
+     "reason": "perimeter_setback"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "reason": "perimeter_setback"
+    }
+   ],
+   "result_id": "res_410d496155af5459caa61028",
+   "schema_version": "solar.layout.result/1",
+   "warnings": [],
+   "z_kind": "relative_flat_datum",
+   "z_reference": "z = 0 is the layout's synthetic flat datum; heights are not surveyed elevations"
+  },
+  "verification": {
+   "checks": {
+    "dimensions": true,
+    "exclusions": true,
+    "footprint_shape": true,
+    "identity_and_membership": true,
+    "lattice_positions": true,
+    "module_geometry": true,
+    "module_within_table": true,
+    "perimeter_setback": true,
+    "quantities": true,
+    "site_containment": true,
+    "tables_disjoint": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/repro-data generate <tmp>/from-bundle/handoffs/module-01/fixtures/obstacle.request.json
+# exit 0 in 0.8s
+1507",
+   "payload_digest": "1f53ed0242dfb9e9edb0efe69caad2d54305dc878f9f39266db5c6f9bb165102",
+   "placement": {
+    "anchor_xy_m": [
+     1.0,
+     1.0
+    ],
+    "clear_row_gap_m": 1.0,
+    "lattice_period_u_m": 3.0,
+    "minimum_clear_row_gap_m": 1.0,
+    "mode": "fixed_lattice",
+    "optimality": "fixed_lattice_no_search",
+    "phase_candidates": [
+     {
+      "candidates": 56,
+      "module_count": 20,
+      "offset_u_m": 0.0,
+      "offset_v_m": 0.0,
+      "phase_index": [
+       0,
+       0
+      ],
+      "table_count": 5
+     }
+    ],
+    "row_pitch_m": 5.0,
+    "selected_offset_u_m": 0.0,
+    "selected_offset_v_m": 0.0,
+    "selected_phase_index": [
+     0,
+     0
+    ],
+    "table_gap_m": 1.0
+   },
+   "quantities": {
+    "buildable_area_bounds_m2": [
+     111.99683726177663,
+     112.0
+    ],
+    "buildable_area_m2": 112.0,
+    "dc_capacity_kwp": 11.0,
+    "gross_site_area_m2": 168.0,
+    "module_count": 20,
+    "module_ground_coverage_buildable": 0.35714285714285715,
+    "module_ground_coverage_gross": 0.23809523809523808,
+    "module_power_wp": 550.0,
+    "modules_per_table": 4,
+    "outer_ring_area_m2": 168.0,
+    "physical_module_area_m2": 40.0,
+    "projected_module_area_m2": 40.0,
+    "table_count": 5,
+    "table_footprint_area_m2": 40.0
+   },
+   "rejections": [
+    {
+     "i": -1,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 0,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 2,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 0,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 1,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 0,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 2,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": 0,
+     "reason": "perimeter_setback"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "reason": "perimeter_setback"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "reason": "exclusion:EX-1"
+    }
+   ],
+   "result_id": "res_35676bb67db6ca4ba3cf15d4",
+   "schema_version": "solar.layout.result/1",
+   "warnings": [],
+   "z_kind": "relative_flat_datum",
+   "z_reference": "z = 0 is the layout's synthetic flat datum; heights are not surveyed elevations"
+  },
+  "verification": {
+   "checks": {
+    "dimensions": true,
+    "exclusions": true,
+    "footprint_shape": true,
+    "identity_and_membership": true,
+    "lattice_positions": true,
+    "module_geometry": true,
+    "module_within_table": true,
+    "perimeter_setback": true,
+    "quantities": true,
+    "site_containment": true,
+    "tables_disjoint": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/repro-data pitch <tmp>/from-bundle/handoffs/module-01/fixtures/pitch-3-4-5.request.json
+# exit 0 in 0.8s
+{
+ "ok": true,
+ "result": {
+  "assumptions": [
+   "flat ground",
+   "equal lower-edge heights",
+   "infinite rows",
+   "direct sun perpendicular to the row from the facing side",
+   "single specified elevation only"
+  ],
+  "clearance_pitch_m": 4.5,
+  "formulae": {
+   "pitch_at_that_elevation_m": "D + H / tan(alpha)",
+   "projected_depth_m": "L cos(beta)",
+   "recommended_pitch_m": "max(D + minimum_clear_row_gap, D + H / tan(alpha))",
+   "shadow_clear_gap_m": "H / tan(alpha)",
+   "table_rise_m": "L sin(beta)"
+  },
+  "governed_by": "solar_elevation",
+  "inputs": {
+   "minimum_clear_row_gap_m": 0.5,
+   "solar_elevation_deg": 45.0,
+   "table_slope_length_m": 5.0,
+   "tilt_deg": 36.86989764584402
+  },
+  "label": "2D row-spacing estimate at the specified solar elevation",
+  "model": "flat_equal_height_infinite_rows_perpendicular_front_sun",
+  "not_provided": [
+   "all-year or seasonal shading guarantee",
+   "obstacle or terrain shading",
+   "energy or shading-loss estimate",
+   "solar position from a place, date or time"
+  ],
+  "pitch_at_that_elevation_m": 7.0,
+  "pitch_definition": "lower edge to lower edge, horizontal, perpendicular to the rows",
+  "projected_depth_m": 4.0,
+  "recommended_pitch_m": 7.0,
+  "schema_version": "solar.row_pitch.result/1",
+  "shadow_clear_gap_m": 3.0000000000000004,
+  "table_rise_m": 3.0
+ }
+}
+
+
+
+$ <tmp>/from-bundle/solar-site-layout/.venv/bin/python -m pytest -q -p no:cacheprovider
+# exit 0 in 52.7s
+........................................................................ [ 34%]
+........................................................................ [ 69%]
+...............................................................          [100%]
+
+
