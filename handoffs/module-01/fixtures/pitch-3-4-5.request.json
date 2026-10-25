@@ -1,0 +1,8 @@
+{
+  "schema_version": "solar.row_pitch.request/1",
+  "table_slope_length_m": 5.0,
+  "tilt_deg": 36.86989764584402,
+  "solar_elevation_deg": 45.0,
+  "minimum_clear_row_gap_m": 0.5,
+  "model": "flat_equal_height_infinite_rows_perpendicular_front_sun"
+}

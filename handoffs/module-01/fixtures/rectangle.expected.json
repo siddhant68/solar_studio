@@ -1,0 +1,52 @@
+{
+  "fixture": "rectangle.request.json",
+  "expectation_authority": "independent interval arithmetic in ACCEPTANCE.md",
+  "table_origins_xy_m": [
+    [
+      1,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      7,
+      6
+    ]
+  ],
+  "table_count": 6,
+  "module_count": 24,
+  "dc_capacity_kwp": 13.2,
+  "table_width_m": 2,
+  "table_slope_length_m": 4,
+  "table_projected_depth_m": 4,
+  "table_rise_m": 0,
+  "gross_site_area_m2": 168,
+  "buildable_area_m2": 120,
+  "physical_module_area_m2": 48,
+  "projected_module_area_m2": 48,
+  "table_footprint_area_m2": 48,
+  "module_ground_coverage_gross": 0.2857142857142857,
+  "module_ground_coverage_buildable": 0.4,
+  "z_kind": "relative_flat_datum",
+  "all_module_corner_z_relative_m": 0.8,
+  "tolerance": {
+    "count": 0,
+    "coordinate_m": 1e-09,
+    "area_m2": 1e-09,
+    "capacity_kwp": 1e-09
+  }
+}

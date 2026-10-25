@@ -1,0 +1,40 @@
+{
+  "fixture": "obstacle.request.json",
+  "table_origins_xy_m": [
+    [
+      1,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      7,
+      6
+    ]
+  ],
+  "rejected_table_origins_xy_m": [
+    [
+      4,
+      1
+    ]
+  ],
+  "table_count": 5,
+  "module_count": 20,
+  "dc_capacity_kwp": 11,
+  "gross_site_area_m2": 168,
+  "buildable_area_m2": 112,
+  "physical_module_area_m2": 40,
+  "projected_module_area_m2": 40,
+  "table_footprint_area_m2": 40,
+  "tolerance_m": 1e-09
+}

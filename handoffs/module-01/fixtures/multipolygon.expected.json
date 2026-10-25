@@ -1,0 +1,59 @@
+{
+  "fixture": "multipolygon.request.json",
+  "table_count": 12,
+  "module_count": 48,
+  "dc_capacity_kwp": 26.4,
+  "gross_site_area_m2": 336,
+  "buildable_area_m2": 240,
+  "table_origins_xy_m": [
+    [
+      1,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      4,
+      6
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      22,
+      1
+    ],
+    [
+      25,
+      1
+    ],
+    [
+      19,
+      6
+    ],
+    [
+      22,
+      6
+    ],
+    [
+      25,
+      6
+    ]
+  ],
+  "tolerance_m": 1e-09
+}

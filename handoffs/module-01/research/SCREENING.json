@@ -1,0 +1,41 @@
+{
+  "research_date": "2026-10-25",
+  "status": "planning research only; no REA or reference runtime execution performed",
+  "references": [
+    {
+      "role": "primary_browser_artifact",
+      "repository": "https://github.com/peterklingelhofer/agrivoltaic-garden-planner",
+      "commit": "43118b3939a91df5ba641a3b0470022ff7ecc5c7",
+      "code_license": "Apache-2.0",
+      "other_terms": "Documentation/data CC BY 4.0; third-party terms separate",
+      "runtime_verified": false
+    },
+    {
+      "role": "secondary_source_reference",
+      "repository": "https://github.com/JavierBrana/PVPlant",
+      "commit": "7852ee562c92706e5e3e5d095cefccd5070b18d3",
+      "license_observation": "PVPlantRack.py and PVPlantPlacement.py headers say LGPL version 2 or later; repository API licence null",
+      "runtime_verified": false
+    },
+    {
+      "role": "numerical_reference",
+      "repository": "https://github.com/pvlib/pvlib-python",
+      "license": "BSD-3-Clause",
+      "runtime_verified": false
+    },
+    {
+      "role": "rejected_unimplemented_oracle",
+      "repository": "https://github.com/funkybooboo/sunfarm",
+      "commit": "565d7d92dccbe480d6a3ec069ea4c0ab7d01572c",
+      "evidence": "src/main.rs explicitly says core simulation not yet implemented"
+    }
+  ],
+  "rea": {
+    "version": "6.8.0",
+    "npm_url": "https://registry.npmjs.org/rea-agents/6.8.0",
+    "tarball_url": "https://registry.npmjs.org/rea-agents/-/rea-agents-6.8.0.tgz",
+    "integrity": "sha512-9QDeRnGqEDzABZyr04eLnBXBv/c6I9/TWu/6M0MD4pEfkySI/BIgwTODIbAReX3C1x6hjw9+Jlx4A2yUSPZ9ww==",
+    "node_engines": "^22.23.4 || ^24.22.1 || >=26.12.1",
+    "execution_performed": false
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "fixtures": [
+    "concave-notch.request.json",
+    "hole.request.json"
+  ],
+  "candidate_table_origin_xy_m": [
+    2,
+    2
+  ],
+  "candidate_table_footprint_xy_m": [
+    [
+      2,
+      2
+    ],
+    [
+      6,
+      2
+    ],
+    [
+      6,
+      6
+    ],
+    [
+      2,
+      6
+    ],
+    [
+      2,
+      2
+    ]
+  ],
+  "candidate_centre_xy_m": [
+    4,
+    4
+  ],
+  "corners_and_centre_inside_site": true,
+  "full_footprint_admissible": false,
+  "candidate_must_be_rejected": true,
+  "expected_table_count": 0,
+  "reason": "A forbidden notch or hole intersects the footprint even though sampled points miss it."
+}

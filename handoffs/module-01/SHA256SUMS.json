@@ -1,0 +1,20 @@
+{
+  "ACCEPTANCE.md": "0088ec10f1aa05cb326b3acefd333fbfefb1586b2bf206cc4e5b80f34be5e6cb",
+  "PACKAGE_VALIDATION.json": "85d844f0c9a89cd4ba013cfb69d21aa2ab13ad950bcd62360fb98c3736fb99fe",
+  "README.md": "ec4566d76f894d1a7cfdbf164dfef1c6425fb4a5287051e6e6b38ab88d5959f5",
+  "REA_AND_REFERENCES.md": "fec286c21977d266619405e504f9ebb0c869ca1b748e0d03fa661e9263f72d2c",
+  "START_HERE.md": "0ae2e87170f25907574a7e09be4906cda6e24c4a3e325a0a4304285b5831ff7c",
+  "fixtures/adversarial.expected.json": "8b856aad9f799147a5ff5c69fcbec8f9ee892178fa5cfc8b75ffb60f263a94b6",
+  "fixtures/concave-notch.request.json": "cac76c7939845537d88cbdff114b62b6a08ce7b7455e6fcbe027fb96b86bcbfe",
+  "fixtures/hole.request.json": "d7e00d2116fbb4635c578065f93bf2d3be80df4403954f8c276d4ca677c1e6bb",
+  "fixtures/multipolygon.expected.json": "7086e3bb785f16bc98b38c28268ffd27f406797d8a0c267cc81f64f305489e19",
+  "fixtures/multipolygon.request.json": "c0b17859d90715f732207cc8b7e2cbd42a4697d5020ae2103bf7688ff8ce51ea",
+  "fixtures/obstacle.expected.json": "e60038c590f6ebbcf13811ba3f9bd6dbc09e7617e78d7464914b24f55d8cf450",
+  "fixtures/obstacle.request.json": "bf393dd83eb9da26a8f197863e4e79088e1b0d4141267a5a314a14a8d927b26a",
+  "fixtures/pitch-3-4-5.expected.json": "147e46bce1f7c32028dbb4f34510e96e11336dba7e933e3341207c385576c9dd",
+  "fixtures/pitch-3-4-5.request.json": "4af906b2d83c1fdcefb3a4ec7b343ae86ac91cde78bf440e0713e79df8ea33c4",
+  "fixtures/rectangle.expected.json": "bfe86edaf7c2ee87670e01031d994f340f5eacacc7264997b71585909c28a773",
+  "fixtures/rectangle.request.json": "1c8a0c4e040dc4dae08d03f43b9741e1639cd939d3424faa28d72bd3c852184d",
+  "fixtures/translation-matrix.json": "762f2c3327545c8f9159aa29d5c41eec9ffa5f85587d32d6172543cd3b95779d",
+  "research/SCREENING.json": "3506cf0fbe4b32ee1810091466748253442a3d6c28eb26cffc7f8cb542e5c070"
+}

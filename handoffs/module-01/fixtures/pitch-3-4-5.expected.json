@@ -1,0 +1,15 @@
+{
+  "projected_depth_m": 4,
+  "table_rise_m": 3,
+  "shadow_clear_gap_m": 3,
+  "pitch_at_that_elevation_m": 7,
+  "recommended_pitch_m": 7,
+  "tolerance_m": 1e-09,
+  "assumptions": [
+    "flat ground",
+    "equal lower-edge heights",
+    "infinite rows",
+    "direct sun perpendicular to the row from the facing side",
+    "single specified elevation only"
+  ]
+}
