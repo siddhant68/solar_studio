@@ -7,7 +7,7 @@
   "files": {
    "json": {
     "file": "rectangle/layout.json",
-    "sha256": "99e6d83e3648e6b2d44325398e4782cb0494b18dde403528f85732d3e2e149ef"
+    "sha256": "4949205f2eb2e74eb187279e655b29fbfc72545bdb4d869ac5e11d8f3664e9f8"
    },
    "csv": {
     "file": "rectangle/modules.csv",
@@ -15,15 +15,15 @@
    },
    "svg": {
     "file": "rectangle/plan.svg",
-    "sha256": "b0672c4e7f5b6a11a1e3a6066f6f55f89edc6a3265e1cf9d3231e750b2a8dae9"
+    "sha256": "ba25cec92738dd60ad8c0f8b648eeb8930096613088bb3475fa5d6ee71167a98"
    },
    "dxf": {
     "file": "rectangle/plan.dxf",
-    "sha256": "fbf771298289e700b8037236be7a1cc616f7dde684f5b0f6479b946ec87833bb"
+    "sha256": "fc7817e0e507150368c56db6e7724705f1bad4221071e39f83de07375041ac06"
    },
    "report": {
     "file": "rectangle/report.md",
-    "sha256": "20f0a8e52d24695dd151977fad4be83c268fba5a818855053cd2938f64f71826"
+    "sha256": "2dad2507085c71d8f9ea2bbf9088d9d01a76c0f4cf1c2603db8db8b94d653326"
    }
   }
  },
@@ -35,7 +35,7 @@
   "files": {
    "json": {
     "file": "obstacle/layout.json",
-    "sha256": "f0b0ab5113fc5949a48d5116902c75f01443f6fe9213a6d0dc21210e426fded4"
+    "sha256": "05eb577cedc73c70076c3dc489cd452ec7ad0a0ea0db5fbe8ecceed06796041b"
    },
    "csv": {
     "file": "obstacle/modules.csv",
@@ -43,7 +43,7 @@
    },
    "svg": {
     "file": "obstacle/plan.svg",
-    "sha256": "25ac863202acd99850d3285b1c531fbe8dbebd71435326f82b20d98dc81c9411"
+    "sha256": "d63d6b0202cb03fe0f81d98c6d036bcbd9c0c6db68daacad8bec31d1ec54e2dd"
    },
    "dxf": {
     "file": "obstacle/plan.dxf",
@@ -51,7 +51,7 @@
    },
    "report": {
     "file": "obstacle/report.md",
-    "sha256": "2ef935eadfb141ffddcf980323c1d9eb67b8dcbd0026afa935e4e0fbc79043f5"
+    "sha256": "a8e882d27296ad7db8afd5228f054fbe99561e780e3509a712625de878bd30de"
    }
   }
  },
@@ -63,7 +63,7 @@
   "files": {
    "json": {
     "file": "multipolygon/layout.json",
-    "sha256": "43bf6415d191f4be73002b46e010de4f52e21fc96ff0585128db63ae932240d4"
+    "sha256": "6a03421af62939e609b0ab6496a201ffa152cc2cbd3895897e673b3cc1a09652"
    },
    "csv": {
     "file": "multipolygon/modules.csv",
@@ -71,15 +71,15 @@
    },
    "svg": {
     "file": "multipolygon/plan.svg",
-    "sha256": "419542e79a90d864fe3c8d8e9fbc6e6dba9e0e0af0523d3d617485d5981570e3"
+    "sha256": "b16ea521078f6ff656579670071f060a196e1545ed5a5828118c1fa4d401f47f"
    },
    "dxf": {
     "file": "multipolygon/plan.dxf",
-    "sha256": "c77c40cce9f248c09bb8ccc4d0778a4b3ee88808aab04776cc24c7294210b610"
+    "sha256": "9b5ae946a0e0c86ed2e3fdaf9c35d81fd1e53a3e7425ef1b1ff6ebbf9ffca819"
    },
    "report": {
     "file": "multipolygon/report.md",
-    "sha256": "cc727ae68e44c98a9e536897a9ac0e90a54bb52c857e84b3fe73fefd3d45565b"
+    "sha256": "8d092392b120e363f2d7527e3247706c3b3c8cfbba7641287486bea2a412b1ad"
    }
   }
  },
@@ -91,7 +91,7 @@
   "files": {
    "json": {
     "file": "concave-notch/layout.json",
-    "sha256": "0523143f5d1fe6b1a23d10e3b0e4818e4f036fae851fa1bf87b4e51416904fdd"
+    "sha256": "d12d869d915d6cf5996e4f6ccc2c6d1d6ebcc445507a43092e41be45240a1e64"
    },
    "csv": {
     "file": "concave-notch/modules.csv",
@@ -99,15 +99,15 @@
    },
    "svg": {
     "file": "concave-notch/plan.svg",
-    "sha256": "c7b074febcdc37118a64689c3f8e575039fb346252e1a28dce703f34a779eacc"
+    "sha256": "71b620a870ba37ffba154665e1d98c6bac857e330e47c9f078674bf4011f905f"
    },
    "dxf": {
     "file": "concave-notch/plan.dxf",
-    "sha256": "d71f20678e5d529ae62ea6c62ccc34e785f06a97367e02478809b3fbf38082e2"
+    "sha256": "ca75d46f5d1294c0a707f976f277a69e09695d605938010421cbb94d9177be29"
    },
    "report": {
     "file": "concave-notch/report.md",
-    "sha256": "31ebcb5c2cfe1623df578b185151ee60e1f1fd905c9608d09c5eadb698e291ec"
+    "sha256": "ab3d349d366f9166eba19eb19e232145b90ee699e4fab77011f12c224f12f97a"
    }
   }
  },
@@ -119,7 +119,7 @@
   "files": {
    "json": {
     "file": "hole/layout.json",
-    "sha256": "7125d0a234e165e5beba5a73a11846e45946bb2e67b7853a152f191e785a3ad3"
+    "sha256": "c578d2b5b047f2b607647a62bcc89178eea75fb662ad9ba4bba44f82c8a8ca44"
    },
    "csv": {
     "file": "hole/modules.csv",
@@ -127,15 +127,15 @@
    },
    "svg": {
     "file": "hole/plan.svg",
-    "sha256": "0162ff656c8dc60572fd034ba8053faeb9eb4627a6ec4007fc0f259659855f96"
+    "sha256": "77a74f9fe0778d692b2e1eb69726d808272c511e078179d8fd736dad9e943ef5"
    },
    "dxf": {
     "file": "hole/plan.dxf",
-    "sha256": "0045a579c581987a23b70f368953d83eef2bac5d6ff4cbac05f6738d025f3c24"
+    "sha256": "f10610f9a542c4993ed948582cff138d1c6725f7c75bce03036f3cd206459c3f"
    },
    "report": {
     "file": "hole/report.md",
-    "sha256": "d64bbf5c8532e7d0a1bfefd94726e452b22a97344cc824ce5c702e8bc19ee67d"
+    "sha256": "e427acf8efeccd1f80bdfa67053b2f663013d42bae772f2f7a8f907db15d7fb3"
    }
   }
  },

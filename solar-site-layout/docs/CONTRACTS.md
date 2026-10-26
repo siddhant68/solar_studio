@@ -35,7 +35,7 @@ The row-pitch calculator has its own schema: `src/solar_layout/schemas/solar.row
 | Boundary vertices | ≤ 100,000; exclusion vertices ≤ 100,000 in total |
 | Candidate table positions | ≤ 400,000 per phase and ≤ 1,200,000 per generation, checked **before** any candidate is built |
 | Placed modules | ≤ 60,000, checked before modules are emitted |
-| Generation time | 60 s by default (`SOLAR_LAYOUT_TIMEOUT_S`). The deadline is checked between 20,000-candidate chunks and before module generation. Exceeding it is `RESOURCE_LIMIT`, and nothing is saved. |
+| Generation time | 60 s by default (`SOLAR_LAYOUT_TIMEOUT_S`). The deadline is checked between 20,000-candidate chunks, before module generation, after result-record construction and after independent verification, so it covers the whole generation before anything is persisted. Exceeding it is `RESOURCE_LIMIT` (`details.stage` names where), and nothing is saved. |
 | HTTP body | ≤ 20 MiB |
 | Page size | default 100, maximum 500. Larger requests are refused (`INVALID_CURSOR`), never truncated. |
 

@@ -1,7 +1,7 @@
 {
  "schema": "solar.benchmarks/1",
  "machine": {
-  "cpu_model": "Intel(R) Xeon(R) Processor @ 2.80GHz",
+  "cpu_model": "Intel(R) Xeon(R) Processor @ 2.10GHz",
   "logical_cpus": 4,
   "memory_total_mib": 16091,
   "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
@@ -28,9 +28,9 @@
    "fixture": "fixtures/benchmark-10k.request.json",
    "generate": {
     "exit": 0,
-    "wall_s": 3.7596895799997583,
-    "peak_tree_rss_mib": 86.36,
-    "rss_samples": 283,
+    "wall_s": 2.232591556999978,
+    "peak_tree_rss_mib": 81.44,
+    "rss_samples": 193,
     "stderr_tail": "",
     "ok": true,
     "result_id": "res_d1bbb8a940f5c1d227f55119",
@@ -39,60 +39,60 @@
     "dc_capacity_kwp": 5911.36,
     "candidates_evaluated": 744,
     "timings": {
-     "validate_s": 0.04067785400002322,
-     "compute_s": 0.05308898400016915,
-     "records_and_digest_s": 0.4985199200000352,
-     "verify_s": 1.6630623990004096,
-     "persist_s": 0.5065425760003563,
-     "generate_and_verify_total_s": 2.7619086929998957
+     "validate_s": 0.021244289999913235,
+     "compute_s": 0.023943563999864637,
+     "records_and_digest_s": 0.33387974299989764,
+     "verify_s": 1.0498280580000028,
+     "persist_s": 0.2905220659999941,
+     "generate_and_verify_total_s": 1.7194269929998427
     }
    },
    "exports": {
     "exit": 0,
-    "wall_s": 7.431859803000407,
-    "peak_tree_rss_mib": 91.29,
-    "rss_samples": 558,
+    "wall_s": 2.7648506820000875,
+    "peak_tree_rss_mib": 85.16,
+    "rss_samples": 238,
     "stderr_tail": "",
     "ok": true,
     "exports": {
      "json": {
-      "seconds": 0.41783899199981533,
-      "bytes": 3402666,
-      "sha256": "6fdbd78eff8d1fee6f5704edfc87b90957e6f90dfbea8428d9031b58dc266f4b"
+      "seconds": 0.2740076659999886,
+      "bytes": 3402820,
+      "sha256": "128e88e85dda98e04cff8bfff1c8c0f04e83a2d5036c570cbf4a1ccbbed76e08"
      },
      "csv": {
-      "seconds": 0.40953217500009487,
+      "seconds": 0.22934966499997245,
       "bytes": 2105741,
       "sha256": "321d5111429309493e2953d0f8f569685036c7166753ed8dd0bcad098958bdae"
      },
      "svg": {
-      "seconds": 0.3348958010001297,
-      "bytes": 2305194,
-      "sha256": "a8ae627aee3f6424000ba6af5edb171ef2716c90f488f84ee5146fa28616d283"
+      "seconds": 0.17727313799991862,
+      "bytes": 2305236,
+      "sha256": "fc7b97dd331d86a87eba22b9b18da99d2862c43b293a1d46a30edf53464a20c7"
      },
      "dxf": {
-      "seconds": 2.1730134800000087,
+      "seconds": 1.278074069000013,
       "bytes": 2833310,
-      "sha256": "16558f9d10c0b2fadd056a1a3daa419d47bd6e9a129fa32c4bdd28b933455bee"
+      "sha256": "de4a66c7b1cb4db2683ee795f986020addedac439a83bc2c42b3cde1bf4a103b"
      },
      "report": {
-      "seconds": 0.011779262999880302,
-      "bytes": 5725,
-      "sha256": "00812557ad287b5ba20a4db0f8f8e80c720567176f68f797729008361f42a034"
+      "seconds": 0.007110579000027428,
+      "bytes": 5824,
+      "sha256": "dbefdb3c95d09afae6ed187b654c327385e495b7866de918cbc202a71f1700c4"
      },
      "bundle": {
-      "seconds": 3.103886810000404,
-      "bytes": 879639,
-      "sha256": "5c3104d591c79714fb47c0dcad9311f2212fa57014041c3b66ed031ae145c6d9"
+      "seconds": 0.21770186599997032,
+      "bytes": 879808,
+      "sha256": "e768bf1ccb387a72d08bd2b6a1837c1e5787ae6542664d6b9325a5d15b3db276"
      }
     }
    },
    "gate": {
     "requirement": ">= 10,000 modules generated and verified in <= 20 s with peak process-tree memory <= 512 MiB",
     "module_count": 10192,
-    "generate_and_verify_s": 2.7619086929998957,
-    "process_wall_s_including_interpreter_start": 3.7596895799997583,
-    "peak_tree_rss_mib": 86.36,
+    "generate_and_verify_s": 1.7194269929998427,
+    "process_wall_s_including_interpreter_start": 2.232591556999978,
+    "peak_tree_rss_mib": 81.44,
     "pass": true
    }
   },
@@ -101,9 +101,9 @@
    "fixture": "fixtures/stress-25k.request.json",
    "generate": {
     "exit": 0,
-    "wall_s": 7.180454393999753,
-    "peak_tree_rss_mib": 112.14,
-    "rss_samples": 542,
+    "wall_s": 5.023961407999877,
+    "peak_tree_rss_mib": 107.03,
+    "rss_samples": 435,
     "stderr_tail": "",
     "ok": true,
     "result_id": "res_db870f4649ecac536539eb6c",
@@ -112,51 +112,51 @@
     "dc_capacity_kwp": 14957.04,
     "candidates_evaluated": 1530,
     "timings": {
-     "validate_s": 0.047522343000309775,
-     "compute_s": 0.0853648760003125,
-     "records_and_digest_s": 0.8343919549997736,
-     "verify_s": 4.265114101000108,
-     "persist_s": 0.9876564180003697,
-     "generate_and_verify_total_s": 6.220064418999755
+     "validate_s": 0.03294642099990597,
+     "compute_s": 0.036507361000076344,
+     "records_and_digest_s": 0.6130915319999986,
+     "verify_s": 3.125147520999917,
+     "persist_s": 0.6519829750000099,
+     "generate_and_verify_total_s": 4.459685049999962
     }
    },
    "exports": {
     "exit": 0,
-    "wall_s": 18.341780544999892,
-    "peak_tree_rss_mib": 115.25,
-    "rss_samples": 1372,
+    "wall_s": 6.6740309029999025,
+    "peak_tree_rss_mib": 107.61,
+    "rss_samples": 569,
     "stderr_tail": "",
     "ok": true,
     "exports": {
      "json": {
-      "seconds": 1.3210701569996672,
-      "bytes": 8593403,
-      "sha256": "c1536cef748331ef617b6c1047d756f1285861c12912c417a40c9dfeecf9db08"
+      "seconds": 0.8873929699998371,
+      "bytes": 8593557,
+      "sha256": "7ad1691c654ba7d8345d07a4ebfd295529e52e9a3399f33c11464e564bef5310"
      },
      "csv": {
-      "seconds": 1.2621188189996246,
+      "seconds": 0.44637584499992045,
       "bytes": 5356469,
       "sha256": "954936a4ec75c0f409b8178fdd107126d5d1bf6520e59b6835f5380657ef28a8"
      },
      "svg": {
-      "seconds": 0.7669425209996916,
-      "bytes": 5769285,
-      "sha256": "10ee4c23673efa7405fe2f86bffe3f42a5f51e4831949b7839538e43fe6ca58c"
+      "seconds": 0.4431610389999605,
+      "bytes": 5769327,
+      "sha256": "3d7c98575b2a7925a72218d0e8770d13e9e9bd6dcfe9f8328958d0d17cf55da4"
      },
      "dxf": {
-      "seconds": 5.786552302000018,
+      "seconds": 3.781935685999997,
       "bytes": 7104969,
       "sha256": "b8e8395e8ad1aa11823fdb4cc893a48c1c753c345999ce0bdebbc3daa8000123"
      },
      "report": {
-      "seconds": 0.011503032999826246,
-      "bytes": 5726,
-      "sha256": "a3e913ee5f8e2a2432981bfb3eca6de508c0cf389c68e08103b07f850743d64b"
+      "seconds": 0.006622276999905807,
+      "bytes": 5825,
+      "sha256": "acd78a1d111f047d2436b049075b4e05d97db3da0056a89f10da08d65e569c12"
      },
      "bundle": {
-      "seconds": 8.15760318499997,
-      "bytes": 2171928,
-      "sha256": "c7589a091c731ed0b4d699e741a6901101d81cfaf75e275ef12ce872dcf1908b"
+      "seconds": 0.4842590589998963,
+      "bytes": 2172129,
+      "sha256": "25298830c907bcb5b97a536cbcdbb89b6506b7a7a0e68b326f11b8870050d22d"
      }
     }
    },
@@ -171,26 +171,28 @@
    "fixture": "fixtures/stress-25k.request.json",
    "generate": {
     "exit": 0,
-    "wall_s": 1.2139921560001312,
-    "peak_tree_rss_mib": 70.91,
-    "rss_samples": 90,
+    "wall_s": 4.417582653999943,
+    "peak_tree_rss_mib": 107.11,
+    "rss_samples": 382,
     "stderr_tail": "",
-    "ok": false,
-    "error": {
-     "code": "RESOURCE_LIMIT",
-     "message": "Layout generation exceeded its 0.05 s time limit during module generation; nothing was saved",
-     "details": {
-      "limit": "generation_timeout_s",
-      "value": 0.05,
-      "stage": "module generation"
-     }
-    },
-    "elapsed_s": 0.0818652120005936,
-    "stored_results": 0
+    "ok": true,
+    "result_id": "res_db870f4649ecac536539eb6c",
+    "module_count": 25788,
+    "table_count": 921,
+    "dc_capacity_kwp": 14957.04,
+    "candidates_evaluated": 1530,
+    "timings": {
+     "validate_s": 0.020365116999983,
+     "compute_s": 0.0324862850000045,
+     "records_and_digest_s": 0.6903430820000267,
+     "verify_s": 2.5900765359999696,
+     "persist_s": 0.6442099380001309,
+     "generate_and_verify_total_s": 3.977489773999878
+    }
    },
    "gate": {
     "requirement": "finite timeout returns a typed RESOURCE_LIMIT and stores nothing",
-    "pass": true
+    "pass": false
    }
   },
   {
@@ -198,9 +200,9 @@
    "fixture": "derived: 1400 x 900 m site, 2x14 tables, pitch 4.5 m",
    "generate": {
     "exit": 0,
-    "wall_s": 1.224300425000365,
-    "peak_tree_rss_mib": 87.98,
-    "rss_samples": 89,
+    "wall_s": 0.6847466110000369,
+    "peak_tree_rss_mib": 82.85,
+    "rss_samples": 58,
     "stderr_tail": "",
     "ok": false,
     "error": {
@@ -211,7 +213,7 @@
       "value": 457828
      }
     },
-    "elapsed_s": 0.32813852700019197,
+    "elapsed_s": 0.19902860800016242,
     "stored_results": 0
    },
    "gate": {
@@ -224,9 +226,9 @@
    "fixture": "derived: 14 x 14 km site, 0.05 m tables",
    "generate": {
     "exit": 0,
-    "wall_s": 0.9360208779999084,
-    "peak_tree_rss_mib": 69.11,
-    "rss_samples": 70,
+    "wall_s": 0.48180814400006966,
+    "peak_tree_rss_mib": 63.83,
+    "rss_samples": 41,
     "stderr_tail": "",
     "ok": false,
     "error": {
@@ -237,7 +239,7 @@
       "value": 78402240016
      }
     },
-    "elapsed_s": 0.026223381999443518,
+    "elapsed_s": 0.019484356000020853,
     "stored_results": 0
    },
    "gate": {

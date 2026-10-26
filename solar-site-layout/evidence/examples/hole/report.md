@@ -7,8 +7,8 @@ Preliminary flat-site layout under the stated assumptions. It is not a construct
 - Result ID: `res_0227335bfa4c9345d18675d3`
 - Input digest: `f6c78db79239e2c89183cb5f4237564ab6fcdccb5daf43836f5d432101d79556`
 - Numerical payload digest: `f4797e55abc7ac4a327469572d667bc4d225381220b1393b65b3e4c50574711e`
-- Source: direct request (no project)
-- Algorithm `lattice-fixed-and-phase3x3/1`, geometry policy `geom-policy/1`, source commit `f16944e8e9050aaf1078a3a07fcf2115805bc4e4`
+- Project associations: not part of this result-only report; the `context` export lists the projects and revisions that use this result.
+- Algorithm `lattice-fixed-and-phase3x3/1`, geometry policy `geom-policy/1`, source commit `d935ff25e1b321dddd2d935b94134caba0bd558a`
 
 ## Frame and site
 
@@ -91,7 +91,7 @@ Energy yield, shading losses, electrical strings, inverter selection, AC capacit
 - schema_version: `solar.layout.result/1`
 - algorithm_version: `lattice-fixed-and-phase3x3/1`
 - geometry_policy_version: `geom-policy/1`
-- source_commit: `f16944e8e9050aaf1078a3a07fcf2115805bc4e4`
+- source_commit: `d935ff25e1b321dddd2d935b94134caba0bd558a`
 - source_dirty: `False`
-- created_at: `2026-10-25T20:01:34.130148Z`
+- created_at: `2026-10-26T11:31:31.406998Z`
 - dependencies: ezdxf 1.4.5, geos 3.14.1, jsonschema 4.26.0, mcp 2.3.0, numpy 2.5.4, python 3.12.3, shapely 2.2.0, starlette 1.10.0, uvicorn 0.54.0

@@ -5,9 +5,9 @@
   "-m",
   "solar_layout.mcp_server",
   "--data-dir",
-  "/tmp/pytest-of-root/pytest-8/test_s02_real_mcp_client_sessi0/mcp-data"
+  "/tmp/pytest-of-root/pytest-22/test_s02_real_mcp_client_sessi0/mcp-data"
  ],
- "data_dir": "/tmp/pytest-of-root/pytest-8/test_s02_real_mcp_client_sessi0/mcp-data",
+ "data_dir": "/tmp/pytest-of-root/pytest-22/test_s02_real_mcp_client_sessi0/mcp-data",
  "steps": [
   {
    "step": "initialize",
@@ -44,7 +44,7 @@
   {
    "step": "create_project",
    "ok": true,
-   "project_id": "prj_ae44b255558a4d4a890f"
+   "project_id": "prj_762b2201cec74313b103"
   },
   {
    "step": "update_project (CAS rev 1 -> 2)",
@@ -79,30 +79,30 @@
   {
    "step": "export_layout svg",
    "ok": true,
-   "path": "res_2e599e535a0cfd6f84a8a1b0/res_2e599e535a0cfd6f84a8a1b0-plan.svg",
-   "sha256": "19eba513c13d8ea2ccd0184a11ae450449cd4718b3849840e23b7375f231a24b",
-   "bytes": 10222
+   "path": "res_2e599e535a0cfd6f84a8a1b0/v2/res_2e599e535a0cfd6f84a8a1b0-plan.svg",
+   "sha256": "8a0d86f4e8a4a67cf35878dd7c8ce3906fcbc9aefc6daf8ac42c698bb2b79bdb",
+   "bytes": 10256
   },
   {
    "step": "export_layout csv",
    "ok": true,
-   "path": "res_2e599e535a0cfd6f84a8a1b0/res_2e599e535a0cfd6f84a8a1b0-modules.csv",
+   "path": "res_2e599e535a0cfd6f84a8a1b0/v2/res_2e599e535a0cfd6f84a8a1b0-modules.csv",
    "sha256": "422de085ab1f9c38282901338f99c19f3f8b1ebc52e7bc335c0467e0cd55577e",
    "bytes": 3613
   },
   {
    "step": "export_layout report",
    "ok": true,
-   "path": "res_2e599e535a0cfd6f84a8a1b0/res_2e599e535a0cfd6f84a8a1b0-report.md",
-   "sha256": "d15cf63adb289c25e332586bab70135f8c7ea7ba621fd5a26913cbc904c5e790",
-   "bytes": 5553
+   "path": "res_2e599e535a0cfd6f84a8a1b0/v2/res_2e599e535a0cfd6f84a8a1b0-report.md",
+   "sha256": "97b4d496a08a11f6ce3f72467ae787befbb409a62e14ae724d3e280e16041dc3",
+   "bytes": 5624
   },
   {
    "step": "export_layout bundle",
    "ok": true,
-   "path": "res_2e599e535a0cfd6f84a8a1b0/res_2e599e535a0cfd6f84a8a1b0-bundle.zip",
-   "sha256": "77d91bb579d9582f559b1fa3b1c0951690251a271ee7fe0663bd119eb78f5b13",
-   "bytes": 15841
+   "path": "res_2e599e535a0cfd6f84a8a1b0/v2/res_2e599e535a0cfd6f84a8a1b0-bundle.zip",
+   "sha256": "2fc2671a253837a89cce8e624be4ffb41275e105ff05f0b060ef4170c8b5a90f",
+   "bytes": 15918
   },
   {
    "step": "export_layout traversal attempt is typed",

@@ -73,7 +73,7 @@ TEST_MAP = {
     "C09": [("test_tolerance_and_arcs.py", "test_")],
     "C10": [("test_verifier_translation_phase_identity.py", "test_c10_"), ("test_review_regressions.py", "test_f5_")],
     "C11": [("test_verifier_translation_phase_identity.py", "test_c11_")],
-    "C12": [("test_validation.py", n) for n in ("test_coordinate_magnitude_limit", "test_site_diagonal_limit", "test_module_dimension_envelope", "test_anchor_must_be_near_site", "test_candidate_limit", "test_module_output_limit", "test_timeout_policy")],
+    "C12": [("test_validation.py", n) for n in ("test_coordinate_magnitude_limit", "test_site_diagonal_limit", "test_module_dimension_envelope", "test_anchor_must_be_near_site", "test_candidate_limit", "test_module_output_limit", "test_timeout_policy", "test_timeout_covers")],
     "C13": [("test_verifier_translation_phase_identity.py", "test_c13_")],
     "C14": [("test_verifier_translation_phase_identity.py", "test_c14_")],
     "S01": [("test_service_interfaces.py", "test_s01_")],
@@ -115,6 +115,7 @@ REVIEW_NOTES = {
     "V02": "Review 2026-10-26 regressions F1 (create- and update-delay edits) and F2 (stale SVG; project switch and import while pending) are the V02 rows of ui-checks.json.",
     "V04": "Review 2026-10-26 regressions F3 (concurrent exports) and F4 (result-only, write-once exports; separate context export), plus the PYTHONHASHSEED-dependent DXF bytes found during the repair, are in tests/test_review_regressions.py.",
     "S05": "Review 2026-10-26 regression F3: parallel and overlapping exports leave no failed call and no stray .partial files (tests/test_review_regressions.py::test_f3_*).",
+    "C12": "Re-running D03 after the review repair showed the generation time limit was checked only inside the layout engine; it now also covers record construction and verification before anything is persisted (tests/test_validation.py::test_timeout_covers_records_and_verification_not_only_compute).",
     "C10": "Review 2026-10-26 regression F5: per-record fields, record totals, independently computed areas and payload integrity (tests/test_review_regressions.py::test_f5_*).",
 }
 SUPERSEDES = {

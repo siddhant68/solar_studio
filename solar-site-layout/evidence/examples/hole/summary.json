@@ -76,6 +76,7 @@
  ],
  "verification": {
   "checks": {
+   "areas": true,
    "dimensions": true,
    "exclusions": true,
    "footprint_shape": true,
@@ -83,8 +84,11 @@
    "lattice_positions": true,
    "module_geometry": true,
    "module_within_table": true,
+   "payload_integrity": true,
    "perimeter_setback": true,
    "quantities": true,
+   "record_fields": true,
+   "record_totals": true,
    "site_containment": true,
    "tables_disjoint": true
   },

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import copy
+import sqlite3
 import time
 
 import pytest
@@ -259,3 +260,28 @@ def test_timeout_policy_is_finite_and_typed(req):
     with pytest.raises(DomainError) as e:
         run_layout(req, timeout_s=0.0)
     assert e.value.code == "RESOURCE_LIMIT" and e.value.details["limit"] == "generation_timeout_s"
+
+
+def test_timeout_covers_records_and_verification_not_only_compute(tmp_path, monkeypatch):
+    """Found when re-running D03 after the review repair: the time limit was checked only
+    inside the layout engine, so a fast compute stage let a timed-out generation run its
+    record construction and verification and be stored. The service now checks the same
+    deadline after those stages, before persisting."""
+    import solar_layout.service as service_mod
+    from solar_layout.service import SolarService
+
+    svc = SolarService(tmp_path / "d")
+    real_verify = service_mod.verify_records
+
+    def slow_verify(*a, **k):
+        time.sleep(0.3)
+        return real_verify(*a, **k)
+
+    monkeypatch.setattr(service_mod, "verify_records", slow_verify)
+    with pytest.raises(DomainError) as e:
+        svc.generate_layout(request=load_fixture("rectangle.request.json"), timeout_s=0.2)
+    assert e.value.code == "RESOURCE_LIMIT" and e.value.details["stage"] == "independent verification"
+    with sqlite3.connect(svc.store.db_path) as con:
+        assert con.execute("SELECT COUNT(*) FROM results").fetchone()[0] == 0
+    monkeypatch.setattr(service_mod, "verify_records", real_verify)
+    assert svc.generate_layout(request=load_fixture("rectangle.request.json"), timeout_s=60)["verification"]["ok"]

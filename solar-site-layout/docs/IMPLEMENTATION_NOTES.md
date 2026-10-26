@@ -42,6 +42,8 @@ The review in `../reviews/module-01/2026-10-26/` reproduced five defects at `f55
 
 Found during the repair: **DXF bytes depended on `PYTHONHASHSEED`.** ezdxf writes a CLASS definition for each entity type in use while iterating a `set` of type names, so the CLASSES section order (and the DXF and bundle hashes) differed between processes; re-exports agreed only within one process. The document's entity database now reports those types sorted. `test_exports_identical_across_processes_and_hash_seeds` exports one stored result under three hash seeds. Earlier DXF/bundle hashes in old evidence remain valid for the bytes they describe but are not reproducible in every process.
 
+Found when re-running the benchmarks: **the generation time limit covered only the layout engine.** It was checked between candidate chunks and before module generation, so the D03 demonstration (0.05 s limit on the 25,788-module stress case) passed only while the compute stage itself took longer than 0.05 s (0.085 s in the first run, 0.036 s on this run's machine, which then stored the result). Record construction and verification, now the larger part of a generation, were unbounded. The service checks the same deadline after record construction and after verification, before persisting (`test_timeout_covers_records_and_verification_not_only_compute`); the engine itself is unchanged.
+
 ## Known limitations
 
 - Only flat sites with a single metric Cartesian frame. No CRS transformation or grid convergence.

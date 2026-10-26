@@ -26,7 +26,7 @@ from typing import Any
 from . import ALGORITHM_VERSION, GEOMETRY_POLICY_VERSION, RESULT_SCHEMA, __version__, policy
 from .errors import INVALID_CURSOR, INVALID_INPUT, VERIFICATION_FAILED, DomainError
 from .exports import build_export, check_format, check_result_id, open_export
-from .layout import candidate_estimate, compute_layout
+from .layout import _Deadline, candidate_estimate, compute_layout
 from .pitch import calculate_row_pitch
 from .result import ResultRecords, result_id_for
 from .store import Store, now
@@ -182,6 +182,10 @@ class SolarService:
             request = snapshot
         elif request is None:
             raise DomainError(INVALID_INPUT, "Give a project_id or an inline request", field="request")
+        # The generation time limit covers the whole pipeline: the engine checks it between
+        # candidate chunks, and it is checked again after record construction and after
+        # verification, before anything is persisted.
+        deadline = _Deadline(policy.generation_timeout_s() if timeout_s is None else timeout_s)
         val = validate_layout_request(request)
         result_id = result_id_for(val.input_digest)
         reused = self.store.result_exists(result_id)
@@ -189,7 +193,9 @@ class SolarService:
             comp = compute_layout(val, timeout_s=timeout_s)
             rr = ResultRecords(comp)
             tables = list(rr.table_records())
+            deadline.check("result record construction")
             verification = verify_records(val.normalized, rr.summary, tables, rr.module_records())
+            deadline.check("independent verification")
             if not verification["ok"]:
                 raise DomainError(
                     VERIFICATION_FAILED,

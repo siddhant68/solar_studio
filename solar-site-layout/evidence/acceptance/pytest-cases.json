@@ -3,73 +3,73 @@
   "file": "test_browser_and_mcp.py",
   "name": "test_s02_real_mcp_client_session",
   "outcome": "passed",
-  "seconds": 3.829
+  "seconds": 2.209
  },
  {
   "file": "test_browser_and_mcp.py",
   "name": "test_v01_v02_v03_real_browser",
   "outcome": "passed",
-  "seconds": 9.35
+  "seconds": 12.857
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_files_hashes_recorded[obstacle]",
   "outcome": "passed",
-  "seconds": 0.299
+  "seconds": 0.098
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_csv_matches_every_module[obstacle]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_json_matches_result[obstacle]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.0
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_svg_vertices_map_back_to_result[obstacle]",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_dxf_reopens_with_units_layers_counts_extents[obstacle]",
   "outcome": "passed",
-  "seconds": 0.03
+  "seconds": 0.01
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_bundle_manifest[obstacle]",
   "outcome": "passed",
-  "seconds": 0.004
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_exports_are_deterministic[obstacle]",
   "outcome": "passed",
-  "seconds": 0.014
+  "seconds": 0.002
  },
  {
   "file": "test_exports.py",
   "name": "test_v05_report_reproduces_arithmetic_and_states_assumptions[obstacle]",
   "outcome": "passed",
-  "seconds": 0.004
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_files_hashes_recorded[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.268
+  "seconds": 0.1
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_csv_matches_every_module[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
@@ -81,127 +81,127 @@
   "file": "test_exports.py",
   "name": "test_v04_svg_vertices_map_back_to_result[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_dxf_reopens_with_units_layers_counts_extents[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.019
+  "seconds": 0.013
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_bundle_manifest[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_exports_are_deterministic[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.015
+  "seconds": 0.002
  },
  {
   "file": "test_exports.py",
   "name": "test_v05_report_reproduces_arithmetic_and_states_assumptions[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_files_hashes_recorded[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.363
+  "seconds": 0.095
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_csv_matches_every_module[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.0
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_json_matches_result[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.004
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_svg_vertices_map_back_to_result[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_dxf_reopens_with_units_layers_counts_extents[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.018
+  "seconds": 0.036
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_bundle_manifest[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_exports_are_deterministic[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.013
+  "seconds": 0.002
  },
  {
   "file": "test_exports.py",
   "name": "test_v05_report_reproduces_arithmetic_and_states_assumptions[projected_rotated]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_exports.py",
   "name": "test_v04_tampered_export_is_rebuilt_not_served",
   "outcome": "passed",
-  "seconds": 0.122
+  "seconds": 0.054
  },
  {
   "file": "test_exports.py",
   "name": "test_v05_empty_layout_report_has_null_ratio",
   "outcome": "passed",
-  "seconds": 0.049
+  "seconds": 0.031
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_c02_rectangle_exact_counts_areas_and_origins",
   "outcome": "passed",
-  "seconds": 0.008
+  "seconds": 0.005
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_c03_obstacle_rejects_exactly_the_table_at_4_1",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.005
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_obstacle_exact_tangency_is_allowed",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.005
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_multipolygon_all_components_considered",
   "outcome": "passed",
-  "seconds": 0.012
+  "seconds": 0.007
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_c07_sampled_points_pass_but_footprint_is_rejected[concave-notch.request.json]",
   "outcome": "passed",
-  "seconds": 0.005
+  "seconds": 0.002
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_c07_sampled_points_pass_but_footprint_is_rejected[hole.request.json]",
   "outcome": "passed",
-  "seconds": 0.005
+  "seconds": 0.003
  },
  {
   "file": "test_fixtures_analytic.py",
@@ -213,49 +213,49 @@
   "file": "test_fixtures_analytic.py",
   "name": "test_c08_large_setback_returns_successful_empty_layout",
   "outcome": "passed",
-  "seconds": 0.004
+  "seconds": 0.002
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_c08_complete_exclusion_returns_empty_with_null_buildable_ratio",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.004
  },
  {
   "file": "test_fixtures_analytic.py",
   "name": "test_c08_multipolygon_components_each_contribute",
   "outcome": "passed",
-  "seconds": 0.021
+  "seconds": 0.01
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c04_landscape_gaps_and_tilt_hand_calculation",
   "outcome": "passed",
-  "seconds": 0.282
+  "seconds": 0.158
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c04_portrait_vs_landscape_swap_and_gap_positions",
   "outcome": "passed",
-  "seconds": 0.575
+  "seconds": 0.337
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c04_3_4_5_module_corner_heights_second_path",
   "outcome": "passed",
-  "seconds": 0.1
+  "seconds": 0.056
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_cardinal_axes_are_exact[0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_cardinal_axes_are_exact[90]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
@@ -273,7 +273,7 @@
   "file": "test_geometry_conventions.py",
   "name": "test_c06_facing_direction_and_rise[0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
@@ -303,7 +303,7 @@
   "file": "test_geometry_conventions.py",
   "name": "test_c06_facing_direction_and_rise[180]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
@@ -315,85 +315,85 @@
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[0]",
   "outcome": "passed",
-  "seconds": 0.091
+  "seconds": 0.049
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[17]",
   "outcome": "passed",
-  "seconds": 0.114
+  "seconds": 0.059
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[37]",
   "outcome": "passed",
-  "seconds": 0.108
+  "seconds": 0.066
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[73]",
   "outcome": "passed",
-  "seconds": 0.134
+  "seconds": 0.062
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[90]",
   "outcome": "passed",
-  "seconds": 0.099
+  "seconds": 0.049
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[180]",
   "outcome": "passed",
-  "seconds": 0.11
+  "seconds": 0.049
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_c06_upper_edge_is_away_from_facing_side[270]",
   "outcome": "passed",
-  "seconds": 0.085
+  "seconds": 0.05
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_azimuth_normalization[540-180.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_azimuth_normalization[-90-270.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_azimuth_normalization[360-0.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_azimuth_normalization[-0.0-0.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_azimuth_normalization[-1e-20-0.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_geometry_conventions.py",
   "name": "test_azimuth_normalization[725.5-5.5]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_c05_3_4_5_fixture",
   "outcome": "passed",
-  "seconds": 0.004
+  "seconds": 0.003
  },
  {
   "file": "test_pitch.py",
@@ -405,13 +405,13 @@
   "file": "test_pitch.py",
   "name": "test_clearance_dominated_pitch",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_uses_total_rise_not_lower_edge_height",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
@@ -423,31 +423,31 @@
   "file": "test_pitch.py",
   "name": "test_invalid_elevation[-5.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_invalid_elevation[90.0001]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_invalid_elevation[180.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_zenith_sun_has_no_shadow_gap",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_near_horizon_is_a_bounded_diagnostic[1e-300]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
@@ -465,283 +465,433 @@
   "file": "test_pitch.py",
   "name": "test_near_horizon_is_a_bounded_diagnostic[0.999]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_minimum_supported_elevation_is_finite",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_azimuth_and_time_inputs_are_unsupported[solar_azimuth_deg-135.0]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_azimuth_and_time_inputs_are_unsupported[datetime-2026-06-21T12:00:00+02:00]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_azimuth_and_time_inputs_are_unsupported[time_window-value2]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_azimuth_and_time_inputs_are_unsupported[city-Madrid]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_pitch.py",
   "name": "test_non_finite_and_unknown_fields",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_parallel_same_format_service_exports[json]",
+  "outcome": "passed",
+  "seconds": 0.102
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_parallel_same_format_service_exports[csv]",
+  "outcome": "passed",
+  "seconds": 0.098
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_parallel_same_format_service_exports[svg]",
+  "outcome": "passed",
+  "seconds": 0.106
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_parallel_same_format_service_exports[dxf]",
+  "outcome": "passed",
+  "seconds": 0.127
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_parallel_same_format_service_exports[report]",
+  "outcome": "passed",
+  "seconds": 0.117
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_parallel_same_format_service_exports[bundle]",
+  "outcome": "passed",
+  "seconds": 0.147
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_controlled_overlap_inside_staging_write",
+  "outcome": "passed",
+  "seconds": 0.043
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_dxf_concurrency_does_not_touch_global_ezdxf_options",
+  "outcome": "passed",
+  "seconds": 0.084
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f3_http_parallel_downloads_and_bundle_overlap",
+  "outcome": "passed",
+  "seconds": 1.331
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_exports_identical_across_processes_and_hash_seeds",
+  "outcome": "passed",
+  "seconds": 2.276
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f4_result_export_unchanged_when_another_project_reuses_result",
+  "outcome": "passed",
+  "seconds": 0.201
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f4_result_exports_contain_no_mutable_project_context",
+  "outcome": "passed",
+  "seconds": 0.049
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f4_bundle_built_from_one_snapshot_matches_standalone_exports",
+  "outcome": "passed",
+  "seconds": 0.105
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f4_issued_export_is_never_rewritten_with_different_bytes",
+  "outcome": "passed",
+  "seconds": 0.054
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_corrupt_module_power_is_detected",
+  "outcome": "passed",
+  "seconds": 0.02
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_record_capacity_must_reconcile_with_summary",
+  "outcome": "passed",
+  "seconds": 0.018
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_consistently_falsified_areas_are_detected",
+  "outcome": "passed",
+  "seconds": 0.018
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_falsified_buildable_area_within_gross_is_detected",
+  "outcome": "passed",
+  "seconds": 0.018
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_contract_fields_are_checked[table_i-7]",
+  "outcome": "passed",
+  "seconds": 0.018
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_contract_fields_are_checked[row-9]",
+  "outcome": "passed",
+  "seconds": 0.019
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_contract_fields_are_checked[module_id-T_j0_i0_r0_c0x]",
+  "outcome": "passed",
+  "seconds": 0.018
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_contract_fields_are_checked[table_id-T_j0_i1]",
+  "outcome": "passed",
+  "seconds": 0.018
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_table_record_fields_are_checked",
+  "outcome": "passed",
+  "seconds": 0.017
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_payload_digest_integrity",
+  "outcome": "passed",
+  "seconds": 0.028
+ },
+ {
+  "file": "test_review_regressions.py",
+  "name": "test_f5_new_checks_pass_on_all_fixture_results",
+  "outcome": "passed",
+  "seconds": 0.072
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s01_cli_and_http_same_summary_and_identity",
   "outcome": "passed",
-  "seconds": 0.879
+  "seconds": 0.581
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s01_same_domain_errors[<lambda>-UNSUPPORTED_FRAME]",
   "outcome": "passed",
-  "seconds": 0.837
+  "seconds": 0.613
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s01_same_domain_errors[<lambda>-INVALID_PITCH]",
   "outcome": "passed",
-  "seconds": 0.93
+  "seconds": 0.523
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s01_same_domain_errors[<lambda>-INVALID_GEOMETRY]",
   "outcome": "passed",
-  "seconds": 0.89
+  "seconds": 0.521
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s01_same_domain_errors[<lambda>-INVALID_INPUT]",
   "outcome": "passed",
-  "seconds": 0.772
+  "seconds": 0.515
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s01_non_finite_json_over_http_is_typed",
   "outcome": "passed",
-  "seconds": 0.035
+  "seconds": 0.023
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s03_result_created_by_cli_read_by_http_and_python",
   "outcome": "passed",
-  "seconds": 1.593
+  "seconds": 1.082
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_selection_bound_to_source_revision",
   "outcome": "passed",
-  "seconds": 0.083
+  "seconds": 0.068
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s04_two_processes_one_expected_revision",
   "outcome": "passed",
-  "seconds": 5.334
+  "seconds": 4.818
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s05_restart_reads_projects_results_pages_and_exports",
   "outcome": "passed",
-  "seconds": 5.044
+  "seconds": 3.203
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s05_killed_generation_leaves_no_result[generate:modules_partially_written]",
   "outcome": "passed",
-  "seconds": 3.626
+  "seconds": 2.571
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s05_killed_generation_leaves_no_result[generate:before_commit]",
   "outcome": "passed",
-  "seconds": 3.539
+  "seconds": 2.518
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s05_raised_fault_rolls_back",
   "outcome": "passed",
-  "seconds": 0.094
+  "seconds": 0.053
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s05_killed_export_is_never_presented",
   "outcome": "passed",
-  "seconds": 1.519
+  "seconds": 1.12
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_cursor_paging_visits_every_item_once_in_order",
   "outcome": "passed",
-  "seconds": 2.861
+  "seconds": 1.99
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs0]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs1]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs2]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs3]",
   "outcome": "passed",
-  "seconds": 0.002
+  "seconds": 0.001
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs4]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs5]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_invalid_cursor_and_range_are_typed[kwargs6]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_cursor_from_other_kind_rejected",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.002
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s06_summary_and_page_reads_do_not_load_coordinates",
   "outcome": "passed",
-  "seconds": 0.021
+  "seconds": 0.014
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[../../etc/passwd]",
   "outcome": "passed",
-  "seconds": 0.029
+  "seconds": 0.017
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[res_../../x]",
   "outcome": "passed",
-  "seconds": 0.03
+  "seconds": 0.014
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[/etc/passwd]",
   "outcome": "passed",
-  "seconds": 0.037
+  "seconds": 0.015
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[res_gggggggggggggggggggggggg]",
   "outcome": "passed",
-  "seconds": 0.03
+  "seconds": 0.015
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[]",
   "outcome": "passed",
-  "seconds": 0.028
+  "seconds": 0.016
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[None]",
   "outcome": "passed",
-  "seconds": 0.032
+  "seconds": 0.015
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_result_ids[5]",
   "outcome": "passed",
-  "seconds": 0.024
+  "seconds": 0.015
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_formats[../json]",
   "outcome": "passed",
-  "seconds": 0.064
+  "seconds": 0.033
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_formats[json/../../x]",
   "outcome": "passed",
-  "seconds": 0.054
+  "seconds": 0.031
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_formats[pdf]",
   "outcome": "passed",
-  "seconds": 0.054
+  "seconds": 0.038
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_formats[]",
   "outcome": "passed",
-  "seconds": 0.05
+  "seconds": 0.047
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_formats[None]",
   "outcome": "passed",
-  "seconds": 0.049
+  "seconds": 0.052
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_malformed_formats[JSON]",
   "outcome": "passed",
-  "seconds": 0.052
+  "seconds": 0.04
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_http_traversal_attempts",
   "outcome": "passed",
-  "seconds": 0.051
+  "seconds": 0.028
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_symlinked_result_folder_cannot_escape",
   "outcome": "passed",
-  "seconds": 0.059
+  "seconds": 0.041
  },
  {
   "file": "test_service_interfaces.py",
   "name": "test_s07_no_shell_interpolation_in_source",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.002
  },
  {
   "file": "test_tolerance_and_arcs.py",
@@ -753,85 +903,85 @@
   "file": "test_tolerance_and_arcs.py",
   "name": "test_setback_just_outside_is_rejected_just_inside_kept[1e-06]",
   "outcome": "passed",
-  "seconds": 0.01
+  "seconds": 0.007
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_setback_just_outside_is_rejected_just_inside_kept[1e-09]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.008
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_setback_just_outside_is_rejected_just_inside_kept[1e-12]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.008
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_setback_just_outside_is_rejected_just_inside_kept[9.094947017729282e-13]",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.008
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_borderline_cases_use_exact_arithmetic",
   "outcome": "passed",
-  "seconds": 0.005
+  "seconds": 0.004
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_keepout_tangent_and_neighbours[0.0-True]",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.007
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_keepout_tangent_and_neighbours[-1e-10-True]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.007
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_keepout_tangent_and_neighbours[1e-10-False]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.006
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_keepout_tangent_and_neighbours[1e-06-False]",
   "outcome": "passed",
-  "seconds": 0.008
+  "seconds": 0.005
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_keepout_tangent_and_neighbours[9.094947017729282e-13-False]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.006
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_keepout_corner_arc_is_a_true_circle_not_a_chord_polygon",
   "outcome": "passed",
-  "seconds": 0.007
+  "seconds": 0.004
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_setback_reflex_vertex_arc_is_safe",
   "outcome": "passed",
-  "seconds": 0.006
+  "seconds": 0.003
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_buildable_area_bounds_bracket_an_analytic_area",
   "outcome": "passed",
-  "seconds": 0.101
+  "seconds": 0.089
  },
  {
   "file": "test_tolerance_and_arcs.py",
   "name": "test_translated_tangency_still_exact",
   "outcome": "passed",
-  "seconds": 0.006
+  "seconds": 0.005
  },
  {
   "file": "test_tolerance_and_arcs.py",
@@ -861,7 +1011,7 @@
   "file": "test_validation.py",
   "name": "test_fixtures_are_valid_without_migration",
   "outcome": "passed",
-  "seconds": 0.014
+  "seconds": 0.009
  },
  {
   "file": "test_validation.py",
@@ -897,7 +1047,7 @@
   "file": "test_validation.py",
   "name": "test_unsupported_frames_are_typed[<lambda>-/frame/axes]",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.002
  },
  {
   "file": "test_validation.py",
@@ -909,19 +1059,19 @@
   "file": "test_validation.py",
   "name": "test_non_finite_json_is_rejected[NaN]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_validation.py",
   "name": "test_non_finite_json_is_rejected[Infinity]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_validation.py",
   "name": "test_non_finite_json_is_rejected[-Infinity]",
   "outcome": "passed",
-  "seconds": 0.001
+  "seconds": 0.0
  },
  {
   "file": "test_validation.py",
@@ -963,7 +1113,7 @@
   "file": "test_validation.py",
   "name": "test_bad_holes_are_rejected[holes2]",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.002
  },
  {
   "file": "test_validation.py",
@@ -1077,61 +1227,61 @@
   "file": "test_validation.py",
   "name": "test_module_output_limit",
   "outcome": "passed",
-  "seconds": 0.273
+  "seconds": 0.223
  },
  {
   "file": "test_validation.py",
   "name": "test_timeout_policy_is_finite_and_typed",
   "outcome": "passed",
-  "seconds": 0.003
+  "seconds": 0.002
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_fixture_results_verify[rectangle]",
   "outcome": "passed",
-  "seconds": 0.017
+  "seconds": 0.012
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_fixture_results_verify[obstacle]",
   "outcome": "passed",
-  "seconds": 0.018
+  "seconds": 0.012
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_fixture_results_verify[multipolygon]",
   "outcome": "passed",
-  "seconds": 0.031
+  "seconds": 0.023
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_fixture_results_verify[concave-notch]",
   "outcome": "passed",
-  "seconds": 0.004
+  "seconds": 0.003
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_fixture_results_verify[hole]",
   "outcome": "passed",
-  "seconds": 0.005
+  "seconds": 0.003
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_tables_and_modules_do_not_overlap_and_totals_agree",
   "outcome": "passed",
-  "seconds": 0.008
+  "seconds": 0.006
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_detects_table_moved_into_exclusion",
   "outcome": "passed",
-  "seconds": 0.017
+  "seconds": 0.012
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_detects_moved_module",
   "outcome": "passed",
-  "seconds": 0.018
+  "seconds": 0.013
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
@@ -1143,13 +1293,13 @@
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_detects_dropped_and_orphan_modules",
   "outcome": "passed",
-  "seconds": 0.024
+  "seconds": 0.026
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_detects_duplicate_and_overlapping_tables",
   "outcome": "passed",
-  "seconds": 0.026
+  "seconds": 0.027
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
@@ -1161,84 +1311,84 @@
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c10_detects_table_across_hole_and_outside_setback",
   "outcome": "passed",
-  "seconds": 0.005
+  "seconds": 0.004
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c11_translation_matrix_21_pairs",
   "outcome": "passed",
-  "seconds": 0.318
+  "seconds": 0.205
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c11_rotated_projected_frame_regression",
   "outcome": "passed",
-  "seconds": 0.01
+  "seconds": 0.009
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c13_nine_candidates_selection_and_labels",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.004
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c13_tie_break_prefers_phase_zero",
   "outcome": "passed",
-  "seconds": 0.022
+  "seconds": 0.014
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c13_deterministic_repeat",
   "outcome": "passed",
-  "seconds": 0.015
+  "seconds": 0.01
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_equivalent_inputs_share_identity",
   "outcome": "passed",
-  "seconds": 0.014
+  "seconds": 0.01
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_repeated_runs_identical",
   "outcome": "passed",
-  "seconds": 0.02
+  "seconds": 0.013
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_geometry_affecting_change_changes_identity[path0-1.5]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.007
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_geometry_affecting_change_changes_identity[path1-181.0]",
   "outcome": "passed",
-  "seconds": 0.011
+  "seconds": 0.007
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_geometry_affecting_change_changes_identity[path2-value2]",
   "outcome": "passed",
-  "seconds": 0.015
+  "seconds": 0.008
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_geometry_affecting_change_changes_identity[path3-551.0]",
   "outcome": "passed",
-  "seconds": 0.023
+  "seconds": 0.008
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_geometry_affecting_change_changes_identity[path4-0.9]",
   "outcome": "passed",
-  "seconds": 0.018
+  "seconds": 0.008
  },
  {
   "file": "test_verifier_translation_phase_identity.py",
   "name": "test_c14_payload_digest_excludes_wrappers",
   "outcome": "passed",
-  "seconds": 0.009
+  "seconds": 0.004
  }
 ]

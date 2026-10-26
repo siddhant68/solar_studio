@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="335.000mm" height="242.000mm" viewBox="0 0 335.000 242.000" data-result-id="res_3e27e5b3fad95f3c132daf2b">
 <title>Site layout res_3e27e5b3fad95f3c132daf2b</title>
-<metadata>{"frame": {"axes": {"x": "east", "y": "north"}, "id": "local:analytic-site", "kind": "local_cartesian", "units": "m"}, "input_digest": "ccafb0427593deaaa7e01a625bad77eb6d244e65c23f6e6741282a0549c72660", "payload_digest": "f605a1cc6de082c3438ec4845443dda42028e5056596daea413ac048a983b37c", "result_id": "res_3e27e5b3fad95f3c132daf2b", "scale_denominator": 50, "units": "plan viewBox in metres; page in millimetres", "world_from_plan": {"x": "X + x0", "x0": -1.0, "y": "y1 - Y", "y1": 9.0}}</metadata>
+<metadata>{"context": "result_only", "frame": {"axes": {"x": "east", "y": "north"}, "id": "local:analytic-site", "kind": "local_cartesian", "units": "m"}, "input_digest": "ccafb0427593deaaa7e01a625bad77eb6d244e65c23f6e6741282a0549c72660", "payload_digest": "f605a1cc6de082c3438ec4845443dda42028e5056596daea413ac048a983b37c", "result_id": "res_3e27e5b3fad95f3c132daf2b", "scale_denominator": 50, "units": "plan viewBox in metres; page in millimetres", "world_from_plan": {"x": "X + x0", "x0": -1.0, "y": "y1 - Y", "y1": 9.0}}</metadata>
 <style>
 .site{fill:#f3efe4;stroke:#3b3b3b;stroke-width:1.6px;vector-effect:non-scaling-stroke;fill-rule:evenodd}
 .admissible{fill:#dcefdc;stroke:#2e7d32;stroke-width:1px;stroke-dasharray:6 3;vector-effect:non-scaling-stroke;fill-rule:evenodd}
@@ -58,7 +58,7 @@
 <text x="0.00" y="162.80" class="small">Result res_3e27e5b3fad95f3c132daf2b</text>
 <text x="0.00" y="166.40" class="small">Input digest ccafb0427593deaaa7e01a62</text>
 <text x="0.00" y="170.00" class="small">Payload digest f605a1cc6de082c3438ec484</text>
-<text x="0.00" y="173.60" class="small">Project: none (direct request)</text>
+<text x="0.00" y="173.60" class="small">Result-only plan; projects: see context export</text>
 <text x="0.00" y="177.20" class="small">Frame local_cartesian 'local:analytic-site'</text>
 <text x="0.00" y="180.80" class="small">Units: metres. x East, y North.</text>
 <text x="0.00" y="184.40" class="small">z: relative to synthetic flat datum (not surveyed)</text>
