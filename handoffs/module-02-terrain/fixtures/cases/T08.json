@@ -1,0 +1,97 @@
+{
+ "case_id": "T08",
+ "title": "Rejected requests (typed errors; nothing stored)",
+ "cases": [
+  {
+   "name": "frame mismatch",
+   "change": "surface.frame.id = 'local:other-site' for case T03",
+   "expected_error": "FRAME_MISMATCH",
+   "why": "the terrain and the layout must declare the identical horizontal frame; no transformation is attempted"
+  },
+  {
+   "name": "vertical datum mismatch",
+   "change": "surface.vertical = {kind: orthometric, crs: EPSG:5703} and request.vertical.expected_crs = EPSG:5773",
+   "expected_error": "DATUM_MISMATCH",
+   "why": "no vertical transformation in Module 02 (PROJ falls back to a no-op ballpark transformation offline; see research/library-probes.json)"
+  },
+  {
+   "name": "missing vertical datum",
+   "change": "delete surface.vertical",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "elevations without a declared vertical reference are not accepted"
+  },
+  {
+   "name": "source mismatch",
+   "change": "request.source_layout.payload_digest = 64 zeros",
+   "expected_error": "SOURCE_MISMATCH",
+   "why": "a placement names the layout by result_id and payload_digest together"
+  },
+  {
+   "name": "unknown layout",
+   "change": "request.source_layout.result_id = res_000000000000000000000000",
+   "expected_error": "RESULT_NOT_FOUND",
+   "why": ""
+  },
+  {
+   "name": "degenerate triangle",
+   "change": "hill-fan triangle [0, 1, 4] replaced by [0, 1, 1]",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "zero plan area"
+  },
+  {
+   "name": "overlapping triangles",
+   "change": "append triangle [0, 1, 2] to hill-fan",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "a 2.5D surface maps each plan point to one elevation"
+  },
+  {
+   "name": "clockwise triangle",
+   "change": "hill-fan triangle [0, 1, 4] written as [0, 4, 1]",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "orientation is part of the contract (counter-clockwise in plan)"
+  },
+  {
+   "name": "non-finite elevation",
+   "change": "vertex 4 z = NaN",
+   "expected_error": "INVALID_TERRAIN",
+   "why": ""
+  },
+  {
+   "name": "duplicate plan vertex",
+   "change": "append vertex (4, 4, 11.0)",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "two elevations at one plan point"
+  },
+  {
+   "name": "cracked T-junction",
+   "change": "hill-fan: append vertex 5 = (6, 2, 10.5) on edge (8,0)-(4,4) and replace triangle [1, 2, 4] by [1, 2, 5] and [5, 2, 4]; triangle [0, 1, 4] keeps the full edge",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "the edge interpolates to 10.3 at (6, 2) on one side and the new vertex says 10.5: a crack with two elevations along one line"
+  },
+  {
+   "name": "support outside footprint",
+   "change": "supports.points_ad_m = [[4.5, 1.0]] for case T03 (W = 4)",
+   "expected_error": "INVALID_INPUT",
+   "why": "supports are inside the table footprint"
+  },
+  {
+   "name": "negative clearance",
+   "change": "placement.minimum_clearance_m = -0.1",
+   "expected_error": "INVALID_INPUT",
+   "why": ""
+  },
+  {
+   "name": "unsupported policy",
+   "change": "placement.policy = 'follow_terrain_reorientation'",
+   "expected_error": "UNSUPPORTED_OPERATION",
+   "why": "reorientation is a later, separately approved milestone"
+  }
+ ],
+ "accepted_variants": [
+  {
+   "name": "consistent T-junction",
+   "change": "as 'cracked T-junction' but with vertex 5 = (6, 2, 10.3), the edge's interpolated elevation",
+   "expected": "valid surface; T03 placement unchanged (L = 11.1 m)"
+  }
+ ]
+}

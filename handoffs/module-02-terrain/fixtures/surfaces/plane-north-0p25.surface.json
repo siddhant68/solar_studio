@@ -1,0 +1,58 @@
+{
+ "schema_version": "solar.terrain.surface/1",
+ "name": "Plane G = 50 + 0.25 y",
+ "frame": {
+  "kind": "local_cartesian",
+  "id": "local:analytic-site",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "vertical": {
+  "kind": "local",
+  "id": "local:fixture-datum",
+  "crs": null,
+  "units": "m",
+  "positive": "up"
+ },
+ "source": {
+  "kind": "synthetic_analytic",
+  "description": "Two triangles over [0,6] x [0,8]; G = 50 + 0.25 y (rises north)"
+ },
+ "vertices_xyz_m": [
+  [
+   0.0,
+   0.0,
+   50.0
+  ],
+  [
+   6.0,
+   0.0,
+   50.0
+  ],
+  [
+   6.0,
+   8.0,
+   52.0
+  ],
+  [
+   0.0,
+   8.0,
+   52.0
+  ]
+ ],
+ "triangles": [
+  [
+   0,
+   1,
+   2
+  ],
+  [
+   0,
+   2,
+   3
+  ]
+ ]
+}

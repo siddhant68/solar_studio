@@ -1,0 +1,150 @@
+{
+ "case_id": "T02",
+ "title": "Tilted 3-4-5 table on ground rising north at 0.25",
+ "layout": {
+  "request": "layouts/single-tilted-3-4-5.layout-request.json",
+  "observed_result_id": "res_927a1bf4f489084fc4e05685",
+  "observed_payload_digest": "9b1be5d89497a6519894c92e6125a2e13df9454afdcf1ede6f328adca1086bda",
+  "modules_per_table": 2,
+  "power_wp": 550,
+  "table_width_W_m": 2.0,
+  "table_depth_D_m": 4.0,
+  "tan_tilt": 0.75,
+  "lower_edge_height_m": 0.8
+ },
+ "surface": "../surfaces/plane-north-0p25.surface.json",
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "source_layout": {
+   "result_id": "res_927a1bf4f489084fc4e05685",
+   "payload_digest": "9b1be5d89497a6519894c92e6125a2e13df9454afdcf1ede6f328adca1086bda"
+  },
+  "terrain": "surfaces/plane-north-0p25.surface.json",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.0
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     3.5
+    ],
+    [
+     1.5,
+     0.5
+    ],
+    [
+     1.5,
+     3.5
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 20.0,
+   "max_support_above_ground_m": 2.5
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "formula": "planar ground G = z0 + gx x + gy y; L = max over footprint corners of (G - d tan(beta)) + c + s; clearance(a, d) = L + d tan(beta) - s - G; support above-ground height = top - ground",
+ "plane": {
+  "z0": 50.0,
+  "gx": 0.0,
+  "gy": 0.25
+ },
+ "expected": {
+  "tables": [
+   {
+    "table_id": "T_j0_i0",
+    "origin_xy_m": [
+     2.0,
+     2.0
+    ],
+    "footprint_xy_m": [
+     [
+      2.0,
+      2.0
+     ],
+     [
+      4.0,
+      2.0
+     ],
+     [
+      4.0,
+      6.0
+     ],
+     [
+      2.0,
+      6.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 51.0,
+    "upper_edge_z_m": 54.0,
+    "vertical_lift_m": 50.2,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 2.5,
+    "max_ground_slope_deg": 14.036243467926479,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       2.5,
+       2.5
+      ],
+      "ground_z_m": 50.625,
+      "top_z_m": 51.375,
+      "above_ground_m": 0.75
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       2.5,
+       5.5
+      ],
+      "ground_z_m": 51.375,
+      "top_z_m": 53.625,
+      "above_ground_m": 2.25
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       3.5,
+       2.5
+      ],
+      "ground_z_m": 50.625,
+      "top_z_m": 51.375,
+      "above_ground_m": 0.75
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       3.5,
+       5.5
+      ],
+      "ground_z_m": 51.375,
+      "top_z_m": 53.625,
+      "above_ground_m": 2.25
+     }
+    ]
+   }
+  ],
+  "placed_tables": 1,
+  "placed_modules": 2,
+  "placed_dc_kwp": 1.1
+ },
+ "notes": "tan(beta) = 3/4. G - 0.75 d decreases with d, so the front (lower) edge governs: L = 50.5 + 0.5 = 51.0. Module corners: 51.0 at the lower edge, 54.0 at the upper edge. Rear clearance 2.5 m. Ground slope atan(0.25)."
+}

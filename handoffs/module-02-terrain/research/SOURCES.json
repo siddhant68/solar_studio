@@ -1,0 +1,102 @@
+{
+ "research_date": "2026-10-26",
+ "status": "planning research for the Module 02 terrain proposal; no terrain code was written",
+ "authorities": {
+  "source-read": "ordinary reading of a pinned public commit; behaviour inferred from code, not executed",
+  "runtime-probe": "the library was installed in an isolated environment and called; see probes/library_probes.py and library-probes.json",
+  "repository-search": "text search of a pinned commit to establish presence or absence of a feature",
+  "not-inspected": "named for context only; no claim about behaviour"
+ },
+ "sources": [
+  {
+   "name": "PVPlant (FreeCAD workbench)",
+   "repository": "https://github.com/JavierBrana/PVPlant",
+   "commit": "7852ee562c92706e5e3e5d095cefccd5070b18d3",
+   "commit_date": "2023-10-14",
+   "authority": "source-read",
+   "licence_observation": "file headers: GNU LGPL version 2 or later, referring to a LICENCE text file that does not exist at this commit; no repository-level licence (same observation as Module 01)",
+   "maturity_observation": "last commit 2023; FreeCAD/GUI-bound code with commented-out experiments and TODOs; no test suite found",
+   "terrain_features_observed": [
+    "Terrain mesh from points: scipy Delaunay over all points inside a cutting boundary, then faces filtered by maximum edge length and angle (PVPlantCreateTerrainMesh.py:136-146)",
+    "ESRI ASCII grid import and thin-plate RBF interpolation of CSV points onto a grid spanning the full bounding box (Utils/importDEM.py:29-66, 80-100)",
+    "Adjust-to-terrain: projects points along a table's centre line onto the mesh, sets each frame's z to the mean of two projected points and rotates the frame to follow the ground; optional linear-regression trend (PVPlantPlacement.py:771-874)",
+    "Earthworks cut/fill along tracker paths (PVPlantEarthWorks.py:137, 397) - grading, out of Module 02 scope",
+    "Slope colouring by face normal angle (PVPlantTerrainAnalisys.py:540-560)",
+    "Rack and foundation parameters with fixed defaults: NumberPole = 7, PoleLength = 3000 mm (PVPlantRack.py:885-898); foundation length 700 mm default (PVPlantFoundation.py:49)"
+   ],
+   "defects_or_risks_observed_by_reading": [
+    "Faces rejected by the edge/angle filter keep their zero-initialised vertices, so the mesh gains degenerate triangles at the origin instead of omitting them (PVPlantCreateTerrainMesh.py:141-146)",
+    "XLLCENTER is converted to a corner by subtracting half the grid width (cellsize * nx / 2) instead of half a cell (Utils/importDEM.py:58-59); GDAL places the same grid 2 m and 1 m differently in the probe",
+    "Elevations are multiplied by 1000 before cells are compared with the unscaled NODATA_VALUE, so a -9999 no-data cell becomes -9999000 and passes the != nodata test (PVPlantTerrain.py:311, 327, 356, 376, 436)",
+    "The RBF interpolation grid covers the whole bounding box, so it extrapolates outside the surveyed points (Utils/importDEM.py:97-100)",
+    "Ground is sampled only along each table's centre line; there is no clearance check over the full footprint, and points that miss the mesh are silently dropped (PVPlantPlacement.py:810-870)",
+    "Slope colouring uses angle - 90 for downward normals instead of 180 - angle (PVPlantTerrainAnalisys.py:553-554)"
+   ],
+   "use_in_module_02": "Concepts only (centre-line following, pile parameters, earthworks scope boundary) and a list of failure modes the acceptance fixtures cover. No code is reused; licence status is unclear."
+  },
+  {
+   "name": "pvlib-python",
+   "repository": "https://github.com/pvlib/pvlib-python",
+   "commit": "d6075f679f5c05c87fc9be1af72a1f3af2da0d2f",
+   "commit_date": "2026-10-25",
+   "authority": "source-read",
+   "licence": "BSD-3-Clause (LICENSE)",
+   "terrain_features_observed": [
+    "tracking.calc_axis_tilt(slope_azimuth, slope_tilt, axis_azimuth): tan(axis_tilt) = cos(axis_azimuth - slope_azimuth) * tan(slope_tilt), cited to Anderson and Mikofski, NREL/TP-5K00-76626 (2020)",
+    "tracking.calc_cross_axis_tilt for slope-aware backtracking on one uniform planar slope",
+    "shading.ground_angle / masking_angle assume regular rows on uniform ground"
+   ],
+   "observation": "Every terrain-related function assumes one uniform plane; there is no DEM or TIN handling.",
+   "use_in_module_02": "Independent oracle for uniform-slope geometry in the later reorientation milestone (e.g. axis tilt on a planar slope). Not a dependency of the vertical-lift milestone."
+  },
+  {
+   "name": "agrivoltaic garden planner (Module 01 browser reference)",
+   "repository": "https://github.com/peterklingelhofer/agrivoltaic-garden-planner",
+   "commit": "43118b3939a91df5ba641a3b0470022ff7ecc5c7",
+   "authority": "repository-search",
+   "licence": "Apache-2.0 code; CC BY 4.0 documentation/data",
+   "observation": "Only a single site elevation, taken from the weather record, is used for sun position (src/types/site.ts, src/types/weather.ts, src/ui/site-notice.ts). No terrain surface, DEM, TIN or terrain-following placement.",
+   "use_in_module_02": "None; therefore no REA question about terrain behaviour applies to this artifact."
+  },
+  {
+   "name": "PROJ via pyproj",
+   "package": "pyproj 3.7.2 (PROJ 9.5.1)",
+   "authority": "runtime-probe",
+   "licence": "MIT (pyproj); PROJ under MIT/X (LICENSE_proj in the wheel)",
+   "observation": "Offline, without the EGM96 grid, WGS 84 ellipsoidal height -> EGM96 height silently uses a 'ballpark' no-op: 100 m in, 100 m out, accuracy -1, no warning or error; only_best=True, PROJ_ONLY_BEST_DEFAULT=YES and errcheck=True did not change that. TransformerGroup does warn that the best operation is unavailable.",
+   "use_in_module_02": "No vertical transformation in Module 02. Datum identity is checked and a mismatch is rejected. A later transformation feature would have to require the named grid and refuse ballpark operations explicitly."
+  },
+  {
+   "name": "SciPy spatial / interpolate",
+   "package": "scipy 1.16.2",
+   "authority": "runtime-probe",
+   "licence": "BSD-3-Clause",
+   "observation": "Delaunay over points surrounding an unsurveyed 4 x 4 m gap triangulates the gap; LinearNDInterpolator returns a finite value (0.5) at its centre. Only points outside the convex hull give NaN.",
+   "use_in_module_02": "No implicit triangulation of scattered points in the first milestone; coverage is exactly the supplied triangles."
+  },
+  {
+   "name": "GDAL via rasterio",
+   "package": "rasterio 1.4.3 (bundled GDAL 3.9.3)",
+   "authority": "runtime-probe",
+   "licence": "rasterio BSD-3-Clause; GDAL MIT/X; the manylinux wheel also bundles GEOS (LGPL-2.1), OpenSSL libcrypto, curl, HDF5 and other libraries with their own terms",
+   "observation": "read(masked=True) masks the no-data cell; dataset.sample() without masked=True returns the raw -9999; GeoTIFF default AREA_OR_POINT=Area puts row 0/col 0 centre half a cell from the corner; ESRI ASCII XLLCENTER is converted correctly (lower-left corner 9, 19 for centre 10, 20 and cell 2 m).",
+   "use_in_module_02": "Candidate for the optional DEM adapter milestone; must use masked reads and explicit pixel registration. Optional dependency because of the bundled-library footprint."
+  },
+  {
+   "name": "Other open-source tools (screened, not inspected)",
+   "authority": "not-inspected",
+   "items": [
+    {"name": "PDAL", "licence_claim": "BSD", "possible_role": "point-cloud filtering before TIN creation (outside Module 02)"},
+    {"name": "WhiteboxTools", "licence_claim": "MIT", "possible_role": "slope/aspect cross-checks"},
+    {"name": "CGAL", "licence_claim": "GPL/LGPL by package", "possible_role": "constrained triangulation; licence would need owner review"},
+    {"name": "RichDEM", "licence_claim": "GPL-3.0", "possible_role": "DEM hydrology; copyleft, not proposed"},
+    {"name": "LandXML 1.2 (format)", "licence_claim": "open specification", "possible_role": "TIN exchange format for a later import adapter"}
+   ]
+  },
+  {
+   "name": "Commercial terrain-following PV design tools (PVcase, PVsyst, SolarFarmer, others)",
+   "authority": "not-inspected",
+   "observation": "Proprietary and/or native desktop/CAD software. Not inspected, not a dependency, not an REA target here."
+  }
+ ]
+}
