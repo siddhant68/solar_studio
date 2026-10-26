@@ -1,0 +1,71 @@
+{
+ "passed": true,
+ "working_tree_clean_at_packaging": true,
+ "head": "4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb",
+ "branch": "claude/kind-cerf-gu33em",
+ "commands": [
+  "git bundle create solar_studio-4594c5f1e8.bundle --all",
+  "git bundle verify solar_studio-4594c5f1e8.bundle",
+  "git archive --format=zip --prefix=solar_studio/ -o solar_studio-4594c5f1e8-source.zip HEAD"
+ ],
+ "checks": {
+  "bundle_created": true,
+  "bundle_verify": true,
+  "zip_created": true,
+  "zip_crc_ok": true,
+  "zip_matches_tracked_files": true,
+  "no_caches_venvs_db_keys_or_reference_checkouts": true,
+  "bundle_clone": true,
+  "bundle_clone_head_matches": true,
+  "bundle_clone_tree_matches": true
+ },
+ "files": [
+  {
+   "name": "solar_studio-4594c5f1e8.bundle",
+   "bytes": 33741413,
+   "sha256": "27ff8af961199872231c0ef6819c21e16ba4c8552c57f281275a3c8cfe76fc34"
+  },
+  {
+   "name": "solar_studio-4594c5f1e8-source.zip",
+   "bytes": 30958238,
+   "sha256": "ad6837053311985c3f3e980cd2dcecd61e23db709715ff2df855fa58ceb16413"
+  }
+ ],
+ "zip_file_count": 265,
+ "largest_files_in_zip": [
+  {
+   "path": "solar-site-layout/evidence/rea/runtime-scenarios/R03-S2-change-pitch-tilt.evidence.json.gz",
+   "bytes": 7163849
+  },
+  {
+   "path": "solar-site-layout/evidence/rea/static/attempt4-html-worker-chunks.evidence-bundle.json.gz",
+   "bytes": 7028416
+  },
+  {
+   "path": "solar-site-layout/evidence/rea/runtime-scenarios/R03-S2-change-pitch-tilt/09-after_settle.png",
+   "bytes": 914886
+  },
+  {
+   "path": "solar-site-layout/evidence/runtime/agv/S2-change-pitch-tilt-after-tilt.png",
+   "bytes": 914777
+  },
+  {
+   "path": "solar-site-layout/evidence/rea/runtime-scenarios/R03-S2-change-pitch-tilt/07-set_pitch_6.png",
+   "bytes": 891951
+  },
+  {
+   "path": "solar-site-layout/evidence/runtime/agv/S2-change-pitch-tilt-after-pitch.png",
+   "bytes": 891750
+  },
+  {
+   "path": "solar-site-layout/evidence/runtime/agv/S3-save-reload-saved-before-reload.png",
+   "bytes": 824086
+  },
+  {
+   "path": "solar-site-layout/evidence/rea/runtime-scenarios/R03-S3-save-reload.evidence.json.gz",
+   "bytes": 758209
+  }
+ ],
+ "forbidden_hits": [],
+ "summary": "bundle solar_studio-4594c5f1e8.bundle and source zip solar_studio-4594c5f1e8-source.zip built from 4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb; bundle_created=True, bundle_verify=True, zip_created=True, zip_crc_ok=True, zip_matches_tracked_files=True, no_caches_venvs_db_keys_or_reference_checkouts=True, bundle_clone=True, bundle_clone_head_matches=True, bundle_clone_tree_matches=True"
+}

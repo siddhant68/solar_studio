@@ -1,0 +1,95 @@
+{
+ "result_id": "res_410d496155af5459caa61028",
+ "input_digest": "9210e69797916b72039bdc1c0f54557138acf6cfd1b08e27de4852e61d2a1c7b",
+ "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
+ "quantities": {
+  "buildable_area_bounds_m2": [
+   119.99668665411444,
+   120.0
+  ],
+  "buildable_area_m2": 120.0,
+  "dc_capacity_kwp": 13.2,
+  "gross_site_area_m2": 168.0,
+  "module_count": 24,
+  "module_ground_coverage_buildable": 0.4,
+  "module_ground_coverage_gross": 0.2857142857142857,
+  "module_power_wp": 550.0,
+  "modules_per_table": 4,
+  "outer_ring_area_m2": 168.0,
+  "physical_module_area_m2": 48.0,
+  "projected_module_area_m2": 48.0,
+  "table_count": 6,
+  "table_footprint_area_m2": 48.0
+ },
+ "dimensions": {
+  "columns": 2,
+  "footprint_checked_L_m": 4.0,
+  "footprint_checked_W_m": 2.0,
+  "lower_edge_height_m": 0.8,
+  "module_gap_x_m": 0.0,
+  "module_gap_y_m": 0.0,
+  "module_l_upslope_m": 2.0,
+  "module_orientation": "portrait",
+  "module_w_across_m": 1.0,
+  "rows": 2,
+  "table_projected_depth_D_m": 4.0,
+  "table_rise_H_m": 0.0,
+  "table_slope_length_L_m": 4.0,
+  "table_width_W_m": 2.0,
+  "tilt_deg": 0.0,
+  "upper_edge_height_m": 0.8
+ },
+ "placement": {
+  "anchor_xy_m": [
+   1.0,
+   1.0
+  ],
+  "clear_row_gap_m": 1.0,
+  "lattice_period_u_m": 3.0,
+  "minimum_clear_row_gap_m": 1.0,
+  "mode": "fixed_lattice",
+  "optimality": "fixed_lattice_no_search",
+  "phase_candidates": [
+   {
+    "candidates": 56,
+    "module_count": 24,
+    "offset_u_m": 0.0,
+    "offset_v_m": 0.0,
+    "phase_index": [
+     0,
+     0
+    ],
+    "table_count": 6
+   }
+  ],
+  "row_pitch_m": 5.0,
+  "selected_offset_u_m": 0.0,
+  "selected_offset_v_m": 0.0,
+  "selected_phase_index": [
+   0,
+   0
+  ],
+  "table_gap_m": 1.0
+ },
+ "warnings": [],
+ "verification": {
+  "checks": {
+   "areas": true,
+   "dimensions": true,
+   "exclusions": true,
+   "footprint_shape": true,
+   "identity_and_membership": true,
+   "lattice_positions": true,
+   "module_geometry": true,
+   "module_within_table": true,
+   "payload_integrity": true,
+   "perimeter_setback": true,
+   "quantities": true,
+   "record_fields": true,
+   "record_totals": true,
+   "site_containment": true,
+   "tables_disjoint": true
+  },
+  "ok": true
+ }
+}

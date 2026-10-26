@@ -1,0 +1,45 @@
+{
+ "error": "JavaScript application analysis failed",
+ "code": "provider_timeout",
+ "category": "timeout",
+ "message": "JavaScript source analysis reached its 300000ms per-source server/provider deadline (analysis_timeout_ms), not the MCP client deadline.",
+ "retryable": true,
+ "remediation": {
+  "action": "Reuse accessible partial_observation Evidence to avoid recomputation; reading it is not a prerequisite for a corrected retry. Increase analysis_timeout_ms through MCP, or use rea analyze-javascript-application <input_path> --analysis-timeout-ms <milliseconds> on the CLI. Alternatively, reduce semantic limits or select exact inventoried source_paths (CLI: --source-path on that command). Omit source_paths to analyze all sources; an empty array is invalid. detail: summary reduces response size, not analysis work. Allow execution, cleanup and delivery headroom in the MCP client tool deadline; increasing that client deadline alone does not change this server budget. Resolve any reported incomplete cleanup before retrying."
+ },
+ "recovery": {
+  "kind": "inspect_timeout_state",
+  "operation": "analyze_javascript_application",
+  "timeout_ms": 300000
+ },
+ "details": {
+  "operation": "analyze_javascript_application",
+  "timeout_ms": 300000,
+  "limit": {
+   "setting": "javascript.analysis_timeout_ms",
+   "effective_value": 300000,
+   "unit": "ms",
+   "minimum": 1,
+   "maximum": 2147483647,
+   "applies_at": "next_operation",
+   "agent_editable": true,
+   "scope": "rea-runtime",
+   "rea_restart_required": false,
+   "parameter": "analysis_timeout_ms"
+  },
+  "captured_output": {
+   "stdout": "",
+   "stderr": "",
+   "truncated": true,
+   "stderr_bytes": 0,
+   "exit_code": null,
+   "signal": null
+  }
+ },
+ "_retained_note": {
+  "full_output_sha256": "42d1461d21bbec6e273840b84674dcc3b83403ded7cc820d5168dc4f5f1bf9a1",
+  "full_output_bytes": 204818,
+  "partial_observation_evidence_id": "ev_90008ce05e0284c46dda702141e968c7b6cb47ca2a920f14a39edf3203552e28",
+  "partial_observation": "omitted from the repository (large); kept in the separate evidence archive"
+ }
+}

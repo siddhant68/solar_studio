@@ -1,0 +1,96 @@
+{
+ "browser": {
+  "mode": "launch",
+  "executable_path": "/home/user/work/tools/chromium-offline.sh",
+  "headless": true
+ },
+ "start_url": {
+  "url": "http://127.0.0.1:4173/",
+  "query": []
+ },
+ "actions": [
+  {
+   "step_id": "app_visible",
+   "action": "wait_for",
+   "locator": {
+    "kind": "test_id",
+    "value": "app-root"
+   },
+   "state": "visible",
+   "timeout_ms": 60000
+  },
+  {
+   "step_id": "example_settle",
+   "action": "wait_for_timeout",
+   "duration_ms": 5000
+  },
+  {
+   "step_id": "open_panels_step",
+   "action": "click",
+   "locator": {
+    "kind": "test_id",
+    "value": "action-step-panels"
+   },
+   "timeout_ms": 30000
+  },
+  {
+   "step_id": "open_by_hand_fold",
+   "action": "click",
+   "locator": {
+    "kind": "css",
+    "selector": "[data-testid=\"details-panels-by-hand\"] > summary"
+   },
+   "timeout_ms": 30000
+  },
+  {
+   "step_id": "row_count_visible",
+   "action": "wait_for",
+   "locator": {
+    "kind": "test_id",
+    "value": "control-array-row-count"
+   },
+   "state": "visible",
+   "timeout_ms": 30000
+  },
+  {
+   "step_id": "set_rows_2",
+   "action": "fill",
+   "locator": {
+    "kind": "test_id",
+    "value": "control-array-row-count"
+   },
+   "value": {
+    "source": "literal",
+    "value": "2"
+   }
+  },
+  {
+   "step_id": "set_modules_per_row_4",
+   "action": "fill",
+   "locator": {
+    "kind": "test_id",
+    "value": "control-array-modules-per-row"
+   },
+   "value": {
+    "source": "literal",
+    "value": "4"
+   }
+  },
+  {
+   "step_id": "settle",
+   "action": "wait_for_timeout",
+   "duration_ms": 1500
+  }
+ ],
+ "capture": {
+  "after_each_step": [],
+  "at_end": [
+   "screenshot",
+   "dom",
+   "storage",
+   "url"
+  ],
+  "events": []
+ },
+ "command_timeout_ms": 180000
+}

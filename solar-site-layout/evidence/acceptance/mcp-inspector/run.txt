@@ -1,0 +1,4 @@
+tools-list exit=0
+call-pitch exit=0
+call-generate exit=0
+call-bad-items exit=5

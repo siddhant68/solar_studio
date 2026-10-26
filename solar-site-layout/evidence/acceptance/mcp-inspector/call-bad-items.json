@@ -1,0 +1,16 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"error\": {\"code\": \"RESULT_NOT_FOUND\", \"field\": \"result_id\", \"message\": \"Result 'res_000000000000000000000000' does not exist\"}}"
+    }
+  ],
+  "structuredContent": {
+    "error": {
+      "code": "RESULT_NOT_FOUND",
+      "message": "Result 'res_000000000000000000000000' does not exist",
+      "field": "result_id"
+    }
+  },
+  "isError": true
+}

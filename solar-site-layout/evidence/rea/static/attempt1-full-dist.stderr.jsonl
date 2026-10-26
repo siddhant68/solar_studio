@@ -1,0 +1,12 @@
+{"rea_progress":{"phase":"analyze_javascript_application","completed":0,"total":1,"message":"Inventorying and parsing application artifacts","sequence":1}}
+{"rea_progress":{"phase":"read_javascript_artifacts","completed":0,"total":1,"message":"Reading inventoried JavaScript application sources","sequence":2}}
+{"rea_progress":{"phase":"parse_javascript_sources","completed":0,"total":1,"message":"Processing 16 selected application files","sequence":3}}
+{"rea_progress":{"phase":"parse_javascript_source","completed":0,"total":1,"message":"Parsing and projecting assets/CITATIONS.csl-DQTaCoLw.js (1/16)","sequence":4}}
+{"rea_progress":{"phase":"javascript_worker_parse","completed":0,"total":1,"message":"JavaScript worker parse: assets/CITATIONS.csl-DQTaCoLw.js","sequence":5}}
+{"rea_progress":{"phase":"javascript_worker_static","completed":0,"total":1,"message":"JavaScript worker static: assets/CITATIONS.csl-DQTaCoLw.js","sequence":6}}
+{"rea_progress":{"phase":"javascript_worker_semantic","completed":0,"total":1,"message":"JavaScript worker semantic: assets/CITATIONS.csl-DQTaCoLw.js","sequence":7}}
+{"rea_progress":{"phase":"javascript_worker_projection","completed":0,"total":1,"message":"JavaScript worker projection: assets/CITATIONS.csl-DQTaCoLw.js","sequence":8}}
+{"rea_progress":{"phase":"javascript_worker_transfer","completed":0,"total":1,"message":"JavaScript worker transfer: assets/CITATIONS.csl-DQTaCoLw.js","sequence":9}}
+{"rea_progress":{"phase":"parse_javascript_source","completed":0,"total":1,"message":"Parsing and projecting assets/SceneCanvas-Cc7IAYs_.js (2/16)","sequence":10}}
+{"rea_progress":{"phase":"javascript_worker_parse","completed":0,"total":1,"message":"JavaScript worker parse: assets/SceneCanvas-Cc7IAYs_.js","sequence":11}}
+{"rea_progress":{"phase":"javascript_worker_static","completed":0,"total":1,"message":"JavaScript worker static: assets/SceneCanvas-Cc7IAYs_.js","sequence":12}}

@@ -1,0 +1,127 @@
+{
+ "schema_version": "solar.layout.request/1",
+ "name": "Benchmark site (>=10,000 modules)",
+ "frame": {
+  "kind": "projected_cartesian",
+  "id": "utm-benchmark",
+  "crs": "EPSG:32633",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "boundary": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     500000.0,
+     4200000.0
+    ],
+    [
+     500292.0,
+     4200000.0
+    ],
+    [
+     500315.36,
+     4200092.4
+    ],
+    [
+     500233.6,
+     4200168.0
+    ],
+    [
+     500000.0,
+     4200154.56
+    ],
+    [
+     500000.0,
+     4200000.0
+    ]
+   ],
+   [
+    [
+     500131.4,
+     4200067.2
+    ],
+    [
+     500151.84,
+     4200067.2
+    ],
+    [
+     500151.84,
+     4200080.64
+    ],
+    [
+     500131.4,
+     4200080.64
+    ],
+    [
+     500131.4,
+     4200067.2
+    ]
+   ]
+  ]
+ },
+ "perimeter_setback_m": 5.0,
+ "exclusions": [
+  {
+   "id": "SUBSTATION",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       500043.8,
+       4200117.6
+      ],
+      [
+       500058.4,
+       4200117.6
+      ],
+      [
+       500058.4,
+       4200127.68
+      ],
+      [
+       500043.8,
+       4200127.68
+      ],
+      [
+       500043.8,
+       4200117.6
+      ]
+     ]
+    ]
+   },
+   "keepout_m": 3.0
+  }
+ ],
+ "module": {
+  "model_id": "GENERIC-1134x2278-580",
+  "width_m": 1.134,
+  "length_m": 2.278,
+  "power_wp": 580.0,
+  "orientation": "portrait"
+ },
+ "table": {
+  "rows": 2,
+  "columns": 14,
+  "module_gap_x_m": 0.02,
+  "module_gap_y_m": 0.02,
+  "tilt_deg": 25.0,
+  "facing_azimuth_deg": 180.0,
+  "lower_edge_height_m": 0.8
+ },
+ "placement": {
+  "mode": "fixed_lattice",
+  "anchor_xy_m": [
+   500005.0,
+   4200005.0
+  ],
+  "table_gap_m": 0.5,
+  "row_pitch_m": 6.5,
+  "minimum_clear_row_gap_m": 1.5
+ }
+}

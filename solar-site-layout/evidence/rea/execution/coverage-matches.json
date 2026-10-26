@@ -1,0 +1,289 @@
+{
+ "evidence_id": "ev_eb277a5ae447c5e80c13cbe8268bb901fa009f4880e624d7366f005d9cf3693f",
+ "idle_evidence_id": "ev_8fe3de3c3102f62262d050d009101f7561a13115376aebe8986ff53e6fd31ffb",
+ "provider": {
+  "id": "rea-cdp-browser",
+  "name": "REA Chrome DevTools Protocol observation provider",
+  "version": "2"
+ },
+ "window": {
+  "armed_at": "2026-10-25T19:41:13.722Z",
+  "ended_at": "2026-10-25T19:41:21.723Z",
+  "requested_ms": 8000,
+  "end_reason": "window_elapsed",
+  "producer_started_seconds": 3824.435662,
+  "producer_sampled_seconds": 3834.622694
+ },
+ "idle_executed_function_counts": {},
+ "scripts": [
+  {
+   "url": "http://127.0.0.1:4173/assets/index-8KvU91kB.js",
+   "executed_functions": 678,
+   "source_sha256": "9a048faba4d5050f2ded8d89a107e2503a0eb4e7efa02dbe0322b5ae013cf226",
+   "matches": [
+    {
+     "name": "nd",
+     "start": 344096,
+     "end": 344208,
+     "count": 4,
+     "tokens": [
+      "tiltDeg"
+     ],
+     "excerpt": "e=>{switch(e.mode){case`fixed`:return e.tiltDeg;case`single-axis-tilted`:return e.axisTiltDeg;default:return 0}}"
+    },
+    {
+     "name": "rd",
+     "start": 344212,
+     "end": 344258,
+     "count": 22,
+     "tokens": [
+      "tiltDeg"
+     ],
+     "excerpt": "e=>e.mode===`fixed`?e.tiltDeg:e.maxRotationDeg"
+    },
+    {
+     "name": "id",
+     "start": 344262,
+     "end": 344414,
+     "count": 54,
+     "tokens": [
+      "collectorWidthM"
+     ],
+     "excerpt": "(e,t)=>{let{clearanceHeightM:n,collectorWidthM:r}=e.geometry,i=r*M(t);return e.tracker.mode===`fixed`?{lowerM:n,upperM:n+i}:{lowerM:n-i/2,upperM:n+i/2}}"
+    },
+    {
+     "name": "sd",
+     "start": 344491,
+     "end": 344561,
+     "count": 8,
+     "tokens": [
+      "collectorWidthM"
+     ],
+     "excerpt": "e=>Math.max(1,Math.round(e.geometry.collectorWidthM/e.module.heightM))"
+    },
+    {
+     "name": "ud",
+     "start": 344659,
+     "end": 344882,
+     "count": 4,
+     "tokens": [
+      "collectorWidthM",
+      "groundCoverRatio",
+      "pitchM",
+      "projectedGroundCoverRatio"
+     ],
+     "excerpt": "e=>{let{geometry:t,tracker:n}=e,r=nd(n);return{groundCoverRatio:ed(t.collectorWidthM,t.pitchM),projectedGroundCoverRatio:td(t.collectorWidthM,t.pitchM,r),maxHeightM:ad(e).upperM,nameplateDcKw:ld(e),nameplateAcKw:$u(ld(e))}}"
+    },
+    {
+     "name": "dd",
+     "start": 344886,
+     "end": 345094,
+     "count": 2,
+     "tokens": [
+      "rowAzimuthDeg",
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": "(e,t,n)=>{let{geometry:r,tracker:i}=e,a=fd(e,t,n),o=Yu(i)?i.axisAzimuthDeg:r.rowAzimuthDeg;return{rotationDeg:a,tiltDeg:Math.abs(a),surfaceAzimuthDeg:i.mode===`fixed`?i.surfaceAzimuthDeg:Ne(o+(a>=0?90:-90))}}"
+    },
+    {
+     "name": "fd",
+     "start": 345098,
+     "end": 345713,
+     "count": 12,
+     "tokens": [
+      "collectorWidthM",
+      "pitchM",
+      "tiltDeg"
+     ],
+     "excerpt": "(e,t,n)=>{let{tracker:r}=e;switch(r.mode){case`fixed`:return r.tiltDeg;case`single-axis-horizontal-ns`:case`single-axis-tilted`:{if(t<=0)return 0;let i=90-t,a=n-r.axisAzimuthDeg,o=M(i)*M(a),s=M(i)*Pe(a)*M(r.axisTiltDeg)+Pe(i)*Pe(r.axisTiltDeg),c=Me(Math.atan2(o,s));return je(r.backtracking?pd(c,e.geome"
+    },
+    {
+     "name": "md",
+     "start": 345803,
+     "end": 346639,
+     "count": 2,
+     "tokens": [
+      "collectorWidthM",
+      "pitchM",
+      "rowAzimuthDeg",
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": "(e,t,n,r)=>{let i=[];for(let a of e){let{geometry:e}=a,{tiltDeg:o,surfaceAzimuthDeg:s}=dd(a,n,r),c=M(e.rowAzimuthDeg),l=Pe(e.rowAzimuthDeg),u=Pe(e.rowAzimuthDeg),d=-M(e.rowAzimuthDeg),f=M(s),p=Pe(s),m=e.collectorWidthM*Pe(o)/2,h=e.rowLengthM/e.modulesPerRow,g=h/2,{lowerM:_,upperM:v}=id(a,o),y={x"
+    },
+    {
+     "name": "Ep",
+     "start": 405976,
+     "end": 406197,
+     "count": 2,
+     "tokens": [
+      "collectorWidthM",
+      "pitchM"
+     ],
+     "excerpt": "e=>{if(e.tracker.mode===`fixed`)return e;let{clearanceHeightM:t,collectorWidthM:n,pitchM:r}=e.geometry,i=od(e);return t>=i&&r>=n?e:{...e,geometry:{...e.geometry,clearanceHeightM:z(Math.max(t,i)),pitchM:z(Math.max(r,n))}}}"
+    },
+    {
+     "name": "Op",
+     "start": 406248,
+     "end": 406624,
+     "count": 10,
+     "tokens": [
+      "rowAzimuthDeg",
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": "(e,t,n)=>{let r=e.tracker,i=fd(e,R(t),R(n));if(r.mode===`fixed`)return{tiltDeg:r.tiltDeg,surfaceAzimuthDeg:r.surfaceAzimuthDeg,rotationDeg:r.tiltDeg};if(r.mode===`dual-axis`)return{tiltDeg:i,surfaceAzimuthDeg:n,rotationDeg:i};let a=r.mode===`agro-optimized`?e.geometry.rowAzimuthDeg:r.axisAzimuthDeg;return{tilt"
+    },
+    {
+     "name": "kp",
+     "start": 406628,
+     "end": 407641,
+     "count": 10,
+     "tokens": [
+      "collectorWidthM",
+      "pitchM",
+      "rowAzimuthDeg",
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": "(e,t,n)=>{let r=Op(e,t,n),i=e.geometry,a=r.tiltDeg*Tp,o=i.rowAzimuthDeg*Tp,s=r.surfaceAzimuthDeg*Tp,c={x:Math.sin(o),z:-Math.cos(o)},l={x:Math.cos(o),z:Math.sin(o)},u={x:Math.sin(s),z:-Math.cos(s)},d=Math.max(1,Math.round(i.collectorWidthM/e.module.heightM)),f=i.collectorWidthM/d,p="
+    },
+    {
+     "name": "wM",
+     "start": 630243,
+     "end": 630655,
+     "count": 2,
+     "tokens": [
+      "pitchM",
+      "rowAzimuthDeg",
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": "e=>{let{geometry:t,tracker:n}=e,r=n.mode===`fixed`?`fixed at ${String(Math.round(n.tiltDeg))} degrees facing ${SM(n.surfaceAzimuthDeg)}`:`on a tracker that follows the sun`,i=n.mode===`fixed`?`of headroom`:`to the axis`;return`${Hv(t.rowCount,`row`,`rows`)} of ${Hv(t.modulesPerRow,`panel`,`panels`)} running ${CM(t.rowAzim"
+    },
+    {
+     "name": "tI",
+     "start": 756058,
+     "end": 756957,
+     "count": 3,
+     "tokens": [
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": ".mode===`fixed`?(0,Z.jsxs)(`div`,{className:`row`,children:[(0,Z.jsx)(Qk,{testId:`control-array-tilt`,label:`Tilt from flat`,unit:`deg`,min:0,max:90,value:nv(n.tiltDeg),onChange:r=>t({...e,tracker:{...n,tiltDeg:R(r)}})}),(0,Z.jsx)(Qk,{testId:`control-array-azimuth`,label:`Direction the panels face`,unit:`deg`,min:0,max:360,value:nv(n.surfaceAzimuthDeg),onChange:r=>t({...e,tracker:{...n,surfaceAzim"
+    },
+    {
+     "name": "onChange",
+     "start": 756285,
+     "end": 756325,
+     "count": 1,
+     "tokens": [
+      "tiltDeg"
+     ],
+     "excerpt": "r=>t({...e,tracker:{...n,tiltDeg:R(r)}})"
+    },
+    {
+     "name": "nI",
+     "start": 756961,
+     "end": 762162,
+     "count": 3,
+     "tokens": [
+      "collectorWidthM",
+      "control-array-pitch",
+      "groundCoverRatio",
+      "pitchM",
+      "projectedGroundCoverRatio",
+      "rowAzimuthDeg"
+     ],
+     "excerpt": "`,value:s.tracker.mode,options:$F,onChange:e=>i(eI(s,e))}),(0,Z.jsx)(tI,{array:s,onChange:i}),(0,Z.jsxs)(`div`,{className:`row`,children:[(0,Z.jsx)(Qk,{testId:`control-array-pitch`,label:`Row spacing, center to center`,unit:t,min:JA(.5,t),step:GA(t,.1),value:KA(s.geometry.pitchM,t,nv),onChange:e=>l({pitchM:z(Math.max(.5,qA(e,t)))})}),(0,Z.jsx)(Qk,{testId:`control-array-collector-width`,label:`Widt"
+    },
+    {
+     "name": "onChange",
+     "start": 758183,
+     "end": 758221,
+     "count": 1,
+     "tokens": [
+      "pitchM"
+     ],
+     "excerpt": "e=>l({pitchM:z(Math.max(.5,qA(e,t)))})"
+    },
+    {
+     "name": "JL",
+     "start": 802109,
+     "end": 802848,
+     "count": 3,
+     "tokens": [
+      "pitchM"
+     ],
+     "excerpt": ":r=>t({...e,geometry:{...n,clearanceHeightM:z(r)}})}),(0,Z.jsx)($k,{testId:`control-panels-spacing`,label:`Space between the rows`,min:2,max:16,step:.5,value:n.pitchM,display:`${nv(n.pitchM).toFixed(1)} m`,onChange:r=>t({...e,geometry:{...n,pitchM:z(r)}})})]})}"
+    }
+   ]
+  },
+  {
+   "url": "http://127.0.0.1:4173/assets/SceneCanvas-Cc7IAYs_.js",
+   "executed_functions": 1200,
+   "source_sha256": "72c67958bf239413e5c2e2c9d512ad30f706d2d945f92277f34d1041d57f9abd",
+   "matches": [
+    {
+     "name": "bS",
+     "start": 975352,
+     "end": 975573,
+     "count": 12,
+     "tokens": [
+      "collectorWidthM",
+      "pitchM",
+      "rowAzimuthDeg"
+     ],
+     "excerpt": "(e,t)=>e.map(e=>{let n=e.geometry;return{footprint:a(w(n.originM,(n.rowCount-1)*n.pitchM+n.collectorWidthM,Math.min(n.rowLengthM,n.modulesPerRow*e.module.widthM),-n.rowAzimuthDeg)),heightM:Math.max(0,ne(e).lowerM-yS-t)}})"
+    },
+    {
+     "name": "",
+     "start": 975365,
+     "end": 975572,
+     "count": 10,
+     "tokens": [
+      "collectorWidthM",
+      "pitchM",
+      "rowAzimuthDeg"
+     ],
+     "excerpt": "e=>{let n=e.geometry;return{footprint:a(w(n.originM,(n.rowCount-1)*n.pitchM+n.collectorWidthM,Math.min(n.rowLengthM,n.modulesPerRow*e.module.widthM),-n.rowAzimuthDeg)),heightM:Math.max(0,ne(e).lowerM-yS-t)}}"
+    },
+    {
+     "name": "dC",
+     "start": 979924,
+     "end": 980105,
+     "count": 2,
+     "tokens": [
+      "pitchM",
+      "rowAzimuthDeg"
+     ],
+     "excerpt": "e=>{let t=e?.arrays[0];if(t===void 0)return null;let{geometry:n}=t,r=n.rowCount*n.pitchM,i=aC*Math.max(r,n.rowLengthM);return uC(n.originM.xM,n.originM.yM,i,rC,lC(n.rowAzimuthDeg))}"
+    },
+    {
+     "name": "lM",
+     "start": 1125540,
+     "end": 1128573,
+     "count": 3,
+     "tokens": [
+      "groundCoverRatio",
+      "rowAzimuthDeg",
+      "surfaceAzimuthDeg",
+      "tiltDeg"
+     ],
+     "excerpt": "0,V.useMemo)(()=>new q(.25,.25),[]),T=FA(1,a,.55);if(!n||!f)return null;let E=MA(n.module),{widthM:D,heightM:k}=n.module,A=tM(D,k),j=rM(D,k),M=lS(f.orientation.tiltDeg,f.orientation.surfaceAzimuthDeg),N=Math.min(n.geometry.rowLengthM,n.geometry.modulesPerRow*D),P=Math.max(.4,n.geometry.clearanceHeightM);return(0,$.jsxs)(`group`,{name:`array-${e}`,onClick:p,onPointerOver:h,onPointerDown:l.onPointer"
+    },
+    {
+     "name": "",
+     "start": 1128444,
+     "end": 1128565,
+     "count": 9,
+     "tokens": [
+      "rowAzimuthDeg"
+     ],
+     "excerpt": "e=>(0,$.jsx)(yx,{position:[...e],rotation:[0,-(n.geometry.rowAzimuthDeg*Math.PI/180)+Math.PI/2,0]},`tube-${e.join(`:`)}`)"
+    }
+   ]
+  }
+ ]
+}

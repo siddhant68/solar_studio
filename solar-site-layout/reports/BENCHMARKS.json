@@ -1,0 +1,249 @@
+{
+ "schema": "solar.benchmarks/1",
+ "machine": {
+  "cpu_model": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "logical_cpus": 4,
+  "memory_total_mib": 16091,
+  "os": "Linux-6.18.44-fc-v153-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "runner": "Claude Code cloud container (Linux x86_64)"
+ },
+ "declared_limits": {
+  "max_abs_coordinate_m": 10000000.0,
+  "max_site_diagonal_m": 20000.0,
+  "min_module_dimension_m": 0.05,
+  "max_module_dimension_m": 10.0,
+  "max_anchor_distance_from_site_bbox_m": 20000.0,
+  "max_boundary_vertices": 100000,
+  "max_exclusion_vertices_total": 100000,
+  "max_candidates_per_phase": 400000,
+  "max_candidates_total": 1200000,
+  "max_modules": 60000,
+  "generation_timeout_s_default": 60.0
+ },
+ "method": "fresh child process per case; process-tree RSS sampled every 10 ms with psutil (peak of the sum over the child and its descendants); exports in a separate child",
+ "cases": [
+  {
+   "case": "D02-10k",
+   "fixture": "fixtures/benchmark-10k.request.json",
+   "generate": {
+    "exit": 0,
+    "wall_s": 2.1093989740002144,
+    "peak_tree_rss_mib": 81.39,
+    "rss_samples": 183,
+    "stderr_tail": "",
+    "ok": true,
+    "result_id": "res_d1bbb8a940f5c1d227f55119",
+    "module_count": 10192,
+    "table_count": 364,
+    "dc_capacity_kwp": 5911.36,
+    "candidates_evaluated": 744,
+    "timings": {
+     "validate_s": 0.028479306000008364,
+     "compute_s": 0.037102481000147236,
+     "records_and_digest_s": 0.31086579200018605,
+     "verify_s": 0.9651317929997276,
+     "persist_s": 0.23757201299986264,
+     "generate_and_verify_total_s": 1.5791600289999224
+    }
+   },
+   "exports": {
+    "exit": 0,
+    "wall_s": 2.8494672209999408,
+    "peak_tree_rss_mib": 84.83,
+    "rss_samples": 248,
+    "stderr_tail": "",
+    "ok": true,
+    "exports": {
+     "json": {
+      "seconds": 0.2999097530000654,
+      "bytes": 3402820,
+      "sha256": "9e682eba9b48511d445e50dfe2d901d622fb341d5f4dd412a4e8e6233c6b80ba"
+     },
+     "csv": {
+      "seconds": 0.20835920399986207,
+      "bytes": 2105741,
+      "sha256": "321d5111429309493e2953d0f8f569685036c7166753ed8dd0bcad098958bdae"
+     },
+     "svg": {
+      "seconds": 0.1792085600000064,
+      "bytes": 2305236,
+      "sha256": "fc7b97dd331d86a87eba22b9b18da99d2862c43b293a1d46a30edf53464a20c7"
+     },
+     "dxf": {
+      "seconds": 1.4506541409996316,
+      "bytes": 2833310,
+      "sha256": "de4a66c7b1cb4db2683ee795f986020addedac439a83bc2c42b3cde1bf4a103b"
+     },
+     "report": {
+      "seconds": 0.006214074999661534,
+      "bytes": 5824,
+      "sha256": "e7faf480c67b5e30e38ffd5498274374d1811910f0ec6c33ad4f1ccf06b4ad2c"
+     },
+     "bundle": {
+      "seconds": 0.20429091300002256,
+      "bytes": 879818,
+      "sha256": "a6760c1ba6cdcb743753c043120ef3c6ba63d8fe67f2bdc7ddc7e6ca028cdea1"
+     }
+    }
+   },
+   "gate": {
+    "requirement": ">= 10,000 modules generated and verified in <= 20 s with peak process-tree memory <= 512 MiB",
+    "module_count": 10192,
+    "generate_and_verify_s": 1.5791600289999224,
+    "process_wall_s_including_interpreter_start": 2.1093989740002144,
+    "peak_tree_rss_mib": 81.39,
+    "pass": true
+   }
+  },
+  {
+   "case": "D03-25k",
+   "fixture": "fixtures/stress-25k.request.json",
+   "generate": {
+    "exit": 0,
+    "wall_s": 4.752562919999946,
+    "peak_tree_rss_mib": 107.09,
+    "rss_samples": 414,
+    "stderr_tail": "",
+    "ok": true,
+    "result_id": "res_db870f4649ecac536539eb6c",
+    "module_count": 25788,
+    "table_count": 921,
+    "dc_capacity_kwp": 14957.04,
+    "candidates_evaluated": 1530,
+    "timings": {
+     "validate_s": 0.020169765999980882,
+     "compute_s": 0.03081705200020224,
+     "records_and_digest_s": 0.5782509149998987,
+     "verify_s": 2.796536348000245,
+     "persist_s": 0.806716981000136,
+     "generate_and_verify_total_s": 4.232498603000295
+    }
+   },
+   "exports": {
+    "exit": 0,
+    "wall_s": 7.001972336999643,
+    "peak_tree_rss_mib": 106.84,
+    "rss_samples": 607,
+    "stderr_tail": "",
+    "ok": true,
+    "exports": {
+     "json": {
+      "seconds": 0.960872592999749,
+      "bytes": 8593557,
+      "sha256": "1222334f48c723e214cd7818ca799bd32c2c32bfe8e30ee9c63c0bf2644a7923"
+     },
+     "csv": {
+      "seconds": 0.7315360769998733,
+      "bytes": 5356469,
+      "sha256": "954936a4ec75c0f409b8178fdd107126d5d1bf6520e59b6835f5380657ef28a8"
+     },
+     "svg": {
+      "seconds": 0.46295955599998706,
+      "bytes": 5769327,
+      "sha256": "3d7c98575b2a7925a72218d0e8770d13e9e9bd6dcfe9f8328958d0d17cf55da4"
+     },
+     "dxf": {
+      "seconds": 3.861930620000294,
+      "bytes": 7104969,
+      "sha256": "b8e8395e8ad1aa11823fdb4cc893a48c1c753c345999ce0bdebbc3daa8000123"
+     },
+     "report": {
+      "seconds": 0.010446141000102216,
+      "bytes": 5825,
+      "sha256": "7ee1c09a329e510bfa797cbe579a111d034cc28917c2204ccab85d8ee7a4aa25"
+     },
+     "bundle": {
+      "seconds": 0.42802416400036236,
+      "bytes": 2172126,
+      "sha256": "9754981731ad1cbf098ea0ad0185d243ff958a1f2ec9f9b115f140ddf1c23e51"
+     }
+    }
+   },
+   "gate": {
+    "requirement": "25,000-module stress fixture completes or is rejected by a declared limit before committing partial output",
+    "completed": true,
+    "module_count": 25788
+   }
+  },
+  {
+   "case": "D03-timeout-0.05s",
+   "fixture": "fixtures/stress-25k.request.json",
+   "generate": {
+    "exit": 0,
+    "wall_s": 0.6903244449999875,
+    "peak_tree_rss_mib": 66.36,
+    "rss_samples": 60,
+    "stderr_tail": "",
+    "ok": false,
+    "error": {
+     "code": "RESOURCE_LIMIT",
+     "message": "Layout generation exceeded its 0.05 s time limit during module generation; nothing was saved",
+     "details": {
+      "limit": "generation_timeout_s",
+      "value": 0.05,
+      "stage": "module generation"
+     }
+    },
+    "elapsed_s": 0.0860227850002957,
+    "stored_results": 0
+   },
+   "gate": {
+    "requirement": "finite timeout returns a typed RESOURCE_LIMIT and stores nothing",
+    "pass": true
+   }
+  },
+  {
+   "case": "D03-output-limit",
+   "fixture": "derived: 1400 x 900 m site, 2x14 tables, pitch 4.5 m",
+   "generate": {
+    "exit": 0,
+    "wall_s": 0.6350517020000552,
+    "peak_tree_rss_mib": 82.79,
+    "rss_samples": 55,
+    "stderr_tail": "",
+    "ok": false,
+    "error": {
+     "code": "RESOURCE_LIMIT",
+     "message": "The layout would place 457828 modules, above the output limit 60000; nothing was saved",
+     "details": {
+      "limit": "max_modules",
+      "value": 457828
+     }
+    },
+    "elapsed_s": 0.20952081299992642,
+    "stored_results": 0
+   },
+   "gate": {
+    "requirement": "output above the declared module limit is rejected before anything is committed",
+    "pass": true
+   }
+  },
+  {
+   "case": "D03-candidate-limit",
+   "fixture": "derived: 14 x 14 km site, 0.05 m tables",
+   "generate": {
+    "exit": 0,
+    "wall_s": 0.594846478999898,
+    "peak_tree_rss_mib": 63.86,
+    "rss_samples": 51,
+    "stderr_tail": "",
+    "ok": false,
+    "error": {
+     "code": "RESOURCE_LIMIT",
+     "message": "78402240016 candidate table positions exceed the limit 1200000; nothing was computed",
+     "details": {
+      "limit": "max_candidates_total",
+      "value": 78402240016
+     }
+    },
+    "elapsed_s": 0.020311195999966003,
+    "stored_results": 0
+   },
+   "gate": {
+    "requirement": "candidate bound is enforced before unbounded work",
+    "pass": true
+   }
+  }
+ ]
+}

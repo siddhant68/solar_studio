@@ -1,0 +1,32 @@
+{
+ "evidence_id": "ev_eb277a5ae447c5e80c13cbe8268bb901fa009f4880e624d7366f005d9cf3693f",
+ "idle_evidence_id": "ev_8fe3de3c3102f62262d050d009101f7561a13115376aebe8986ff53e6fd31ffb",
+ "provider": {
+  "id": "rea-cdp-browser",
+  "name": "REA Chrome DevTools Protocol observation provider",
+  "version": "2"
+ },
+ "window": {
+  "armed_at": "2026-10-25T19:41:13.722Z",
+  "ended_at": "2026-10-25T19:41:21.723Z",
+  "requested_ms": 8000,
+  "end_reason": "window_elapsed",
+  "producer_started_seconds": 3824.435662,
+  "producer_sampled_seconds": 3834.622694
+ },
+ "idle_executed_function_counts": {},
+ "scripts": [
+  {
+   "url": "http://127.0.0.1:4173/assets/index-8KvU91kB.js",
+   "executed_functions": 678,
+   "source_sha256": "9a048faba4d5050f2ded8d89a107e2503a0eb4e7efa02dbe0322b5ae013cf226",
+   "matches": []
+  },
+  {
+   "url": "http://127.0.0.1:4173/assets/SceneCanvas-Cc7IAYs_.js",
+   "executed_functions": 1200,
+   "source_sha256": "72c67958bf239413e5c2e2c9d512ad30f706d2d945f92277f34d1041d57f9abd",
+   "matches": []
+  }
+ ]
+}

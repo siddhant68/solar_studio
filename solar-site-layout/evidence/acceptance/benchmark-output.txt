@@ -1,0 +1,5 @@
+D02-10k {"requirement": ">= 10,000 modules generated and verified in <= 20 s with peak process-tree memory <= 512 MiB", "module_count": 10192, "generate_and_verify_s": 1.5791600289999224, "process_wall_s_including_interpreter_start": 2.1093989740002144, "peak_tree_rss_mib": 81.39, "pass": true}
+D03-25k {"requirement": "25,000-module stress fixture completes or is rejected by a declared limit before committing partial output", "completed": true, "module_count": 25788}
+D03-timeout-0.05s {"requirement": "finite timeout returns a typed RESOURCE_LIMIT and stores nothing", "pass": true}
+D03-output-limit {"requirement": "output above the declared module limit is rejected before anything is committed", "pass": true}
+D03-candidate-limit {"requirement": "candidate bound is enforced before unbounded work", "pass": true}

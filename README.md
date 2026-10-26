@@ -2,11 +2,13 @@
 
 An open, assistant-accessible solar design platform, beginning with a verified flat-site layout module.
 
-**Current state:** research-backed implementation handoff and analytic fixtures. The application has not been built in this repository yet. No application tests or actual REA analysis are claimed by this handoff.
+**Current state (26 October 2026):** Module 01 is implemented in [`solar-site-layout/`](solar-site-layout/). The five findings from the first independent review are repaired and passed a follow-up review at `82f11f0`; all seven recorded implementation tree bindings match the tested source `fe15c5f`. The independent Mac run passed **233 tests, 24 browser checks and 17 MCP steps**. See the [follow-up review](reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md) and [raw verification](reviews/module-01/2026-10-26-followup/VERIFICATION.json).
 
-## Start the build
+[PR #1](https://github.com/siddhant68/solar_studio/pull/1) remains open; merging/tagging and the new-code licence are owner decisions. Module 02 has not been implemented.
 
-Give an execution-enabled Claude Cloud session access to this repository and use [START_PROMPT.md](START_PROMPT.md). Begin with [the complete Module 01 brief](handoffs/module-01/START_HERE.md).
+## Continue in Claude Cloud
+
+Start with [CLAUDE_NEXT_HANDOFF.md](CLAUDE_NEXT_HANDOFF.md): consume the independent verification, add CI in its own PR and prepare a design-only terrain-module proposal separately. Every required report and screenshot is now accessible through Git. The original [starter prompt](START_PROMPT.md) and [Module 01 brief](handoffs/module-01/START_HERE.md) remain historical/specification context.
 
 The first goal is: **site boundary + panel/mounting rules → panel positions, counts, DC capacity and a readable plan.** The intended application exposes the same calculation service through a browser, CLI, HTTP and MCP.
 
@@ -35,3 +37,12 @@ For a file-upload workflow, download the [complete ZIP](handoffs/archives/Solar_
 The supplied rectangle case must produce exactly **6 tables, 24 panels and 13.2 kWp**. Terrain, electrical diagrams and energy yield are later modules.
 
 The brief was prepared on 25 October 2026. Reference observations, future implementation results and independently verified outputs must remain clearly distinguished.
+
+## Review history
+
+- [First review](reviews/module-01/2026-10-26/REVIEW.md): five reproduced findings at `f55f4be`, retained unchanged.
+- [Repair delivery](solar-site-layout/DELIVERY_REPORT.md): fixes and Linux evidence bound to `fe15c5f`.
+- [Independent repair verification](reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md): all five accepted in the exercised cases at `82f11f0`, plus Mac tests and four-process export evidence.
+- [Downloadable follow-up evidence](reviews/module-01/2026-10-26-followup/Solar_Module_01_Repair_Verification.zip).
+
+The earlier [repair handoff](CLAUDE_REPAIR_HANDOFF.md) is superseded by [the continuation handoff](CLAUDE_NEXT_HANDOFF.md). Do not reopen completed repairs because an older document lists them.

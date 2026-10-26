@@ -1,0 +1,101 @@
+{
+  "head": "82f11f035f78b3e6daf2659582690d393b53016d",
+  "source_commit_in_acceptance": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
+  "tree_bindings": {
+    "solar-site-layout/src": {
+      "recorded": "f953f8d04f429a948727b2763077409754a5ceca",
+      "actual": "f953f8d04f429a948727b2763077409754a5ceca"
+    },
+    "solar-site-layout/tests": {
+      "recorded": "fd175473616a869a2ce64edee0e2923e2578e41a",
+      "actual": "fd175473616a869a2ce64edee0e2923e2578e41a"
+    },
+    "solar-site-layout/scripts": {
+      "recorded": "13933fa4583b60e766cd9ee83d274eb0ce4f4228",
+      "actual": "13933fa4583b60e766cd9ee83d274eb0ce4f4228"
+    },
+    "solar-site-layout/pyproject.toml": {
+      "recorded": "63bb288c2c3e26ee9c40f203a0f2b31751960156",
+      "actual": "63bb288c2c3e26ee9c40f203a0f2b31751960156"
+    },
+    "solar-site-layout/uv.lock": {
+      "recorded": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
+      "actual": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5"
+    },
+    "solar-site-layout/fixtures": {
+      "recorded": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
+      "actual": "ac2ee3e5ea20d4396328e087dd12e715914ac71b"
+    },
+    "solar-site-layout/references/probes": {
+      "recorded": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb",
+      "actual": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb"
+    }
+  },
+  "corrupt_power_rejected": true,
+  "corrupt_power_failed_checks": [
+    "record_fields",
+    "record_totals",
+    "payload_integrity"
+  ],
+  "four_process_calls": [
+    {
+      "returncode": 0,
+      "result": {
+        "result_id": "res_410d496155af5459caa61028",
+        "format": "bundle",
+        "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+        "file_name": "res_410d496155af5459caa61028-bundle.zip",
+        "sha256": "1185efa7b8fcf0b85de551e0af88313b88ec99d0996e8b7de1d03c6b2f85dbeb",
+        "bytes": 15619,
+        "media_type": "application/zip",
+        "context": "result_only"
+      },
+      "stderr": ""
+    },
+    {
+      "returncode": 0,
+      "result": {
+        "result_id": "res_410d496155af5459caa61028",
+        "format": "bundle",
+        "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+        "file_name": "res_410d496155af5459caa61028-bundle.zip",
+        "sha256": "1185efa7b8fcf0b85de551e0af88313b88ec99d0996e8b7de1d03c6b2f85dbeb",
+        "bytes": 15619,
+        "media_type": "application/zip",
+        "context": "result_only"
+      },
+      "stderr": ""
+    },
+    {
+      "returncode": 0,
+      "result": {
+        "result_id": "res_410d496155af5459caa61028",
+        "format": "bundle",
+        "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+        "file_name": "res_410d496155af5459caa61028-bundle.zip",
+        "sha256": "1185efa7b8fcf0b85de551e0af88313b88ec99d0996e8b7de1d03c6b2f85dbeb",
+        "bytes": 15619,
+        "media_type": "application/zip",
+        "context": "result_only"
+      },
+      "stderr": ""
+    },
+    {
+      "returncode": 0,
+      "result": {
+        "result_id": "res_410d496155af5459caa61028",
+        "format": "bundle",
+        "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+        "file_name": "res_410d496155af5459caa61028-bundle.zip",
+        "sha256": "1185efa7b8fcf0b85de551e0af88313b88ec99d0996e8b7de1d03c6b2f85dbeb",
+        "bytes": 15619,
+        "media_type": "application/zip",
+        "context": "result_only"
+      },
+      "stderr": ""
+    }
+  ],
+  "four_process_passed": true,
+  "published_bytes_match": true,
+  "passed": true
+}

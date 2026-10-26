@@ -1,0 +1,44 @@
+{
+ "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
+ "source_tree_ids": {
+  "solar-site-layout/src": "f953f8d04f429a948727b2763077409754a5ceca",
+  "solar-site-layout/tests": "fd175473616a869a2ce64edee0e2923e2578e41a",
+  "solar-site-layout/scripts": "13933fa4583b60e766cd9ee83d274eb0ce4f4228",
+  "solar-site-layout/pyproject.toml": "63bb288c2c3e26ee9c40f203a0f2b31751960156",
+  "solar-site-layout/uv.lock": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
+  "solar-site-layout/fixtures": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
+  "solar-site-layout/references/probes": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb"
+ },
+ "started_at": "2026-10-26T11:33:49.174428+00:00",
+ "finished_at": "2026-10-26T11:35:16.866336+00:00",
+ "pytest": {
+  "exit": 0,
+  "seconds": 44.0,
+  "command": "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml"
+ },
+ "test_count": 233,
+ "tooling": {
+  "python": "3.12.3",
+  "node": "v22.22.0",
+  "playwright": "1.63.0",
+  "playwright_pinned": "1.63.0",
+  "uv": "uv 0.11.32 (x86_64-unknown-linux-gnu)"
+ },
+ "inspector": {
+  "tools": [
+   "validate_request",
+   "calculate_row_pitch",
+   "create_project",
+   "get_project",
+   "update_project",
+   "generate_layout",
+   "get_layout_summary",
+   "get_layout_items",
+   "export_layout"
+  ],
+  "pitch_recommended_m": 7,
+  "rectangle_result_id": "res_410d496155af5459caa61028",
+  "rectangle_modules": 24,
+  "bad_items_error": "RESULT_NOT_FOUND"
+ }
+}

@@ -1,0 +1,14 @@
+PASS V01 import + edit + generate shows totals
+PASS V01 save/reload restores project, inputs and current result
+PASS V01 export download (zip bundle)
+FAIL V01 no browser errors
+PASS V02 delayed result labelled historical; new edits remain dirty
+PASS V02 old response cannot overwrite newer result selection
+PASS V03 rectangle overview/close-up drawing
+PASS V03 rectangle no browser errors
+PASS V03 concave-notch overview/close-up drawing
+PASS V03 concave-notch no browser errors
+PASS V03 hole overview/close-up drawing
+PASS V03 hole no browser errors
+PASS V03 projected-rotated overview/close-up drawing
+PASS V03 projected-rotated no browser errors

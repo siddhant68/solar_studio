@@ -1,0 +1,22 @@
+{
+ "base": "http://127.0.0.1:4173/",
+ "cdp_port": 9333,
+ "target_id": "EE6E09CCA6E9CC94B582942D9EDF1285",
+ "windows": [
+  {
+   "name": "idle",
+   "exit": 0,
+   "file": "observe-idle.json"
+  },
+  {
+   "name": "pitch_and_tilt_change",
+   "exit": 0,
+   "file": "observe-pitch-change.json",
+   "gcr_before": "39.2%",
+   "gcr_after": "58.7%",
+   "armed_ms": 1792957273723,
+   "action_started_ms": 1792957274034,
+   "action_finished_ms": 1792957280867
+  }
+ ]
+}

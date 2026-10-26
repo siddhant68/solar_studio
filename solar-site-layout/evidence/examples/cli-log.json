@@ -1,0 +1,130 @@
+[
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data generate handoffs/module-01/fixtures/rectangle.request.json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_410d496155af5459caa61028 --format json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_410d496155af5459caa61028 --format csv",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_410d496155af5459caa61028 --format svg",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_410d496155af5459caa61028 --format dxf",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_410d496155af5459caa61028 --format report",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data generate handoffs/module-01/fixtures/obstacle.request.json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_35676bb67db6ca4ba3cf15d4 --format json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_35676bb67db6ca4ba3cf15d4 --format csv",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_35676bb67db6ca4ba3cf15d4 --format svg",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_35676bb67db6ca4ba3cf15d4 --format dxf",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_35676bb67db6ca4ba3cf15d4 --format report",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data generate handoffs/module-01/fixtures/multipolygon.request.json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_55756be61915e4dee3504beb --format json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_55756be61915e4dee3504beb --format csv",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_55756be61915e4dee3504beb --format svg",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_55756be61915e4dee3504beb --format dxf",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_55756be61915e4dee3504beb --format report",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data generate handoffs/module-01/fixtures/concave-notch.request.json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_3e27e5b3fad95f3c132daf2b --format json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_3e27e5b3fad95f3c132daf2b --format csv",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_3e27e5b3fad95f3c132daf2b --format svg",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_3e27e5b3fad95f3c132daf2b --format dxf",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_3e27e5b3fad95f3c132daf2b --format report",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data generate handoffs/module-01/fixtures/hole.request.json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_0227335bfa4c9345d18675d3 --format json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_0227335bfa4c9345d18675d3 --format csv",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_0227335bfa4c9345d18675d3 --format svg",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_0227335bfa4c9345d18675d3 --format dxf",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data export res_0227335bfa4c9345d18675d3 --format report",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data pitch handoffs/module-01/fixtures/pitch-3-4-5.request.json",
+  "exit": 0
+ },
+ {
+  "command": "solar-layout --data-dir evidence/examples/_data generate solar-site-layout/evidence/examples/_data/bad-units.json",
+  "exit": 2
+ }
+]

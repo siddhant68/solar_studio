@@ -1,0 +1,374 @@
+{
+ "browser": {
+  "cleanup": "terminated-owned-process",
+  "mode": "launch",
+  "process_ownership": "provider-owned",
+  "product": "Chromium",
+  "version": "153.0.8010.12"
+ },
+ "completeness": {
+  "equality_eligible": true,
+  "missing_sections": [],
+  "status": "complete",
+  "truncated_sections": []
+ },
+ "duration_ms": 33223,
+ "evidence_id": "ev_226f247fdc2b3090353b7155fbc4581a60dcc4256282911661f1e9b0cf536ca7",
+ "limitations": [
+  "Event sequence records provider receipt order; simultaneous browser causality is not inferred.",
+  "Network content is retained only when selected; Playwright response-body bytes are API results and are not guaranteed to match wire bytes.",
+  "Request bytes are limited to what Playwright exposes; not_exposed does not establish body absence or multipart file coverage.",
+  "Network content reads settle within 5 seconds each and the observer does not request bodies from unfinished responses.",
+  "Playwright scenario events do not expose request initiator stacks; receipt order does not prove causality.",
+  "Storage values are hashed only after declared-secret redaction."
+ ],
+ "predicate_type": "rea.browser-scenario-capture",
+ "provider": {
+  "id": "rea-playwright-browser-scenario",
+  "name": "REA Playwright browser scenario capture provider",
+  "version": "1"
+ },
+ "steps": [
+  {
+   "action": "goto_start",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {},
+   "dom": {
+    "file": "00-scenario_start.dom.html",
+    "sha256": "77c6375c0119c0fdd557f5ad69698a01e973bb614dfbee0a4be31e4ea23f475b"
+   },
+   "error": null,
+   "index": 0,
+   "readouts": {},
+   "screenshot": {
+    "bytes": 83354,
+    "file": "00-scenario_start.png",
+    "sha256": "b3a3ef85b93737ad5904d86ac80a18db2b249dbcb21d01942fbcc147f146bdc7"
+   },
+   "status": "completed",
+   "step_id": "scenario_start"
+  },
+  {
+   "action": "wait_for",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {},
+   "dom": {
+    "file": "01-app_visible.dom.html",
+    "sha256": "65433fa6ba225f0f2a4674f0d7cc053f36378aa3c366379969f2fbfa135d4447"
+   },
+   "error": null,
+   "index": 1,
+   "readouts": {},
+   "screenshot": {
+    "bytes": 677863,
+    "file": "01-app_visible.png",
+    "sha256": "5fa6fa0776c4694d95231888670131b84cdb0d033ca64bbf4e00e5a1b3d0c2da"
+   },
+   "status": "completed",
+   "step_id": "app_visible"
+  },
+  {
+   "action": "wait_for_timeout",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {},
+   "dom": {
+    "file": "02-example_settle.dom.html",
+    "sha256": "deb29f38761a4e7edb124480d530453484882fe06a61bd500067ad761c2e795e"
+   },
+   "error": null,
+   "index": 2,
+   "readouts": {},
+   "screenshot": {
+    "bytes": 710238,
+    "file": "02-example_settle.png",
+    "sha256": "e83195ebfee1a0a841a402d0051fd2a409c2f65bb98e837b0bdf16158421c3e0"
+   },
+   "status": "completed",
+   "step_id": "example_settle"
+  },
+  {
+   "action": "click",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "9",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "03-open_panels_step.dom.html",
+    "sha256": "5038e609464b2d01a756530dd610dfd6648fccb81fa54e01999676b4b6e7ced5"
+   },
+   "error": null,
+   "index": 3,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "39.2%",
+    "readout-array-max-height": "4.09 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "35.5%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 709080,
+    "file": "03-open_panels_step.png",
+    "sha256": "aac69837f71145c56a9ec4da0d22715819c457f957a8a7618254d0912ae3b2bf"
+   },
+   "status": "completed",
+   "step_id": "open_panels_step"
+  },
+  {
+   "action": "click",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "9",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "04-open_by_hand_fold.dom.html",
+    "sha256": "e05213b92b634d875b717b38573f4c75ca2a34400bc13c46fb658437700bb9c2"
+   },
+   "error": null,
+   "index": 4,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "39.2%",
+    "readout-array-max-height": "4.09 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "35.5%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 712290,
+    "file": "04-open_by_hand_fold.png",
+    "sha256": "fd265484a002f8d17822bf96b20b78b9a9d527b5fb91c9aa805fe05007b9cb1f"
+   },
+   "status": "completed",
+   "step_id": "open_by_hand_fold"
+  },
+  {
+   "action": "wait_for",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "9",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "05-row_count_visible.dom.html",
+    "sha256": "e05213b92b634d875b717b38573f4c75ca2a34400bc13c46fb658437700bb9c2"
+   },
+   "error": null,
+   "index": 5,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "39.2%",
+    "readout-array-max-height": "4.09 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "35.5%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 712290,
+    "file": "05-row_count_visible.png",
+    "sha256": "fd265484a002f8d17822bf96b20b78b9a9d527b5fb91c9aa805fe05007b9cb1f"
+   },
+   "status": "completed",
+   "step_id": "row_count_visible"
+  },
+  {
+   "action": "wait_for_timeout",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "9",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "06-before_settle.dom.html",
+    "sha256": "e05213b92b634d875b717b38573f4c75ca2a34400bc13c46fb658437700bb9c2"
+   },
+   "error": null,
+   "index": 6,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "39.2%",
+    "readout-array-max-height": "4.09 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "35.5%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 712290,
+    "file": "06-before_settle.png",
+    "sha256": "fd265484a002f8d17822bf96b20b78b9a9d527b5fb91c9aa805fe05007b9cb1f"
+   },
+   "status": "completed",
+   "step_id": "before_settle"
+  },
+  {
+   "action": "fill",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "9",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "07-set_pitch_6.dom.html",
+    "sha256": "dfc982abe518cf7da8cdc4c7bdeba2cf15dad5c06400fa424d764548edc572cb"
+   },
+   "error": null,
+   "index": 7,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "58.7%",
+    "readout-array-max-height": "4.09 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "53.2%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 891951,
+    "file": "07-set_pitch_6.png",
+    "sha256": "af024dd93574ecece0024e794bf5a51a509f23e5a96ad8afd0f38e159b8e636f"
+   },
+   "status": "completed",
+   "step_id": "set_pitch_6"
+  },
+  {
+   "action": "fill",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "6",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "08-set_tilt_35.dom.html",
+    "sha256": "e607092bfff520b6b361a05f204cc72a43022b25a47d15e9dc28e507604fff54"
+   },
+   "error": null,
+   "index": 8,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "58.7%",
+    "readout-array-max-height": "4.62 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "48.1%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 914886,
+    "file": "08-set_tilt_35.png",
+    "sha256": "0b3a1dc9c747c4c6e3b4b8770db9638b0354a15c69497cd20324b4f5c6a41323"
+   },
+   "status": "completed",
+   "step_id": "set_tilt_35"
+  },
+  {
+   "action": "wait_for_timeout",
+   "after_url": "http://127.0.0.1:4173/",
+   "controls": {
+    "control-array-azimuth": "180",
+    "control-array-bifaciality": "0.7",
+    "control-array-clearance": "2.6",
+    "control-array-collector-width": "3.5",
+    "control-array-module-height": "1.762",
+    "control-array-module-power": "430",
+    "control-array-module-width": "1.134",
+    "control-array-modules-per-row": "14",
+    "control-array-pitch": "6",
+    "control-array-row-azimuth": "90",
+    "control-array-row-count": "3",
+    "control-array-tilt": "25"
+   },
+   "dom": {
+    "file": "09-after_settle.dom.html",
+    "sha256": "e607092bfff520b6b361a05f204cc72a43022b25a47d15e9dc28e507604fff54"
+   },
+   "error": null,
+   "index": 9,
+   "readouts": {
+    "readout-array-bifaciality-help": "The rear side catches light reflected off the ground under the rows. The annual energy report below says how much it added, and the ground cover on the ground step sets how bright that ground is.",
+    "readout-array-gcr": "58.7%",
+    "readout-array-max-height": "4.62 m",
+    "readout-array-nameplate": "36.1 kW",
+    "readout-array-projected-gcr": "48.1%",
+    "readout-array-row-azimuth": "90.0\u00b0"
+   },
+   "screenshot": {
+    "bytes": 914886,
+    "file": "09-after_settle.png",
+    "sha256": "0b3a1dc9c747c4c6e3b4b8770db9638b0354a15c69497cd20324b4f5c6a41323"
+   },
+   "status": "completed",
+   "step_id": "after_settle",
+   "storage": {
+    "cookies": 0,
+    "local_storage": [
+     {
+      "name": "agrivoltaic-garden-designer/design",
+      "value_sha256": "db7cbf389c52a3b4ca6c57e9d483150126f51509295c6553ce0efaec135628a8",
+      "value_state": "hashed"
+     }
+    ],
+    "session_storage_entries": 0
+   }
+  }
+ ]
+}

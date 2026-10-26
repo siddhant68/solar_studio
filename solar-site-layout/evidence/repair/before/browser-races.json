@@ -1,0 +1,29 @@
+{
+  "browser_version": "153.0.8010.12",
+  "edit_during_autosave": {
+    "edited_width": "2",
+    "inputs_state": "dirty",
+    "result_state": "current",
+    "displayed_modules": 24,
+    "displayed_table_width": 2,
+    "snapshot_claimed_width": 2,
+    "saved_input_width": 1,
+    "revision": 1
+  },
+  "delayed_svg_before_release": {
+    "modules": "16",
+    "status": "Result res_8238e4697b1600f96b1059ed from rev 2 — current",
+    "export": "/api/layouts/res_8238e4697b1600f96b1059ed/exports/bundle",
+    "state_result": "res_8238e4697b1600f96b1059ed"
+  },
+  "delayed_svg_after_release": {
+    "modules": "24",
+    "status": "Result res_8238e4697b1600f96b1059ed from rev 2 — current",
+    "summary_identity": "Result res_410d496155af5459caa61028 · revision 1 · input 9210e69797916b72… · payload 450141e5c44c2d6f… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+    "banner": "Current result for revision 2",
+    "export": "/api/layouts/res_410d496155af5459caa61028/exports/bundle",
+    "state_result": "res_8238e4697b1600f96b1059ed",
+    "current_revision": 2,
+    "edited_width": "2"
+  }
+}

@@ -1,0 +1,8 @@
+{
+ "name": "solar-site-layout-browser-checks",
+ "private": true,
+ "description": "Pinned tooling for tests/browser/ui_checks.cjs",
+ "dependencies": {
+  "playwright": "1.63.0"
+ }
+}

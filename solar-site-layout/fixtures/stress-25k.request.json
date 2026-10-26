@@ -1,0 +1,127 @@
+{
+ "schema_version": "solar.layout.request/1",
+ "name": "Stress site (>=25,000 modules)",
+ "frame": {
+  "kind": "projected_cartesian",
+  "id": "utm-benchmark",
+  "crs": "EPSG:32633",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "boundary": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     500000.0,
+     4200000.0
+    ],
+    [
+     500450.0,
+     4200000.0
+    ],
+    [
+     500486.0,
+     4200143.0
+    ],
+    [
+     500360.0,
+     4200260.0
+    ],
+    [
+     500000.0,
+     4200239.2
+    ],
+    [
+     500000.0,
+     4200000.0
+    ]
+   ],
+   [
+    [
+     500202.5,
+     4200104.0
+    ],
+    [
+     500234.0,
+     4200104.0
+    ],
+    [
+     500234.0,
+     4200124.8
+    ],
+    [
+     500202.5,
+     4200124.8
+    ],
+    [
+     500202.5,
+     4200104.0
+    ]
+   ]
+  ]
+ },
+ "perimeter_setback_m": 5.0,
+ "exclusions": [
+  {
+   "id": "SUBSTATION",
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       500067.5,
+       4200182.0
+      ],
+      [
+       500090.0,
+       4200182.0
+      ],
+      [
+       500090.0,
+       4200197.6
+      ],
+      [
+       500067.5,
+       4200197.6
+      ],
+      [
+       500067.5,
+       4200182.0
+      ]
+     ]
+    ]
+   },
+   "keepout_m": 3.0
+  }
+ ],
+ "module": {
+  "model_id": "GENERIC-1134x2278-580",
+  "width_m": 1.134,
+  "length_m": 2.278,
+  "power_wp": 580.0,
+  "orientation": "portrait"
+ },
+ "table": {
+  "rows": 2,
+  "columns": 14,
+  "module_gap_x_m": 0.02,
+  "module_gap_y_m": 0.02,
+  "tilt_deg": 25.0,
+  "facing_azimuth_deg": 180.0,
+  "lower_edge_height_m": 0.8
+ },
+ "placement": {
+  "mode": "fixed_lattice",
+  "anchor_xy_m": [
+   500005.0,
+   4200005.0
+  ],
+  "table_gap_m": 0.5,
+  "row_pitch_m": 6.5,
+  "minimum_clear_row_gap_m": 1.5
+ }
+}

@@ -1,0 +1,2 @@
+{"rea_progress":{"phase":"browser_execution","completed":1,"total":2,"message":"Browser execution observation armed; perform the requested action now"}}
+{"rea_progress":{"phase":"browser_execution","completed":2,"total":2,"message":"Browser execution observation ended","terminal":true}}
