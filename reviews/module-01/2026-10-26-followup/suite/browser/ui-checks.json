@@ -1,0 +1,1577 @@
+{
+ "authority": "Playwright + Chromium against the local solar-site-layout server",
+ "base": "http://127.0.0.1:56986",
+ "playwright": "1.63.0",
+ "browser": {
+  "channel": "chrome",
+  "version": "156.0.8078.47"
+ },
+ "passed": true,
+ "results": [
+  {
+   "name": "V01 import + edit + generate shows totals",
+   "pass": true,
+   "details": {
+    "nums": {
+     "modules": 20,
+     "tables": 5
+    },
+    "expected_D": "3.939",
+    "statusAfterGen": "current",
+    "importedSetback": "1"
+   }
+  },
+  {
+   "name": "V01 save/reload restores project, inputs and current result",
+   "pass": true,
+   "details": {
+    "projectId": "prj_7c80bdbcf03d41a7b45a",
+    "url": "http://127.0.0.1:56986/?project=prj_7c80bdbcf03d41a7b45a",
+    "tiltAfter": "10",
+    "statusIn": "saved",
+    "statusRes": "current"
+   }
+  },
+  {
+   "name": "V01 export download (zip bundle)",
+   "pass": true,
+   "details": {
+    "file": "V01-download-res_2e599e535a0cfd6f84a8a1b0-bundle.zip",
+    "bytes": 15925,
+    "sha256": "d32599fe7b274c0fdd50c3aa1dc13006faa2d1daeebe374e1f7ae303cf6f543f"
+   }
+  },
+  {
+   "name": "V01 no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V02 delayed result labelled historical; new edits remain dirty",
+   "pass": true,
+   "details": {
+    "dirtyWhilePending": "dirty",
+    "resState": "outdated",
+    "banner": "outdated",
+    "inState": "dirty",
+    "tilt": "15"
+   }
+  },
+  {
+   "name": "V02 old response cannot overwrite newer result selection",
+   "pass": true,
+   "details": {
+    "displayed_before_release": "Result res_231a9a2c0cf690833855e879 from rev 2 — current",
+    "displayed_after_release": "Result res_231a9a2c0cf690833855e879 from rev 2 — current",
+    "server_selected": "res_231a9a2c0cf690833855e879",
+    "server_revision": 2
+   }
+  },
+  {
+   "name": "V02 F1 create-delay edit stays dirty; result labelled with the saved snapshot",
+   "pass": true,
+   "details": {
+    "during": {
+     "edited_width": "2",
+     "inputs_state": "dirty",
+     "result_state": "outdated",
+     "result_text": "Result res_410d496155af5459caa61028 from rev 1 — outdated (historical: inputs changed since generation)",
+     "modules": "24",
+     "identity": "Result res_410d496155af5459caa61028 · revision 1 · input 9210e69797916b72… · payload 450141e5c44c2d6f… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+     "banner": "outdated",
+     "export_href": "/api/layouts/res_410d496155af5459caa61028/exports/bundle",
+     "export_disabled": false,
+     "plan_result": "res_410d496155af5459caa61028",
+     "has_plan": true,
+     "displayed": {
+      "result": "res_410d496155af5459caa61028",
+      "revision": 1,
+      "project": "prj_2e7eadf89e8f4ce3bd98",
+      "inputs": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      },
+      "dims": {
+       "columns": 2,
+       "footprint_checked_L_m": 4,
+       "footprint_checked_W_m": 2,
+       "lower_edge_height_m": 0.8,
+       "module_gap_x_m": 0,
+       "module_gap_y_m": 0,
+       "module_l_upslope_m": 2,
+       "module_orientation": "portrait",
+       "module_w_across_m": 1,
+       "rows": 2,
+       "table_projected_depth_D_m": 4,
+       "table_rise_H_m": 0,
+       "table_slope_length_L_m": 4,
+       "table_width_W_m": 2,
+       "tilt_deg": 0,
+       "upper_edge_height_m": 0.8
+      }
+     },
+     "project": {
+      "id": "prj_2e7eadf89e8f4ce3bd98",
+      "revision": 1,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      }
+     },
+     "history": "Results this session (1)#1 res_410d496155af5459caa61028 · rev 1 · 24 modules",
+     "messages": "Generated res_410d496155af5459caa61028 from revision 1 (selected)."
+    },
+    "server_revision": 1,
+    "server_width": 1,
+    "after_regenerate": {
+     "result_state": "current",
+     "modules": "16",
+     "revision": 2
+    }
+   }
+  },
+  {
+   "name": "V02 F1 create-delay no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V02 F1 update-delay edit stays dirty; result labelled with the saved snapshot",
+   "pass": true,
+   "details": {
+    "during": {
+     "edited_width": "2",
+     "inputs_state": "dirty",
+     "result_state": "outdated",
+     "result_text": "Result res_ba89b032cd498df8cbb7f9ad from rev 2 — outdated (historical: inputs changed since generation)",
+     "modules": "24",
+     "identity": "Result res_ba89b032cd498df8cbb7f9ad · revision 2 · input c9c22697e8ee0264… · payload 12109cfe4e092bdf… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+     "banner": "outdated",
+     "export_href": "/api/layouts/res_ba89b032cd498df8cbb7f9ad/exports/bundle",
+     "export_disabled": false,
+     "plan_result": "res_ba89b032cd498df8cbb7f9ad",
+     "has_plan": true,
+     "displayed": {
+      "result": "res_ba89b032cd498df8cbb7f9ad",
+      "revision": 2,
+      "project": "prj_4a5107dfd5404b378aa0",
+      "inputs": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 10
+       }
+      },
+      "dims": {
+       "columns": 2,
+       "footprint_checked_L_m": 4,
+       "footprint_checked_W_m": 2,
+       "lower_edge_height_m": 0.8,
+       "module_gap_x_m": 0,
+       "module_gap_y_m": 0,
+       "module_l_upslope_m": 2,
+       "module_orientation": "portrait",
+       "module_w_across_m": 1,
+       "rows": 2,
+       "table_projected_depth_D_m": 3.939231012048832,
+       "table_rise_H_m": 0.6945927106677213,
+       "table_slope_length_L_m": 4,
+       "table_width_W_m": 2,
+       "tilt_deg": 10,
+       "upper_edge_height_m": 1.4945927106677215
+      }
+     },
+     "project": {
+      "id": "prj_4a5107dfd5404b378aa0",
+      "revision": 2,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 10
+       }
+      }
+     },
+     "history": "Results this session (1)#1 res_ba89b032cd498df8cbb7f9ad · rev 2 · 24 modules",
+     "messages": "Generated res_ba89b032cd498df8cbb7f9ad from revision 2 (selected)."
+    },
+    "server_revision": 2,
+    "server_width": 1,
+    "server_tilt": 10
+   }
+  },
+  {
+   "name": "V02 F1 update-delay no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V02 F2 stale SVG released after a newer result changes nothing",
+   "pass": true,
+   "details": {
+    "before": {
+     "edited_width": "2",
+     "inputs_state": "saved",
+     "result_state": "current",
+     "result_text": "Result res_8238e4697b1600f96b1059ed from rev 2 — current",
+     "modules": "16",
+     "identity": "Result res_8238e4697b1600f96b1059ed · revision 2 · input ce936bf729cf3ccc… · payload 0e0ee113847c3b9e… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+     "banner": "current",
+     "export_href": "/api/layouts/res_8238e4697b1600f96b1059ed/exports/bundle",
+     "export_disabled": false,
+     "plan_result": "res_8238e4697b1600f96b1059ed",
+     "has_plan": true,
+     "displayed": {
+      "result": "res_8238e4697b1600f96b1059ed",
+      "revision": 2,
+      "project": "prj_0dae62bf92de45c9b4b1",
+      "inputs": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 2
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      },
+      "dims": {
+       "columns": 2,
+       "footprint_checked_L_m": 4,
+       "footprint_checked_W_m": 4,
+       "lower_edge_height_m": 0.8,
+       "module_gap_x_m": 0,
+       "module_gap_y_m": 0,
+       "module_l_upslope_m": 2,
+       "module_orientation": "portrait",
+       "module_w_across_m": 2,
+       "rows": 2,
+       "table_projected_depth_D_m": 4,
+       "table_rise_H_m": 0,
+       "table_slope_length_L_m": 4,
+       "table_width_W_m": 4,
+       "tilt_deg": 0,
+       "upper_edge_height_m": 0.8
+      }
+     },
+     "project": {
+      "id": "prj_0dae62bf92de45c9b4b1",
+      "revision": 2,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 2
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      }
+     },
+     "history": "Results this session (1)#2 res_8238e4697b1600f96b1059ed · rev 2 · 16 modules",
+     "messages": "Generated res_8238e4697b1600f96b1059ed from revision 2 (selected)."
+    },
+    "after": {
+     "edited_width": "2",
+     "inputs_state": "saved",
+     "result_state": "current",
+     "result_text": "Result res_8238e4697b1600f96b1059ed from rev 2 — current",
+     "modules": "16",
+     "identity": "Result res_8238e4697b1600f96b1059ed · revision 2 · input ce936bf729cf3ccc… · payload 0e0ee113847c3b9e… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+     "banner": "current",
+     "export_href": "/api/layouts/res_8238e4697b1600f96b1059ed/exports/bundle",
+     "export_disabled": false,
+     "plan_result": "res_8238e4697b1600f96b1059ed",
+     "has_plan": true,
+     "displayed": {
+      "result": "res_8238e4697b1600f96b1059ed",
+      "revision": 2,
+      "project": "prj_0dae62bf92de45c9b4b1",
+      "inputs": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 2
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      },
+      "dims": {
+       "columns": 2,
+       "footprint_checked_L_m": 4,
+       "footprint_checked_W_m": 4,
+       "lower_edge_height_m": 0.8,
+       "module_gap_x_m": 0,
+       "module_gap_y_m": 0,
+       "module_l_upslope_m": 2,
+       "module_orientation": "portrait",
+       "module_w_across_m": 2,
+       "rows": 2,
+       "table_projected_depth_D_m": 4,
+       "table_rise_H_m": 0,
+       "table_slope_length_L_m": 4,
+       "table_width_W_m": 4,
+       "tilt_deg": 0,
+       "upper_edge_height_m": 0.8
+      }
+     },
+     "project": {
+      "id": "prj_0dae62bf92de45c9b4b1",
+      "revision": 2,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 2
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      }
+     },
+     "history": "Results this session (2)#1 res_410d496155af5459caa61028 · rev 1 · 24 modules · late response from an older generation; not displayed#2 res_8238e4697b1600f96b1059ed · rev 2 · 16 modules",
+     "messages": "A response for revision 1 arrived after newer inputs or results; it was kept as historical and not displayed (late response from an older generation; not displayed)."
+    }
+   }
+  },
+  {
+   "name": "V02 F2 stale SVG no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V02 project switch while a generation is pending keeps the opened project",
+   "pass": true,
+   "details": {
+    "opened": "prj_8393e017a2fa4dd296d4",
+    "opened_result": "res_35676bb67db6ca4ba3cf15d4",
+    "before": {
+     "edited_width": "1",
+     "inputs_state": "saved",
+     "result_state": "current",
+     "result_text": "Result res_35676bb67db6ca4ba3cf15d4 from rev 1 — current",
+     "modules": "20",
+     "identity": "Result res_35676bb67db6ca4ba3cf15d4 · revision 1 · input cc63b20a4dce022a… · payload 1f53ed0242dfb9e9… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+     "banner": "current",
+     "export_href": "/api/layouts/res_35676bb67db6ca4ba3cf15d4/exports/bundle",
+     "export_disabled": false,
+     "plan_result": "res_35676bb67db6ca4ba3cf15d4",
+     "has_plan": true,
+     "displayed": {
+      "result": "res_35676bb67db6ca4ba3cf15d4",
+      "revision": 1,
+      "project": "prj_8393e017a2fa4dd296d4",
+      "inputs": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [
+        {
+         "geometry": {
+          "coordinates": [
+           [
+            [
+             4,
+             1
+            ],
+            [
+             6,
+             1
+            ],
+            [
+             6,
+             5
+            ],
+            [
+             4,
+             5
+            ],
+            [
+             4,
+             1
+            ]
+           ]
+          ],
+          "type": "Polygon"
+         },
+         "id": "EX-1",
+         "keepout_m": 0
+        }
+       ],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "One table excluded",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      },
+      "dims": {
+       "columns": 2,
+       "footprint_checked_L_m": 4,
+       "footprint_checked_W_m": 2,
+       "lower_edge_height_m": 0.8,
+       "module_gap_x_m": 0,
+       "module_gap_y_m": 0,
+       "module_l_upslope_m": 2,
+       "module_orientation": "portrait",
+       "module_w_across_m": 1,
+       "rows": 2,
+       "table_projected_depth_D_m": 4,
+       "table_rise_H_m": 0,
+       "table_slope_length_L_m": 4,
+       "table_width_W_m": 2,
+       "tilt_deg": 0,
+       "upper_edge_height_m": 0.8
+      }
+     },
+     "project": {
+      "id": "prj_8393e017a2fa4dd296d4",
+      "revision": 1,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [
+        {
+         "geometry": {
+          "coordinates": [
+           [
+            [
+             4,
+             1
+            ],
+            [
+             6,
+             1
+            ],
+            [
+             6,
+             5
+            ],
+            [
+             4,
+             5
+            ],
+            [
+             4,
+             1
+            ]
+           ]
+          ],
+          "type": "Polygon"
+         },
+         "id": "EX-1",
+         "keepout_m": 0
+        }
+       ],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "One table excluded",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      }
+     },
+     "history": "Results this session (1)#2 res_35676bb67db6ca4ba3cf15d4 · rev 1 · 20 modules",
+     "messages": "Opened prj_8393e017a2fa4dd296d4 at revision 1"
+    },
+    "after": {
+     "edited_width": "1",
+     "inputs_state": "saved",
+     "result_state": "current",
+     "result_text": "Result res_35676bb67db6ca4ba3cf15d4 from rev 1 — current",
+     "modules": "20",
+     "identity": "Result res_35676bb67db6ca4ba3cf15d4 · revision 1 · input cc63b20a4dce022a… · payload 1f53ed0242dfb9e9… · frame local_cartesian local:analytic-site · z relative_flat_datum",
+     "banner": "current",
+     "export_href": "/api/layouts/res_35676bb67db6ca4ba3cf15d4/exports/bundle",
+     "export_disabled": false,
+     "plan_result": "res_35676bb67db6ca4ba3cf15d4",
+     "has_plan": true,
+     "displayed": {
+      "result": "res_35676bb67db6ca4ba3cf15d4",
+      "revision": 1,
+      "project": "prj_8393e017a2fa4dd296d4",
+      "inputs": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [
+        {
+         "geometry": {
+          "coordinates": [
+           [
+            [
+             4,
+             1
+            ],
+            [
+             6,
+             1
+            ],
+            [
+             6,
+             5
+            ],
+            [
+             4,
+             5
+            ],
+            [
+             4,
+             1
+            ]
+           ]
+          ],
+          "type": "Polygon"
+         },
+         "id": "EX-1",
+         "keepout_m": 0
+        }
+       ],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "One table excluded",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      },
+      "dims": {
+       "columns": 2,
+       "footprint_checked_L_m": 4,
+       "footprint_checked_W_m": 2,
+       "lower_edge_height_m": 0.8,
+       "module_gap_x_m": 0,
+       "module_gap_y_m": 0,
+       "module_l_upslope_m": 2,
+       "module_orientation": "portrait",
+       "module_w_across_m": 1,
+       "rows": 2,
+       "table_projected_depth_D_m": 4,
+       "table_rise_H_m": 0,
+       "table_slope_length_L_m": 4,
+       "table_width_W_m": 2,
+       "tilt_deg": 0,
+       "upper_edge_height_m": 0.8
+      }
+     },
+     "project": {
+      "id": "prj_8393e017a2fa4dd296d4",
+      "revision": 1,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [
+        {
+         "geometry": {
+          "coordinates": [
+           [
+            [
+             4,
+             1
+            ],
+            [
+             6,
+             1
+            ],
+            [
+             6,
+             5
+            ],
+            [
+             4,
+             5
+            ],
+            [
+             4,
+             1
+            ]
+           ]
+          ],
+          "type": "Polygon"
+         },
+         "id": "EX-1",
+         "keepout_m": 0
+        }
+       ],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "One table excluded",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      }
+     },
+     "history": "Results this session (2)#1 res_410d496155af5459caa61028 · rev 1 · 24 modules · inputs were replaced (project opened or file imported) while it was pending; not displayed#2 res_35676bb67db6ca4ba3cf15d4 · rev 1 · 20 modules",
+     "messages": "A response for revision 1 arrived after newer inputs or results; it was kept as historical and not displayed (inputs were replaced (project opened or file imported) while it was pending; not displayed)."
+    }
+   }
+  },
+  {
+   "name": "V02 project switch no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V02 import while a generation is pending: the old result never appears for the imported inputs",
+   "pass": true,
+   "details": {
+    "during": {
+     "edited_width": "1",
+     "inputs_state": "dirty",
+     "result_state": "none",
+     "result_text": "Result: none",
+     "identity": null,
+     "banner": null,
+     "export_href": null,
+     "export_disabled": true,
+     "plan_result": null,
+     "has_plan": false,
+     "displayed": null,
+     "project": {
+      "id": "prj_53497f9c9a704d93b60b",
+      "revision": 1,
+      "saved": {
+       "boundary": {
+        "coordinates": [
+         [
+          [
+           0,
+           0
+          ],
+          [
+           12,
+           0
+          ],
+          [
+           12,
+           14
+          ],
+          [
+           0,
+           14
+          ],
+          [
+           0,
+           0
+          ]
+         ]
+        ],
+        "type": "Polygon"
+       },
+       "exclusions": [],
+       "frame": {
+        "axes": {
+         "x": "east",
+         "y": "north"
+        },
+        "id": "local:analytic-site",
+        "kind": "local_cartesian",
+        "units": "m"
+       },
+       "module": {
+        "length_m": 2,
+        "model_id": "SYNTHETIC-1x2-550",
+        "orientation": "portrait",
+        "power_wp": 550,
+        "width_m": 1
+       },
+       "name": "Analytic rectangle",
+       "perimeter_setback_m": 1,
+       "placement": {
+        "anchor_xy_m": [
+         1,
+         1
+        ],
+        "minimum_clear_row_gap_m": 1,
+        "mode": "fixed_lattice",
+        "row_pitch_m": 5,
+        "table_gap_m": 1
+       },
+       "schema_version": "solar.layout.request/1",
+       "table": {
+        "columns": 2,
+        "facing_azimuth_deg": 180,
+        "lower_edge_height_m": 0.8,
+        "module_gap_x_m": 0,
+        "module_gap_y_m": 0,
+        "rows": 2,
+        "tilt_deg": 0
+       }
+      }
+     },
+     "history": "Results this session (1)#1 res_410d496155af5459caa61028 · rev 1 · 24 modules · inputs were replaced (project opened or file imported) while it was pending; not displayed",
+     "messages": "A response for revision 1 arrived after newer inputs or results; it was kept as historical and not displayed (inputs were replaced (project opened or file imported) while it was pending; not displayed)."
+    },
+    "after_regenerate": {
+     "result_state": "current",
+     "modules": "20"
+    }
+   }
+  },
+  {
+   "name": "V02 import while pending no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 rectangle overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 0,
+    "holes": 1,
+    "modules": 24,
+    "tables": 6,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 39,
+    "scaleText": "Scale 1:43 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 48,
+     "tableEnvelopeArea": 48,
+     "envelopeExceedsModules": 0
+    },
+    "screenshots": [
+     "V03-rectangle-overview.png",
+     "V03-rectangle-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 rectangle no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 concave-notch overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 0,
+    "holes": 1,
+    "modules": 0,
+    "tables": 0,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 39,
+    "scaleText": "Scale 1:30 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 0,
+     "tableEnvelopeArea": 0,
+     "envelopeExceedsModules": 0
+    },
+    "screenshots": [
+     "V03-concave-notch-overview.png",
+     "V03-concave-notch-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 concave-notch no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 hole overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 0,
+    "holes": 2,
+    "modules": 0,
+    "tables": 0,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 39,
+    "scaleText": "Scale 1:30 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 0,
+     "tableEnvelopeArea": 0,
+     "envelopeExceedsModules": 0
+    },
+    "screenshots": [
+     "V03-hole-overview.png",
+     "V03-hole-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 hole no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  },
+  {
+   "name": "V03 projected-rotated overview/close-up drawing",
+   "pass": true,
+   "details": {
+    "north": true,
+    "scale": true,
+    "legend": true,
+    "units": true,
+    "site": 1,
+    "exclusions": 1,
+    "holes": 2,
+    "modules": 360,
+    "tables": 30,
+    "textOverlapsPlan": 0,
+    "textOutsidePage": 0,
+    "nText": 40,
+    "scaleText": "Scale 1:17 at this zoom (plan in metres)",
+    "gapOk": {
+     "moduleArea": 842.8397052512861,
+     "tableEnvelopeArea": 858.9814094592493,
+     "envelopeExceedsModules": 16.141704207963244
+    },
+    "screenshots": [
+     "V03-projected-rotated-overview.png",
+     "V03-projected-rotated-closeup.png"
+    ]
+   }
+  },
+  {
+   "name": "V03 projected-rotated no browser errors",
+   "pass": true,
+   "details": {
+    "errors": []
+   }
+  }
+ ]
+}

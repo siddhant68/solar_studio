@@ -2,13 +2,13 @@
 
 An open, assistant-accessible solar design platform, beginning with a verified flat-site layout module.
 
-**Build status (25 October 2026):** Module 01 is implemented in [`solar-site-layout/`](solar-site-layout/). See its [delivery report](solar-site-layout/DELIVERY_REPORT.md), [acceptance gates](solar-site-layout/reports/ACCEPTANCE.json) (36/36 recorded pass, bound to source commit `f16944e`) and [README](solar-site-layout/README.md). The handoff text below is unchanged.
+**Current state (26 October 2026):** Module 01 is implemented in [`solar-site-layout/`](solar-site-layout/). The five findings from the first independent review are repaired and passed a follow-up review at `82f11f0`; all seven recorded implementation tree bindings match the tested source `fe15c5f`. The independent Mac run passed **233 tests, 24 browser checks and 17 MCP steps**. See the [follow-up review](reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md) and [raw verification](reviews/module-01/2026-10-26-followup/VERIFICATION.json).
 
-**Current state:** Module 01 is implemented on `claude/kind-cerf-gu33em`. An independent review reproduced five findings; repair and revalidate them before merging. The original brief and fixtures remain the specification.
+[PR #1](https://github.com/siddhant68/solar_studio/pull/1) remains open; merging/tagging and the new-code licence are owner decisions. Module 02 has not been implemented.
 
 ## Continue in Claude Cloud
 
-Give an execution-enabled Claude Cloud session access to this branch and follow [CLAUDE_REPAIR_HANDOFF.md](CLAUDE_REPAIR_HANDOFF.md). It points to the review evidence, required repairs and final verification. The [original starter prompt](START_PROMPT.md) and [complete Module 01 brief](handoffs/module-01/START_HERE.md) are retained for context.
+Start with [CLAUDE_NEXT_HANDOFF.md](CLAUDE_NEXT_HANDOFF.md): consume the independent verification, add CI in its own PR and prepare a design-only terrain-module proposal separately. Every required report and screenshot is now accessible through Git. The original [starter prompt](START_PROMPT.md) and [Module 01 brief](handoffs/module-01/START_HERE.md) remain historical/specification context.
 
 The first goal is: **site boundary + panel/mounting rules → panel positions, counts, DC capacity and a readable plan.** The intended application exposes the same calculation service through a browser, CLI, HTTP and MCP.
 
@@ -38,6 +38,11 @@ The supplied rectangle case must produce exactly **6 tables, 24 panels and 13.2 
 
 The brief was prepared on 25 October 2026. Reference observations, future implementation results and independently verified outputs must remain clearly distinguished.
 
-## Current review and repair handoff
+## Review history
 
-Module 01 has an implementation on `claude/kind-cerf-gu33em` and an independent review with five reproducible findings. **Repair and revalidate before merging.** Start the next Claude Cloud session with [CLAUDE_REPAIR_HANDOFF.md](CLAUDE_REPAIR_HANDOFF.md). The [full review and evidence](reviews/module-01/2026-10-26/REVIEW.md) and [downloadable review ZIP](reviews/module-01/2026-10-26/Solar_Module_01_Independent_Review.zip) are included. The original Module 01 handoff above remains the specification.
+- [First review](reviews/module-01/2026-10-26/REVIEW.md): five reproduced findings at `f55f4be`, retained unchanged.
+- [Repair delivery](solar-site-layout/DELIVERY_REPORT.md): fixes and Linux evidence bound to `fe15c5f`.
+- [Independent repair verification](reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md): all five accepted in the exercised cases at `82f11f0`, plus Mac tests and four-process export evidence.
+- [Downloadable follow-up evidence](reviews/module-01/2026-10-26-followup/Solar_Module_01_Repair_Verification.zip).
+
+The earlier [repair handoff](CLAUDE_REPAIR_HANDOFF.md) is superseded by [the continuation handoff](CLAUDE_NEXT_HANDOFF.md). Do not reopen completed repairs because an older document lists them.

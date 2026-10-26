@@ -1,5 +1,7 @@
 # Claude Cloud handoff — repair Module 01 before merge
 
+> Historical repair brief: the five findings were repaired and accepted in the independent follow-up at `82f11f0`. For current work read [CLAUDE_NEXT_HANDOFF.md](CLAUDE_NEXT_HANDOFF.md) and [the verification report](reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md).
+
 Continue work in `siddhant68/solar_studio`, on branch **`claude/kind-cerf-gu33em`**. Fetch the current branch before editing; the latest commits include this independent review. `main` remains the original handoff. Do not start Module 02 or merge to `main` during this repair.
 
 ## Read first

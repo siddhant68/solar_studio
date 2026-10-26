@@ -1,0 +1,101 @@
+{
+  "head": "82f11f035f78b3e6daf2659582690d393b53016d",
+  "tested_source_claim": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
+  "recorded_tree_bindings_match": {
+    "solar-site-layout/src": true,
+    "solar-site-layout/tests": true,
+    "solar-site-layout/scripts": true,
+    "solar-site-layout/pyproject.toml": true,
+    "solar-site-layout/uv.lock": true,
+    "solar-site-layout/fixtures": true,
+    "solar-site-layout/references/probes": true
+  },
+  "pytest": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "233",
+    "time": "23.990",
+    "timestamp": "2026-10-26T20:43:38.347417+05:30",
+    "hostname": "Siddhants-MacBook-Pro-5.local"
+  },
+  "browser": {
+    "passed": true,
+    "checks": 24,
+    "failures": []
+  },
+  "mcp": {
+    "steps": 17,
+    "all_passed": true
+  },
+  "original_failure_probes": {
+    "parallel_export_failures": 0,
+    "export_bytes_stable_after_new_project": true,
+    "corrupt_areas_rejected": true
+  },
+  "additional_checks": {
+    "corrupt_module_power_rejected": true,
+    "power_failed_checks": [
+      "record_fields",
+      "record_totals",
+      "payload_integrity"
+    ],
+    "cross_process_bundle_publication": [
+      {
+        "returncode": 0,
+        "result": {
+          "result_id": "res_410d496155af5459caa61028",
+          "format": "bundle",
+          "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+          "file_name": "res_410d496155af5459caa61028-bundle.zip",
+          "sha256": "846d6feb99be78fc68ec52bd0cd263fa00ed8fa55312e555e4cc24e487bbc1c1",
+          "bytes": 15622,
+          "media_type": "application/zip",
+          "context": "result_only"
+        }
+      },
+      {
+        "returncode": 0,
+        "result": {
+          "result_id": "res_410d496155af5459caa61028",
+          "format": "bundle",
+          "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+          "file_name": "res_410d496155af5459caa61028-bundle.zip",
+          "sha256": "846d6feb99be78fc68ec52bd0cd263fa00ed8fa55312e555e4cc24e487bbc1c1",
+          "bytes": 15622,
+          "media_type": "application/zip",
+          "context": "result_only"
+        }
+      },
+      {
+        "returncode": 0,
+        "result": {
+          "result_id": "res_410d496155af5459caa61028",
+          "format": "bundle",
+          "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+          "file_name": "res_410d496155af5459caa61028-bundle.zip",
+          "sha256": "846d6feb99be78fc68ec52bd0cd263fa00ed8fa55312e555e4cc24e487bbc1c1",
+          "bytes": 15622,
+          "media_type": "application/zip",
+          "context": "result_only"
+        }
+      },
+      {
+        "returncode": 0,
+        "result": {
+          "result_id": "res_410d496155af5459caa61028",
+          "format": "bundle",
+          "path": "res_410d496155af5459caa61028/v2/res_410d496155af5459caa61028-bundle.zip",
+          "file_name": "res_410d496155af5459caa61028-bundle.zip",
+          "sha256": "846d6feb99be78fc68ec52bd0cd263fa00ed8fa55312e555e4cc24e487bbc1c1",
+          "bytes": 15622,
+          "media_type": "application/zip",
+          "context": "result_only"
+        }
+      }
+    ],
+    "cross_process_pass": true
+  },
+  "core_unchanged": true
+}
