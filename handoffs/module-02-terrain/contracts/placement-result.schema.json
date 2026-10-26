@@ -1,0 +1,89 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://solar-studio.invalid/schemas/solar.terrain.placement.result/1",
+ "title": "solar.terrain.placement.result/1 (DRAFT for review)",
+ "description": "Summary and record shapes of an immutable terrain placement. Records are paged exactly like Module 01 items (kind = tables | modules | supports). The Module 01 layout result is never modified.",
+ "$defs": {
+  "xy": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}},
+  "xyz": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "number"}},
+  "status": {"enum": ["placed", "unknown_ground", "infeasible"]},
+  "reason": {"enum": ["footprint_not_fully_covered", "ground_slope_exceeds_limit", "support_above_ground_exceeds_limit"]},
+  "table_record": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["seq", "table_id", "status", "reasons", "footprint_xy_m", "covered_area_m2", "uncovered_area_m2"],
+   "properties": {
+    "seq": {"type": "integer", "minimum": 0},
+    "table_id": {"type": "string", "description": "Module 01 table_id; unique only together with the summary's source result_id and payload_digest."},
+    "status": {"$ref": "#/$defs/status"},
+    "reasons": {"type": "array", "items": {"$ref": "#/$defs/reason"}},
+    "footprint_xy_m": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/xy"}, "description": "Copied unchanged from the Module 01 table record."},
+    "covered_area_m2": {"type": "number", "minimum": 0},
+    "uncovered_area_m2": {"type": "number", "minimum": 0},
+    "lower_edge_z_m": {"type": "number", "description": "Absolute elevation of the module plane's lower edge in the terrain vertical reference. Absent unless placed or infeasible."},
+    "upper_edge_z_m": {"type": "number"},
+    "vertical_lift_m": {"type": "number", "description": "lower_edge_z_m - Module 01 lower_edge_height_m: the constant added to every Module 01 z value of this table."},
+    "min_clearance_m": {"type": "number"},
+    "min_clearance_at_xy_m": {"$ref": "#/$defs/xy"},
+    "max_clearance_m": {"type": "number"},
+    "max_ground_slope_deg": {"type": "number", "description": "Steepest TIN triangle that overlaps the footprint with positive area."},
+    "mean_ground_gradient_uv": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}, "description": "Area-weighted mean ground gradient along the table's u and v axes (informative)."}
+   }
+  },
+  "module_record": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["seq", "module_id", "table_id", "corners_xyz_m"],
+   "properties": {
+    "seq": {"type": "integer", "minimum": 0},
+    "module_id": {"type": "string"},
+    "table_id": {"type": "string"},
+    "corners_xyz_m": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/xyz"}, "description": "Module 01 corners with z + vertical_lift_m; x and y unchanged. Only for placed tables."}
+   }
+  },
+  "support_record": {
+   "type": "object",
+   "additionalProperties": false,
+   "required": ["seq", "support_id", "table_id", "a_m", "d_m", "xy_m", "ground_z_m", "top_z_m", "above_ground_m"],
+   "properties": {
+    "seq": {"type": "integer", "minimum": 0},
+    "support_id": {"type": "string", "description": "S_<table_id>_<k>, k in model order."},
+    "table_id": {"type": "string"},
+    "a_m": {"type": "number"},
+    "d_m": {"type": "number"},
+    "xy_m": {"$ref": "#/$defs/xy"},
+    "ground_z_m": {"type": "number"},
+    "top_z_m": {"type": "number", "description": "Underside of the structure at the support: module plane minus structure_depth_m."},
+    "above_ground_m": {"type": "number", "description": "top_z_m - ground_z_m. Not an embedment depth or a pile length."}
+   }
+  }
+ },
+ "type": "object",
+ "required": ["schema_version", "placement_id", "source_layout", "terrain", "parameters_digest", "frame", "vertical", "z_kind", "policy", "counts", "payload_digest"],
+ "properties": {
+  "schema_version": {"const": "solar.terrain.placement.result/1"},
+  "placement_id": {"type": "string", "pattern": "^plc_[0-9a-f]{24}$"},
+  "source_layout": {
+   "type": "object",
+   "required": ["result_id", "payload_digest", "schema_version", "algorithm_version"],
+   "properties": {"result_id": {"type": "string"}, "payload_digest": {"type": "string"}, "schema_version": {"type": "string"}, "algorithm_version": {"type": "string"}}
+  },
+  "terrain": {"type": "object", "required": ["terrain_id", "terrain_digest"], "properties": {"terrain_id": {"type": "string", "pattern": "^ter_[0-9a-f]{24}$"}, "terrain_digest": {"type": "string"}}},
+  "parameters_digest": {"type": "string"},
+  "frame": {"type": "object"},
+  "vertical": {"type": "object"},
+  "z_kind": {"const": "terrain_vertical_reference"},
+  "policy": {"type": "object"},
+  "counts": {
+   "type": "object",
+   "required": ["tables", "placed_tables", "unknown_ground_tables", "infeasible_tables", "placed_modules", "placed_dc_capacity_kwp", "supports"],
+   "properties": {
+    "tables": {"type": "integer"}, "placed_tables": {"type": "integer"}, "unknown_ground_tables": {"type": "integer"}, "infeasible_tables": {"type": "integer"},
+    "placed_modules": {"type": "integer"}, "placed_dc_capacity_kwp": {"type": "number"}, "supports": {"type": "integer"}
+   }
+  },
+  "payload_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+  "warnings": {"type": "array", "items": {"type": "string"}},
+  "not_computed": {"type": "array", "items": {"type": "string"}, "description": "Always lists: embedment depth, pile length, foundation design, structural adequacy, grading, cut/fill, drainage."}
+ }
+}
