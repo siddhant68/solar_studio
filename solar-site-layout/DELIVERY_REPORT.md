@@ -6,6 +6,18 @@ Source commit under test: `fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef` (branch `cl
 
 **Summary.** `reports/ACCEPTANCE.json` records **all 36 gates as pass** over 233 test cases (0 failed, 0 skipped; browser tooling was required, not optional). The numerical core (validation, layout engine, exact kernel, result records) is unchanged, and every analytic fixture still reproduces exactly. The one material shortfall is still in the reference investigation: REA's static analysis did not finish the reference's 917 kB main bundle, and R02 passes on runtime coverage with that limitation stated.
 
+## Independent verification of the repair (follow-up review, 26 October 2026)
+
+An independent reviewer rechecked implementation head `82f11f035f78b3e6daf2659582690d393b53016d` (`../reviews/module-01/2026-10-26-followup/`, published to the branch in `9a123fb`) and recommends accepting the five repairs and PR #1 as the Module 01 milestone, subject to the owner's merge decision. Scope of that acceptance: the defined flat-site layout module, not terrain, structural or electrical design, a hosted multi-user service or a public release.
+
+- All seven recorded tree bindings (`src`, `tests`, `scripts`, `pyproject.toml`, `uv.lock`, `fixtures`, `references/probes`) match the tested source `fe15c5f`; the numerical core files are unchanged.
+- macOS arm64, Python 3.12.14, Playwright 1.63.0 with installed Google Chrome: 233 tests passed, 0 failed, 0 skipped; 24/24 browser checks; 17 MCP steps.
+- The original failure probes on the repaired head: 0/24 parallel export failures, export bytes unchanged after another project reuses a result, falsified areas rejected; a 123,456 W module rejected by `record_fields`, `record_totals` and `payload_integrity`; four independent processes publishing one unissued bundle got identical paths and bytes.
+- Not rerun by the reviewer: the Linux benchmarks, the REA reference pipeline, and the specific archive files from this session (their hashes were not checked against those files).
+- The reviewer's portable script (`reproduce_followup.py`) was also run in this cloud container on `9a123fb`: bindings match, the corrupted power is rejected, four processes publish identical bundles.
+
+Status, kept separate from that acceptance: PR #1 is **open and not merged**, nothing is tagged, `main` still holds the original handoff, and the licence is undecided.
+
 ## Review response, finding by finding
 
 | Finding | Reproduced here (before) | Fix | Regression and result (after) |
@@ -85,9 +97,10 @@ These are observations of other software. See `reports/REFERENCE_FINDINGS.md` fo
 
 ## Untested platforms
 
-- macOS and Windows: not run. Expected to work for the engine and service; the fault-injection tests and the bash helpers are POSIX-only, and off POSIX the export publication lock is in-process only (no `flock`).
-- Other browsers: only Chromium 153 was tested; Firefox and WebKit were not.
-- Python 3.13+: not run (3.12.3 was tested).
+- macOS: one independent run on macOS arm64 with Python 3.12.14 and Google Chrome (above). Other Mac configurations and Safari were not tested.
+- Windows: not run. The fault-injection tests and the bash helpers are POSIX-only, and off POSIX the export publication lock is in-process only (no `flock`).
+- Other browsers: Chromium 153 (Linux, this session) and Google Chrome (macOS, the reviewer) were tested; Firefox, WebKit and Safari were not.
+- Python 3.13+: not run (3.12.3 on Linux and 3.12.14 on macOS were tested).
 
 ## Remaining failures and limitations
 
@@ -113,8 +126,7 @@ See `docs/IMPLEMENTATION_NOTES.md`. In the first build: non-deterministic DXF ti
 
 ## Next actions for Module 02 (terrain), not started
 
-1. Accept a surveyed terrain input (TIN or DEM with its CRS and vertical datum) and keep `relative_flat_datum` results separate from terrain-fitted results by `z_kind`.
-2. Fit a rack plane per table from the immutable table records, keyed by the existing `table_id` / `(i, j)`. Report slope limits and per-pile heights as new, explicitly verified quantities.
-3. Add terrain-aware exclusions (slope above a limit) as additional forbidden regions, decided against the original geometry like keepouts.
-4. Extend the verifier with independent terrain checks before any terrain result is persisted.
-5. Re-run REA on the reference's main chunk with a larger budget only if a terrain-related reference question needs it.
+A design-only terrain proposal is prepared separately for review (branch `docs/module-02-terrain-plan`, `handoffs/module-02-terrain/`). No terrain code exists. Two points from that work correct the outline previously given here:
+
+1. A Module 01 `table_id` such as `T_j0_i0` is unique only within its layout. A terrain placement must reference the source layout by `result_id` and `payload_digest` together with the `table_id`, plus the exact terrain input and parameters.
+2. The flat-layout result and its exports stay unchanged. Terrain placement is a separate result with its own identity; `relative_flat_datum` heights are never reinterpreted as surveyed elevations.

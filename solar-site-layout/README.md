@@ -6,10 +6,12 @@ The output is a preliminary layout under stated assumptions: a flat site, synthe
 
 ## Status
 
+Module 01 passed the independent follow-up review of the repairs (`../reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md`), which recommends accepting PR #1 as the Module 01 milestone. That is **review acceptance of the flat-site layout scope, not a merge or a release**: PR #1 is open, `main` still holds the original handoff, nothing is tagged, and the licence is undecided. Merging, tagging and the licence are owner decisions.
+
 | Platform | Status |
 |---|---|
 | Linux x86_64 (Ubuntu 24.04, Python 3.12.3, cloud container) | **Tested.** The full test suite, real-browser checks (full Chromium 153 via Playwright 1.63.0, pinned in `tests/browser/`), real MCP client sessions, benchmarks, and a fresh-clone reproduction all ran here. |
-| macOS | **Not tested.** No macOS runner was available. Every dependency ships macOS wheels and the code uses no Linux-only APIs, except the test-only `SIGKILL` fault injection and `scripts/dev_server.sh` (`setsid`). |
+| macOS arm64 (Python 3.12.14, Google Chrome via Playwright 1.63.0 `channel: "chrome"`) | **One independent run** (follow-up review, 26 October 2026, `../reviews/module-01/2026-10-26-followup/`): 233 tests passed with none skipped, 24/24 browser checks, 17 MCP steps, at implementation head `82f11f0`. Benchmarks, the REA pipeline and packaging were not run there. This is not evidence for Safari, other Mac configurations or Python 3.13+. |
 | Windows | **Not tested.** The test-only fault injection uses POSIX signals, and the shell helper scripts are bash. |
 
 ## Install
@@ -102,6 +104,8 @@ SOLAR_REQUIRE_BROWSER=1 .venv/bin/python -m pytest -q   # as above, but missing 
 ```
 
 The browser tests need Node ≥ 20. `scripts/bootstrap_browser.sh` installs the pinned Playwright into `tests/browser/node_modules` (unless an identical version is already resolvable) and its Chromium build, then launches it once. Without that tooling the browser test is skipped with the reason printed, unless `SOLAR_REQUIRE_BROWSER=1` is set; `scripts/run_acceptance.py` always sets it. The checks drive full Chromium (`channel: "chromium"`; override with `SOLAR_BROWSER_CHANNEL`) and fail on any console error, failed request or HTTP status ≥ 400, logged with its URL. The MCP Inspector cross-check is optional.
+
+**Continuous integration.** `.github/workflows/module-01.yml` (repository root) runs on pull requests, on pushes to `main` and on demand: Ubuntu 24.04, `uv sync --frozen` with Python 3.12, Node 22, the pinned Playwright via `scripts/bootstrap_browser.sh`, then the full suite with `SOLAR_REQUIRE_BROWSER=1` and JUnit output. `.github/scripts/module01_ci.py` then fails the job on any failure, error or skip, or if the real-browser checks (V01–V03, including the review regressions) or the real MCP session did not run and pass. The test count is not fixed. The JUnit report, test log, browser screenshots and checks, MCP transcript and the tested commit with tool versions are uploaded as the artifact `module-01-evidence-run<id>-attempt<n>` (kept 30 days), also when the job fails. The workflow has read-only repository permissions and no secrets or deployment.
 
 Regressions for the independent review of 26 October 2026 (`../reviews/module-01/2026-10-26/`) are in `tests/test_review_regressions.py` (exports and verifier) and in the V02 checks of `tests/browser/ui_checks.cjs` (browser races). `evidence/repair/` holds the before/after observations.
 
