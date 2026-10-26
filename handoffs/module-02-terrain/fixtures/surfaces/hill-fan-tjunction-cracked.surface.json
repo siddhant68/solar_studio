@@ -1,0 +1,83 @@
+{
+ "schema_version": "solar.terrain.surface/1",
+ "name": "Hill fan with a cracked T-junction",
+ "frame": {
+  "kind": "local_cartesian",
+  "id": "local:analytic-site",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "vertical": {
+  "kind": "local",
+  "id": "local:fixture-datum",
+  "crs": null,
+  "units": "m",
+  "positive": "up"
+ },
+ "source": {
+  "kind": "synthetic_analytic",
+  "description": "As the consistent variant but the junction vertex says 10.5 where the edge interpolates to 10.3: two elevations along one line (INVALID_TERRAIN)"
+ },
+ "vertices_xyz_m": [
+  [
+   0.0,
+   0.0,
+   10.0
+  ],
+  [
+   8.0,
+   0.0,
+   10.0
+  ],
+  [
+   8.0,
+   8.0,
+   10.0
+  ],
+  [
+   0.0,
+   8.0,
+   10.0
+  ],
+  [
+   4.0,
+   4.0,
+   10.6
+  ],
+  [
+   6.0,
+   2.0,
+   10.5
+  ]
+ ],
+ "triangles": [
+  [
+   0,
+   1,
+   4
+  ],
+  [
+   1,
+   2,
+   5
+  ],
+  [
+   5,
+   2,
+   4
+  ],
+  [
+   2,
+   3,
+   4
+  ],
+  [
+   3,
+   0,
+   4
+  ]
+ ]
+}

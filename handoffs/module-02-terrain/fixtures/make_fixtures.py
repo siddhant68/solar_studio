@@ -60,6 +60,32 @@ def fl(x: F) -> float:
     return float(x)
 
 
+def canonical(value) -> str:
+    """Module 01's canonical JSON: sorted keys, no whitespace, shortest round-trip floats, -0.0 as 0.0."""
+    def canon(v):
+        if isinstance(v, float):
+            return 0.0 if v == 0.0 else v
+        if isinstance(v, dict):
+            return {k: canon(x) for k, x in v.items()}
+        if isinstance(v, list):
+            return [canon(x) for x in v]
+        return v
+    return json.dumps(canon(value), sort_keys=True, separators=(",", ":"), allow_nan=False)
+
+
+def terrain_identity(s: dict) -> tuple[str, str]:
+    """CONTRACTS.md section 2: digest over frame (crs null when absent), vertical (crs null when absent),
+    float vertices and integer triangles; ID = ter_ + sha256('solar.terrain.surface/1|' + digest)[:24]."""
+    import hashlib
+    frame = dict(s["frame"])
+    frame.setdefault("crs", None)
+    vertical = dict(s["vertical"])
+    vertical.setdefault("crs", None)
+    body = {"frame": frame, "vertical": vertical, "vertices_xyz_m": [[float(c) for c in v] for v in s["vertices_xyz_m"]], "triangles": [[int(i) for i in t] for t in s["triangles"]]}
+    digest = hashlib.sha256(canonical(body).encode()).hexdigest()
+    return digest, "ter_" + hashlib.sha256(("solar.terrain.surface/1|" + digest).encode()).hexdigest()[:24]
+
+
 def surface(name, vertices, triangles, description, frame=LOCAL_FRAME, vertical=LOCAL_VERTICAL):
     return {
         "schema_version": "solar.terrain.surface/1",
@@ -84,12 +110,31 @@ SURFACES = {
     "plane-rectangle-west-half": plane_rect("Same plane, surveyed only for x in [0, 6]", 0, 0, 6, 14, 100, F(1, 20), F(1, 10),
                                             "Two triangles over [0,6] x [0,14]; everything with x > 6 is unknown ground"),
     "plane-north-0p25": plane_rect("Plane G = 50 + 0.25 y", 0, 0, 6, 8, 50, 0, F(1, 4), "Two triangles over [0,6] x [0,8]; G = 50 + 0.25 y (rises north)"),
+    "plane-north-0p5": plane_rect("Plane G = 20 + 0.5 y (dyadic slope)", 0, 0, 8, 8, 20, 0, F(1, 2), "Two triangles over [0,8] x [0,8]; G = 20 + 0.5 y; every value in case T13 is exactly representable"),
     "plane-north-0p6": plane_rect("Steep plane G = 20 + 0.6 y", 0, 0, 8, 8, 20, 0, F(3, 5), "Two triangles over [0,8] x [0,8]; G = 20 + 0.6 y (about 31 degrees)"),
     "hill-fan": surface(
         "Fan with a raised centre vertex",
         [(0, 0, 10), (8, 0, 10), (8, 8, 10), (0, 8, 10), (4, 4, F(106, 10))],
         [[0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4]],
         "Square [0,8]^2 at z = 10 with one interior vertex (4, 4, 10.6); four triangles, CCW",
+    ),
+    "flat-micro-gap": surface(
+        "Flat survey with a 0.000001 m wide unsurveyed strip",
+        [(0, 0, 10), (4, 0, 10), (4, 8, 10), (0, 8, 10), (4.000001, 0, 10), (8, 0, 10), (8, 8, 10), (4.000001, 8, 10)],
+        [[0, 1, 2], [0, 2, 3], [4, 5, 6], [4, 6, 7]],
+        "Two flat rectangles [0,4] x [0,8] and [4.000001,8] x [0,8] at z = 10; the strip between them is not surveyed",
+    ),
+    "hill-fan-tjunction-consistent": surface(
+        "Hill fan with a consistent T-junction",
+        [(0, 0, 10), (8, 0, 10), (8, 8, 10), (0, 8, 10), (4, 4, F(106, 10)), (6, 2, F(103, 10))],
+        [[0, 1, 4], [1, 2, 5], [5, 2, 4], [2, 3, 4], [3, 0, 4]],
+        "hill-fan with vertex (6, 2, 10.3) on edge (8,0)-(4,4); triangle [1,2,4] split into [1,2,5] and [5,2,4]; [0,1,4] keeps the full edge. 10.3 is the edge's interpolated elevation",
+    ),
+    "hill-fan-tjunction-cracked": surface(
+        "Hill fan with a cracked T-junction",
+        [(0, 0, 10), (8, 0, 10), (8, 8, 10), (0, 8, 10), (4, 4, F(106, 10)), (6, 2, F(105, 10))],
+        [[0, 1, 4], [1, 2, 5], [5, 2, 4], [2, 3, 4], [3, 0, 4]],
+        "As the consistent variant but the junction vertex says 10.5 where the edge interpolates to 10.3: two elevations along one line (INVALID_TERRAIN)",
     ),
     "void-ring": surface(
         "Flat ring with an unsurveyed 1 x 1 m hole",
@@ -166,7 +211,7 @@ def case_planar(case_id, title, layout_key, surface_key, z0, gx, gy, c, s, suppo
         "placement_request": {
             "schema_version": "solar.terrain.placement.request/1",
             "source_layout": {"result_id": lay["observed_result_id"], "payload_digest": lay["observed_payload_digest"]},
-            "terrain": f"surfaces/{surface_key}.surface.json",
+            "terrain": terrain_identity(SURFACES[surface_key])[1],
             "placement": {"policy": "minimum_clearance_vertical_lift", "minimum_clearance_m": fl(F(c)), "structure_depth_m": fl(F(s))},
             "supports": {"model": "explicit_table_local", "points_ad_m": supports},
             "limits": limits,
@@ -209,6 +254,9 @@ def main() -> None:
     cases.append(case_planar("T07", "Ground slope limit makes a table infeasible", "single-flat-4x2", "plane-north-0p6", 20, 0, F(3, 5), F(1, 2), 0, [[0.5, 0.5], [0.5, 1.5], [3.5, 0.5], [3.5, 1.5]],
                              {"max_ground_slope_deg": 25.0, "max_support_above_ground_m": 2.0},
                              notes="atan(0.6) = 30.96 deg > 25 deg; support heights (1.4 m, 0.8 m) are within 2.0 m."))
+    cases.append(case_planar("T13", "Support exactly at the height limit is within it", "single-flat-4x2", "plane-north-0p5", 20, 0, F(1, 2), F(1, 2), 0, [[0.5, 0.5], [0.5, 1.5], [3.5, 0.5], [3.5, 1.5]],
+                             {"max_ground_slope_deg": 35.0, "max_support_above_ground_m": 1.25},
+                             notes="L = 20 + 0.5 x 5 + 0.5 = 23.0; front supports at y = 3.5 stand exactly 1.25 m above ground (all values dyadic, so exact in double). Equality is within the limit: placed. With max_support_above_ground_m = 1.2499999999 the same table is infeasible (support_above_ground_exceeds_limit); the decision is made by the exact band (CONTRACTS.md 4.3)."))
     # T03: hill touching the middle of the table, all corners lower
     hill = {
         "case_id": "T03",
@@ -218,7 +266,7 @@ def main() -> None:
         "placement_request": {
             "schema_version": "solar.terrain.placement.request/1",
             "source_layout": {"result_id": LAYOUTS["single-flat-4x2"]["observed_result_id"], "payload_digest": LAYOUTS["single-flat-4x2"]["observed_payload_digest"]},
-            "terrain": "surfaces/hill-fan.surface.json",
+            "terrain": terrain_identity(SURFACES["hill-fan"])[1],
             "placement": {"policy": "minimum_clearance_vertical_lift", "minimum_clearance_m": 0.5, "structure_depth_m": 0.0},
             "supports": {"model": "explicit_table_local", "points_ad_m": [[0.5, 1.0], [2.0, 1.0], [3.5, 1.0]]},
             "limits": {"max_ground_slope_deg": 20.0, "max_support_above_ground_m": 2.0},
@@ -254,7 +302,7 @@ def main() -> None:
         "title": "Unsurveyed void under the middle of a table; every corner is on surveyed ground",
         "layout": {k: LAYOUTS["single-flat-4x2"][k] for k in ("request", "observed_result_id", "observed_payload_digest", "modules_per_table", "power_wp")} | {"table_width_W_m": 4.0, "table_depth_D_m": 2.0, "tan_tilt": 0.0, "lower_edge_height_m": 0.8},
         "surface": "../surfaces/void-ring.surface.json",
-        "placement_request": dict(hill["placement_request"], terrain="surfaces/void-ring.surface.json"),
+        "placement_request": dict(hill["placement_request"], terrain=terrain_identity(SURFACES["void-ring"])[1]),
         "formula": "coverage = union of the TIN triangles (closed); uncovered area = footprint area - area of footprint intersected with the coverage",
         "expected": {
             "tables": [{"table_id": "T_j0_i0", "origin_xy_m": [2.0, 3.0], "footprint_xy_m": [[2.0, 3.0], [6.0, 3.0], [6.0, 5.0], [2.0, 5.0]], "status": "unknown_ground", "reasons": ["footprint_not_fully_covered"], "covered_area_m2": 7.0, "uncovered_area_m2": 1.0, "corners_covered": True}],
@@ -269,7 +317,11 @@ def main() -> None:
         "title": "Rejected requests (typed errors; nothing stored)",
         "cases": [
             {"name": "frame mismatch", "change": "surface.frame.id = 'local:other-site' for case T03", "expected_error": "FRAME_MISMATCH", "why": "the terrain and the layout must declare the identical horizontal frame; no transformation is attempted"},
-            {"name": "vertical datum mismatch", "change": "surface.vertical = {kind: orthometric, crs: EPSG:5703} and request.vertical.expected_crs = EPSG:5773", "expected_error": "DATUM_MISMATCH", "why": "no vertical transformation in Module 02 (PROJ falls back to a no-op ballpark transformation offline; see research/library-probes.json)"},
+            {"name": "vertical datum mismatch", "change": "T09 inputs (surface vertical = orthometric EPSG:5773) with request.expected_vertical = {kind: orthometric, crs: EPSG:5703}", "expected_error": "DATUM_MISMATCH", "why": "no vertical transformation in Module 02 (PROJ falls back to a no-op ballpark transformation offline; see research/library-probes.json)"},
+            {"name": "vertical kind mismatch", "change": "T03 (local datum local:fixture-datum) with request.expected_vertical = {kind: local, id: local:other-benchmark}", "expected_error": "DATUM_MISMATCH", "why": "a different local benchmark is a different reference"},
+            {"name": "empty expected_vertical", "change": "request.expected_vertical = {}", "expected_error": "INVALID_INPUT", "why": "assertions must be complete"},
+            {"name": "partial expected_vertical", "change": "request.expected_vertical = {kind: orthometric}", "expected_error": "INVALID_INPUT", "why": "kind without crs is not a supported assertion"},
+            {"name": "matching expected_vertical", "change": "T09 with request.expected_vertical = {kind: orthometric, crs: EPSG:5773}", "expected_error": None, "why": "accepted; result identical to T09 except parameters_digest and placement_id"},
             {"name": "missing vertical datum", "change": "delete surface.vertical", "expected_error": "INVALID_TERRAIN", "why": "elevations without a declared vertical reference are not accepted"},
             {"name": "source mismatch", "change": "request.source_layout.payload_digest = 64 zeros", "expected_error": "SOURCE_MISMATCH", "why": "a placement names the layout by result_id and payload_digest together"},
             {"name": "unknown layout", "change": "request.source_layout.result_id = res_000000000000000000000000", "expected_error": "RESULT_NOT_FOUND", "why": ""},
@@ -278,14 +330,20 @@ def main() -> None:
             {"name": "clockwise triangle", "change": "hill-fan triangle [0, 1, 4] written as [0, 4, 1]", "expected_error": "INVALID_TERRAIN", "why": "orientation is part of the contract (counter-clockwise in plan)"},
             {"name": "non-finite elevation", "change": "vertex 4 z = NaN", "expected_error": "INVALID_TERRAIN", "why": ""},
             {"name": "duplicate plan vertex", "change": "append vertex (4, 4, 11.0)", "expected_error": "INVALID_TERRAIN", "why": "two elevations at one plan point"},
-            {"name": "cracked T-junction", "change": "hill-fan: append vertex 5 = (6, 2, 10.5) on edge (8,0)-(4,4) and replace triangle [1, 2, 4] by [1, 2, 5] and [5, 2, 4]; triangle [0, 1, 4] keeps the full edge", "expected_error": "INVALID_TERRAIN", "why": "the edge interpolates to 10.3 at (6, 2) on one side and the new vertex says 10.5: a crack with two elevations along one line"},
+            {"name": "cracked T-junction", "surface": "surfaces/hill-fan-tjunction-cracked.surface.json", "expected_error": "INVALID_TERRAIN", "why": "the edge (8,0)-(4,4) interpolates to 10.3 at (6, 2) on one side and the junction vertex says 10.5: a crack with two elevations along one line"},
+            {"name": "coordinate beyond envelope", "change": "hill-fan vertex 0 x = 20000000", "expected_error": "RESOURCE_LIMIT", "why": "|x| <= 1e7"},
+            {"name": "elevation beyond envelope", "change": "hill-fan vertex 4 z = 30000", "expected_error": "RESOURCE_LIMIT", "why": "|z| <= 2e4"},
+            {"name": "too many triangles", "change": "a surface with more triangles than the configured limit (tests lower the limit; the T1 limit is 2,000,000)", "expected_error": "RESOURCE_LIMIT", "why": "checked before geometric work"},
+            {"name": "placement time limit", "change": "SOLAR_TERRAIN_TIMEOUT_S = 0 for T01", "expected_error": "RESOURCE_LIMIT", "why": "finite time limit; nothing stored"},
+            {"name": "unknown terrain", "change": "request.terrain = ter_000000000000000000000000", "expected_error": "TERRAIN_NOT_FOUND", "why": ""},
+            {"name": "unsupported support model", "change": "supports = {model: uniform_rows, ...}", "expected_error": "UNSUPPORTED_OPERATION", "why": "generated rows are T2"},
             {"name": "support outside footprint", "change": "supports.points_ad_m = [[4.5, 1.0]] for case T03 (W = 4)", "expected_error": "INVALID_INPUT", "why": "supports are inside the table footprint"},
             {"name": "negative clearance", "change": "placement.minimum_clearance_m = -0.1", "expected_error": "INVALID_INPUT", "why": ""},
             {"name": "unsupported policy", "change": "placement.policy = 'follow_terrain_reorientation'", "expected_error": "UNSUPPORTED_OPERATION", "why": "reorientation is a later, separately approved milestone"},
         ],
     }
     errors["accepted_variants"] = [
-        {"name": "consistent T-junction", "change": "as 'cracked T-junction' but with vertex 5 = (6, 2, 10.3), the edge's interpolated elevation", "expected": "valid surface; T03 placement unchanged (L = 11.1 m)"},
+        {"name": "consistent T-junction", "surface": "surfaces/hill-fan-tjunction-consistent.surface.json", "expected": "valid surface; see case T12 (T03 placement unchanged, L = 11.1 m)"},
     ]
     cases.append(errors)
     invariance = {
@@ -341,8 +399,34 @@ def main() -> None:
         ],
     }
     cases.append(corruption)
+    gap = F(repr(4.000001)) - 4  # the represented strip width, exactly
+    micro = {
+        "case_id": "T11",
+        "title": "A 0.000001 m unsurveyed strip under a table whose four corners are surveyed",
+        "layout": void["layout"],
+        "surface": "../surfaces/flat-micro-gap.surface.json",
+        "placement_request": dict(hill["placement_request"], terrain=terrain_identity(SURFACES["flat-micro-gap"])[1]),
+        "formula": "exact coverage: the strip's boundary edges x = 4 and x = 4.000001 cross the open footprint, so the footprint is not covered, however narrow the strip",
+        "expected": {
+            "tables": [{"table_id": "T_j0_i0", "origin_xy_m": [2.0, 3.0], "footprint_xy_m": [[2.0, 3.0], [6.0, 3.0], [6.0, 5.0], [2.0, 5.0]], "status": "unknown_ground", "reasons": ["footprint_not_fully_covered"],
+                        "covered_area_m2": fl(8 - 2 * gap), "uncovered_area_m2": fl(2 * gap), "corners_covered": True}],
+            "placed_tables": 0, "placed_modules": 0, "placed_dc_kwp": 0.0,
+        },
+        "must_not": {"why": "an area tolerance or corner sampling would call this covered and place the table at 10.5 m"},
+        "notes": "uncovered area = 2 x (double(4.000001) - 4) m^2, about 2e-6 m^2; the status is decided topologically, not by the area",
+    }
+    cases.append(micro)
+    tj = json.loads(json.dumps(hill))
+    tj["case_id"] = "T12"
+    tj["title"] = "Consistent T-junction: the hill-fan with a split triangle gives the T03 placement"
+    tj["surface"] = "../surfaces/hill-fan-tjunction-consistent.surface.json"
+    tj["placement_request"]["terrain"] = terrain_identity(SURFACES["hill-fan-tjunction-consistent"])[1]
+    tj["notes"] = "The junction vertex (6, 2) lies outside the footprint; the split changes no overlay value inside it."
+    cases.append(tj)
     for c in cases:
         write(HERE / "cases" / f"{c['case_id']}.json", c)
+    write(HERE / "surfaces" / "INDEX.json", {key: dict(zip(("terrain_digest", "terrain_id"), terrain_identity(json.loads((HERE / "surfaces" / f"{key}.surface.json").read_text()))))
+                                            for key in sorted(list(SURFACES) + ["hill-fan-rotated"])})
     print("wrote", len(SURFACES), "surfaces and", len(cases), "cases")
 
 

@@ -1,83 +1,206 @@
 {
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "https://solar-studio.invalid/schemas/solar.terrain.placement.request/1",
- "title": "solar.terrain.placement.request/1 (DRAFT for review)",
- "description": "Place an immutable Module 01 layout result on a stored terrain surface by rigid vertical lift. All lengths in metres. Every parameter that changes the result is explicit; there are no hidden defaults.",
+ "title": "solar.terrain.placement.request/1",
+ "description": "Place a stored Module 01 layout result on a stored terrain surface by rigid vertical lift. Every parameter that changes the result is explicit; there are no hidden defaults. Semantic rules: CONTRACTS.md section 3.",
  "type": "object",
  "additionalProperties": false,
- "required": ["schema_version", "source_layout", "terrain", "placement", "supports", "limits", "coverage"],
+ "required": [
+  "schema_version",
+  "source_layout",
+  "terrain",
+  "placement",
+  "supports",
+  "limits",
+  "coverage"
+ ],
  "properties": {
-  "schema_version": {"const": "solar.terrain.placement.request/1"},
+  "schema_version": {
+   "const": "solar.terrain.placement.request/1"
+  },
   "source_layout": {
    "description": "The Module 01 result, named by its result ID and payload digest together. Table IDs such as T_j0_i0 are unique only inside this layout.",
    "type": "object",
    "additionalProperties": false,
-   "required": ["result_id", "payload_digest"],
+   "required": [
+    "result_id",
+    "payload_digest"
+   ],
    "properties": {
-    "result_id": {"type": "string", "pattern": "^res_[0-9a-f]{24}$"},
-    "payload_digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    "result_id": {
+     "type": "string",
+     "pattern": "^res_[0-9a-f]{24}$"
+    },
+    "payload_digest": {
+     "type": "string",
+     "pattern": "^[0-9a-f]{64}$"
+    }
    }
   },
   "terrain": {
-   "description": "A stored terrain ID (ter_...). Fixture files may name a surface file instead; the service stores it first and uses its ID.",
-   "type": "string"
-  },
-  "vertical": {
-   "description": "Optional assertion: the caller expects results in this vertical reference. A different terrain vertical reference is DATUM_MISMATCH; nothing is transformed.",
-   "type": "object",
-   "additionalProperties": false,
-   "properties": {"expected_kind": {"enum": ["orthometric", "ellipsoidal", "local"]}, "expected_crs": {"type": ["string", "null"]}, "expected_id": {"type": "string"}}
+   "type": "string",
+   "pattern": "^ter_[0-9a-f]{24}$",
+   "description": "ID of an imported surface (import_terrain)."
   },
   "placement": {
    "type": "object",
    "additionalProperties": false,
-   "required": ["policy", "minimum_clearance_m", "structure_depth_m"],
+   "required": [
+    "policy",
+    "minimum_clearance_m",
+    "structure_depth_m"
+   ],
    "properties": {
     "policy": {
-     "const": "minimum_clearance_vertical_lift",
-     "description": "Rigid vertical translation of each table, keeping its XY footprint, tilt, azimuth and module layout. The lift is the smallest that keeps the vertical clearance at least minimum_clearance_m over the whole footprint."
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 100,
+     "description": "minimum_clearance_vertical_lift is the only policy in T1; any other value is UNSUPPORTED_OPERATION (validator)."
     },
-    "minimum_clearance_m": {"type": "number", "minimum": 0, "maximum": 20},
-    "structure_depth_m": {"type": "number", "minimum": 0, "maximum": 5, "description": "Depth of structure below the module plane counted against clearance; 0 measures clearance to the module plane."}
+    "minimum_clearance_m": {
+     "type": "number",
+     "minimum": 0,
+     "maximum": 20
+    },
+    "structure_depth_m": {
+     "type": "number",
+     "minimum": 0,
+     "maximum": 5,
+     "description": "Depth of structure below the module plane counted against clearance; 0 measures clearance to the module plane."
+    }
    }
   },
   "supports": {
-   "description": "Support positions come from an explicitly stated model; their number is not derived from table dimensions or module count.",
-   "oneOf": [
-    {
-     "type": "object",
-     "additionalProperties": false,
-     "required": ["model", "points_ad_m"],
-     "properties": {
-      "model": {"const": "explicit_table_local"},
-      "points_ad_m": {"type": "array", "minItems": 1, "maxItems": 64, "items": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"type": "number"}}}
-     }
-    },
-    {
-     "type": "object",
-     "additionalProperties": false,
-     "required": ["model", "rows_d_m", "spacing_a_m", "end_offset_a_m"],
-     "properties": {
-      "model": {"const": "uniform_rows", "description": "Supports at d in rows_d_m and a = end_offset_a_m + k * spacing_a_m for k = 0.. while a <= W - end_offset_a_m."},
-      "rows_d_m": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"type": "number"}},
-      "spacing_a_m": {"type": "number", "exclusiveMinimum": 0},
-      "end_offset_a_m": {"type": "number", "minimum": 0}
+   "description": "Support positions come from an explicitly stated model; their number is not derived from table dimensions or module count. T1 supports only explicit_table_local (other models are UNSUPPORTED_OPERATION).",
+   "type": "object",
+   "required": [
+    "model"
+   ],
+   "properties": {
+    "model": {
+     "type": "string"
+    }
+   },
+   "if": {
+    "properties": {
+     "model": {
+      "const": "explicit_table_local"
      }
     }
-   ]
+   },
+   "then": {
+    "additionalProperties": false,
+    "required": [
+     "model",
+     "points_ad_m"
+    ],
+    "properties": {
+     "model": {
+      "const": "explicit_table_local"
+     },
+     "points_ad_m": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+       "type": "array",
+       "minItems": 2,
+       "maxItems": 2,
+       "items": {
+        "type": "number"
+       }
+      }
+     }
+    }
+   }
   },
   "limits": {
    "type": "object",
    "additionalProperties": false,
-   "required": ["max_ground_slope_deg", "max_support_above_ground_m"],
+   "required": [
+    "max_ground_slope_deg",
+    "max_support_above_ground_m"
+   ],
    "properties": {
-    "max_ground_slope_deg": {"type": "number", "exclusiveMinimum": 0, "maximum": 60},
-    "max_support_above_ground_m": {"type": "number", "exclusiveMinimum": 0, "maximum": 20}
+    "max_ground_slope_deg": {
+     "type": "number",
+     "exclusiveMinimum": 0,
+     "maximum": 60
+    },
+    "max_support_above_ground_m": {
+     "type": "number",
+     "exclusiveMinimum": 0,
+     "maximum": 20
+    }
    }
   },
   "coverage": {
    "const": "mark_unknown_ground",
    "description": "A table whose footprint is not wholly inside the TIN coverage is reported as unknown_ground and not placed. No interpolation across gaps and no extrapolation."
+  },
+  "expected_vertical": {
+   "description": "Optional assertion of the terrain's complete vertical reference. Partial or empty assertions are rejected; any difference is DATUM_MISMATCH. Nothing is transformed.",
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "kind"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "orthometric",
+      "ellipsoidal",
+      "local"
+     ]
+    },
+    "crs": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "id": {
+     "type": "string",
+     "minLength": 1
+    }
+   },
+   "oneOf": [
+    {
+     "properties": {
+      "kind": {
+       "enum": [
+        "orthometric",
+        "ellipsoidal"
+       ]
+      },
+      "crs": {
+       "type": "string",
+       "minLength": 1
+      }
+     },
+     "required": [
+      "crs"
+     ],
+     "not": {
+      "required": [
+       "id"
+      ]
+     }
+    },
+    {
+     "properties": {
+      "kind": {
+       "const": "local"
+      },
+      "crs": {
+       "type": "null"
+      }
+     },
+     "required": [
+      "id"
+     ]
+    }
+   ]
   }
  }
 }

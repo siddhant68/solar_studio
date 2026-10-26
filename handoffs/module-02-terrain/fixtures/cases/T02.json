@@ -19,7 +19,7 @@
    "result_id": "res_927a1bf4f489084fc4e05685",
    "payload_digest": "9b1be5d89497a6519894c92e6125a2e13df9454afdcf1ede6f328adca1086bda"
   },
-  "terrain": "surfaces/plane-north-0p25.surface.json",
+  "terrain": "ter_a6a6c4f23d9b293da1b3e0f2",
   "placement": {
    "policy": "minimum_clearance_vertical_lift",
    "minimum_clearance_m": 0.5,

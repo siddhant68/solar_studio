@@ -20,6 +20,11 @@ All Module 01 z values of the table are raised by L − lower_edge_height_m.
 | T08 | — | — | Rejected inputs | Typed errors; no transformation |
 | T09 | T03 rotated 30° CCW and moved to EPSG:32633 | rotated fan | Frame invariance | Same elevations as T03 |
 | T10 | T03 / T01 | — | Corrupted outputs | Verifier checks that must fail |
+| T11 | single flat 4 × 2 table | two flat sheets with a 0.000001 m strip between them | Micro-gap under a table with surveyed corners | `unknown_ground`; uncovered 2 × (double(4.000001) − 4) m² |
+| T12 | single flat 4 × 2 table | hill fan with a consistent T-junction | T-junction acceptance | Same as T03 (L = 11.1 m) |
+| T13 | single flat 4 × 2 table | plane G = 20 + 0.5y | Support exactly at the height limit | 1.25 m = limit → `placed` (exact tie rule) |
+
+`surfaces/INDEX.json` gives each surface's `terrain_digest` and `terrain_id`, computed by the canonical rule in `CONTRACTS.md` §2. The implementation must reproduce them. `hill-fan-tjunction-cracked.surface.json` must be rejected (T08).
 
 **Layout requests.**
 - `layouts/single-*.layout-request.json` are Module 01 requests whose single table lands exactly on the footprint listed in the cases. This was checked by running the accepted Module 01 (`fe15c5f`).

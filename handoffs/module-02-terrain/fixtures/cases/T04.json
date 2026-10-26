@@ -19,7 +19,7 @@
    "result_id": "res_4c0feedc2e9bff7e31ebdefc",
    "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e"
   },
-  "terrain": "surfaces/void-ring.surface.json",
+  "terrain": "ter_a1dcaca58e3781c15b023566",
   "placement": {
    "policy": "minimum_clearance_vertical_lift",
    "minimum_clearance_m": 0.5,

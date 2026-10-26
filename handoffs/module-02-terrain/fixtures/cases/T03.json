@@ -19,7 +19,7 @@
    "result_id": "res_4c0feedc2e9bff7e31ebdefc",
    "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e"
   },
-  "terrain": "surfaces/hill-fan.surface.json",
+  "terrain": "ter_b3a23946bd49d8aa30483fef",
   "placement": {
    "policy": "minimum_clearance_vertical_lift",
    "minimum_clearance_m": 0.5,

@@ -1,6 +1,6 @@
 # Module 02 — Terrain placement: design proposal
 
-Prepared 26 October 2026 for owner review. **This is a plan, not an implementation.** No terrain code exists, and nothing here changes Module 01. Start with `README.md` for the file map and `OWNER_DECISIONS.md` for what needs approval.
+Prepared 26 October 2026 for owner review; **revision 2 (27 October 2026)** finalizes the contracts for milestone T1 (`CONTRACTS.md` section 9 lists the changes) and adds the performance measurement definition (section 11). T1 is implemented under the working scope recorded in `OWNER_DECISIONS.md`; T2–T4 remain plans. Start with `README.md` for the file map.
 
 ## 1. The outcome
 
@@ -135,7 +135,11 @@ L = max over the footprint of [ G(p) − d(p)·tan β ] + c + s
 
 The maximum is therefore exact and computable, not sampled.
 
-Decisions within a 1e-9 m band of a limit are re-decided with exact rational arithmetic, as in Module 01. This covers coverage tangency, clearance equality and support or slope limits.
+The numerical policy is `terrain-policy/1` (`CONTRACTS.md` section 4). In outline:
+- Incidence decisions (coverage, point location, overlaps) use exact predicates with no tolerance.
+- Areas are informative.
+- Elevations are doubles, with an exact recomputation band of 1e-9 m at the support-height limit.
+- Slope decisions compare the exact squared gradient with the double tan(limit).
 
 The table's vertical lift is Δ = L − h₀. Every Module 01 z value of that table (module corners, lower and upper edge) is raised by Δ. XY never changes.
 
@@ -191,25 +195,30 @@ It is proposed as milestone T4, subject to owner approval (D7).
 ## 7. Architecture and integration
 
 ```text
-browser / CLI / HTTP / MCP ──► SolarService ──► Module 01 engine (unchanged)
-                                   │
-                                   ├──► terrain validation ─► terrain engine (lift) ─► terrain verifier ─► Store
-                                   │          ▲
-                                   └── Module 01 records via the published record contract
+browser / CLI / HTTP / MCP ──► SolarService (Module 01, unchanged engine) ──► solar.sqlite3
+            │                          ▲ get_layout_summary / get_layout_items (published contract)
+            └──────────────► TerrainService ──► validation ─► engine (vertical lift) ─► independent verifier ─► terrain.sqlite3
 ```
 
-- New package `solar_terrain` (engine, verifier, schemas). It consumes Module 01 results **only through the published contracts**: the `solar.layout.result/1` summary and the table/module record shapes, as returned by `get_layout_summary` / `get_layout_items` or found in an export. **It never imports private Module 01 modules** such as `solar_layout.layout` or `solar_layout.result` internals.
-- The shared `SolarService` gains operations:
+- **New package `solar_terrain`**, in the same distribution as Module 01, contains:
+  - `surface` (validation and preparation);
+  - `engine` (placement);
+  - `verify` (independent verifier, sharing no geometry code with `engine`);
+  - `store`, `service`, `exports`.
+- **Inputs from Module 01.** It consumes Module 01 results **only through the published service operations and record shapes**, and never imports Module 01 engine modules. Its permitted Module 01 imports are the contract utilities `solar_layout.errors` and `solar_layout.jsonio`. A test enforces this boundary and the separation between `verify` and `engine`.
+- **`TerrainService`** is composed with Module 01's `SolarService` and offers:
   - `validate_terrain`;
-  - `import_terrain` (store a surface, immutable and content-addressed);
+  - `import_terrain` (immutable, content-addressed);
+  - `get_terrain`;
   - `place_on_terrain`;
   - `get_placement_summary`;
-  - `get_placement_items(kind = tables | modules | supports, cursor, limit)`, paged and bounded like Module 01;
-  - `export_placement(json | csv | dxf | report | bundle | context)`.
-- **Persistence** adds new tables to the same SQLite store, using Module 01's transactional and write-once rules. A crash leaves no partial placement.
-- **MCP tools** mirror the operations, and typed errors use the same envelope. New error codes: `INVALID_TERRAIN`, `FRAME_MISMATCH`, `DATUM_MISMATCH`, `SOURCE_MISMATCH`.
+  - `get_placement_items(kind = tables | modules | supports, offset | cursor, limit)`, paged like Module 01;
+  - `export_placement(json | csv | supports_csv)`;
+  - `verify_stored_placement`.
+- **Interfaces.** The CLI (`solar-layout terrain …`), the HTTP API (`/api/terrains`, `/api/placements`) and the MCP server gain the matching operations. Errors use Module 01's envelope plus the new codes in `CONTRACTS.md` §7.
+- **Persistence** uses a separate SQLite file, `DATA_DIR/terrain.sqlite3`, so Module 01's database is untouched. It follows Module 01's transactional and write-once rules, and a crash leaves no partial terrain or placement.
 - **Provenance** records the algorithm and policy versions, source commit and dependency versions, as in Module 01.
-- **CI:** the Module 01 workflow extends to the terrain suite, which runs with the same rule that browser and MCP tests are mandatory once T2 adds UI.
+- **CI.** The Module 01 workflow already runs the whole suite, which now includes terrain tests and a real terrain MCP session. The CI gate also requires the terrain MCP evidence. A second job runs the terrain benchmark and uploads its report.
 
 ## 8. Independent verification
 
@@ -229,7 +238,7 @@ The planning fixtures already follow this approach. `fixtures/check_fixtures.py`
 
 | Milestone | Delivers | Exit gates (ACCEPTANCE.md) |
 |---|---|---|
-| **T0 (this PR)** | Proposal, draft contracts, fixtures with independently re-derived expectations, acceptance matrix, research, owner decisions | Owner review |
+| **T0 (PR #3)** | Proposal, draft contracts, fixtures with independently re-derived expectations, acceptance matrix, research, owner decisions | Owner review |
 | **T1** | TIN validation and storage; vertical-lift placement; coverage/unknown ground; slope and explicit-support limits; independent verifier; service, CLI, HTTP, MCP; JSON/CSV exports; CI | TR01–TR03, TC01–TC14, TV01–TV03, TS01–TS05, TD01–TD04 |
 | **T2** | `uniform_rows` supports; DXF (3D faces, support points), SVG plan with elevation labels and a report; read-only browser view of a placement; browser checks | TC15, TV04, TS06 |
 | **T3** | DEM adapter (GeoTIFF, ESRI ASCII) with masked reads and explicit registration; LandXML TIN import | TC16–TC17 |
@@ -246,3 +255,25 @@ Each milestone is reviewed before the next starts. A fresh agent can start T1 fr
 | Survey TINs with T-junctions or slivers | Validator accepts T-junctions and rejects zero-area and overlapping triangles; borderline decisions exact |
 | Expectation that supports mean pile quantities | `not_computed` list in every result; report text; acceptance gate TC11 |
 | Scope creep into grading or structural design | Section 2 boundaries; owner decision D7 for reorientation; grading not planned |
+
+## 11. Performance measurement (gate TD02)
+
+**Construction** (`scripts/terrain_benchmark.py`):
+- The layout is Module 01's `fixtures/benchmark-10k.request.json`: 10,192 modules in 364 tables, in a projected frame with a hole and a keepout.
+- The terrain is a regular 501 × 501-vertex grid, i.e. **500,000 triangles**. It covers the layout's site bounding box with a 10 m margin, in the same frame, with a local vertical datum.
+- Elevations are z = 100 + 0.02·x′ + 0.03·y′ + 0.4·sin(x′/9)·cos(y′/13), with x′, y′ local to the grid origin.
+- Each grid cell is split into two triangles on a fixed diagonal.
+- Supports are 6 explicit points per table.
+- Clearance and limits are chosen so that every table is placed. Correctness is covered by the fixtures, not by this case.
+
+**Measured separately, each in a fresh process**, with wall time and peak process-tree RSS sampled every 10 ms. Every phase includes everything it needs:
+
+| Phase | From | To | Target |
+|---|---|---|---|
+| Terrain import | Surface JSON file on disk | Validated, prepared and stored terrain (`import_terrain`) | Reported; no T1 target |
+| **Placement (TD02)** | Layout and prepared terrain already stored | Placement computed, **independently verified**, and persisted with all records (`place_on_terrain`) | **≤ 30 s wall (process, including interpreter start) and ≤ 1 GiB peak process-tree memory** |
+| Cold workflow | Nothing stored | Generate layout + import terrain + place, in one process | Reported; no T1 target |
+
+- Hardware (CPU model, cores, memory), OS, Python and dependency versions are recorded with every measurement.
+- The benchmark runs locally and in CI, and both results are reported. A miss is reported as a TD02 failure with its numbers; the target is not changed to fit.
+- **Bounded candidate selection.** The engine finds candidate triangles per table with an STR-tree over triangle bounding boxes. The verifier uses its own uniform grid. Neither scans every triangle for every table. Both report candidate counts in the result's `diagnostics`, and a test bounds them.

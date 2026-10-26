@@ -1,58 +1,29 @@
 {
- "prepared": "2026-10-26",
- "scope": "checks of this planning package only; no terrain implementation exists",
+ "scope": "checks of the Module 02 contract package (schemas and fixtures); implementation evidence is in solar-site-layout/reports/TERRAIN_ACCEPTANCE.json",
  "checks": {
-  "fixture_generation_deterministic": {
-   "passed": true,
-   "tree_sha256_before": "6fb32f0c89f6f9d1aed8c3df1ebd353191eb78b6eab051a4e7dff9c9d655b34c",
-   "tree_sha256_after_regeneration": "6fb32f0c89f6f9d1aed8c3df1ebd353191eb78b6eab051a4e7dff9c9d655b34c"
-  },
-  "independent_fixture_checker": {
-   "passed": true,
-   "output": "OK: 18 table expectations in 10 cases re-derived from the TINs"
-  },
-  "schemas_are_valid_draft_2020_12": true,
+  "schemas_valid_draft_2020_12": true,
   "surfaces_validate": {
    "passed": true,
-   "files": {
-    "fixtures/surfaces/hill-fan-rotated.surface.json": true,
-    "fixtures/surfaces/hill-fan.surface.json": true,
-    "fixtures/surfaces/plane-north-0p25.surface.json": true,
-    "fixtures/surfaces/plane-north-0p6.surface.json": true,
-    "fixtures/surfaces/plane-rectangle-west-half.surface.json": true,
-    "fixtures/surfaces/plane-rectangle.surface.json": true,
-    "fixtures/surfaces/void-ring.surface.json": true
-   }
+   "errors": {},
+   "count": 11
   },
   "placement_requests_validate": {
    "passed": true,
-   "files": {
-    "fixtures/cases/T01.json": true,
-    "fixtures/cases/T02.json": true,
-    "fixtures/cases/T03.json": true,
-    "fixtures/cases/T04.json": true,
-    "fixtures/cases/T05.json": true,
-    "fixtures/cases/T06.json": true,
-    "fixtures/cases/T07.json": true
-   }
+   "errors": {},
+   "count": 10
   },
-  "module01_footprints_confirmed": {
+  "fixture_regeneration_byte_identical": {
    "passed": true,
-   "method": "the single-table layout requests and the rectangle fixture were generated with the accepted Module 01 (source fe15c5f) in this session; table footprints equal the case footprints; T09's rotated footprint matched the transformed T03 footprint with maximum difference 0.0",
-   "observed": {
-    "rectangle": "res_410d496155af5459caa61028",
-    "single-tilted-3-4-5": "res_927a1bf4f489084fc4e05685",
-    "single-flat-4x2": "res_4c0feedc2e9bff7e31ebdefc",
-    "single-flat-4x2-rotated": "res_a9f1db03663ea4c6e6d10f35"
-   }
+   "tree_sha256": "44a5c592bb4bd8854e4e4299c1db3e0bb6bf2d2e1325925366c3e0c5f551938e"
   },
-  "checker_rejects_planted_errors": {
+  "independent_fixture_checker": {
    "passed": true,
-   "method": "a copy of the fixtures with T03 lower edge 10.8, T04 reported fully covered and one T01 support height changed made check_fixtures.py exit 1 naming all three (and T09)"
+   "output": "OK: 21 table expectations in 13 cases re-derived from the TINs"
   }
  },
  "tools": {
-  "python_for_scripts": "3.12.3",
+  "python": "3.12.3",
   "jsonschema": "4.26.0"
- }
+ },
+ "passed": true
 }

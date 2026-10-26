@@ -1,0 +1,95 @@
+{
+ "case_id": "T11",
+ "title": "A 0.000001 m unsurveyed strip under a table whose four corners are surveyed",
+ "layout": {
+  "request": "layouts/single-flat-4x2.layout-request.json",
+  "observed_result_id": "res_4c0feedc2e9bff7e31ebdefc",
+  "observed_payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+  "modules_per_table": 4,
+  "power_wp": 550,
+  "table_width_W_m": 4.0,
+  "table_depth_D_m": 2.0,
+  "tan_tilt": 0.0,
+  "lower_edge_height_m": 0.8
+ },
+ "surface": "../surfaces/flat-micro-gap.surface.json",
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "source_layout": {
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+   "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e"
+  },
+  "terrain": "ter_99b9de2d543263aaae637da0",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.0
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.5,
+     1.0
+    ],
+    [
+     2.0,
+     1.0
+    ],
+    [
+     3.5,
+     1.0
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 20.0,
+   "max_support_above_ground_m": 2.0
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "formula": "exact coverage: the strip's boundary edges x = 4 and x = 4.000001 cross the open footprint, so the footprint is not covered, however narrow the strip",
+ "expected": {
+  "tables": [
+   {
+    "table_id": "T_j0_i0",
+    "origin_xy_m": [
+     2.0,
+     3.0
+    ],
+    "footprint_xy_m": [
+     [
+      2.0,
+      3.0
+     ],
+     [
+      6.0,
+      3.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      2.0,
+      5.0
+     ]
+    ],
+    "status": "unknown_ground",
+    "reasons": [
+     "footprint_not_fully_covered"
+    ],
+    "covered_area_m2": 7.999998,
+    "uncovered_area_m2": 2e-06,
+    "corners_covered": true
+   }
+  ],
+  "placed_tables": 0,
+  "placed_modules": 0,
+  "placed_dc_kwp": 0.0
+ },
+ "must_not": {
+  "why": "an area tolerance or corner sampling would call this covered and place the table at 10.5 m"
+ },
+ "notes": "uncovered area = 2 x (double(4.000001) - 4) m^2, about 2e-6 m^2; the status is decided topologically, not by the area"
+}

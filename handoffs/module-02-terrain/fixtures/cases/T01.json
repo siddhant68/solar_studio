@@ -19,7 +19,7 @@
    "result_id": "res_410d496155af5459caa61028",
    "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc"
   },
-  "terrain": "surfaces/plane-rectangle.surface.json",
+  "terrain": "ter_0bd7bacad2881da43cc5bed7",
   "placement": {
    "policy": "minimum_clearance_vertical_lift",
    "minimum_clearance_m": 0.5,
