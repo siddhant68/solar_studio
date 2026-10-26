@@ -1,0 +1,73 @@
+{
+  "corrupt_module_power": {
+    "verifier_passed": true,
+    "supplied_power_wp": 550.0,
+    "corrupted_power_wp": 123456,
+    "actual_record_capacity_kwp": 136.106,
+    "reported_capacity_kwp": 13.2
+  },
+  "export_context_change": {
+    "changed_top_level_fields": [
+      "project_sources"
+    ],
+    "old_project_sources": [],
+    "new_project_sources": [
+      {
+        "created_at": "2026-10-26T09:26:32.919184Z",
+        "interface": "python",
+        "project_id": "prj_5c505a91aabf441782ad",
+        "project_revision": 1
+      }
+    ],
+    "same_result": true,
+    "same_path": true,
+    "same_hash": false
+  },
+  "source_binding": {
+    "solar-site-layout/src": {
+      "recorded": "157eff355585ad442cbbf85e57c6d4ecd87e4a5c",
+      "head": "157eff355585ad442cbbf85e57c6d4ecd87e4a5c",
+      "matches": true
+    },
+    "solar-site-layout/tests": {
+      "recorded": "28ee47cd34f161d0c81ecbeae91f1c85d9ccbbbc",
+      "head": "28ee47cd34f161d0c81ecbeae91f1c85d9ccbbbc",
+      "matches": true
+    },
+    "solar-site-layout/scripts": {
+      "recorded": "055d7f8d6f7b03324d47082c493776055f4c7cbc",
+      "head": "055d7f8d6f7b03324d47082c493776055f4c7cbc",
+      "matches": true
+    },
+    "solar-site-layout/pyproject.toml": {
+      "recorded": "293a29565e9bc2281d67e7bef9f4066279ae31c9",
+      "head": "293a29565e9bc2281d67e7bef9f4066279ae31c9",
+      "matches": true
+    },
+    "solar-site-layout/uv.lock": {
+      "recorded": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
+      "head": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
+      "matches": true
+    },
+    "solar-site-layout/fixtures": {
+      "recorded": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
+      "head": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
+      "matches": true
+    },
+    "solar-site-layout/references/probes": {
+      "recorded": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb",
+      "head": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb",
+      "matches": true
+    }
+  },
+  "independent_pytest": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "207",
+    "time": "17.506",
+    "timestamp": "2026-10-26T14:52:28.232608+05:30",
+    "hostname": "Siddhants-MacBook-Pro-5.local"
+  }
+}

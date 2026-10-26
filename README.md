@@ -4,11 +4,11 @@ An open, assistant-accessible solar design platform, beginning with a verified f
 
 **Build status (25 October 2026):** Module 01 is implemented in [`solar-site-layout/`](solar-site-layout/). See its [delivery report](solar-site-layout/DELIVERY_REPORT.md), [acceptance gates](solar-site-layout/reports/ACCEPTANCE.json) (36/36 recorded pass, bound to source commit `f16944e`) and [README](solar-site-layout/README.md). The handoff text below is unchanged.
 
-**Current state:** research-backed implementation handoff and analytic fixtures. The application has not been built in this repository yet. No application tests or actual REA analysis are claimed by this handoff.
+**Current state:** Module 01 is implemented on `claude/kind-cerf-gu33em`. An independent review reproduced five findings; repair and revalidate them before merging. The original brief and fixtures remain the specification.
 
-## Start the build
+## Continue in Claude Cloud
 
-Give an execution-enabled Claude Cloud session access to this repository and use [START_PROMPT.md](START_PROMPT.md). Begin with [the complete Module 01 brief](handoffs/module-01/START_HERE.md).
+Give an execution-enabled Claude Cloud session access to this branch and follow [CLAUDE_REPAIR_HANDOFF.md](CLAUDE_REPAIR_HANDOFF.md). It points to the review evidence, required repairs and final verification. The [original starter prompt](START_PROMPT.md) and [complete Module 01 brief](handoffs/module-01/START_HERE.md) are retained for context.
 
 The first goal is: **site boundary + panel/mounting rules → panel positions, counts, DC capacity and a readable plan.** The intended application exposes the same calculation service through a browser, CLI, HTTP and MCP.
 
@@ -37,3 +37,7 @@ For a file-upload workflow, download the [complete ZIP](handoffs/archives/Solar_
 The supplied rectangle case must produce exactly **6 tables, 24 panels and 13.2 kWp**. Terrain, electrical diagrams and energy yield are later modules.
 
 The brief was prepared on 25 October 2026. Reference observations, future implementation results and independently verified outputs must remain clearly distinguished.
+
+## Current review and repair handoff
+
+Module 01 has an implementation on `claude/kind-cerf-gu33em` and an independent review with five reproducible findings. **Repair and revalidate before merging.** Start the next Claude Cloud session with [CLAUDE_REPAIR_HANDOFF.md](CLAUDE_REPAIR_HANDOFF.md). The [full review and evidence](reviews/module-01/2026-10-26/REVIEW.md) and [downloadable review ZIP](reviews/module-01/2026-10-26/Solar_Module_01_Independent_Review.zip) are included. The original Module 01 handoff above remains the specification.
