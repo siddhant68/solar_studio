@@ -125,7 +125,107 @@ def _tool_defs() -> list[types.Tool]:
     ]
 
 
-def _dispatch(svc: SolarService, name: str, args: dict[str, Any]) -> Any:
+def _terrain_tool_defs() -> list[types.Tool]:
+    from solar_terrain.schemas import REQUEST, SURFACE, load_schema
+
+    surface = {k: v for k, v in load_schema(SURFACE).items() if k not in ("$schema", "$id")}
+    request = {k: v for k, v in load_schema(REQUEST).items() if k not in ("$schema", "$id")}
+    tid = {"type": "string", "pattern": "^ter_[0-9a-f]{24}$", "description": "Terrain ID returned by import_terrain"}
+    plc = {"type": "string", "pattern": "^plc_[0-9a-f]{24}$", "description": "Placement ID returned by place_on_terrain"}
+    ro = types.ToolAnnotations(read_only_hint=True, open_world_hint=False)
+    rw = types.ToolAnnotations(read_only_hint=False, destructive_hint=False, open_world_hint=False)
+    return [
+        types.Tool(
+            name="validate_terrain",
+            description="Module 02: validate a TIN terrain surface (solar.terrain.surface/1: explicit counter-clockwise triangles, horizontal frame identical to the layout's, required vertical reference). Returns the terrain ID it would get, or typed errors. Stores nothing.",
+            input_schema={"type": "object", "properties": {"surface": surface}, "required": ["surface"], "additionalProperties": False},
+            annotations=ro,
+        ),
+        types.Tool(
+            name="import_terrain",
+            description="Module 02: validate and store a TIN terrain surface. Immutable and content-addressed: importing the same surface again returns the stored terrain. No coordinate or datum transformation is performed.",
+            input_schema={"type": "object", "properties": {"surface": surface}, "required": ["surface"], "additionalProperties": False},
+            annotations=rw,
+        ),
+        types.Tool(
+            name="get_terrain",
+            description="Module 02: read a stored terrain's identity, frame, vertical reference, counts and bounds (not its vertices).",
+            input_schema={"type": "object", "properties": {"terrain_id": tid}, "required": ["terrain_id"], "additionalProperties": False},
+            annotations=ro,
+        ),
+        types.Tool(
+            name="place_on_terrain",
+            description=(
+                "Module 02: place a stored Module 01 layout (named by result_id and payload_digest) on a stored terrain by rigid vertical lift "
+                "(policy minimum_clearance_vertical_lift). Each table keeps its XY geometry; uncovered footprints are unknown_ground; slope and "
+                "support-height limits make tables infeasible. Independently verified before it is stored. Support heights are above-ground "
+                "heights, not embedment depths or pile lengths."
+            ),
+            input_schema={"type": "object", "properties": {"request": request}, "required": ["request"], "additionalProperties": False},
+            annotations=rw,
+        ),
+        types.Tool(
+            name="get_placement_summary",
+            description="Module 02: read a placement summary (counts, statistics, verification, provenance) without loading records.",
+            input_schema={"type": "object", "properties": {"placement_id": plc}, "required": ["placement_id"], "additionalProperties": False},
+            annotations=ro,
+        ),
+        types.Tool(
+            name="get_placement_items",
+            description="Module 02: page through a placement's tables, modules or supports in stable order. Default 100 items, maximum 500; continue with next_cursor.",
+            input_schema={
+                "type": "object",
+                "properties": {
+                    "placement_id": plc,
+                    "kind": {"enum": ["tables", "modules", "supports"]},
+                    "offset": {"type": "integer", "minimum": 0},
+                    "cursor": {"type": "string"},
+                    "limit": {"type": "integer", "minimum": 1, "maximum": 500},
+                },
+                "required": ["placement_id"],
+                "additionalProperties": False,
+            },
+            annotations=ro,
+        ),
+        types.Tool(
+            name="export_placement",
+            description="Module 02: publish (or reuse) a write-once placement export inside the managed export root: json (full result), csv (module corners) or supports_csv. Returns the managed relative path, byte size and SHA-256.",
+            input_schema={"type": "object", "properties": {"placement_id": plc, "format": {"enum": ["json", "csv", "supports_csv"]}}, "required": ["placement_id", "format"], "additionalProperties": False},
+            annotations=rw,
+        ),
+        types.Tool(
+            name="verify_stored_placement",
+            description="Module 02: re-run the independent verifier on a stored placement against the Module 01 records and the stored terrain.",
+            input_schema={"type": "object", "properties": {"placement_id": plc}, "required": ["placement_id"], "additionalProperties": False},
+            annotations=ro,
+        ),
+    ]
+
+
+TERRAIN_TOOLS = ("validate_terrain", "import_terrain", "get_terrain", "place_on_terrain", "get_placement_summary", "get_placement_items", "export_placement", "verify_stored_placement")
+
+
+def _dispatch_terrain(ts: Any, name: str, args: dict[str, Any]) -> Any:
+    if name == "validate_terrain":
+        return ts.validate_terrain(args.get("surface"))
+    if name == "import_terrain":
+        return ts.import_terrain(args.get("surface"))
+    if name == "get_terrain":
+        return ts.get_terrain(args.get("terrain_id"))
+    if name == "place_on_terrain":
+        return ts.place_on_terrain(args.get("request"))
+    if name == "get_placement_summary":
+        return ts.get_placement_summary(args.get("placement_id"))
+    if name == "get_placement_items":
+        return ts.get_placement_items(args.get("placement_id"), args.get("kind", "tables"), offset=args.get("offset"), cursor=args.get("cursor"), limit=args.get("limit"))
+    if name == "export_placement":
+        return ts.export_placement(args.get("placement_id"), args.get("format"))
+    return ts.verify_stored_placement(args.get("placement_id"))
+
+
+def _dispatch(svc: SolarService, name: str, args: dict[str, Any], terrain: Any = None) -> Any:
+    if name in TERRAIN_TOOLS and terrain is not None:
+        return _dispatch_terrain(terrain, name, args)
     if name == "validate_request":
         return svc.validate_request(args.get("request"))
     if name == "calculate_row_pitch":
@@ -153,8 +253,11 @@ def _result(payload: Any, is_error: bool = False) -> types.CallToolResult:
 
 
 def build_server(data_dir: str | None) -> Server:
+    from solar_terrain.service import TerrainService
+
     svc = SolarService(data_dir, interface="mcp")
-    tools = _tool_defs()
+    terrain = TerrainService(svc, data_dir, interface="mcp")
+    tools = _tool_defs() + _terrain_tool_defs()
 
     async def on_list_tools(ctx, params) -> types.ListToolsResult:
         return types.ListToolsResult(tools=tools)
@@ -162,7 +265,7 @@ def build_server(data_dir: str | None) -> Server:
     async def on_call_tool(ctx, params: types.CallToolRequestParams) -> types.CallToolResult:
         args = params.arguments or {}
         try:
-            out = await anyio.to_thread.run_sync(_dispatch, svc, params.name, args)
+            out = await anyio.to_thread.run_sync(_dispatch, svc, params.name, args, terrain)
         except DomainError as e:
             return _result({"error": e.to_dict()}, is_error=True)
         except Exception as e:  # typed, never a bare traceback to the client
@@ -177,7 +280,10 @@ def build_server(data_dir: str | None) -> Server:
         instructions=(
             "Solar Studio Module 01. Deterministic flat-site table layout: validate_request, calculate_row_pitch, "
             "create_project/get_project/update_project, generate_layout, get_layout_summary, get_layout_items, export_layout. "
-            "All coordinates are metres in the request frame (x East, y North). Do not invent quantities; read them from results."
+            "Module 02 (terrain placement, milestone T1): validate_terrain, import_terrain, get_terrain, place_on_terrain, "
+            "get_placement_summary, get_placement_items, export_placement, verify_stored_placement. "
+            "All coordinates are metres in the request frame (x East, y North); terrain elevations are in the terrain's declared "
+            "vertical reference and are never transformed. Do not invent quantities; read them from results."
         ),
         on_list_tools=on_list_tools,
         on_call_tool=on_call_tool,
