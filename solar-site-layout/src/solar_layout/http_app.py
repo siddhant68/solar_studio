@@ -15,12 +15,12 @@ from typing import Any
 from starlette.applications import Starlette
 from starlette.concurrency import run_in_threadpool
 from starlette.requests import Request
-from starlette.responses import FileResponse, JSONResponse, Response
+from starlette.responses import JSONResponse, Response, StreamingResponse
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 
 from .errors import HTTP_STATUS, INTERNAL_ERROR, INVALID_INPUT, RESOURCE_LIMIT, DomainError
-from .exports import MEDIA_TYPES, export_path, verify_export_file
+from .exports import MEDIA_TYPES
 from .jsonio import loads_strict
 from .service import SolarService
 
@@ -115,29 +115,35 @@ def create_app(data_dir: str | None = None) -> Starlette:
             _int_param(request, "limit"),
         )
 
+    def _chunks(fh):
+        try:
+            while chunk := fh.read(1 << 16):
+                yield chunk
+        finally:
+            fh.close()
+
+    async def _serve_export(rid: str, fmt: str, download: bool) -> Response:
+        # The SHA-256 header is computed from the same open handle the body is streamed
+        # from, so it always describes the bytes this response carries.
+        fh, meta = await run_in_threadpool(svc.open_export, rid, fmt)
+        headers = {"X-Content-SHA256": meta["sha256"], "Content-Length": str(meta["bytes"])}
+        if download:
+            headers["Content-Disposition"] = 'attachment; filename="%s"' % meta["file_name"]
+        return StreamingResponse(_chunks(fh), media_type=MEDIA_TYPES[fmt], headers=headers)
+
     async def export(request: Request):
         rid = request.path_params["result_id"]
         fmt = request.path_params["fmt"]
         if request.method == "POST":
             return await run_in_threadpool(svc.export_layout, rid, fmt)
-        rec = await run_in_threadpool(svc.store.get_export, rid, fmt) if fmt in MEDIA_TYPES else None
-        if rec is None:
-            await run_in_threadpool(svc.export_layout, rid, fmt)
-        try:
-            path = await run_in_threadpool(verify_export_file, svc.store, rid, fmt)
-        except DomainError:
-            # recorded file missing or altered: rebuild it from the immutable result, then re-check
-            await run_in_threadpool(svc.export_layout, rid, fmt)
-            path = await run_in_threadpool(verify_export_file, svc.store, rid, fmt)
-        export_path(svc.store, rid, fmt)
-        return FileResponse(path, media_type=MEDIA_TYPES[fmt], filename=path.name, headers={"X-Content-SHA256": (await run_in_threadpool(svc.store.get_export, rid, fmt))["sha256"]})
+        return await _serve_export(rid, fmt, download=True)
 
     async def plan_svg(request: Request):
-        rid = request.path_params["result_id"]
-        if await run_in_threadpool(svc.store.get_export, rid, "svg") is None:
-            await run_in_threadpool(svc.export_layout, rid, "svg")
-        path = await run_in_threadpool(verify_export_file, svc.store, rid, "svg")
-        return FileResponse(path, media_type="image/svg+xml")
+        return await _serve_export(request.path_params["result_id"], "svg", download=False)
+
+    async def favicon(request: Request):
+        icon = resources.files("solar_layout").joinpath("web", "favicon.svg").read_bytes()
+        return Response(icon, media_type="image/svg+xml", headers={"Cache-Control": "max-age=86400"})
 
     async def index(request: Request):
         html = resources.files("solar_layout").joinpath("web", "index.html").read_text()
@@ -146,6 +152,7 @@ def create_app(data_dir: str | None = None) -> Starlette:
     web_dir = str(resources.files("solar_layout").joinpath("web"))
     routes = [
         Route("/", handler(index)),
+        Route("/favicon.ico", handler(favicon)),
         Route("/api/health", handler(health)),
         Route("/api/validate", handler(validate), methods=["POST"]),
         Route("/api/row-pitch", handler(pitch), methods=["POST"]),

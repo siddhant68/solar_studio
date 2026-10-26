@@ -25,7 +25,7 @@ from typing import Any
 
 from . import ALGORITHM_VERSION, GEOMETRY_POLICY_VERSION, RESULT_SCHEMA, __version__, policy
 from .errors import INVALID_CURSOR, INVALID_INPUT, VERIFICATION_FAILED, DomainError
-from .exports import build_export, check_format, check_result_id
+from .exports import build_export, check_format, check_result_id, open_export
 from .layout import candidate_estimate, compute_layout
 from .pitch import calculate_row_pitch
 from .result import ResultRecords, result_id_for
@@ -293,6 +293,13 @@ class SolarService:
         check_format(format)
         self.store.get_result_row(result_id)  # RESULT_NOT_FOUND
         return build_export(self.store, result_id, format)
+
+    def open_export(self, result_id: str, format: str):
+        """Publish or reuse an export and return (open verified handle, metadata)."""
+        check_result_id(result_id)
+        check_format(format)
+        self.store.get_result_row(result_id)  # RESULT_NOT_FOUND
+        return open_export(self.store, result_id, format)
 
     def verify_stored_result(self, result_id: str) -> dict[str, Any]:
         check_result_id(result_id)

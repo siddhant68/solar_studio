@@ -238,8 +238,11 @@ def test_s05_killed_export_is_never_presented(data_dir, http):
     assert rc == -9
     svc = SolarService(data_dir)
     assert svc.store.get_export(rid, "json") is None
-    folder = Path(data_dir) / "exports" / rid
-    assert not (folder / f"{rid}-layout.json").exists()
+    from solar_layout.exports import export_path
+
+    final, _ = export_path(svc.store, rid, "json")
+    folder = final.parent
+    assert not final.exists()
     assert any(p.name.endswith(".partial") for p in folder.iterdir())  # orphan, unreferenced
     assert all(e["format"] != "json" for e in svc.get_layout_summary(rid)["exports"])
     # the HTTP download path regenerates a complete, hashed file instead of serving the partial

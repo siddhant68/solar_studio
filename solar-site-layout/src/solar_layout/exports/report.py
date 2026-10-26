@@ -18,7 +18,7 @@ def _r(x: float | None, nd: int = 6) -> str:
     return f"{x:.{nd}f}".rstrip("0").rstrip(".") if isinstance(x, float) else str(x)
 
 
-def write_report(out: IO[str], request: dict[str, Any], summary: dict[str, Any], provenance: dict[str, Any], sources: list[dict[str, Any]]) -> None:
+def write_report(out: IO[str], request: dict[str, Any], summary: dict[str, Any], provenance: dict[str, Any]) -> None:
     q = summary["quantities"]
     d = summary["dimensions"]
     pl = summary["placement"]
@@ -30,11 +30,7 @@ def write_report(out: IO[str], request: dict[str, Any], summary: dict[str, Any],
     w("Preliminary flat-site layout under the stated assumptions. It is not a construction approval, and the bounded lattice search is not a claim of a globally optimal plant design.\n\n")
     w("## Identity\n\n")
     w(f"- Result ID: `{summary['result_id']}`\n- Input digest: `{summary['input_digest']}`\n- Numerical payload digest: `{summary.get('payload_digest')}`\n")
-    if sources:
-        for s in sources:
-            w(f"- Source: project `{s['project_id']}` revision {s['project_revision']} (via {s['interface']})\n")
-    else:
-        w("- Source: direct request (no project)\n")
+    w("- Project associations: not part of this result-only report; the `context` export lists the projects and revisions that use this result.\n")
     w(f"- Algorithm `{provenance['algorithm_version']}`, geometry policy `{provenance['geometry_policy_version']}`, source commit `{provenance.get('source_commit')}`\n\n")
 
     w("## Frame and site\n\n")

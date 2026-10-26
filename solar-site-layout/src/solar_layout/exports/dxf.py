@@ -6,6 +6,7 @@ drawing can be reconciled with the CSV/JSON records.
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any, Iterable
 
 import ezdxf
@@ -46,17 +47,42 @@ def _ring_pts(ring) -> list[tuple[float, float]]:
     return pts
 
 
-def _fix_ezdxf_markers(doc) -> None:
-    """ezdxf records "created/written by ezdxf <version> @ <timestamp>" in a metadata
-    dictionary on every write. Replace both markers with the version alone so the same
-    immutable result always produces the same DXF bytes."""
-    from ezdxf.document import CREATED_BY_EZDXF, WRITTEN_BY_EZDXF
+def _make_reproducible(doc) -> None:
+    """Make this document's bytes reproducible without touching process-wide state.
+
+    ezdxf adds a CLASS definition for every entity type in use while writing, iterating a
+    `set` of type names, so the CLASSES section order followed Python's per-process string
+    hashing (PYTHONHASHSEED) and the same result gave different DXF bytes in different
+    processes. This document's entity database reports those types sorted instead.
+
+    On every write ezdxf also records "created/written by ezdxf <version> @ <timestamp>" in a
+    metadata dictionary, stamps $TDCREATE/$TDUPDATE with the clock and draws fresh
+    $VERSIONGUID/$FINGERPRINTGUID values. Its global `write_fixed_meta_data_for_testing`
+    switch would make those constant, but flipping a process-wide option races with other
+    threads writing DXF at the same time. Both update hooks are therefore overridden on
+    this document instance only, writing the same constants that switch writes."""
+    from ezdxf.document import CONST_GUID, CREATED_BY_EZDXF, WRITTEN_BY_EZDXF
+    from ezdxf.tools.codepage import tocodepage
+    from ezdxf.tools.juliandate import juliandate
 
     marker = f"{ezdxf.__version__} (timestamp omitted for reproducible exports)"
     meta = doc.ezdxf_metadata()
     meta[CREATED_BY_EZDXF] = marker
     meta[WRITTEN_BY_EZDXF] = marker
-    doc._update_ezdxf_metadata = lambda: None  # instance override: keep the fixed marker
+    fixed_date = juliandate(datetime(2000, 1, 1, 0, 0))
+
+    def update_metadata() -> None:
+        for var in ("$TDCREATE", "$TDUCREATE", "$TDUPDATE", "$TDUUPDATE"):
+            doc.header[var] = fixed_date
+        doc.header["$VERSIONGUID"] = CONST_GUID
+        doc.header["$FINGERPRINTGUID"] = CONST_GUID
+        doc.header["$HANDSEED"] = str(doc.entitydb.handles)  # next handle, as ezdxf writes it
+        doc.header["$DWGCODEPAGE"] = tocodepage(doc.encoding)
+
+    doc._update_ezdxf_metadata = lambda: None  # keep the fixed marker
+    doc._update_metadata = update_metadata
+    types_in_use = doc.entitydb.dxf_types_in_use
+    doc.entitydb.dxf_types_in_use = lambda: sorted(types_in_use())
 
 
 def build_dxf(
@@ -74,7 +100,7 @@ def build_dxf(
     doc.appids.add(APPID)
     for name, color in LAYERS.items():
         doc.layers.add(name, color=color)
-    _fix_ezdxf_markers(doc)
+    _make_reproducible(doc)
     msp = doc.modelspace()
     for poly in _polys(request["boundary"]):
         msp.add_lwpolyline(_ring_pts(poly[0]), close=True, dxfattribs={"layer": "SITE_BOUNDARY"})

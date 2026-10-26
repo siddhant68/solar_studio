@@ -98,7 +98,6 @@ def write_svg(
     regions: dict[str, Any],
     tables: Iterable[dict[str, Any]],
     modules: Iterable[dict[str, Any]],
-    sources: list[dict[str, Any]],
 ) -> None:
     site_polys = _rings(request["boundary"])
     xs = [p[0] for poly in site_polys for ring in poly for p in ring]
@@ -127,6 +126,7 @@ def write_svg(
         "world_from_plan": {"x": "X + x0", "y": "y1 - Y", "x0": x0, "y1": y1},
         "scale_denominator": scale,
         "frame": frame,
+        "context": "result_only",
     }
     w = out.write
     w('<?xml version="1.0" encoding="UTF-8"?>\n')
@@ -249,12 +249,11 @@ def write_svg(
         text(line, "t", 4.0)
     y += 2
     text("Identity", "h2", 4.6)
-    src = sources[-1] if sources else None
     ident = [
         f"Result {summary['result_id']}",
         f"Input digest {summary['input_digest'][:24]}",
         f"Payload digest {str(summary.get('payload_digest', ''))[:24]}",
-        (f"Project {src['project_id']} rev {src['project_revision']}" if src else "Project: none (direct request)"),
+        "Result-only plan; projects: see context export",
         f"Frame {frame['kind']} '{frame['id']}'" + (f" {frame['crs']}" if frame.get("crs") else ""),
         "Units: metres. x East, y North.",
         "z: relative to synthetic flat datum (not surveyed)",

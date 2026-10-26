@@ -1,12 +1,25 @@
 // Solar Studio Module 01 browser client. All numbers come from the HTTP API; this file
 // only edits the request, tracks revisions and displays immutable results.
+//
+// Concurrency rules (see docs/IMPLEMENTATION_NOTES.md, review findings F1/F2):
+// * Generate captures the editor's inputs synchronously when pressed and saves exactly
+//   that snapshot; the result is labelled with the snapshot it was computed from.
+// * Saves run one at a time, each naming the revision the previous one returned.
+// * A result reaches the page only after every request it needs (layout, plan SVG) has
+//   returned, and only if it is still the newest generation of the current editing
+//   context. Opening a project, importing a file or loading an example starts a new
+//   context and clears the view; anything still in flight from before is discarded.
 'use strict';
 
 const state = {
   request: null,        // the editor's request object
   project: null,        // {project_id, revision, savedJSON}
-  genSeq: 0,            // increasing id of each generate press
-  displayed: null,      // {seq, resultId, revision, inputsJSON, data}
+  genSeq: 0,            // increasing id of each generate press (and each project open)
+  displayed: null,      // {seq, epoch, projectId, resultId, revision, inputsJSON, data}, fully rendered
+  viewEpoch: 0,         // bumped when the editing context changes (open, import, example)
+  projectEpoch: 0,      // bumped when a different project is opened
+  openToken: 0,         // latest project-open / example-load request
+  saveChain: Promise.resolve(),
   history: [],
   fullViewBox: null,
 };
@@ -22,7 +35,8 @@ function canon(v) {
   }
   return v;
 }
-const editorJSON = () => JSON.stringify(canon(state.request));
+const editorJSONOf = (request) => JSON.stringify(canon(request));
+const editorJSON = () => editorJSONOf(state.request);
 
 function getPath(obj, path) {
   return path.split('.').reduce((o, k) => (o == null ? undefined : o[k]), obj);
@@ -103,7 +117,7 @@ function isDirty() {
 
 function resultIsCurrent() {
   const d = state.displayed;
-  return !!(d && state.project && d.revision === state.project.revision && d.inputsJSON === editorJSON());
+  return !!(d && state.project && d.projectId === state.project.project_id && d.revision === state.project.revision && d.inputsJSON === editorJSON());
 }
 
 function updateStatus() {
@@ -143,64 +157,90 @@ function updateStatus() {
 }
 
 // ---- project ---------------------------------------------------------------------------
-async function save() {
-  const body = JSON.parse(editorJSON());
-  let p;
-  if (!state.project) {
-    p = await api('POST', '/api/projects', { request: body, name: body.name });
-  } else {
-    p = await api('PUT', `/api/projects/${state.project.project_id}`, { expected_revision: state.project.revision, request: body });
+// Save exactly `json` (default: the editor now). Saves are queued so that each PUT names
+// the revision the previous save returned. Resolves to the saved snapshot
+// {project_id, revision, json}, or {superseded: true} if a different project was opened
+// before this save could apply.
+function save(json = editorJSON()) {
+  const projectEpoch = state.projectEpoch;
+  const run = state.saveChain.then(() => saveNow(json, projectEpoch));
+  state.saveChain = run.catch(() => {});
+  return run;
+}
+
+async function saveNow(json, projectEpoch) {
+  if (projectEpoch !== state.projectEpoch) return { superseded: true };
+  if (state.project && state.project.savedJSON === json) {
+    return { project_id: state.project.project_id, revision: state.project.revision, json };
   }
-  state.project = { project_id: p.project_id, revision: p.revision, savedJSON: JSON.stringify(canon(body)) };
+  const body = JSON.parse(json);
+  const p = state.project
+    ? await api('PUT', `/api/projects/${state.project.project_id}`, { expected_revision: state.project.revision, request: body })
+    : await api('POST', '/api/projects', { request: body, name: body.name });
+  if (projectEpoch !== state.projectEpoch) return { superseded: true, project_id: p.project_id, revision: p.revision };
+  state.project = { project_id: p.project_id, revision: p.revision, savedJSON: json };
   const u = new URL(location.href);
   u.searchParams.set('project', p.project_id);
   history.replaceState(null, '', u);
   updateStatus();
-  return p;
+  return { project_id: p.project_id, revision: p.revision, json };
+}
+
+// Start a new editing context: in-flight generations and renders from the previous one
+// can no longer reach the page, and the previous result is cleared from view.
+function newContext() {
+  state.viewEpoch += 1;
+  state.displayed = null;
+  $('plan-host').innerHTML = '<p class="empty">Generate a layout to see the plan.</p>';
+  $('summary').innerHTML = '';
+  delete $('summary').dataset.modules;
+  delete $('summary').dataset.tables;
+  state.fullViewBox = null;
+  const a = $('export-link');
+  a.removeAttribute('href');
+  a.classList.add('disabled');
+  a.setAttribute('aria-disabled', 'true');
 }
 
 async function openProject(pid) {
+  const token = ++state.openToken;
   const p = await api('GET', `/api/projects/${encodeURIComponent(pid)}`);
+  if (token !== state.openToken) return; // a newer open/import replaced this request
+  state.projectEpoch += 1;
+  newContext();
   state.request = p.request;
-  state.project = { project_id: p.project_id, revision: p.revision, savedJSON: JSON.stringify(canon(p.request)) };
-  state.displayed = null;
+  state.project = { project_id: p.project_id, revision: p.revision, savedJSON: editorJSONOf(p.request) };
   populate();
-  if (p.selected_result_id) {
-    const res = await api('GET', `/api/layouts/${p.selected_result_id}?project_id=${p.project_id}`);
-    const seq = ++state.genSeq;
-    await display({ seq, resultId: res.result_id, revision: p.selected_result_revision, inputsJSON: p.selected_result_is_current ? editorJSON() : '', data: res });
-  }
   const u = new URL(location.href);
   u.searchParams.set('project', p.project_id);
   history.replaceState(null, '', u);
   message(`Opened ${esc(p.project_id)} at revision ${p.revision}`);
+  if (p.selected_result_id) {
+    const seq = ++state.genSeq;
+    const epoch = state.viewEpoch;
+    const res = await api('GET', `/api/layouts/${p.selected_result_id}?project_id=${p.project_id}`);
+    const inputsJSON = p.selected_result_is_current ? state.project.savedJSON : '';
+    await display({ seq, epoch, projectId: p.project_id, resultId: res.result_id, revision: p.selected_result_revision, inputsJSON, data: res });
+  }
 }
 
 // ---- generation --------------------------------------------------------------------------
 async function generate() {
-  try {
-    if (isDirty()) await save();
-  } catch (e) {
-    showError(e);
-    return;
-  }
+  // Everything that labels the result is fixed now, before any await.
   const seq = ++state.genSeq;
+  const epoch = state.viewEpoch;
   const snapshot = editorJSON();
-  const revision = state.project.revision;
-  const projectId = state.project.project_id;
   $('generate').textContent = 'Generating…';
   $('generate').dataset.pending = String(Number($('generate').dataset.pending || 0) + 1);
   try {
-    const res = await api('POST', '/api/layouts', { project_id: projectId, revision });
-    const entry = { seq, resultId: res.result_id, revision, inputsJSON: snapshot, data: res };
-    if (state.displayed && seq < state.displayed.seq) {
-      state.history.push({ ...entry, note: 'late response from an older generation; not displayed' });
-      renderHistory();
-      message(`A late response for revision ${revision} arrived after a newer result; it was kept as historical and not displayed.`);
+    const saved = await save(snapshot);
+    if (saved.superseded || epoch !== state.viewEpoch) {
+      noteDiscarded({ seq, epoch, revision: saved.revision }, 'inputs were replaced (project opened or file imported) before this generation was saved');
       return;
     }
-    await display(entry);
-    message(`Generated ${esc(res.result_id)} from revision ${revision} (${res.selection}).`);
+    const res = await api('POST', '/api/layouts', { project_id: saved.project_id, revision: saved.revision });
+    const entry = { seq, epoch, projectId: saved.project_id, resultId: res.result_id, revision: saved.revision, inputsJSON: saved.json, data: res };
+    if (await display(entry)) message(`Generated ${esc(res.result_id)} from revision ${saved.revision} (${res.selection}).`);
   } catch (e) {
     showError(e);
   } finally {
@@ -210,10 +250,36 @@ async function generate() {
   }
 }
 
+function staleReason(entry) {
+  if (entry.epoch !== state.viewEpoch) return 'inputs were replaced (project opened or file imported) while it was pending; not displayed';
+  if (state.displayed && entry.seq < state.displayed.seq) return 'late response from an older generation; not displayed';
+  return null;
+}
+
+function noteDiscarded(entry, note) {
+  if (entry.data) {
+    state.history.push({ ...entry, note });
+    renderHistory();
+  }
+  message(`A response for revision ${entry.revision ?? '?'} arrived after newer inputs or results; it was kept as historical and not displayed (${esc(note)}).`);
+}
+
+// Render an entry only once all of its data has arrived and only if it is still the
+// newest generation of the current context. Returns whether it was displayed.
 async function display(entry) {
-  state.displayed = entry;
-  state.history.push(entry);
-  const svgText = await (await fetch(`/api/layouts/${entry.resultId}/plan.svg`)).text();
+  let reason = staleReason(entry);
+  if (reason) {
+    noteDiscarded(entry, reason);
+    return false;
+  }
+  const res = await fetch(`/api/layouts/${entry.resultId}/plan.svg`);
+  if (!res.ok) throw await res.json();
+  const svgText = await res.text();
+  reason = staleReason(entry); // re-checked after the last await: nothing below awaits
+  if (reason) {
+    noteDiscarded(entry, reason);
+    return false;
+  }
   const host = $('plan-host');
   host.innerHTML = svgText.replace(/<\?xml[^>]*>/, '');
   const page = host.querySelector('svg');
@@ -223,6 +289,8 @@ async function display(entry) {
   const plan = page.querySelector('#plan');
   state.fullViewBox = plan.getAttribute('data-full-viewbox').split(' ').map(Number);
   for (const cb of document.querySelectorAll('[data-layer]')) applyLayer(cb);
+  state.displayed = entry;
+  state.history.push(entry);
   renderSummary(entry);
   renderHistory();
   const fmt = $('export-format').value;
@@ -231,6 +299,7 @@ async function display(entry) {
   a.classList.remove('disabled');
   a.removeAttribute('aria-disabled');
   updateStatus();
+  return true;
 }
 
 function kv(label, value) {
@@ -369,7 +438,11 @@ async function pitch() {
 }
 
 async function loadExample(name) {
-  state.request = await (await fetch(`/static/examples/${name}.json`)).json();
+  const token = ++state.openToken;
+  const request = await (await fetch(`/static/examples/${name}.json`)).json();
+  if (token !== state.openToken) return;
+  newContext();
+  state.request = request;
   populate();
   message(`Loaded example ${esc(name)} (unsaved)`);
 }
@@ -380,7 +453,8 @@ function bindActions() {
   $('save').onclick = async () => {
     try {
       const p = await save();
-      message(`Saved ${esc(p.project_id)} revision ${p.revision}`);
+      if (p.superseded) message('That save finished after another project was opened; the editor shows the opened project.');
+      else message(`Saved ${esc(p.project_id)} revision ${p.revision}`);
     } catch (e) {
       showError(e);
     }
@@ -398,7 +472,11 @@ function bindActions() {
     const file = ev.target.files[0];
     if (!file) return;
     try {
-      state.request = JSON.parse(await file.text());
+      const token = ++state.openToken;
+      const request = JSON.parse(await file.text());
+      if (token !== state.openToken) return;
+      newContext();
+      state.request = request;
       populate();
       message(`Imported ${esc(file.name)} (unsaved)`);
     } catch (e) {

@@ -10,7 +10,7 @@ import numpy as np
 import pytest
 
 from conftest import load_fixture, run_layout, shifted
-from solar_layout.verify import verify_records
+from solar_layout.verify import payload_digest_of, verify_records
 
 
 def verified(val, rr, tables=None, modules=None, summary=None):
@@ -110,13 +110,18 @@ def test_c10_detects_table_across_hole_and_outside_setback():
     S["quantities"].update(table_count=1, module_count=4, dc_capacity_kwp=2.2, physical_module_area_m2=16.0, projected_module_area_m2=16.0, table_footprint_area_m2=16.0)
     S["quantities"]["module_ground_coverage_gross"] = 16.0 / S["quantities"]["gross_site_area_m2"]
     S["quantities"]["module_ground_coverage_buildable"] = 16.0 / S["quantities"]["buildable_area_m2"]
-    T = [{"seq": 0, "table_id": "T_j0_i0", "i": 0, "j": 0, "origin_xy_m": [2.0, 2.0], "footprint_xy_m": [[2, 2], [6, 2], [6, 6], [2, 6]], "module_count": 4}]
+    T = [{"seq": 0, "table_id": "T_j0_i0", "i": 0, "j": 0, "origin_xy_m": [2.0, 2.0], "footprint_xy_m": [[2, 2], [6, 2], [6, 6], [2, 6]],
+          "lower_edge_z_m": 0.8, "upper_edge_z_m": 0.8, "module_count": 4}]
     M = []
     for r in range(2):
         for c in range(2):
             a0, b0 = 2 * c, 2 * r
-            M.append({"module_id": f"T_j0_i0_r{r}_c{c}", "table_id": "T_j0_i0", "row": r, "column": c,
-                      "corners_xyz_m": [[2 + a0, 2 + b0, 0.8], [4 + a0, 2 + b0, 0.8], [4 + a0, 4 + b0, 0.8], [2 + a0, 4 + b0, 0.8]]})
+            M.append({"seq": len(M), "module_id": f"T_j0_i0_r{r}_c{c}", "table_id": "T_j0_i0", "table_i": 0, "table_j": 0, "row": r, "column": c,
+                      "corners_xyz_m": [[2 + a0, 2 + b0, 0.8], [4 + a0, 2 + b0, 0.8], [4 + a0, 4 + b0, 0.8], [2 + a0, 4 + b0, 0.8]],
+                      "power_wp": req["module"]["power_wp"]})
+    # complete, self-consistent records (fields, totals, payload digest): only the
+    # geometric containment check may object
+    S["payload_digest"] = payload_digest_of(S, T, M)
     ok, failed = verified(val, rr, T, M, S)
     assert not ok and failed == {"site_containment"}
 

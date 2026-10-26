@@ -1,6 +1,6 @@
 """Package and verify the delivery (D05) and reproduce from a fresh checkout (D01).
 
-    .venv/bin/python scripts/package_delivery.py OUT_DIR [--no-repro]
+    .venv/bin/python scripts/package_delivery.py OUT_DIR [--no-repro] [--evidence-dir DIR]
 
 * Git bundle of every branch (`git bundle create --all`), verified with `git bundle verify`
   and by cloning it and comparing the checked-out tree with HEAD.
@@ -11,7 +11,8 @@
 * Fresh checkout: clone from the bundle into an empty directory, `uv sync --frozen` with an
   empty uv cache (packages fetched from the index per uv.lock), the analytic CLI workflow,
   and the full pytest suite.
-Writes evidence/delivery/{package-verification.json, reproduction.json, reproduction-log.txt}.
+Writes evidence/delivery/{package-verification.json, reproduction.json, reproduction-log.txt},
+or into --evidence-dir (used to verify archives of the final commit without changing it).
 """
 
 from __future__ import annotations
@@ -46,8 +47,11 @@ def sha(p: Path) -> str:
 
 
 def main() -> int:
+    global DELIV
     out = Path(sys.argv[1]).resolve()
     repro = "--no-repro" not in sys.argv
+    if "--evidence-dir" in sys.argv:
+        DELIV = Path(sys.argv[sys.argv.index("--evidence-dir") + 1]).resolve()
     out.mkdir(parents=True, exist_ok=True)
     DELIV.mkdir(parents=True, exist_ok=True)
     status = run(["git", "-C", str(REPO), "status", "--porcelain"]).stdout.strip()

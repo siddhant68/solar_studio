@@ -3,7 +3,8 @@ name = "solar-site-layout"
 version = "0.1.0"
 description = "Module 01 of Solar Studio: flat-site boundary and table rules to verified panel layout, capacity, drawings and coordinates"
 readme = "README.md"
-license = "Apache-2.0"
+# Licence: not yet decided by the repository owner. Apache-2.0 is proposed for the new
+# code (see README "Licence"); no licence is declared until the owner confirms one.
 requires-python = ">=3.12"
 dependencies = [
     "shapely>=2.1",

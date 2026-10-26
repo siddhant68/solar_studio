@@ -87,11 +87,13 @@ Phase offsets are `(p/3·P, q/3·R)` for p, q ∈ {0, 1, 2}, evaluated in order 
 | `input_digest` | SHA-256 of the canonical normalized request without `name` |
 | `result_id` | `res_` + `sha256(result schema \| algorithm version \| geometry policy version \| input_digest)[:24]`. It is content-addressed: the same input and policy always produce the same result ID through any interface. |
 | `payload_digest` | SHA-256 over the canonical numerical summary followed by each table record and each module record. Timestamps, provenance, project sources and transport envelopes are excluded. |
-| Artifact `sha256` | SHA-256 of each export file's bytes. Exports are deterministic, including the DXF, whose ezdxf timestamps and GUIDs are fixed. |
+| Artifact `sha256` | SHA-256 of each export file's bytes. Result exports are a pure function of the stored result and are byte-identical in any process: the DXF's ezdxf timestamps and GUIDs are fixed and its CLASSES section is written in sorted order (ezdxf otherwise orders it by per-process string hashing). |
 
 Project revisions start at 1. `update_project(expected_revision)` is a compare-and-swap inside a SQLite `BEGIN IMMEDIATE` transaction (WAL mode), so it also holds across separate processes. Every revision's request is retained.
 
-A result and all its table and module rows are inserted in **one transaction**. A crash or injected fault leaves no result row and no partial rows. Export files are written to `*.partial`, fsynced, atomically renamed, and only then recorded. A recorded export is re-hashed before it is served.
+A result and all its table and module rows are inserted in **one transaction**. A crash or injected fault leaves no result row and no partial rows. Each export build stages into its own uniquely named `*.partial` file in the target directory, which is fsynced, atomically renamed and only then recorded. Publication of one (result, format) is serialized across threads and processes (in-process lock plus `flock`). Export records are write-once (`published_exports`, keyed by path): an issued path keeps its SHA-256, a rebuild that would change it is refused, and an issued file is re-hashed before it is reused or served.
+
+**Verifier.** Independent of the generator, `verify_records` checks: dimensions and axes; quantities; identity and membership; lattice positions; footprint and module geometry; modules within tables; pairwise table disjointness; site containment, perimeter setback and exclusions against the original geometry; every contract field of every record (`record_fields`: field set, `seq`, IDs derived from the lattice indices, row/column ranges, table heights and module count, `power_wp` equal to the request); record totals against the summary (`record_totals`: summed module power vs `dc_capacity_kwp`, summed table module counts, per-module power and modules per table); areas (`areas`: gross and outer-ring areas by its own shoelace sum; buildable area bracketed by its own construction, site minus buffered boundary lines and exclusion buffers with 4× finer arcs, which the reported bounds must intersect and be no more than 17× as wide as); and `payload_integrity`, the payload digest recomputed over exactly the summary and records it was given.
 
 **Selection policy:**
 - Generation never edits a project's specification.
@@ -100,10 +102,11 @@ A result and all its table and module rows are inserted in **one transaction**. 
 - Explicitly generating an old revision is allowed and always produces `historical_not_selected`.
 
 **Browser:**
-- The browser records the revision and an editor snapshot for each generate press.
-- A response is labelled current only if both still match.
-- Edits made while a generation is pending stay dirty.
-- A response from an older press that arrives after a newer one is kept in the history and never displayed over the newer result.
+- Generate captures the editor snapshot synchronously when pressed and saves exactly that snapshot; the result is labelled with the project, revision and snapshot it was computed from. Saves are queued, each naming the revision the previous save returned.
+- A response is labelled current only if the project, its revision and the editor still match that snapshot.
+- Edits made while a save or generation is pending stay dirty.
+- A result is rendered only after every request it needs (layout, plan SVG) has returned, and only if it is still the newest generation of the current editing context; the check is made after the last await, and nothing after it awaits.
+- Opening a project, importing a file or loading an example starts a new editing context and clears the view. A response from an older press or an older context is kept in the session history and never displayed.
 
 ## 7. Operations and transports
 
@@ -119,7 +122,7 @@ The operations are: `validate_request`, `calculate_row_pitch`, `create_project`,
 | generate | `generate REQ.json` or `generate --project ID [--revision N]` | `POST /api/layouts {request}` or `{project_id, revision?}` | `generate_layout {...}` |
 | summary | `summary RID [--project ID]` | `GET /api/layouts/{rid}[?project_id=]` | `get_layout_summary {result_id, project_id?}` |
 | items | `items RID --kind modules [--offset N \| --cursor C] [--limit L]` | `GET /api/layouts/{rid}/items?kind=&offset=&cursor=&limit=` | `get_layout_items {...}` |
-| export | `export RID --format F` | `POST` (create) or `GET` (download) `/api/layouts/{rid}/exports/{F}` | `export_layout {result_id, format}` |
+| export | `export RID --format F` | `POST` (publish or reuse; metadata) or `GET` (download; `X-Content-SHA256` of the streamed bytes) `/api/layouts/{rid}/exports/{F}` | `export_layout {result_id, format}` |
 
 Envelopes:
 - CLI: `{"ok": true, "result": …}` with exit 0, or `{"ok": false, "error": {…}}` with exit 2.
@@ -128,15 +131,18 @@ Envelopes:
 
 The error object is the same everywhere: `{code, message, field?, details?, errors?}`. The codes are `INVALID_INPUT`, `INVALID_GEOMETRY`, `UNSUPPORTED_FRAME`, `UNSUPPORTED_INPUT`, `INVALID_PITCH`, `RESOURCE_LIMIT`, `REVISION_CONFLICT`, `PROJECT_NOT_FOUND`, `RESULT_NOT_FOUND`, `INVALID_CURSOR`, `UNSUPPORTED_OPERATION`, `VERIFICATION_FAILED` and `INTERNAL_ERROR`.
 
-Export paths are built only from a validated result ID (`res_[0-9a-f]{24}`) and an allow-listed format, then resolved and checked to stay inside `DATA_DIR/exports`. No shell is ever invoked.
+Export paths are built only from a validated result ID (`res_[0-9a-f]{24}`), an allow-listed format and, for `context`, the content's SHA-256, then resolved and checked to stay inside `DATA_DIR/exports`. No shell is ever invoked. `GET /favicon.ico` serves the page icon (also linked from the page as `/static/favicon.svg`).
 
 ## 8. Export formats
 
 | Format | File | Content |
 |---|---|---|
-| `json` | `RID-layout.json` | Normalized request, result summary, provenance, project sources, regions, all tables and modules |
+| `json` | `RID-layout.json` | `solar.layout.export/2`: normalized request, result summary, provenance, `export` (`{"layout": "v2", "context": "result_only", …}`), regions, all tables and modules. No project associations. |
 | `csv` | `RID-modules.csv` | One row per module. Columns `module_id, table_id, table_i, table_j, module_row, module_column, c0_x_m, c0_y_m, c0_z_rel_m, … c3_z_rel_m, power_wp`; shortest round-trip decimals |
 | `svg` | `RID-plan.svg` | Page in mm. The nested `<svg id="plan">` viewBox is in site metres at an exact 1:scale. North arrow, scale bar, legend, quantities and identity are in a side panel that never overlaps the plan. `data-x0`/`data-y1` map plan coordinates back to the world. |
 | `dxf` | `RID-plan.dxf` | R2018, `$INSUNITS = 6` (m). Layers SITE_BOUNDARY, SITE_HOLES, ADMISSIBLE_REGION, KEEPOUT_ZONES, EXCLUSIONS, TABLES, MODULES, ANNOTATION. Closed LWPOLYLINEs in world coordinates, with IDs in XDATA `SOLAR_STUDIO`. |
 | `report` | `RID-report.md` | Calculation report |
-| `bundle` | `RID-bundle.zip` | All of the above plus `manifest.json` (result/input/payload digests, frame, versions, SHA-256 of each file) |
+| `bundle` | `RID-bundle.zip` | The five files above, byte-identical to the standalone exports, plus `manifest.json` (`solar.layout.export-bundle/2`: result/input/payload digests, frame, versions, `context: result_only`, SHA-256 of each file) |
+| `context` | `context/RID-context-<sha16>.json` | `solar.layout.export-context/1`: result, input and payload digests and the `project_sources` (project, revision, interface, time) that use the result at export time. Content-addressed; a new association gives a new file, and earlier files are kept. |
+
+Result formats (`json` … `bundle`) live at `RID/v2/` and depend on the immutable result only, so another project or revision reusing a result never changes them. Files of the earlier export layout (directly under `RID/`, which embedded project sources) are never rewritten.

@@ -49,13 +49,23 @@ def _free_port() -> int:
         return s.getsockname()[1]
 
 
-def _node_playwright() -> bool:
+BROWSER_DIR = ROOT / "tests" / "browser"
+PINNED_PLAYWRIGHT = json.loads((BROWSER_DIR / "package.json").read_text())["dependencies"]["playwright"]
+
+
+def _browser_tooling_problem() -> str | None:
+    """None when node resolves the pinned Playwright from tests/browser (its own
+    node_modules from scripts/bootstrap_browser.sh, or an identical preinstalled copy)."""
     if not shutil.which("node"):
-        return False
-    return subprocess.run(["node", "-e", "require('playwright')"], capture_output=True).returncode == 0
+        return "node is not installed"
+    p = subprocess.run(["node", "-p", "require('playwright/package.json').version"], capture_output=True, text=True, cwd=str(BROWSER_DIR))
+    if p.returncode != 0:
+        return "playwright is not resolvable from tests/browser; run scripts/bootstrap_browser.sh"
+    if p.stdout.strip() != PINNED_PLAYWRIGHT:
+        return f"playwright {p.stdout.strip()} found, {PINNED_PLAYWRIGHT} pinned; run scripts/bootstrap_browser.sh"
+    return None
 
 
-@pytest.mark.skipif(not _node_playwright(), reason="node + playwright not available on this runner")
 def test_v01_v02_v03_real_browser(tmp_path):
     out = evidence_dir(tmp_path, "browser")
     port = _free_port()
@@ -74,10 +84,11 @@ def test_v01_v02_v03_real_browser(tmp_path):
             except OSError:
                 time.sleep(0.1)
         p = subprocess.run(
-            ["node", str(ROOT / "tests" / "browser" / "ui_checks.cjs"), f"http://127.0.0.1:{port}", str(out), str(FIXTURES)],
+            ["node", str(BROWSER_DIR / "ui_checks.cjs"), f"http://127.0.0.1:{port}", str(out), str(FIXTURES)],
             capture_output=True,
             text=True,
             timeout=900,
+            cwd=str(BROWSER_DIR),
         )
     finally:
         server.terminate()
@@ -86,3 +97,6 @@ def test_v01_v02_v03_real_browser(tmp_path):
     assert p.returncode == 0 and report["passed"], p.stdout + p.stderr
     names = {r["name"] for r in report["results"]}
     assert any(n.startswith("V01") for n in names) and any(n.startswith("V02") for n in names) and any(n.startswith("V03") for n in names)
+    # the review regressions (F1 create/update delay, F2 stale SVG, switch/import while pending)
+    for needle in ("F1 create", "F1 update", "F2 stale SVG", "project switch", "import while"):
+        assert any(needle in n for n in names), needle

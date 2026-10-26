@@ -71,7 +71,7 @@ TEST_MAP = {
     "C07": [("test_fixtures_analytic.py", "test_c07_"), ("test_fixtures_analytic.py", "test_corner_only")],
     "C08": [("test_fixtures_analytic.py", "test_c08_"), ("test_fixtures_analytic.py", "test_multipolygon_")],
     "C09": [("test_tolerance_and_arcs.py", "test_")],
-    "C10": [("test_verifier_translation_phase_identity.py", "test_c10_")],
+    "C10": [("test_verifier_translation_phase_identity.py", "test_c10_"), ("test_review_regressions.py", "test_f5_")],
     "C11": [("test_verifier_translation_phase_identity.py", "test_c11_")],
     "C12": [("test_validation.py", n) for n in ("test_coordinate_magnitude_limit", "test_site_diagonal_limit", "test_module_dimension_envelope", "test_anchor_must_be_near_site", "test_candidate_limit", "test_module_output_limit", "test_timeout_policy")],
     "C13": [("test_verifier_translation_phase_identity.py", "test_c13_")],
@@ -80,13 +80,13 @@ TEST_MAP = {
     "S02": [("test_browser_and_mcp.py", "test_s02_")],
     "S03": [("test_service_interfaces.py", "test_s03_"), ("test_service_interfaces.py", "test_selection_bound")],
     "S04": [("test_service_interfaces.py", "test_s04_")],
-    "S05": [("test_service_interfaces.py", "test_s05_")],
+    "S05": [("test_service_interfaces.py", "test_s05_"), ("test_review_regressions.py", "test_f3_")],
     "S06": [("test_service_interfaces.py", "test_s06_")],
     "S07": [("test_service_interfaces.py", "test_s07_")],
     "V01": [("test_browser_and_mcp.py", "test_v01_")],
     "V02": [("test_browser_and_mcp.py", "test_v01_")],
     "V03": [("test_browser_and_mcp.py", "test_v01_")],
-    "V04": [("test_exports.py", "test_v04_")],
+    "V04": [("test_exports.py", "test_v04_"), ("test_review_regressions.py", "test_f3_"), ("test_review_regressions.py", "test_f4_"), ("test_review_regressions.py", "test_exports_identical_across")],
     "V05": [("test_exports.py", "test_v05_")],
 }
 
@@ -99,10 +99,28 @@ EVIDENCE = {
     "S02": ["evidence/acceptance/mcp/mcp-wire-transcript.jsonl", "evidence/acceptance/mcp/mcp-session-steps.json", "evidence/acceptance/mcp-inspector/"],
     "S06": ["evidence/acceptance/S06-memory.json"],
     "V01": ["evidence/acceptance/browser/ui-checks.json", "evidence/acceptance/browser/V01-app-after-generate.png", "evidence/acceptance/browser/V01-app-after-reload.png"],
-    "V02": ["evidence/acceptance/browser/V02-late-result-outdated.png", "evidence/acceptance/browser/V02-late-response-not-overwriting.png"],
+    "V02": ["evidence/acceptance/browser/V02-late-result-outdated.png", "evidence/acceptance/browser/V02-late-response-not-overwriting.png", "evidence/acceptance/browser/V02-F1-create-delay.png", "evidence/acceptance/browser/V02-F1-update-delay.png", "evidence/acceptance/browser/V02-F2-stale-svg-released.png", "evidence/acceptance/browser/V02-project-switch-while-pending.png", "evidence/acceptance/browser/V02-import-while-pending.png", "evidence/repair/"],
+    "V04": ["evidence/examples/*/plan.svg|plan.dxf|modules.csv|layout.json", "evidence/repair/"],
+    "C10": ["evidence/repair/"],
+    "S05": ["evidence/repair/"],
     "V03": ["evidence/acceptance/browser/V03-*-overview.png", "evidence/acceptance/browser/V03-*-closeup.png"],
-    "V04": ["evidence/examples/*/plan.svg|plan.dxf|modules.csv|layout.json"],
     "V05": ["evidence/examples/*/report.md"],
+}
+
+
+# Regressions for the independent review of 2026-10-26 (reviews/module-01/2026-10-26/),
+# associated with the original gates they belong to.
+REVIEW_NOTES = {
+    "V01": "Review 2026-10-26: the resource 404 (/favicon.ico) is fixed; the 'no browser errors' checks run full Chromium and fail on any console error, failed request or HTTP status >= 400, logged with its URL.",
+    "V02": "Review 2026-10-26 regressions F1 (create- and update-delay edits) and F2 (stale SVG; project switch and import while pending) are the V02 rows of ui-checks.json.",
+    "V04": "Review 2026-10-26 regressions F3 (concurrent exports) and F4 (result-only, write-once exports; separate context export), plus the PYTHONHASHSEED-dependent DXF bytes found during the repair, are in tests/test_review_regressions.py.",
+    "S05": "Review 2026-10-26 regression F3: parallel and overlapping exports leave no failed call and no stray .partial files (tests/test_review_regressions.py::test_f3_*).",
+    "C10": "Review 2026-10-26 regression F5: per-record fields, record totals, independently computed areas and payload integrity (tests/test_review_regressions.py::test_f5_*).",
+}
+SUPERSEDES = {
+    "previous_acceptance_source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+    "previous_result": "36/36 pass, recorded in delivery commit f55f4be",
+    "why_superseded": "The independent review of 2026-10-26 (reviews/module-01/2026-10-26/) reproduced five defects at f55f4be (F1 input snapshot across autosave, F2 stale SVG render, F3 concurrent export collisions, F4 mutable export context, F5 verifier gaps) and a browser resource 404. The earlier passes for V01, V02, V04, S05 and C10 rested on evidence that did not exercise those cases. This table is rebuilt from a new run on the repaired source.",
 }
 
 
@@ -200,6 +218,8 @@ def main() -> int:
             notes = f"Also cross-checked with a second client implementation (MCP Inspector CLI 2.12.0, TypeScript SDK): {json.dumps(meta['inspector'])}"
         if gid == "S03":
             notes = "Transport schemas documented in docs/CONTRACTS.md section 7; MCP tool input schemas embed the JSON Schemas."
+        if gid in REVIEW_NOTES:
+            notes = (notes + " " if notes else "") + REVIEW_NOTES[gid]
         add(gid, status, test_cmd, EVIDENCE.get(gid, []), names, notes)
     for gid, prefix in (("V01", "V01"), ("V02", "V02"), ("V03", "V03")):
         status, names = gate_from_tests(gid, cases)
@@ -211,6 +231,8 @@ def main() -> int:
         notes = "; ".join(rows)
         if gid == "V03":
             notes += ". Overview and close-up PNGs were also inspected visually in the build session (north arrow, scale, legend, boundaries, keepout arcs, 0.02 m module gaps, side-panel text clear of the plan)."
+        if gid in REVIEW_NOTES:
+            notes += ". " + REVIEW_NOTES[gid]
         add(gid, status, test_cmd, EVIDENCE.get(gid, []), names, notes)
 
     # ---- delivery gates ---------------------------------------------------------------------
@@ -253,6 +275,9 @@ def main() -> int:
         "test_cases_skipped": sum(1 for c in cases if c["outcome"] == "skipped"),
         "gate_counts": counts,
         "complete": counts.get("pass", 0) == 36,
+        "supersedes": SUPERSEDES,
+        "review_regressions": {g: n for g, n in REVIEW_NOTES.items()},
+        "tooling": meta.get("tooling"),
         "gates": gates,
     }
     (ROOT / "reports" / "ACCEPTANCE.json").write_text(json.dumps(out, indent=1))

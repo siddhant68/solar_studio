@@ -4,7 +4,8 @@
 
 Steps (all against the checked-out commit; refuses to run on uncommitted source changes):
  1. pytest (all tests, including the real-browser V01-V03 and real-MCP S02 runs) with
-    JUnit XML; evidence written under evidence/acceptance/.
+    JUnit XML; evidence written under evidence/acceptance/. SOLAR_REQUIRE_BROWSER=1 is
+    set, so missing browser tooling fails the run instead of skipping the browser test.
  2. CLI calculation examples for every analytic fixture (generate + all exports) and the
     3-4-5 pitch example, into evidence/examples/.
  3. Benchmarks (D02/D03) into reports/BENCHMARKS.json.
@@ -50,7 +51,7 @@ def source_tree_ids(commit: str) -> dict[str, str]:
 def run_pytest() -> dict:
     ACC.mkdir(parents=True, exist_ok=True)
     junit = ACC / "pytest-junit.xml"
-    env = dict(os.environ, SOLAR_EVIDENCE_DIR=str(ACC))
+    env = dict(os.environ, SOLAR_EVIDENCE_DIR=str(ACC), SOLAR_REQUIRE_BROWSER="1")
     t0 = time.time()
     p = sh([PY, "-m", "pytest", "-q", "-p", "no:cacheprovider", f"--junitxml={junit}"], cwd=str(ROOT), env=env, timeout=3600)
     (ACC / "pytest-output.txt").write_text(p.stdout + "\n" + p.stderr)
@@ -63,7 +64,26 @@ def run_pytest() -> dict:
             elif child.tag == "skipped":
                 outcome = "skipped"
         cases.append({"file": tc.get("classname", "").split(".")[-1] + ".py", "name": tc.get("name"), "outcome": outcome, "seconds": float(tc.get("time", 0))})
-    return {"exit": p.returncode, "seconds": round(time.time() - t0, 1), "cases": cases, "command": f"SOLAR_EVIDENCE_DIR=evidence/acceptance {Path(PY).name} -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml"}
+    return {"exit": p.returncode, "seconds": round(time.time() - t0, 1), "cases": cases, "command": f"SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance {Path(PY).name} -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml"}
+
+
+def tooling() -> dict:
+    browser_dir = ROOT / "tests" / "browser"
+
+    def version(cmd: list[str], cwd: Path | None = None) -> str | None:
+        try:
+            p = sh(cmd, cwd=str(cwd) if cwd else None)
+        except OSError:
+            return None
+        return p.stdout.strip() if p.returncode == 0 else None
+
+    return {
+        "python": sys.version.split()[0],
+        "node": version(["node", "--version"]),
+        "playwright": version(["node", "-p", "require('playwright/package.json').version"], browser_dir),
+        "playwright_pinned": json.loads((browser_dir / "package.json").read_text())["dependencies"]["playwright"],
+        "uv": version(["uv", "--version"]),
+    }
 
 
 def cli_examples() -> dict:
@@ -152,7 +172,7 @@ def main() -> int:
         catalog = out / "catalog.json"
         if catalog.exists():
             catalog.unlink()
-    (ACC / "run-meta.json").write_text(json.dumps({"source_commit": commit, "source_tree_ids": source_tree_ids(commit), "started_at": started, "finished_at": datetime.now(timezone.utc).isoformat(), "pytest": {k: pt[k] for k in ("exit", "seconds", "command")}, "test_count": len(pt["cases"]), "inspector": insp}, indent=1))
+    (ACC / "run-meta.json").write_text(json.dumps({"source_commit": commit, "source_tree_ids": source_tree_ids(commit), "started_at": started, "finished_at": datetime.now(timezone.utc).isoformat(), "pytest": {k: pt[k] for k in ("exit", "seconds", "command")}, "test_count": len(pt["cases"]), "tooling": tooling(), "inspector": insp}, indent=1))
     (ACC / "pytest-cases.json").write_text(json.dumps(pt["cases"], indent=1))
     print("done; build the gate table with scripts/build_acceptance_report.py")
     return 0 if pt["exit"] == 0 else 1

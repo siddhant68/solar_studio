@@ -9,19 +9,34 @@ re-decided with the exact rational kernel in `exact.py` (shared with the generat
 borderline path; that kernel has its own hand-checked tests).
 
 It consumes records (summary, tables, modules) exactly as stored or exported, so it can
-detect corrupted outputs as well as generator bugs.
+detect corrupted outputs as well as generator bugs. Besides geometry it checks every
+record field the contract defines (IDs, lattice indices, heights, per-module power), that
+record totals reconcile with the summary, the reported areas against its own area
+computation, and the payload digest against the records it was given.
 """
 
 from __future__ import annotations
 
+import hashlib
 import math
 from typing import Any, Iterable
 
 import numpy as np
+import shapely
 from shapely import STRtree, box
 
 from . import exact
-from .policy import DISTANCE_BAND_M, VERIFY_COORDINATE_TOL_M
+from .jsonio import canonical_dumps
+from .policy import ARC_QUAD_SEGMENTS, DISTANCE_BAND_M, VERIFY_COORDINATE_TOL_M
+
+TABLE_FIELDS = frozenset({"seq", "table_id", "i", "j", "origin_xy_m", "footprint_xy_m", "lower_edge_z_m", "upper_edge_z_m", "module_count"})
+MODULE_FIELDS = frozenset({"seq", "module_id", "table_id", "table_i", "table_j", "row", "column", "corners_xyz_m", "power_wp"})
+PAYLOAD_SUMMARY_KEYS = ("schema_version", "input_digest", "computation_frame", "axes", "dimensions", "placement", "quantities")
+# Buildable area is bracketed with arcs four times finer than the generator's
+# polygonization; polygonization error falls as 1/q^2, so a correct reported bracket is
+# at most ~16x as wide as this one (17x allowed).
+AREA_CHECK_QUAD_SEGMENTS = 4 * ARC_QUAD_SEGMENTS
+BRACKET_WIDTH_RATIO = 17.0
 
 _CARD = {0.0: (0.0, 1.0), 90.0: (1.0, 0.0), 180.0: (0.0, -1.0), 270.0: (-1.0, 0.0)}
 
@@ -120,6 +135,53 @@ def _seg_meets_open_quad_decided(seg: np.ndarray, q: np.ndarray) -> bool:
     return exact.segment_meets_open_convex((exact.fr(seg[0]), exact.fr(seg[1])), [exact.fr(p) for p in q])
 
 
+def _is_int(x: Any) -> bool:
+    return isinstance(x, int) and not isinstance(x, bool)
+
+
+def _ring_area(ring: np.ndarray) -> float:
+    """Shoelace area of a closed ring, translated to its first vertex for conditioning."""
+    r = ring - ring[0]
+    x, y = r[:, 0], r[:, 1]
+    return float(abs(np.dot(x[:-1], y[1:]) - np.dot(x[1:], y[:-1])) / 2.0)
+
+
+def _polys_of(geom: dict[str, Any]) -> list:
+    return [geom["coordinates"]] if geom["type"] == "Polygon" else list(geom["coordinates"])
+
+
+def _shapely_of(geom: dict[str, Any], shift: np.ndarray):
+    polys = [shapely.Polygon(np.asarray(p[0], dtype=float) - shift, [np.asarray(h, dtype=float) - shift for h in p[1:]]) for p in _polys_of(geom)]
+    return polys[0] if len(polys) == 1 else shapely.MultiPolygon(polys)
+
+
+def _buildable_region(request: dict[str, Any], shift: np.ndarray, quad_segs: int, radius_factor: float):
+    """Points of the site at least `setback` from every boundary ring and at least
+    `keepout` from every exclusion, built as site minus buffered boundary LINES (the
+    generator instead shrinks the site polygon with a negative buffer)."""
+    site = _shapely_of(request["boundary"], shift)
+    s = request["perimeter_setback_m"]
+    region = site.difference(site.boundary.buffer(s * radius_factor, quad_segs=quad_segs)) if s > 0 else site
+    for ex in request["exclusions"]:
+        g = _shapely_of(ex["geometry"], shift)
+        k = ex["keepout_m"]
+        region = region.difference(g.union(g.boundary.buffer(k * radius_factor, quad_segs=quad_segs)) if k > 0 else g)
+    return region
+
+
+def payload_digest_of(summary: dict[str, Any], tables: Iterable[dict[str, Any]], modules: Iterable[dict[str, Any]]) -> str:
+    """SHA-256 over the canonical numerical summary, then every table and module record."""
+    h = hashlib.sha256()
+    h.update(canonical_dumps({k: summary[k] for k in PAYLOAD_SUMMARY_KEYS}).encode())
+    for rec in tables:
+        h.update(b"\n")
+        h.update(canonical_dumps(rec).encode())
+    for rec in modules:
+        h.update(b"\n")
+        h.update(canonical_dumps(rec).encode())
+    return h.hexdigest()
+
+
 class _Report:
     def __init__(self):
         self.checks: dict[str, dict[str, Any]] = {}
@@ -157,6 +219,10 @@ def verify_records(request: dict[str, Any], summary: dict[str, Any], tables: Ite
         "site_containment",
         "perimeter_setback",
         "exclusions",
+        "record_fields",
+        "record_totals",
+        "areas",
+        "payload_integrity",
     ):
         rep.ensure(name)
     tol = VERIFY_COORDINATE_TOL_M
@@ -186,6 +252,69 @@ def verify_records(request: dict[str, Any], summary: dict[str, Any], tables: Ite
             rep.add("quantities", q[key] is None, {key: "must be null for a zero denominator"})
         else:
             rep.add("quantities", q[key] is not None and _close(q[key], q["projected_module_area_m2"] / den, 1e-12), {key: q[key]})
+
+    # record fields: every field the contract defines, per record
+    h0 = request["table"]["lower_edge_height_m"]
+    by_tid: dict[str, dict[str, Any]] = {}
+    for k, t in enumerate(tables):
+        ok = set(t) == TABLE_FIELDS
+        ok = ok and t["seq"] == k and _is_int(t["i"]) and _is_int(t["j"]) and t["table_id"] == f"T_j{t['j']}_i{t['i']}"
+        ok = ok and t["module_count"] == n_per and _is_int(t["module_count"])
+        ok = ok and _close(t["lower_edge_z_m"], h0, tol) and _close(t["upper_edge_z_m"], h0 + dm["H"], tol)
+        rep.add("record_fields", bool(ok), {"table_seq": k, "table_id": t.get("table_id")})
+        if ok:
+            by_tid[t["table_id"]] = t
+    power_sum = 0.0
+    for k, m in enumerate(modules):
+        ok = set(m) == MODULE_FIELDS
+        ok = ok and m["seq"] == k and all(_is_int(m[f]) for f in ("table_i", "table_j", "row", "column"))
+        ok = ok and 0 <= m["row"] < rows and 0 <= m["column"] < cols
+        ok = ok and m["table_id"] == f"T_j{m['table_j']}_i{m['table_i']}"
+        ok = ok and m["module_id"] == f"{m['table_id']}_r{m['row']}_c{m['column']}"
+        t = by_tid.get(m.get("table_id"))
+        ok = ok and t is not None and (t["i"], t["j"]) == (m["table_i"], m["table_j"])
+        ok = ok and m["power_wp"] == power and isinstance(m["power_wp"], (int, float)) and not isinstance(m["power_wp"], bool)
+        rep.add("record_fields", bool(ok), {"module_seq": k, "module_id": m.get("module_id")})
+        if isinstance(m.get("power_wp"), (int, float)) and not isinstance(m.get("power_wp"), bool):
+            power_sum += float(m["power_wp"])
+
+    # record totals reconcile with the summary
+    rep.add("record_totals", q["module_power_wp"] == power, {"module_power_wp": [q["module_power_wp"], power]})
+    rep.add("record_totals", q["modules_per_table"] == n_per, {"modules_per_table": [q["modules_per_table"], n_per]})
+    table_modules = sum(t["module_count"] if _is_int(t.get("module_count")) else 0 for t in tables)
+    rep.add("record_totals", table_modules == q["module_count"], {"sum_table_module_count": [table_modules, q["module_count"]]})
+    rep.add(
+        "record_totals",
+        _close(power_sum / 1000.0, q["dc_capacity_kwp"], 1e-9 * max(1.0, abs(q["dc_capacity_kwp"]))),
+        {"sum_module_power_kwp": power_sum / 1000.0, "summary_dc_capacity_kwp": q["dc_capacity_kwp"]},
+    )
+
+    # areas: gross and outer-ring areas by the shoelace formula; buildable area bracketed
+    # independently with finer arcs (see _buildable_region)
+    gross = outer = 0.0
+    for poly in _polys_of(request["boundary"]):
+        rings = [np.asarray(r, dtype=float) for r in poly]
+        outer += _ring_area(rings[0])
+        gross += _ring_area(rings[0]) - sum(_ring_area(r) for r in rings[1:])
+    tol_a = 1e-9 * max(1.0, gross)
+    rep.add("areas", _close(q["gross_site_area_m2"], gross, tol_a), {"gross_site_area_m2": [q["gross_site_area_m2"], gross]})
+    rep.add("areas", _close(q["outer_ring_area_m2"], outer, tol_a), {"outer_ring_area_m2": [q["outer_ring_area_m2"], outer]})
+    shift = np.array(request["placement"]["anchor_xy_m"], dtype=float)
+    qs = AREA_CHECK_QUAD_SEGMENTS
+    hi_i = float(_buildable_region(request, shift, qs, 1.0).area)
+    lo_i = float(_buildable_region(request, shift, qs, 1.0 / math.cos(math.pi / (4 * qs))).area)
+    lo_r, hi_r = q["buildable_area_bounds_m2"]
+    b = q["buildable_area_m2"]
+    rep.add("areas", _close(hi_r, b, tol_a) and lo_r <= b + tol_a and b <= gross + tol_a, {"buildable_area_m2": b, "bounds": [lo_r, hi_r]})
+    rep.add("areas", lo_r <= hi_i + tol_a and lo_i <= hi_r + tol_a, {"reported_bounds": [lo_r, hi_r], "independent_bounds": [lo_i, hi_i]})
+    rep.add("areas", hi_r - lo_r <= BRACKET_WIDTH_RATIO * (hi_i - lo_i) + tol_a, {"reported_bounds": [lo_r, hi_r], "independent_bounds": [lo_i, hi_i]})
+
+    # payload digest over exactly these records
+    try:
+        digest = payload_digest_of(summary, tables, modules)
+    except (KeyError, TypeError, ValueError) as e:
+        digest = f"unhashable: {type(e).__name__}"
+    rep.add("payload_integrity", summary.get("payload_digest") == digest, {"reported": summary.get("payload_digest"), "recomputed": digest})
 
     # identity and membership
     tid_set = set()
@@ -224,7 +353,6 @@ def verify_records(request: dict[str, Any], summary: dict[str, Any], tables: Ite
         rep.add("footprint_shape", np.allclose(fp, shape, atol=tol, rtol=0), {"table": t["table_id"]})
         t_by_id[t["table_id"]] = (o, fp)
         quads.append(fp)
-    h0 = request["table"]["lower_edge_height_m"]
     gx, gy = request["table"]["module_gap_x_m"], request["table"]["module_gap_y_m"]
     for m in modules:
         if m["table_id"] not in t_by_id:

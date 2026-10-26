@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable, Iterator
 
-from .errors import PROJECT_NOT_FOUND, RESULT_NOT_FOUND, REVISION_CONFLICT, DomainError
+from .errors import INTERNAL_ERROR, PROJECT_NOT_FOUND, RESULT_NOT_FOUND, REVISION_CONFLICT, DomainError
 from .jsonio import canonical_dumps
 
 SCHEMA = """
@@ -81,6 +81,8 @@ CREATE TABLE IF NOT EXISTS layout_modules (
     record_json TEXT NOT NULL,
     PRIMARY KEY (result_id, seq)
 );
+-- Export layout v1 (one mutable row per result and format). No longer written; kept so
+-- older stores open unchanged. Their files stay where they were issued.
 CREATE TABLE IF NOT EXISTS exports (
     result_id TEXT NOT NULL,
     format TEXT NOT NULL,
@@ -90,6 +92,17 @@ CREATE TABLE IF NOT EXISTS exports (
     created_at TEXT NOT NULL,
     PRIMARY KEY (result_id, format)
 );
+-- Export layout v2: one write-once row per issued file. A path, once published, keeps
+-- its SHA-256 for good.
+CREATE TABLE IF NOT EXISTS published_exports (
+    relpath TEXT PRIMARY KEY,
+    result_id TEXT NOT NULL,
+    format TEXT NOT NULL,
+    sha256 TEXT NOT NULL,
+    bytes INTEGER NOT NULL,
+    created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS published_exports_by_result ON published_exports(result_id, format, created_at);
 """
 
 STORE_SCHEMA_VERSION = "solar.store/1"
@@ -305,7 +318,10 @@ class Store:
                 "SELECT project_id, project_revision, interface, created_at FROM result_sources WHERE result_id=? ORDER BY created_at",
                 (result_id,),
             ).fetchall()
-            exports = con.execute("SELECT format, relpath, sha256, bytes, created_at FROM exports WHERE result_id=? ORDER BY format", (result_id,)).fetchall()
+            exports = con.execute(
+                "SELECT format, relpath, sha256, bytes, created_at FROM published_exports WHERE result_id=? ORDER BY format, created_at, relpath",
+                (result_id,),
+            ).fetchall()
         return {
             "result_id": row[0],
             "input_digest": row[1],
@@ -346,16 +362,42 @@ class Store:
             yield from page
             seq = page[-1]["seq"] + 1
 
-    def record_export(self, result_id: str, fmt: str, relpath: str, sha256: str, size: int) -> None:
+    def publish_export(self, result_id: str, fmt: str, relpath: str, sha256: str, size: int) -> dict[str, Any]:
+        """Record an issued export file. Write-once: re-publishing a path with the same
+        SHA-256 is a no-op, and a different SHA-256 for an issued path is refused."""
         with self.write() as con:
-            con.execute(
-                "INSERT OR REPLACE INTO exports(result_id, format, relpath, sha256, bytes, created_at) VALUES (?,?,?,?,?,?)",
-                (result_id, fmt, relpath, sha256, size, now()),
+            row = con.execute("SELECT sha256, bytes, created_at FROM published_exports WHERE relpath=?", (relpath,)).fetchone()
+            if row is None:
+                ts = now()
+                con.execute(
+                    "INSERT INTO published_exports(relpath, result_id, format, sha256, bytes, created_at) VALUES (?,?,?,?,?,?)",
+                    (relpath, result_id, fmt, sha256, size, ts),
+                )
+                return {"format": fmt, "path": relpath, "sha256": sha256, "bytes": size, "created_at": ts}
+        if row[0] != sha256:
+            raise DomainError(
+                INTERNAL_ERROR,
+                "An issued export would change its bytes; the issued file and record are kept",
+                field="format",
+                details={"path": relpath, "issued_sha256": row[0], "new_sha256": sha256},
             )
+        return {"format": fmt, "path": relpath, "sha256": row[0], "bytes": row[1], "created_at": row[2]}
+
+    def get_published_export(self, relpath: str) -> dict[str, Any] | None:
+        with self.connect() as con:
+            row = con.execute("SELECT format, sha256, bytes, created_at FROM published_exports WHERE relpath=?", (relpath,)).fetchone()
+        if row is None:
+            return None
+        return {"format": row[0], "path": relpath, "sha256": row[1], "bytes": row[2], "created_at": row[3]}
 
     def get_export(self, result_id: str, fmt: str) -> dict[str, Any] | None:
+        """The most recently issued export of a result in one format (result formats have
+        exactly one; the content-addressed context export can have several)."""
         with self.connect() as con:
-            row = con.execute("SELECT relpath, sha256, bytes, created_at FROM exports WHERE result_id=? AND format=?", (result_id, fmt)).fetchone()
+            row = con.execute(
+                "SELECT relpath, sha256, bytes, created_at FROM published_exports WHERE result_id=? AND format=? ORDER BY created_at DESC, rowid DESC LIMIT 1",
+                (result_id, fmt),
+            ).fetchone()
         if row is None:
             return None
         return {"format": fmt, "path": row[0], "sha256": row[1], "bytes": row[2], "created_at": row[3]}

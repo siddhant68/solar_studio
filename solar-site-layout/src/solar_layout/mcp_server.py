@@ -108,10 +108,15 @@ def _tool_defs() -> list[types.Tool]:
         ),
         types.Tool(
             name="export_layout",
-            description="Write one export of a result inside the managed export root: json, csv, svg, dxf, report (Markdown) or bundle (zip with SHA-256 manifest). Returns the managed relative path, byte size and SHA-256.",
+            description=(
+                "Publish (or reuse) one export of a result inside the managed export root: json, csv, svg, dxf, report (Markdown) "
+                "or bundle (zip with SHA-256 manifest) contain the immutable result only and are write-once; context is a "
+                "content-addressed JSON file listing the projects and revisions that use the result. Returns the managed "
+                "relative path, byte size and SHA-256."
+            ),
             input_schema={
                 "type": "object",
-                "properties": {"result_id": rid, "format": {"enum": ["json", "csv", "svg", "dxf", "report", "bundle"]}},
+                "properties": {"result_id": rid, "format": {"enum": ["json", "csv", "svg", "dxf", "report", "bundle", "context"]}},
                 "required": ["result_id", "format"],
                 "additionalProperties": False,
             },
