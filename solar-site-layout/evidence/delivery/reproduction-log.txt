@@ -1,27 +1,27 @@
 $ uv sync --frozen --python 3.12
-# exit 0 in 4.5s
+# exit 0 in 1.9s
 
 warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
 Using CPython 3.12.3 interpreter at: /usr/bin/python3.12
 Creating virtual environment at: .venv
-   Building solar-site-layout @ file:///tmp/solar-verify-962h09gz/from-bundle/solar-site-layout
+   Building solar-site-layout @ file:///tmp/solar-verify-efcp_n21/from-bundle/solar-site-layout
+Downloading cryptography (4.5MiB)
 Downloading numpy (16.0MiB)
-Downloading pydantic-core (2.1MiB)
+Downloading fonttools (5.2MiB)
 Downloading ezdxf (5.9MiB)
 Downloading shapely (2.2MiB)
-Downloading cryptography (4.5MiB)
-Downloading fonttools (5.2MiB)
 Downloading pygments (1.2MiB)
+Downloading pydantic-core (2.1MiB)
  Downloaded pygments
  Downloaded pydantic-core
  Downloaded shapely
  Downloaded cryptography
  Downloaded fonttools
  Downloaded ezdxf
-      Built solar-site-layout @ file:///tmp/solar-verify-962h09gz/from-bundle/solar-site-layout
  Downloaded numpy
-Prepared 43 packages in 4.33s
-Installed 43 packages in 40ms
+      Built solar-site-layout @ file:///tmp/solar-verify-efcp_n21/from-bundle/solar-site-layout
+Prepared 43 packages in 1.74s
+Installed 43 packages in 31ms
  + annotated-types==0.8.0
  + anyio==4.15.1
  + attrs==26.1.0
@@ -58,7 +58,7 @@ Installed 43 packages in 40ms
  + referencing==0.37.0
  + rpds-py==2026.9.1
  + shapely==2.2.0
- + solar-site-layout==0.1.0 (from file:///tmp/solar-verify-962h09gz/from-bundle/solar-site-layout)
+ + solar-site-layout==0.1.0 (from file:///tmp/solar-verify-efcp_n21/from-bundle/solar-site-layout)
  + sse-starlette==3.5.1
  + starlette==1.10.0
  + truststore==0.10.5
@@ -68,11 +68,8 @@ Installed 43 packages in 40ms
 
 
 $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/repro-data generate <tmp>/from-bundle/handoffs/module-01/fixtures/rectangle.request.json
-# exit 0 in 2.6s
-"
-   },
-   "input_digest": "9210e69797916b72039bdc1c0f54557138acf6cfd1b08e27de4852e61d2a1c7b",
-   "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
+# exit 0 in 1.6s
+ad_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
    "placement": {
     "anchor_xy_m": [
      1.0,
@@ -204,6 +201,7 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
   },
   "verification": {
    "checks": {
+    "areas": true,
     "dimensions": true,
     "exclusions": true,
     "footprint_shape": true,
@@ -211,8 +209,11 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
     "lattice_positions": true,
     "module_geometry": true,
     "module_within_table": true,
+    "payload_integrity": true,
     "perimeter_setback": true,
     "quantities": true,
+    "record_fields": true,
+    "record_totals": true,
     "site_containment": true,
     "tables_disjoint": true
    },
@@ -224,10 +225,8 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
 
 
 $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/repro-data generate <tmp>/from-bundle/handoffs/module-01/fixtures/obstacle.request.json
-# exit 0 in 0.8s
-1507",
-   "payload_digest": "1f53ed0242dfb9e9edb0efe69caad2d54305dc878f9f39266db5c6f9bb165102",
-   "placement": {
+# exit 0 in 0.5s
+ement": {
     "anchor_xy_m": [
      1.0,
      1.0
@@ -363,6 +362,7 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
   },
   "verification": {
    "checks": {
+    "areas": true,
     "dimensions": true,
     "exclusions": true,
     "footprint_shape": true,
@@ -370,8 +370,11 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
     "lattice_positions": true,
     "module_geometry": true,
     "module_within_table": true,
+    "payload_integrity": true,
     "perimeter_setback": true,
     "quantities": true,
+    "record_fields": true,
+    "record_totals": true,
     "site_containment": true,
     "tables_disjoint": true
    },
@@ -383,7 +386,7 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
 
 
 $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/repro-data pitch <tmp>/from-bundle/handoffs/module-01/fixtures/pitch-3-4-5.request.json
-# exit 0 in 0.8s
+# exit 0 in 0.5s
 {
  "ok": true,
  "result": {
@@ -430,9 +433,10 @@ $ <tmp>/from-bundle/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/re
 
 
 $ <tmp>/from-bundle/solar-site-layout/.venv/bin/python -m pytest -q -p no:cacheprovider
-# exit 0 in 52.7s
-........................................................................ [ 34%]
-........................................................................ [ 69%]
-...............................................................          [100%]
+# exit 0 in 48.5s
+........................................................................ [ 30%]
+........................................................................ [ 61%]
+........................................................................ [ 92%]
+.................                                                        [100%]
 
 

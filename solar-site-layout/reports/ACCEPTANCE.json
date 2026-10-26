@@ -1,31 +1,51 @@
 {
  "schema": "solar.acceptance/1",
- "generated_at": "2026-10-25T20:05:16.105645+00:00",
- "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+ "generated_at": "2026-10-26T11:47:52.225337+00:00",
+ "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
  "source_tree_ids": {
-  "solar-site-layout/src": "157eff355585ad442cbbf85e57c6d4ecd87e4a5c",
-  "solar-site-layout/tests": "28ee47cd34f161d0c81ecbeae91f1c85d9ccbbbc",
-  "solar-site-layout/scripts": "055d7f8d6f7b03324d47082c493776055f4c7cbc",
-  "solar-site-layout/pyproject.toml": "293a29565e9bc2281d67e7bef9f4066279ae31c9",
+  "solar-site-layout/src": "f953f8d04f429a948727b2763077409754a5ceca",
+  "solar-site-layout/tests": "fd175473616a869a2ce64edee0e2923e2578e41a",
+  "solar-site-layout/scripts": "13933fa4583b60e766cd9ee83d274eb0ce4f4228",
+  "solar-site-layout/pyproject.toml": "63bb288c2c3e26ee9c40f203a0f2b31751960156",
   "solar-site-layout/uv.lock": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
   "solar-site-layout/fixtures": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
   "solar-site-layout/references/probes": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb"
  },
- "head_at_generation": "553b1c1cd07c7b7d085183eea41fa0484f646664",
+ "head_at_generation": "4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb",
  "head_source_tree_matches_tested": true,
- "test_cases": 207,
+ "test_cases": 233,
  "test_cases_failed": 0,
  "test_cases_skipped": 0,
  "gate_counts": {
   "pass": 36
  },
  "complete": true,
+ "supersedes": {
+  "previous_acceptance_source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+  "previous_result": "36/36 pass, recorded in delivery commit f55f4be",
+  "why_superseded": "The independent review of 2026-10-26 (reviews/module-01/2026-10-26/) reproduced five defects at f55f4be (F1 input snapshot across autosave, F2 stale SVG render, F3 concurrent export collisions, F4 mutable export context, F5 verifier gaps) and a browser resource 404. The earlier passes for V01, V02, V04, S05 and C10 rested on evidence that did not exercise those cases. This table is rebuilt from a new run on the repaired source."
+ },
+ "review_regressions": {
+  "V01": "Review 2026-10-26: the resource 404 (/favicon.ico) is fixed; the 'no browser errors' checks run full Chromium and fail on any console error, failed request or HTTP status >= 400, logged with its URL.",
+  "V02": "Review 2026-10-26 regressions F1 (create- and update-delay edits) and F2 (stale SVG; project switch and import while pending) are the V02 rows of ui-checks.json.",
+  "V04": "Review 2026-10-26 regressions F3 (concurrent exports) and F4 (result-only, write-once exports; separate context export), plus the PYTHONHASHSEED-dependent DXF bytes found during the repair, are in tests/test_review_regressions.py.",
+  "S05": "Review 2026-10-26 regression F3: parallel and overlapping exports leave no failed call and no stray .partial files (tests/test_review_regressions.py::test_f3_*).",
+  "C12": "Re-running D03 after the review repair showed the generation time limit was checked only inside the layout engine; it now also covers record construction and verification before anything is persisted (tests/test_validation.py::test_timeout_covers_records_and_verification_not_only_compute).",
+  "C10": "Review 2026-10-26 regression F5: per-record fields, record totals, independently computed areas and payload integrity (tests/test_review_regressions.py::test_f5_*)."
+ },
+ "tooling": {
+  "python": "3.12.3",
+  "node": "v22.22.0",
+  "playwright": "1.63.0",
+  "playwright_pinned": "1.63.0",
+  "uv": "uv 0.11.32 (x86_64-unknown-linux-gnu)"
+ },
  "gates": [
   {
    "gate": "R01",
    "title": "Reference commit/build, file hashes, runtime and licence findings recorded",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     "python -I references/probes/build_manifest.py DIST AGV PVPLANT REA_DIR BUILD_LOG references/manifest.json"
    ],
@@ -40,7 +60,7 @@
    "gate": "R02",
    "title": "Real REA JavaScript analysis of the selected built reference artifact retained and parseable",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     "npx --no-install rea analyze-javascript-application <dist> --detail summary --evidence_output <bundle> --source-path index.html --source-path assets/entry.worker-BWZeDHYo.js --source-path assets/rows-06xZe35N.js --source-path assets/recommend-CNrji3tC.js --format json",
     "node references/probes/agv_rea_execution_probe.cjs http://127.0.0.1:4173/ <out> <rea dir> <node24 bin>"
@@ -56,7 +76,7 @@
    "gate": "R03",
    "title": "Three repeatable local reference scenarios with honest REA-versus-Playwright attribution",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     "npx --no-install rea capture-browser-scenario references/scenarios/<scenario>.rea-scenario.json --format json",
     "node references/probes/agv_playwright_scenarios.cjs http://127.0.0.1:4173/ <out>"
@@ -72,7 +92,7 @@
    "gate": "R04",
    "title": "Reference findings affect implementation decisions; JS/WASM coverage limits explicit",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     "(review) reports/REFERENCE_FINDINGS.md"
    ],
@@ -86,9 +106,9 @@
    "gate": "C01",
    "title": "Versioned schemas reject bad units/frames, NaN/Inf, bad rings/holes, degree/Z inputs with typed field errors",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -130,7 +150,8 @@
     "tests/test_validation.py::test_anchor_must_be_near_site",
     "tests/test_validation.py::test_candidate_limit_rejected_before_work",
     "tests/test_validation.py::test_module_output_limit",
-    "tests/test_validation.py::test_timeout_policy_is_finite_and_typed"
+    "tests/test_validation.py::test_timeout_policy_is_finite_and_typed",
+    "tests/test_validation.py::test_timeout_covers_records_and_verification_not_only_compute"
    ],
    "notes": ""
   },
@@ -138,9 +159,9 @@
    "gate": "C02",
    "title": "Rectangle fixture: 6 tables, 24 modules, 13.2 kWp, 168/120/48 m2, all origins",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -155,9 +176,9 @@
    "gate": "C03",
    "title": "Obstacle fixture: 5 tables, 20 modules, 11 kWp, table (4,1) rejected, 112 m2",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -173,9 +194,9 @@
    "gate": "C04",
    "title": "Portrait/landscape, gaps and tilt dimensions; module vs envelope area",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -190,9 +211,9 @@
    "gate": "C05",
    "title": "3-4-5 pitch fixture and flat / clearance / invalid / near-horizon cases",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -225,9 +246,9 @@
    "gate": "C06",
    "title": "Azimuth axes, corners and relative heights (0/90/180/270, 17/37/73)",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -263,9 +284,9 @@
    "gate": "C07",
    "title": "Concave notch and hole: full footprint validity, not sampled points",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -283,9 +304,9 @@
    "gate": "C08",
    "title": "MultiPolygon components; complete exclusion gives an empty layout with null ratios",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -303,9 +324,9 @@
    "gate": "C09",
    "title": "Setback/keepout against original geometry; arcs and tangency safe",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -336,12 +357,14 @@
    "gate": "C10",
    "title": "No overlap, exact membership, totals agree; verifier detects corruption",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
-   "evidence": [],
+   "evidence": [
+    "evidence/repair/"
+   ],
    "tests": [
     "tests/test_verifier_translation_phase_identity.py::test_c10_fixture_results_verify[rectangle]",
     "tests/test_verifier_translation_phase_identity.py::test_c10_fixture_results_verify[obstacle]",
@@ -355,17 +378,28 @@
     "tests/test_verifier_translation_phase_identity.py::test_c10_detects_dropped_and_orphan_modules",
     "tests/test_verifier_translation_phase_identity.py::test_c10_detects_duplicate_and_overlapping_tables",
     "tests/test_verifier_translation_phase_identity.py::test_c10_detects_capacity_and_area_tampering",
-    "tests/test_verifier_translation_phase_identity.py::test_c10_detects_table_across_hole_and_outside_setback"
+    "tests/test_verifier_translation_phase_identity.py::test_c10_detects_table_across_hole_and_outside_setback",
+    "tests/test_review_regressions.py::test_f5_corrupt_module_power_is_detected",
+    "tests/test_review_regressions.py::test_f5_record_capacity_must_reconcile_with_summary",
+    "tests/test_review_regressions.py::test_f5_consistently_falsified_areas_are_detected",
+    "tests/test_review_regressions.py::test_f5_falsified_buildable_area_within_gross_is_detected",
+    "tests/test_review_regressions.py::test_f5_contract_fields_are_checked[table_i-7]",
+    "tests/test_review_regressions.py::test_f5_contract_fields_are_checked[row-9]",
+    "tests/test_review_regressions.py::test_f5_contract_fields_are_checked[module_id-T_j0_i0_r0_c0x]",
+    "tests/test_review_regressions.py::test_f5_contract_fields_are_checked[table_id-T_j0_i1]",
+    "tests/test_review_regressions.py::test_f5_table_record_fields_are_checked",
+    "tests/test_review_regressions.py::test_f5_payload_digest_integrity",
+    "tests/test_review_regressions.py::test_f5_new_checks_pass_on_all_fixture_results"
    ],
-   "notes": ""
+   "notes": "Review 2026-10-26 regression F5: per-record fields, record totals, independently computed areas and payload integrity (tests/test_review_regressions.py::test_f5_*)."
   },
   {
    "gate": "C11",
    "title": "21 translated/azimuth pairs: same membership, corners within 1e-6 m",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -379,9 +413,9 @@
    "gate": "C12",
    "title": "Envelope, extent, dimension and candidate/output limits enforced before unbounded work",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -392,17 +426,18 @@
     "tests/test_validation.py::test_anchor_must_be_near_site",
     "tests/test_validation.py::test_candidate_limit_rejected_before_work",
     "tests/test_validation.py::test_module_output_limit",
-    "tests/test_validation.py::test_timeout_policy_is_finite_and_typed"
+    "tests/test_validation.py::test_timeout_policy_is_finite_and_typed",
+    "tests/test_validation.py::test_timeout_covers_records_and_verification_not_only_compute"
    ],
-   "notes": ""
+   "notes": "Re-running D03 after the review repair showed the generation time limit was checked only inside the layout engine; it now also covers record construction and verification before anything is persisted (tests/test_validation.py::test_timeout_covers_records_and_verification_not_only_compute)."
   },
   {
    "gate": "C13",
    "title": "Nine phase candidates, selected >= phase zero, tie-break, scores, bounded-optimality label",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -417,9 +452,9 @@
    "gate": "C14",
    "title": "Normalization and repeat runs give identical payload digests; geometry change changes identity",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -439,9 +474,9 @@
    "gate": "S01",
    "title": "CLI and HTTP: same summary/result identity and same domain errors",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -459,9 +494,9 @@
    "gate": "S02",
    "title": "Real MCP client session: initialize, list, project, pitch, generate, page, export; transcript retained",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -478,9 +513,9 @@
    "gate": "S03",
    "title": "Same service and store across MCP/HTTP/CLI; transport schemas documented",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -494,9 +529,9 @@
    "gate": "S04",
    "title": "Two processes, one expected revision: exactly one succeeds",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -509,28 +544,39 @@
    "gate": "S05",
    "title": "Restart reads everything; interrupted generation/export leaves no partial success",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
-   "evidence": [],
+   "evidence": [
+    "evidence/repair/"
+   ],
    "tests": [
     "tests/test_service_interfaces.py::test_s05_restart_reads_projects_results_pages_and_exports",
     "tests/test_service_interfaces.py::test_s05_killed_generation_leaves_no_result[generate:modules_partially_written]",
     "tests/test_service_interfaces.py::test_s05_killed_generation_leaves_no_result[generate:before_commit]",
     "tests/test_service_interfaces.py::test_s05_raised_fault_rolls_back",
-    "tests/test_service_interfaces.py::test_s05_killed_export_is_never_presented"
+    "tests/test_service_interfaces.py::test_s05_killed_export_is_never_presented",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[json]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[csv]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[svg]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[dxf]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[report]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[bundle]",
+    "tests/test_review_regressions.py::test_f3_controlled_overlap_inside_staging_write",
+    "tests/test_review_regressions.py::test_f3_dxf_concurrency_does_not_touch_global_ezdxf_options",
+    "tests/test_review_regressions.py::test_f3_http_parallel_downloads_and_bundle_overlap"
    ],
-   "notes": ""
+   "notes": "Review 2026-10-26 regression F3: parallel and overlapping exports leave no failed call and no stray .partial files (tests/test_review_regressions.py::test_f3_*)."
   },
   {
    "gate": "S06",
    "title": "Bounded stable paging; typed invalid cursor/range; summary/page reads do not load coordinates",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -554,9 +600,9 @@
    "gate": "S07",
    "title": "Export paths stay inside the managed root; no shell interpolation",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [],
@@ -584,9 +630,9 @@
    "gate": "V01",
    "title": "Real browser: import, edit, generate, totals, save/reload, download, screenshot",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -597,33 +643,39 @@
    "tests": [
     "tests/test_browser_and_mcp.py::test_v01_v02_v03_real_browser"
    ],
-   "notes": "V01 import + edit + generate shows totals PASS; V01 save/reload restores project, inputs and current result PASS; V01 export download (zip bundle) PASS; V01 no browser errors PASS"
+   "notes": "V01 import + edit + generate shows totals PASS; V01 save/reload restores project, inputs and current result PASS; V01 export download (zip bundle) PASS; V01 no browser errors PASS. Review 2026-10-26: the resource 404 (/favicon.ico) is fixed; the 'no browser errors' checks run full Chromium and fail on any console error, failed request or HTTP status >= 400, logged with its URL."
   },
   {
    "gate": "V02",
    "title": "Delayed generation: old result historical, edits dirty, no overwrite of newer selection",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
     "evidence/acceptance/browser/V02-late-result-outdated.png",
-    "evidence/acceptance/browser/V02-late-response-not-overwriting.png"
+    "evidence/acceptance/browser/V02-late-response-not-overwriting.png",
+    "evidence/acceptance/browser/V02-F1-create-delay.png",
+    "evidence/acceptance/browser/V02-F1-update-delay.png",
+    "evidence/acceptance/browser/V02-F2-stale-svg-released.png",
+    "evidence/acceptance/browser/V02-project-switch-while-pending.png",
+    "evidence/acceptance/browser/V02-import-while-pending.png",
+    "evidence/repair/"
    ],
    "tests": [
     "tests/test_browser_and_mcp.py::test_v01_v02_v03_real_browser"
    ],
-   "notes": "V02 delayed result labelled historical; new edits remain dirty PASS; V02 old response cannot overwrite newer result selection PASS"
+   "notes": "V02 delayed result labelled historical; new edits remain dirty PASS; V02 old response cannot overwrite newer result selection PASS; V02 F1 create-delay edit stays dirty; result labelled with the saved snapshot PASS; V02 F1 create-delay no browser errors PASS; V02 F1 update-delay edit stays dirty; result labelled with the saved snapshot PASS; V02 F1 update-delay no browser errors PASS; V02 F2 stale SVG released after a newer result changes nothing PASS; V02 F2 stale SVG no browser errors PASS; V02 project switch while a generation is pending keeps the opened project PASS; V02 project switch no browser errors PASS; V02 import while a generation is pending: the old result never appears for the imported inputs PASS; V02 import while pending no browser errors PASS. Review 2026-10-26 regressions F1 (create- and update-delay edits) and F2 (stale SVG; project switch and import while pending) are the V02 rows of ui-checks.json."
   },
   {
    "gate": "V03",
    "title": "Plan renders at overview and close-up for analytic, concave/hole and projected fixtures",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -639,13 +691,14 @@
    "gate": "V04",
    "title": "SVG/DXF/CSV/JSON match the immutable result",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
-    "evidence/examples/*/plan.svg|plan.dxf|modules.csv|layout.json"
+    "evidence/examples/*/plan.svg|plan.dxf|modules.csv|layout.json",
+    "evidence/repair/"
    ],
    "tests": [
     "tests/test_exports.py::test_v04_files_hashes_recorded[obstacle]",
@@ -669,17 +722,31 @@
     "tests/test_exports.py::test_v04_dxf_reopens_with_units_layers_counts_extents[projected_rotated]",
     "tests/test_exports.py::test_v04_bundle_manifest[projected_rotated]",
     "tests/test_exports.py::test_v04_exports_are_deterministic[projected_rotated]",
-    "tests/test_exports.py::test_v04_tampered_export_is_rebuilt_not_served"
+    "tests/test_exports.py::test_v04_tampered_export_is_rebuilt_not_served",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[json]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[csv]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[svg]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[dxf]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[report]",
+    "tests/test_review_regressions.py::test_f3_parallel_same_format_service_exports[bundle]",
+    "tests/test_review_regressions.py::test_f3_controlled_overlap_inside_staging_write",
+    "tests/test_review_regressions.py::test_f3_dxf_concurrency_does_not_touch_global_ezdxf_options",
+    "tests/test_review_regressions.py::test_f3_http_parallel_downloads_and_bundle_overlap",
+    "tests/test_review_regressions.py::test_f4_result_export_unchanged_when_another_project_reuses_result",
+    "tests/test_review_regressions.py::test_f4_result_exports_contain_no_mutable_project_context",
+    "tests/test_review_regressions.py::test_f4_bundle_built_from_one_snapshot_matches_standalone_exports",
+    "tests/test_review_regressions.py::test_f4_issued_export_is_never_rewritten_with_different_bytes",
+    "tests/test_review_regressions.py::test_exports_identical_across_processes_and_hash_seeds"
    ],
-   "notes": ""
+   "notes": "Review 2026-10-26 regressions F3 (concurrent exports) and F4 (result-only, write-once exports; separate context export), plus the PYTHONHASHSEED-dependent DXF bytes found during the repair, are in tests/test_review_regressions.py."
   },
   {
    "gate": "V05",
    "title": "Calculation report arithmetic, denominators and stated assumptions",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>"
    ],
    "evidence": [
@@ -697,9 +764,9 @@
    "gate": "D01",
    "title": "Fresh checkout installs from locks and reproduces the CLI workflow and tests",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "git clone solar_studio-553b1c1cd0.bundle solar_studio",
+    "git clone solar_studio-4594c5f1e8.bundle solar_studio",
     "cd solar_studio/solar-site-layout",
     "UV_CACHE_DIR=$(mktemp -d) uv sync --frozen --python 3.12",
     ".venv/bin/solar-layout --data-dir <tmp> generate ../handoffs/module-01/fixtures/rectangle.request.json",
@@ -712,13 +779,13 @@
     "evidence/delivery/reproduction-log.txt"
    ],
    "tests": [],
-   "notes": "uv sync --frozen: exit 0; generate rectangle: exit 0 -> 24; generate obstacle: exit 0 -> 20; pitch 3-4-5: exit 0 -> 7.0; pytest: exit 0 (...............................................................          [100%])"
+   "notes": "uv sync --frozen: exit 0; generate rectangle: exit 0 -> 24; generate obstacle: exit 0 -> 20; pitch 3-4-5: exit 0 -> 7.0; pytest: exit 0 (.................                                                        [100%])"
   },
   {
    "gate": "D02",
    "title": ">= 10,000 modules generate+verify <= 20 s and <= 512 MiB peak process-tree memory",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     ".venv/bin/python scripts/benchmark.py reports/BENCHMARKS.json"
    ],
@@ -726,13 +793,13 @@
     "reports/BENCHMARKS.json"
    ],
    "tests": [],
-   "notes": "{\"requirement\": \">= 10,000 modules generated and verified in <= 20 s with peak process-tree memory <= 512 MiB\", \"module_count\": 10192, \"generate_and_verify_s\": 2.7619086929998957, \"process_wall_s_including_interpreter_start\": 3.7596895799997583, \"peak_tree_rss_mib\": 86.36, \"pass\": true}"
+   "notes": "{\"requirement\": \">= 10,000 modules generated and verified in <= 20 s with peak process-tree memory <= 512 MiB\", \"module_count\": 10192, \"generate_and_verify_s\": 1.5791600289999224, \"process_wall_s_including_interpreter_start\": 2.1093989740002144, \"peak_tree_rss_mib\": 81.39, \"pass\": true}"
   },
   {
    "gate": "D03",
    "title": "25,000-module stress completes or is rejected by a declared limit; bounds and timeout demonstrated",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     ".venv/bin/python scripts/benchmark.py reports/BENCHMARKS.json"
    ],
@@ -746,9 +813,9 @@
    "gate": "D04",
    "title": "Tests, browser checks, MCP smoke and benchmark run against the final code; evidence bound to commit",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
+    "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml",
     ".venv/bin/python scripts/run_acceptance.py --inspector-dir <npm install of @modelcontextprotocol/inspector@2.12.0>",
     ".venv/bin/python scripts/build_acceptance_report.py"
    ],
@@ -757,29 +824,29 @@
     "evidence/acceptance/pytest-junit.xml"
    ],
    "tests": [],
-   "notes": "pytest exit 0 over 207 cases on source commit f16944e8e9050aaf1078a3a07fcf2115805bc4e4; source tree of HEAD 553b1c1cd07c7b7d085183eea41fa0484f646664 matches the tested tree ids (src, tests, scripts, locks, fixtures, probes)."
+   "notes": "pytest exit 0 over 233 cases on source commit fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef; source tree of HEAD 4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb matches the tested tree ids (src, tests, scripts, locks, fixtures, probes)."
   },
   {
    "gate": "D05",
    "title": "Source archive and Git bundle with SHA-256; integrity checked; no caches/credentials/giant checkouts",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
-    "git bundle create solar_studio-553b1c1cd0.bundle --all",
-    "git bundle verify solar_studio-553b1c1cd0.bundle",
-    "git archive --format=zip --prefix=solar_studio/ -o solar_studio-553b1c1cd0-source.zip HEAD"
+    "git bundle create solar_studio-4594c5f1e8.bundle --all",
+    "git bundle verify solar_studio-4594c5f1e8.bundle",
+    "git archive --format=zip --prefix=solar_studio/ -o solar_studio-4594c5f1e8-source.zip HEAD"
    ],
    "evidence": [
     "evidence/delivery/package-verification.json"
    ],
    "tests": [],
-   "notes": "bundle solar_studio-553b1c1cd0.bundle and source zip solar_studio-553b1c1cd0-source.zip built from 553b1c1cd07c7b7d085183eea41fa0484f646664; bundle_created=True, bundle_verify=True, zip_created=True, zip_crc_ok=True, zip_matches_tracked_files=True, no_caches_venvs_db_keys_or_reference_checkouts=True, bundle_clone=True, bundle_clone_head_matches=True, bundle_clone_tree_matches=True"
+   "notes": "bundle solar_studio-4594c5f1e8.bundle and source zip solar_studio-4594c5f1e8-source.zip built from 4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb; bundle_created=True, bundle_verify=True, zip_created=True, zip_crc_ok=True, zip_matches_tracked_files=True, no_caches_venvs_db_keys_or_reference_checkouts=True, bundle_clone=True, bundle_clone_head_matches=True, bundle_clone_tree_matches=True"
   },
   {
    "gate": "D06",
    "title": "Delivery report separates verified behaviour, observations, assumptions, untested platforms, failures; licences",
    "status": "pass",
-   "source_commit": "f16944e8e9050aaf1078a3a07fcf2115805bc4e4",
+   "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
    "commands": [
     "(review) DELIVERY_REPORT.md"
    ],

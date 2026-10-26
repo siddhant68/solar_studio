@@ -14,9 +14,10 @@ Branch `claude/kind-cerf-gu33em` of `siddhant68/solar_studio`. Pushing to this b
 | 6 | `553b1c1` | Acceptance evidence for `f16944e` | Superseded |
 | 7 | `f55f4be` | First delivery: 36/36 recorded as pass, bound to `f16944e` | Superseded: the review found F1–F5 |
 | 8 | `b7a3beb` | Independent review (`reviews/module-01/2026-10-26/`) and repair handoff; source unchanged | — |
-| 9 | `d935ff2` | **Source commit under acceptance**: repairs for F1–F5, the browser 404 and the PYTHONHASHSEED-dependent DXF bytes; regressions; pinned browser tooling | — |
-| 10 | *(evidence commit)* | Acceptance evidence for `d935ff2` (tests, browser, MCP, Inspector, examples, benchmarks) | — |
-| 11 | *(delivery commit)* | `reports/ACCEPTANCE.json` rebuilt from the new run, packaging and fresh-clone reproduction, delivery report, this checkpoint | Pull request into `main` for review; not merged |
+| 9 | `d935ff2` | Repairs for F1–F5, the browser 404 and the PYTHONHASHSEED-dependent DXF bytes; regressions; pinned browser tooling. Its acceptance run passed 232 tests but failed the D03 timeout demonstration | Timeout fixed in 10 |
+| 10 | `fe15c5f` | **Source commit under acceptance**: the generation time limit also covers record construction and verification. (This commit also carries the outputs of the `d935ff2` run, kept as a record.) | — |
+| 11 | `4594c5f` | Acceptance evidence for `fe15c5f`: 233 tests passed, 0 skipped; 24/24 browser checks; MCP session and Inspector cross-check; examples; benchmarks | — |
+| 12 | *(delivery commit)* | `reports/ACCEPTANCE.json` (36/36 pass, bound to `fe15c5f`), packaging and fresh-clone reproduction of `4594c5f`, delivery report, this checkpoint | Pull request into `main` for review; not merged |
 
 ## How to resume
 

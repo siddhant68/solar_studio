@@ -1,12 +1,12 @@
 {
  "passed": true,
  "working_tree_clean_at_packaging": true,
- "head": "553b1c1cd07c7b7d085183eea41fa0484f646664",
+ "head": "4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb",
  "branch": "claude/kind-cerf-gu33em",
  "commands": [
-  "git bundle create solar_studio-553b1c1cd0.bundle --all",
-  "git bundle verify solar_studio-553b1c1cd0.bundle",
-  "git archive --format=zip --prefix=solar_studio/ -o solar_studio-553b1c1cd0-source.zip HEAD"
+  "git bundle create solar_studio-4594c5f1e8.bundle --all",
+  "git bundle verify solar_studio-4594c5f1e8.bundle",
+  "git archive --format=zip --prefix=solar_studio/ -o solar_studio-4594c5f1e8-source.zip HEAD"
  ],
  "checks": {
   "bundle_created": true,
@@ -21,17 +21,17 @@
  },
  "files": [
   {
-   "name": "solar_studio-553b1c1cd0.bundle",
-   "bytes": 28273285,
-   "sha256": "d6fac89430dd8e1d71451d33849dfef679af52a92075dc32a89ae45c724692bc"
+   "name": "solar_studio-4594c5f1e8.bundle",
+   "bytes": 33741413,
+   "sha256": "27ff8af961199872231c0ef6819c21e16ba4c8552c57f281275a3c8cfe76fc34"
   },
   {
-   "name": "solar_studio-553b1c1cd0-source.zip",
-   "bytes": 28372274,
-   "sha256": "7db9a1f83907ccdfc760a0cc506cea9edbe9be0de4b72e47b2057794c86b4d5a"
+   "name": "solar_studio-4594c5f1e8-source.zip",
+   "bytes": 30958238,
+   "sha256": "ad6837053311985c3f3e980cd2dcecd61e23db709715ff2df855fa58ceb16413"
   }
  ],
- "zip_file_count": 220,
+ "zip_file_count": 265,
  "largest_files_in_zip": [
   {
    "path": "solar-site-layout/evidence/rea/runtime-scenarios/R03-S2-change-pitch-tilt.evidence.json.gz",
@@ -67,5 +67,5 @@
   }
  ],
  "forbidden_hits": [],
- "summary": "bundle solar_studio-553b1c1cd0.bundle and source zip solar_studio-553b1c1cd0-source.zip built from 553b1c1cd07c7b7d085183eea41fa0484f646664; bundle_created=True, bundle_verify=True, zip_created=True, zip_crc_ok=True, zip_matches_tracked_files=True, no_caches_venvs_db_keys_or_reference_checkouts=True, bundle_clone=True, bundle_clone_head_matches=True, bundle_clone_tree_matches=True"
+ "summary": "bundle solar_studio-4594c5f1e8.bundle and source zip solar_studio-4594c5f1e8-source.zip built from 4594c5f1e85ecb0a8720fb3063e45aae48a2ffcb; bundle_created=True, bundle_verify=True, zip_created=True, zip_crc_ok=True, zip_matches_tracked_files=True, no_caches_venvs_db_keys_or_reference_checkouts=True, bundle_clone=True, bundle_clone_head_matches=True, bundle_clone_tree_matches=True"
 }
