@@ -5,9 +5,9 @@
   "-m",
   "solar_layout.mcp_server",
   "--data-dir",
-  "/tmp/pytest-of-root/pytest-22/test_s02_real_mcp_client_sessi0/mcp-data"
+  "/tmp/pytest-of-root/pytest-25/test_s02_real_mcp_client_sessi0/mcp-data"
  ],
- "data_dir": "/tmp/pytest-of-root/pytest-22/test_s02_real_mcp_client_sessi0/mcp-data",
+ "data_dir": "/tmp/pytest-of-root/pytest-25/test_s02_real_mcp_client_sessi0/mcp-data",
  "steps": [
   {
    "step": "initialize",
@@ -44,7 +44,7 @@
   {
    "step": "create_project",
    "ok": true,
-   "project_id": "prj_762b2201cec74313b103"
+   "project_id": "prj_e3a43ddcfa324690abe3"
   },
   {
    "step": "update_project (CAS rev 1 -> 2)",
@@ -94,15 +94,15 @@
    "step": "export_layout report",
    "ok": true,
    "path": "res_2e599e535a0cfd6f84a8a1b0/v2/res_2e599e535a0cfd6f84a8a1b0-report.md",
-   "sha256": "97b4d496a08a11f6ce3f72467ae787befbb409a62e14ae724d3e280e16041dc3",
+   "sha256": "4950bd6c93fcf6ba476c923c1484159c92cb7e66a106742b30a545d76462ed69",
    "bytes": 5624
   },
   {
    "step": "export_layout bundle",
    "ok": true,
    "path": "res_2e599e535a0cfd6f84a8a1b0/v2/res_2e599e535a0cfd6f84a8a1b0-bundle.zip",
-   "sha256": "2fc2671a253837a89cce8e624be4ffb41275e105ff05f0b060ef4170c8b5a90f",
-   "bytes": 15918
+   "sha256": "e9c12bd0e8420df568a91c2a8622cdaab54331fd78526b4b7748053a05d2f891",
+   "bytes": 15920
   },
   {
    "step": "export_layout traversal attempt is typed",

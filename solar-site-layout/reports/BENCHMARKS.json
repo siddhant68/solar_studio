@@ -28,9 +28,9 @@
    "fixture": "fixtures/benchmark-10k.request.json",
    "generate": {
     "exit": 0,
-    "wall_s": 2.232591556999978,
-    "peak_tree_rss_mib": 81.44,
-    "rss_samples": 193,
+    "wall_s": 2.1093989740002144,
+    "peak_tree_rss_mib": 81.39,
+    "rss_samples": 183,
     "stderr_tail": "",
     "ok": true,
     "result_id": "res_d1bbb8a940f5c1d227f55119",
@@ -39,60 +39,60 @@
     "dc_capacity_kwp": 5911.36,
     "candidates_evaluated": 744,
     "timings": {
-     "validate_s": 0.021244289999913235,
-     "compute_s": 0.023943563999864637,
-     "records_and_digest_s": 0.33387974299989764,
-     "verify_s": 1.0498280580000028,
-     "persist_s": 0.2905220659999941,
-     "generate_and_verify_total_s": 1.7194269929998427
+     "validate_s": 0.028479306000008364,
+     "compute_s": 0.037102481000147236,
+     "records_and_digest_s": 0.31086579200018605,
+     "verify_s": 0.9651317929997276,
+     "persist_s": 0.23757201299986264,
+     "generate_and_verify_total_s": 1.5791600289999224
     }
    },
    "exports": {
     "exit": 0,
-    "wall_s": 2.7648506820000875,
-    "peak_tree_rss_mib": 85.16,
-    "rss_samples": 238,
+    "wall_s": 2.8494672209999408,
+    "peak_tree_rss_mib": 84.83,
+    "rss_samples": 248,
     "stderr_tail": "",
     "ok": true,
     "exports": {
      "json": {
-      "seconds": 0.2740076659999886,
+      "seconds": 0.2999097530000654,
       "bytes": 3402820,
-      "sha256": "128e88e85dda98e04cff8bfff1c8c0f04e83a2d5036c570cbf4a1ccbbed76e08"
+      "sha256": "9e682eba9b48511d445e50dfe2d901d622fb341d5f4dd412a4e8e6233c6b80ba"
      },
      "csv": {
-      "seconds": 0.22934966499997245,
+      "seconds": 0.20835920399986207,
       "bytes": 2105741,
       "sha256": "321d5111429309493e2953d0f8f569685036c7166753ed8dd0bcad098958bdae"
      },
      "svg": {
-      "seconds": 0.17727313799991862,
+      "seconds": 0.1792085600000064,
       "bytes": 2305236,
       "sha256": "fc7b97dd331d86a87eba22b9b18da99d2862c43b293a1d46a30edf53464a20c7"
      },
      "dxf": {
-      "seconds": 1.278074069000013,
+      "seconds": 1.4506541409996316,
       "bytes": 2833310,
       "sha256": "de4a66c7b1cb4db2683ee795f986020addedac439a83bc2c42b3cde1bf4a103b"
      },
      "report": {
-      "seconds": 0.007110579000027428,
+      "seconds": 0.006214074999661534,
       "bytes": 5824,
-      "sha256": "dbefdb3c95d09afae6ed187b654c327385e495b7866de918cbc202a71f1700c4"
+      "sha256": "e7faf480c67b5e30e38ffd5498274374d1811910f0ec6c33ad4f1ccf06b4ad2c"
      },
      "bundle": {
-      "seconds": 0.21770186599997032,
-      "bytes": 879808,
-      "sha256": "e768bf1ccb387a72d08bd2b6a1837c1e5787ae6542664d6b9325a5d15b3db276"
+      "seconds": 0.20429091300002256,
+      "bytes": 879818,
+      "sha256": "a6760c1ba6cdcb743753c043120ef3c6ba63d8fe67f2bdc7ddc7e6ca028cdea1"
      }
     }
    },
    "gate": {
     "requirement": ">= 10,000 modules generated and verified in <= 20 s with peak process-tree memory <= 512 MiB",
     "module_count": 10192,
-    "generate_and_verify_s": 1.7194269929998427,
-    "process_wall_s_including_interpreter_start": 2.232591556999978,
-    "peak_tree_rss_mib": 81.44,
+    "generate_and_verify_s": 1.5791600289999224,
+    "process_wall_s_including_interpreter_start": 2.1093989740002144,
+    "peak_tree_rss_mib": 81.39,
     "pass": true
    }
   },
@@ -101,9 +101,9 @@
    "fixture": "fixtures/stress-25k.request.json",
    "generate": {
     "exit": 0,
-    "wall_s": 5.023961407999877,
-    "peak_tree_rss_mib": 107.03,
-    "rss_samples": 435,
+    "wall_s": 4.752562919999946,
+    "peak_tree_rss_mib": 107.09,
+    "rss_samples": 414,
     "stderr_tail": "",
     "ok": true,
     "result_id": "res_db870f4649ecac536539eb6c",
@@ -112,51 +112,51 @@
     "dc_capacity_kwp": 14957.04,
     "candidates_evaluated": 1530,
     "timings": {
-     "validate_s": 0.03294642099990597,
-     "compute_s": 0.036507361000076344,
-     "records_and_digest_s": 0.6130915319999986,
-     "verify_s": 3.125147520999917,
-     "persist_s": 0.6519829750000099,
-     "generate_and_verify_total_s": 4.459685049999962
+     "validate_s": 0.020169765999980882,
+     "compute_s": 0.03081705200020224,
+     "records_and_digest_s": 0.5782509149998987,
+     "verify_s": 2.796536348000245,
+     "persist_s": 0.806716981000136,
+     "generate_and_verify_total_s": 4.232498603000295
     }
    },
    "exports": {
     "exit": 0,
-    "wall_s": 6.6740309029999025,
-    "peak_tree_rss_mib": 107.61,
-    "rss_samples": 569,
+    "wall_s": 7.001972336999643,
+    "peak_tree_rss_mib": 106.84,
+    "rss_samples": 607,
     "stderr_tail": "",
     "ok": true,
     "exports": {
      "json": {
-      "seconds": 0.8873929699998371,
+      "seconds": 0.960872592999749,
       "bytes": 8593557,
-      "sha256": "7ad1691c654ba7d8345d07a4ebfd295529e52e9a3399f33c11464e564bef5310"
+      "sha256": "1222334f48c723e214cd7818ca799bd32c2c32bfe8e30ee9c63c0bf2644a7923"
      },
      "csv": {
-      "seconds": 0.44637584499992045,
+      "seconds": 0.7315360769998733,
       "bytes": 5356469,
       "sha256": "954936a4ec75c0f409b8178fdd107126d5d1bf6520e59b6835f5380657ef28a8"
      },
      "svg": {
-      "seconds": 0.4431610389999605,
+      "seconds": 0.46295955599998706,
       "bytes": 5769327,
       "sha256": "3d7c98575b2a7925a72218d0e8770d13e9e9bd6dcfe9f8328958d0d17cf55da4"
      },
      "dxf": {
-      "seconds": 3.781935685999997,
+      "seconds": 3.861930620000294,
       "bytes": 7104969,
       "sha256": "b8e8395e8ad1aa11823fdb4cc893a48c1c753c345999ce0bdebbc3daa8000123"
      },
      "report": {
-      "seconds": 0.006622276999905807,
+      "seconds": 0.010446141000102216,
       "bytes": 5825,
-      "sha256": "acd78a1d111f047d2436b049075b4e05d97db3da0056a89f10da08d65e569c12"
+      "sha256": "7ee1c09a329e510bfa797cbe579a111d034cc28917c2204ccab85d8ee7a4aa25"
      },
      "bundle": {
-      "seconds": 0.4842590589998963,
-      "bytes": 2172129,
-      "sha256": "25298830c907bcb5b97a536cbcdbb89b6506b7a7a0e68b326f11b8870050d22d"
+      "seconds": 0.42802416400036236,
+      "bytes": 2172126,
+      "sha256": "9754981731ad1cbf098ea0ad0185d243ff958a1f2ec9f9b115f140ddf1c23e51"
      }
     }
    },
@@ -171,28 +171,26 @@
    "fixture": "fixtures/stress-25k.request.json",
    "generate": {
     "exit": 0,
-    "wall_s": 4.417582653999943,
-    "peak_tree_rss_mib": 107.11,
-    "rss_samples": 382,
+    "wall_s": 0.6903244449999875,
+    "peak_tree_rss_mib": 66.36,
+    "rss_samples": 60,
     "stderr_tail": "",
-    "ok": true,
-    "result_id": "res_db870f4649ecac536539eb6c",
-    "module_count": 25788,
-    "table_count": 921,
-    "dc_capacity_kwp": 14957.04,
-    "candidates_evaluated": 1530,
-    "timings": {
-     "validate_s": 0.020365116999983,
-     "compute_s": 0.0324862850000045,
-     "records_and_digest_s": 0.6903430820000267,
-     "verify_s": 2.5900765359999696,
-     "persist_s": 0.6442099380001309,
-     "generate_and_verify_total_s": 3.977489773999878
-    }
+    "ok": false,
+    "error": {
+     "code": "RESOURCE_LIMIT",
+     "message": "Layout generation exceeded its 0.05 s time limit during module generation; nothing was saved",
+     "details": {
+      "limit": "generation_timeout_s",
+      "value": 0.05,
+      "stage": "module generation"
+     }
+    },
+    "elapsed_s": 0.0860227850002957,
+    "stored_results": 0
    },
    "gate": {
     "requirement": "finite timeout returns a typed RESOURCE_LIMIT and stores nothing",
-    "pass": false
+    "pass": true
    }
   },
   {
@@ -200,9 +198,9 @@
    "fixture": "derived: 1400 x 900 m site, 2x14 tables, pitch 4.5 m",
    "generate": {
     "exit": 0,
-    "wall_s": 0.6847466110000369,
-    "peak_tree_rss_mib": 82.85,
-    "rss_samples": 58,
+    "wall_s": 0.6350517020000552,
+    "peak_tree_rss_mib": 82.79,
+    "rss_samples": 55,
     "stderr_tail": "",
     "ok": false,
     "error": {
@@ -213,7 +211,7 @@
       "value": 457828
      }
     },
-    "elapsed_s": 0.19902860800016242,
+    "elapsed_s": 0.20952081299992642,
     "stored_results": 0
    },
    "gate": {
@@ -226,9 +224,9 @@
    "fixture": "derived: 14 x 14 km site, 0.05 m tables",
    "generate": {
     "exit": 0,
-    "wall_s": 0.48180814400006966,
-    "peak_tree_rss_mib": 63.83,
-    "rss_samples": 41,
+    "wall_s": 0.594846478999898,
+    "peak_tree_rss_mib": 63.86,
+    "rss_samples": 51,
     "stderr_tail": "",
     "ok": false,
     "error": {
@@ -239,7 +237,7 @@
       "value": 78402240016
      }
     },
-    "elapsed_s": 0.019484356000020853,
+    "elapsed_s": 0.020311195999966003,
     "stored_results": 0
    },
    "gate": {

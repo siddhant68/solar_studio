@@ -7,7 +7,7 @@
   "files": {
    "json": {
     "file": "rectangle/layout.json",
-    "sha256": "4949205f2eb2e74eb187279e655b29fbfc72545bdb4d869ac5e11d8f3664e9f8"
+    "sha256": "0ee113bb41b7e651e13d3d1941d75f6ef175c6a98c1f7e3593964150bbcfc040"
    },
    "csv": {
     "file": "rectangle/modules.csv",
@@ -23,7 +23,7 @@
    },
    "report": {
     "file": "rectangle/report.md",
-    "sha256": "2dad2507085c71d8f9ea2bbf9088d9d01a76c0f4cf1c2603db8db8b94d653326"
+    "sha256": "04cdc2429e314826a12ea7114c4a68dae74093aa30078ae01833769abb44dce9"
    }
   }
  },
@@ -35,7 +35,7 @@
   "files": {
    "json": {
     "file": "obstacle/layout.json",
-    "sha256": "05eb577cedc73c70076c3dc489cd452ec7ad0a0ea0db5fbe8ecceed06796041b"
+    "sha256": "7b465537c4d19a014c9518bc876156ab8b470fc11bac9c1a8ab15d42d0d75d30"
    },
    "csv": {
     "file": "obstacle/modules.csv",
@@ -51,7 +51,7 @@
    },
    "report": {
     "file": "obstacle/report.md",
-    "sha256": "a8e882d27296ad7db8afd5228f054fbe99561e780e3509a712625de878bd30de"
+    "sha256": "e1cd063016067aa089a359d5c5b58b7dc57c377447cb64032aebfda321b493f2"
    }
   }
  },
@@ -63,7 +63,7 @@
   "files": {
    "json": {
     "file": "multipolygon/layout.json",
-    "sha256": "6a03421af62939e609b0ab6496a201ffa152cc2cbd3895897e673b3cc1a09652"
+    "sha256": "431199b3658c3342a0e2df248a9aaff36d74ab53123352af9220fff88e0a92c4"
    },
    "csv": {
     "file": "multipolygon/modules.csv",
@@ -79,7 +79,7 @@
    },
    "report": {
     "file": "multipolygon/report.md",
-    "sha256": "8d092392b120e363f2d7527e3247706c3b3c8cfbba7641287486bea2a412b1ad"
+    "sha256": "661d28832a57363b63b886dd0bd66e66ed7fff298b26c365545ed1e8d0b31edb"
    }
   }
  },
@@ -91,7 +91,7 @@
   "files": {
    "json": {
     "file": "concave-notch/layout.json",
-    "sha256": "d12d869d915d6cf5996e4f6ccc2c6d1d6ebcc445507a43092e41be45240a1e64"
+    "sha256": "d503c21b59ff9d939365efd48d58fee19f1a1ead2b8539842866f7c3c596e53e"
    },
    "csv": {
     "file": "concave-notch/modules.csv",
@@ -107,7 +107,7 @@
    },
    "report": {
     "file": "concave-notch/report.md",
-    "sha256": "ab3d349d366f9166eba19eb19e232145b90ee699e4fab77011f12c224f12f97a"
+    "sha256": "42f45d792db725c03db30f7f053a7790b656868537cd1e909c94d0a031072e99"
    }
   }
  },
@@ -119,7 +119,7 @@
   "files": {
    "json": {
     "file": "hole/layout.json",
-    "sha256": "c578d2b5b047f2b607647a62bcc89178eea75fb662ad9ba4bba44f82c8a8ca44"
+    "sha256": "b831f3a00c838cd3fc5694e09619ddd7959339d78168a759503360decf981b53"
    },
    "csv": {
     "file": "hole/modules.csv",
@@ -135,7 +135,7 @@
    },
    "report": {
     "file": "hole/report.md",
-    "sha256": "e427acf8efeccd1f80bdfa67053b2f663013d42bae772f2f7a8f907db15d7fb3"
+    "sha256": "8184ecaf113e6bbc15bbd39ae23c0a86d38d181efb475b71bf1ea154e63e3e9d"
    }
   }
  },

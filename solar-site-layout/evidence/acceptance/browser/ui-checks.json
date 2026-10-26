@@ -1,6 +1,6 @@
 {
  "authority": "Playwright + Chromium against the local solar-site-layout server",
- "base": "http://127.0.0.1:33005",
+ "base": "http://127.0.0.1:54265",
  "playwright": "1.63.0",
  "browser": {
   "channel": "chromium",
@@ -25,8 +25,8 @@
    "name": "V01 save/reload restores project, inputs and current result",
    "pass": true,
    "details": {
-    "projectId": "prj_086f7edfb2174a1eb971",
-    "url": "http://127.0.0.1:33005/?project=prj_086f7edfb2174a1eb971",
+    "projectId": "prj_19f4045784f64c8b9f3b",
+    "url": "http://127.0.0.1:54265/?project=prj_19f4045784f64c8b9f3b",
     "tiltAfter": "10",
     "statusIn": "saved",
     "statusRes": "current"
@@ -37,8 +37,8 @@
    "pass": true,
    "details": {
     "file": "V01-download-res_2e599e535a0cfd6f84a8a1b0-bundle.zip",
-    "bytes": 15918,
-    "sha256": "485da9102333aa5a9d789e70ec9977874ff1d214ab34a8f5623053eb62f24608"
+    "bytes": 15922,
+    "sha256": "382ce0bb1e036bbf11704d2f52c4baa8f9b16f3769fdb7fe6c16659ff2e17f18"
    }
   },
   {
@@ -88,7 +88,7 @@
      "displayed": {
       "result": "res_410d496155af5459caa61028",
       "revision": 1,
-      "project": "prj_e98eed9cd152489da3f3",
+      "project": "prj_80ec558724e947e8b0e5",
       "inputs": {
        "boundary": {
         "coordinates": [
@@ -177,7 +177,7 @@
       }
      },
      "project": {
-      "id": "prj_e98eed9cd152489da3f3",
+      "id": "prj_80ec558724e947e8b0e5",
       "revision": 1,
       "saved": {
        "boundary": {
@@ -286,7 +286,7 @@
      "displayed": {
       "result": "res_ba89b032cd498df8cbb7f9ad",
       "revision": 2,
-      "project": "prj_83ccdb4a19bf49338a6f",
+      "project": "prj_4678ebe1409c483288e3",
       "inputs": {
        "boundary": {
         "coordinates": [
@@ -375,7 +375,7 @@
       }
      },
      "project": {
-      "id": "prj_83ccdb4a19bf49338a6f",
+      "id": "prj_4678ebe1409c483288e3",
       "revision": 2,
       "saved": {
        "boundary": {
@@ -480,7 +480,7 @@
      "displayed": {
       "result": "res_8238e4697b1600f96b1059ed",
       "revision": 2,
-      "project": "prj_84cafb8866bd4a92ab56",
+      "project": "prj_e41e9866aa9446a88c37",
       "inputs": {
        "boundary": {
         "coordinates": [
@@ -569,7 +569,7 @@
       }
      },
      "project": {
-      "id": "prj_84cafb8866bd4a92ab56",
+      "id": "prj_e41e9866aa9446a88c37",
       "revision": 2,
       "saved": {
        "boundary": {
@@ -658,7 +658,7 @@
      "displayed": {
       "result": "res_8238e4697b1600f96b1059ed",
       "revision": 2,
-      "project": "prj_84cafb8866bd4a92ab56",
+      "project": "prj_e41e9866aa9446a88c37",
       "inputs": {
        "boundary": {
         "coordinates": [
@@ -747,7 +747,7 @@
       }
      },
      "project": {
-      "id": "prj_84cafb8866bd4a92ab56",
+      "id": "prj_e41e9866aa9446a88c37",
       "revision": 2,
       "saved": {
        "boundary": {
@@ -834,7 +834,7 @@
    "name": "V02 project switch while a generation is pending keeps the opened project",
    "pass": true,
    "details": {
-    "opened": "prj_55038765e1f34d8c8ad5",
+    "opened": "prj_61c61235bd094251a7e8",
     "opened_result": "res_35676bb67db6ca4ba3cf15d4",
     "before": {
      "edited_width": "1",
@@ -851,7 +851,7 @@
      "displayed": {
       "result": "res_35676bb67db6ca4ba3cf15d4",
       "revision": 1,
-      "project": "prj_55038765e1f34d8c8ad5",
+      "project": "prj_61c61235bd094251a7e8",
       "inputs": {
        "boundary": {
         "coordinates": [
@@ -972,7 +972,7 @@
       }
      },
      "project": {
-      "id": "prj_55038765e1f34d8c8ad5",
+      "id": "prj_61c61235bd094251a7e8",
       "revision": 1,
       "saved": {
        "boundary": {
@@ -1076,7 +1076,7 @@
       }
      },
      "history": "Results this session (1)#2 res_35676bb67db6ca4ba3cf15d4 · rev 1 · 20 modules",
-     "messages": "Opened prj_55038765e1f34d8c8ad5 at revision 1"
+     "messages": "Opened prj_61c61235bd094251a7e8 at revision 1"
     },
     "after": {
      "edited_width": "1",
@@ -1093,7 +1093,7 @@
      "displayed": {
       "result": "res_35676bb67db6ca4ba3cf15d4",
       "revision": 1,
-      "project": "prj_55038765e1f34d8c8ad5",
+      "project": "prj_61c61235bd094251a7e8",
       "inputs": {
        "boundary": {
         "coordinates": [
@@ -1214,7 +1214,7 @@
       }
      },
      "project": {
-      "id": "prj_55038765e1f34d8c8ad5",
+      "id": "prj_61c61235bd094251a7e8",
       "revision": 1,
       "saved": {
        "boundary": {
@@ -1346,7 +1346,7 @@
      "has_plan": false,
      "displayed": null,
      "project": {
-      "id": "prj_949d060475914a959ee9",
+      "id": "prj_4681ebf4195a4f2c8f7e",
       "revision": 1,
       "saved": {
        "boundary": {

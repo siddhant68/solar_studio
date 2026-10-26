@@ -1,22 +1,22 @@
 {
- "source_commit": "d935ff25e1b321dddd2d935b94134caba0bd558a",
+ "source_commit": "fe15c5fda8345cbc17c2b8dc2a81fd5321fda5ef",
  "source_tree_ids": {
-  "solar-site-layout/src": "7e9159fedd5df3291562a2c83753131079e0df1f",
-  "solar-site-layout/tests": "d18c80269b55165e45f92d228b54ec8855a25313",
-  "solar-site-layout/scripts": "8a42bd42aedf628655045e916894f3f809957ea7",
+  "solar-site-layout/src": "f953f8d04f429a948727b2763077409754a5ceca",
+  "solar-site-layout/tests": "fd175473616a869a2ce64edee0e2923e2578e41a",
+  "solar-site-layout/scripts": "13933fa4583b60e766cd9ee83d274eb0ce4f4228",
   "solar-site-layout/pyproject.toml": "63bb288c2c3e26ee9c40f203a0f2b31751960156",
   "solar-site-layout/uv.lock": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
   "solar-site-layout/fixtures": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
   "solar-site-layout/references/probes": "2606e1cd29f2e524e09129a4b5dcd772a5d617bb"
  },
- "started_at": "2026-10-26T11:30:35.050230+00:00",
- "finished_at": "2026-10-26T11:32:04.885057+00:00",
+ "started_at": "2026-10-26T11:33:49.174428+00:00",
+ "finished_at": "2026-10-26T11:35:16.866336+00:00",
  "pytest": {
   "exit": 0,
-  "seconds": 44.2,
+  "seconds": 44.0,
   "command": "SOLAR_REQUIRE_BROWSER=1 SOLAR_EVIDENCE_DIR=evidence/acceptance python -m pytest -q --junitxml=evidence/acceptance/pytest-junit.xml"
  },
- "test_count": 232,
+ "test_count": 233,
  "tooling": {
   "python": "3.12.3",
   "node": "v22.22.0",
