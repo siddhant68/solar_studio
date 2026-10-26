@@ -6,10 +6,12 @@ The output is a preliminary layout under stated assumptions: a flat site, synthe
 
 ## Status
 
+Module 01 passed the independent follow-up review of the repairs (`../reviews/module-01/2026-10-26-followup/FOLLOWUP_REVIEW.md`), which recommends accepting PR #1 as the Module 01 milestone. That is **review acceptance of the flat-site layout scope, not a merge or a release**: PR #1 is open, `main` still holds the original handoff, nothing is tagged, and the licence is undecided. Merging, tagging and the licence are owner decisions.
+
 | Platform | Status |
 |---|---|
 | Linux x86_64 (Ubuntu 24.04, Python 3.12.3, cloud container) | **Tested.** The full test suite, real-browser checks (full Chromium 153 via Playwright 1.63.0, pinned in `tests/browser/`), real MCP client sessions, benchmarks, and a fresh-clone reproduction all ran here. |
-| macOS | **Not tested.** No macOS runner was available. Every dependency ships macOS wheels and the code uses no Linux-only APIs, except the test-only `SIGKILL` fault injection and `scripts/dev_server.sh` (`setsid`). |
+| macOS arm64 (Python 3.12.14, Google Chrome via Playwright 1.63.0 `channel: "chrome"`) | **One independent run** (follow-up review, 26 October 2026, `../reviews/module-01/2026-10-26-followup/`): 233 tests passed with none skipped, 24/24 browser checks, 17 MCP steps, at implementation head `82f11f0`. Benchmarks, the REA pipeline and packaging were not run there. This is not evidence for Safari, other Mac configurations or Python 3.13+. |
 | Windows | **Not tested.** The test-only fault injection uses POSIX signals, and the shell helper scripts are bash. |
 
 ## Install
