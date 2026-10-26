@@ -46,3 +46,7 @@ The brief was prepared on 25 October 2026. Reference observations, future implem
 - [Downloadable follow-up evidence](reviews/module-01/2026-10-26-followup/Solar_Module_01_Repair_Verification.zip).
 
 The earlier [repair handoff](CLAUDE_REPAIR_HANDOFF.md) is superseded by [the continuation handoff](CLAUDE_NEXT_HANDOFF.md). Do not reopen completed repairs because an older document lists them.
+
+## Module 02 proposal (for review)
+
+[`handoffs/module-02-terrain/`](handoffs/module-02-terrain/README.md) is a design-only terrain placement proposal: plan, draft contracts, analytic fixtures with independently re-derived expectations, acceptance gates, research and the [owner decisions](handoffs/module-02-terrain/OWNER_DECISIONS.md) needed before any implementation. Nothing in it is implemented.

@@ -1,0 +1,58 @@
+{
+ "schema_version": "solar.terrain.surface/1",
+ "name": "Same plane, surveyed only for x in [0, 6]",
+ "frame": {
+  "kind": "local_cartesian",
+  "id": "local:analytic-site",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "vertical": {
+  "kind": "local",
+  "id": "local:fixture-datum",
+  "crs": null,
+  "units": "m",
+  "positive": "up"
+ },
+ "source": {
+  "kind": "synthetic_analytic",
+  "description": "Two triangles over [0,6] x [0,14]; everything with x > 6 is unknown ground"
+ },
+ "vertices_xyz_m": [
+  [
+   0.0,
+   0.0,
+   100.0
+  ],
+  [
+   6.0,
+   0.0,
+   100.3
+  ],
+  [
+   6.0,
+   14.0,
+   101.7
+  ],
+  [
+   0.0,
+   14.0,
+   101.4
+  ]
+ ],
+ "triangles": [
+  [
+   0,
+   1,
+   2
+  ],
+  [
+   0,
+   2,
+   3
+  ]
+ ]
+}
