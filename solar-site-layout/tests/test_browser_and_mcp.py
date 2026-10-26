@@ -67,6 +67,13 @@ def _browser_tooling_problem() -> str | None:
 
 
 def test_v01_v02_v03_real_browser(tmp_path):
+    problem = _browser_tooling_problem()
+    if problem:
+        # Acceptance runs and CI set SOLAR_REQUIRE_BROWSER=1 so missing tooling fails
+        # loudly instead of skipping unnoticed.
+        if os.environ.get("SOLAR_REQUIRE_BROWSER") == "1":
+            pytest.fail(f"real-browser checks required but cannot run: {problem}")
+        pytest.skip(problem)
     out = evidence_dir(tmp_path, "browser")
     port = _free_port()
     data = tmp_path / "ui-data"
@@ -100,3 +107,27 @@ def test_v01_v02_v03_real_browser(tmp_path):
     # the review regressions (F1 create/update delay, F2 stale SVG, switch/import while pending)
     for needle in ("F1 create", "F1 update", "F2 stale SVG", "project switch", "import while"):
         assert any(needle in n for n in names), needle
+
+
+@pytest.mark.parametrize("required", [True, False])
+def test_missing_browser_tooling_fails_when_required_and_skips_otherwise(tmp_path, required):
+    """The tooling check above was dead code in d935ff2 (the browser test ran unconditionally
+    and crashed with FileNotFoundError when node was absent). Run the browser test in a child
+    pytest whose PATH has no node: with SOLAR_REQUIRE_BROWSER=1 it must FAIL with the reason;
+    without it, it must SKIP with the reason."""
+    bin_dir = tmp_path / "bin-without-node"
+    bin_dir.mkdir()
+    env = {k: v for k, v in os.environ.items() if k not in ("SOLAR_REQUIRE_BROWSER", "SOLAR_EVIDENCE_DIR", "NODE_PATH")}
+    env["PATH"] = str(bin_dir)
+    if required:
+        env["SOLAR_REQUIRE_BROWSER"] = "1"
+    p = subprocess.run(
+        [sys.executable, "-m", "pytest", "-q", "-p", "no:cacheprovider", "-rfEs", "tests/test_browser_and_mcp.py::test_v01_v02_v03_real_browser"],
+        cwd=str(ROOT), env=env, capture_output=True, text=True, timeout=300,
+    )
+    out = p.stdout + p.stderr
+    if required:
+        assert p.returncode != 0 and "FAILED tests/test_browser_and_mcp.py::test_v01_v02_v03_real_browser" in out, out[-2000:]
+        assert "required but cannot run: node is not installed" in out, out[-2000:]
+    else:
+        assert p.returncode == 0 and "SKIPPED [1]" in out and "node is not installed" in out, out[-2000:]

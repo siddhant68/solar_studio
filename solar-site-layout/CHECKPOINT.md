@@ -19,7 +19,7 @@ Branch `claude/kind-cerf-gu33em` of `siddhant68/solar_studio`. Pushing to this b
 | 11 | `4594c5f` | Acceptance evidence for `fe15c5f`: 233 tests passed, 0 skipped; 24/24 browser checks; MCP session and Inspector cross-check; examples; benchmarks | — |
 | 12 | `82f11f0` | Delivery: `reports/ACCEPTANCE.json` (36/36 pass, bound to `fe15c5f`), packaging and fresh-clone reproduction of `4594c5f`, delivery report, this checkpoint | — |
 | 13 | `9a123fb` | Independent follow-up review published (`reviews/module-01/2026-10-26-followup/`): repairs accepted in the exercised cases at `82f11f0`; macOS/Chrome run with 233 tests, 24 browser checks and 17 MCP steps | PR #1 open; merge and tag are owner decisions |
-| 14 | branch `ci/module-01-browser-required` | Status documentation for the verification, and GitHub Actions CI that requires the browser and MCP tests and uploads their evidence. Its own PR, based on PR #1's branch | Owner review |
+| 14 | branch `ci/module-01-browser-required` | Status documentation for the verification; GitHub Actions CI that requires the browser and MCP tests and uploads their evidence; a fix for the browser test's dead `SOLAR_REQUIRE_BROWSER` check (changes the `tests` tree, so its evidence is the CI run on that branch, not the `fe15c5f` acceptance run). Its own PR, based on PR #1's branch | Owner review |
 
 ## How to resume
 
