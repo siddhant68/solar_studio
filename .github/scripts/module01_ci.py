@@ -1,4 +1,4 @@
-"""Evidence gate for the Module 01 CI job (standard library only).
+"""Evidence gate for the Module 01 and Module 02 T1 CI job (standard library only).
 
     python3 .github/scripts/module01_ci.py environment --evidence DIR
     python3 .github/scripts/module01_ci.py check --evidence DIR
@@ -8,7 +8,8 @@
 errors or skips, and unless the real-browser and real-MCP tests ran and left their
 evidence: every browser check passed (V01, V02 including the review regressions, V03)
 and every MCP session step succeeded, with a wire transcript that starts with
-`initialize`. It does not pin the test count; new tests only need to pass.
+`initialize`. The terrain tests must be present and pass, and the terrain MCP session
+(import, place, paging, export, typed DATUM_MISMATCH) must leave its own evidence. It does not pin the test count; new tests only need to pass.
 Both commands run from `solar-site-layout/` and write JSON next to the evidence.
 """
 
@@ -27,8 +28,18 @@ APP = Path(__file__).resolve().parents[2] / "solar-site-layout"
 REQUIRED_CASES = {
     ("test_browser_and_mcp.py", "test_v01_v02_v03_real_browser"),
     ("test_browser_and_mcp.py", "test_s02_real_mcp_client_session"),
+    # Module 02 T1: the real terrain MCP client session (gate TS05)
+    ("test_terrain_service.py", "test_ts05_real_terrain_mcp_client_session"),
 }
-REQUIRED_FILES = ("test_review_regressions.py",)
+REQUIRED_FILES = (
+    "test_review_regressions.py",
+    "test_terrain_contracts.py",
+    "test_terrain_errors.py",
+    "test_terrain_fixtures.py",
+    "test_terrain_predicates.py",
+    "test_terrain_service.py",
+    "test_terrain_verifier.py",
+)
 BROWSER_PREFIXES = ("V01", "V02", "V03")
 BROWSER_NEEDLES = ("F1 create", "F1 update", "F2 stale SVG", "project switch", "import while")
 
@@ -133,11 +144,32 @@ def check(evidence: Path) -> int:
             problems.append(f"MCP session steps did not all succeed: {bad or 'no steps'}")
         if first != "initialize":
             problems.append(f"MCP wire transcript does not start with initialize (got {first!r})")
+    t_steps = evidence / "terrain-mcp" / "terrain-mcp-session-steps.json"
+    t_wire = evidence / "terrain-mcp" / "terrain-mcp-wire-transcript.jsonl"
+    if not t_steps.is_file() or not t_wire.is_file():
+        problems.append("terrain MCP evidence (terrain-mcp/terrain-mcp-session-steps.json, terrain-mcp/terrain-mcp-wire-transcript.jsonl) is missing")
+    else:
+        steps = json.loads(t_steps.read_text()).get("steps", [])
+        bad = [s.get("step", "?") for s in steps if not s.get("ok")]
+        lines = [ln for ln in t_wire.read_text().splitlines() if ln.strip()]
+        msgs = [json.loads(ln)["message"] for ln in lines]
+        first = msgs[0].get("method") if msgs else None
+        calls = {m["params"]["name"] for m in msgs if m.get("method") == "tools/call"}
+        summary["terrain_mcp"] = {"steps": len(steps), "failed": bad, "wire_messages": len(lines), "first_method": first, "tools_called": sorted(calls)}
+        if not steps or bad:
+            problems.append(f"terrain MCP session steps did not all succeed: {bad or 'no steps'}")
+        if first != "initialize":
+            problems.append(f"terrain MCP wire transcript does not start with initialize (got {first!r})")
+        missing = {"import_terrain", "place_on_terrain", "get_placement_items", "export_placement"} - calls
+        if missing:
+            problems.append(f"terrain MCP session did not call {sorted(missing)}")
+        if not any("DATUM_MISMATCH" in s.get("step", "") and s.get("ok") for s in steps):
+            problems.append("terrain MCP session did not show the typed DATUM_MISMATCH error")
     summary["passed"] = not problems
     summary["problems"] = problems
     evidence.mkdir(parents=True, exist_ok=True)
     (evidence / "ci-check.json").write_text(json.dumps(summary, indent=1) + "\n")
-    report = ["## Module 01 CI evidence", "", f"**{'PASS' if not problems else 'FAIL'}**", ""]
+    report = ["## Module 01 and Module 02 T1 CI evidence", "", f"**{'PASS' if not problems else 'FAIL'}**", ""]
     if "tests" in summary:
         report.append(f"- Tests: {json.dumps(summary['tests'])}")
     if "browser" in summary:
@@ -146,6 +178,9 @@ def check(evidence: Path) -> int:
     if "mcp" in summary:
         m = summary["mcp"]
         report.append(f"- MCP session steps: {m['steps']} ({len(m['failed'])} failed), {m['wire_messages']} wire messages")
+    if "terrain_mcp" in summary:
+        m = summary["terrain_mcp"]
+        report.append(f"- Terrain MCP session steps: {m['steps']} ({len(m['failed'])} failed), {m['wire_messages']} wire messages")
     report += [f"- Problem: {p}" for p in problems]
     text = "\n".join(report) + "\n"
     print(text)

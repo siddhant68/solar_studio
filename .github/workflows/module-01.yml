@@ -1,12 +1,14 @@
-# Module 01 (solar-site-layout): full test suite with the real-browser and real-MCP tests
-# required. A missing or broken browser fails the job (SOLAR_REQUIRE_BROWSER=1), and
-# .github/scripts/module01_ci.py rejects any failure, error or skip and checks that the
-# browser and MCP evidence was produced. Evidence is uploaded even when the job fails.
+# solar-site-layout: the full test suite (Module 01 and Module 02 milestone T1) with the
+# real-browser and real-MCP tests required. A missing or broken browser fails the job
+# (SOLAR_REQUIRE_BROWSER=1), and .github/scripts/module01_ci.py rejects any failure, error
+# or skip and checks that the browser, MCP and terrain MCP evidence was produced. A second
+# job runs the terrain benchmark (gate TD02) and uploads its report. Evidence is uploaded
+# even when a job fails.
 #
 # Actions are pinned to full commit SHAs, verified on 2026-10-26:
 #   actions/checkout v7.0.1, astral-sh/setup-uv v10.2.0, actions/setup-node v7.1.0,
 #   actions/upload-artifact v7.0.2 (all node24 actions).
-name: Module 01 tests (browser and MCP required)
+name: Module 01 and terrain T1 tests (browser and MCP required)
 
 on:
   pull_request:
@@ -88,5 +90,55 @@ jobs:
         with:
           name: module-01-evidence-run${{ github.run_id }}-attempt${{ github.run_attempt }}
           path: ci-evidence/
+          retention-days: 30
+          if-no-files-found: warn
+
+  terrain-benchmark:
+    name: Terrain benchmark TD02 (500k triangles, 10,192 modules)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      EVIDENCE_DIR: ${{ github.workspace }}/terrain-benchmark
+    defaults:
+      run:
+        shell: bash
+        working-directory: solar-site-layout
+    steps:
+      - name: Check out
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          version: "0.11.32"
+          enable-cache: false
+
+      - name: Install the application from uv.lock
+        run: uv sync --frozen --python 3.12
+
+      - name: Run the benchmark (fails the job if TD02 is missed)
+        env:
+          SOLAR_BENCH_RUNNER: GitHub Actions ubuntu-24.04
+        run: |
+          set -o pipefail
+          mkdir -p "$EVIDENCE_DIR"
+          git rev-parse HEAD > "$EVIDENCE_DIR/tested-commit.txt"
+          .venv/bin/python scripts/terrain_benchmark.py "$EVIDENCE_DIR/TERRAIN_BENCHMARKS.json" 2>&1 | tee "$EVIDENCE_DIR/benchmark-output.txt"
+
+      - name: Summarize
+        if: always()
+        run: |
+          if [ -f "$EVIDENCE_DIR/TERRAIN_BENCHMARKS.json" ]; then
+            python3 ../.github/scripts/terrain_bench_summary.py "$EVIDENCE_DIR/TERRAIN_BENCHMARKS.json" | tee -a "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload benchmark report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: terrain-benchmark-run${{ github.run_id }}-attempt${{ github.run_attempt }}
+          path: terrain-benchmark/
           retention-days: 30
           if-no-files-found: warn
