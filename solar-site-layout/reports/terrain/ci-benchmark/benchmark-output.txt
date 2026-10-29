@@ -1,0 +1,22 @@
+{
+ "td02": {
+  "requirement": "placement (independent verification and persistence included, layout and prepared terrain already stored) <= 30 s process wall time including interpreter start, and <= 1 GiB peak process-tree memory",
+  "process_wall_s": 6.377,
+  "peak_tree_rss_mib": 342.5,
+  "wall_target_s": 30.0,
+  "memory_target_mib": 1024.0,
+  "all_tables_placed": true,
+  "verified": true,
+  "fresh_computation": true,
+  "pass": true
+ },
+ "import": {
+  "wall_s": 7.001,
+  "peak_tree_rss_mib": 602.9
+ },
+ "cold": {
+  "wall_s": 14.183,
+  "peak_tree_rss_mib": 608.8,
+  "ok": true
+ }
+}

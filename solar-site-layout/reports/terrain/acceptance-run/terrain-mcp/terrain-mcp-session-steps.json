@@ -1,0 +1,212 @@
+{
+ "client": "mcp Python SDK ClientSession over stdio_client",
+ "server_command": [
+  "/home/user/solar_studio/solar-site-layout/.venv/bin/python",
+  "-m",
+  "solar_layout.mcp_server",
+  "--data-dir",
+  "/tmp/pytest-of-root/pytest-78/test_ts05_real_terrain_mcp_cli0/mcp-data"
+ ],
+ "data_dir": "/tmp/pytest-of-root/pytest-78/test_ts05_real_terrain_mcp_cli0/mcp-data",
+ "steps": [
+  {
+   "step": "initialize",
+   "ok": true,
+   "protocol": "2025-11-25",
+   "server": "solar-site-layout"
+  },
+  {
+   "step": "tools/list includes the terrain tools",
+   "ok": true,
+   "tools": [
+    "validate_request",
+    "calculate_row_pitch",
+    "create_project",
+    "get_project",
+    "update_project",
+    "generate_layout",
+    "get_layout_summary",
+    "get_layout_items",
+    "export_layout",
+    "validate_terrain",
+    "import_terrain",
+    "get_terrain",
+    "place_on_terrain",
+    "get_placement_summary",
+    "get_placement_items",
+    "export_placement",
+    "verify_stored_placement"
+   ]
+  },
+  {
+   "step": "generate_layout (T03 layout)",
+   "ok": true,
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc"
+  },
+  {
+   "step": "validate_terrain",
+   "ok": true,
+   "terrain_id": "ter_b3a23946bd49d8aa30483fef"
+  },
+  {
+   "step": "import_terrain",
+   "ok": true,
+   "terrain_id": "ter_b3a23946bd49d8aa30483fef",
+   "info": {
+    "bbox_xy_m": [
+     0.0,
+     0.0,
+     8.0,
+     8.0
+    ],
+    "boundary_segment_count": 4,
+    "exact_arithmetic": {
+     "orientations_evaluated": 112,
+     "orientations_exact_expansion": 16,
+     "orientations_exact_rational": 0,
+     "rational_point_tests": 0,
+     "slope_decisions_exact": 0,
+     "support_limit_exact_recomputations": 0
+    },
+    "overlap_candidate_pairs": 6,
+    "referenced_vertex_count": 5,
+    "t_junction_count": 0,
+    "triangle_count": 4,
+    "unreferenced_vertex_count": 0,
+    "vertex_count": 5,
+    "z_range_m": [
+     10.0,
+     10.6
+    ]
+   }
+  },
+  {
+   "step": "get_terrain",
+   "ok": true
+  },
+  {
+   "step": "place_on_terrain (T03 interior hill)",
+   "ok": true,
+   "placement_id": "plc_411aa6a57e2cebc84d12ebfb",
+   "counts": {
+    "infeasible_tables": 0,
+    "placed_dc_capacity_kwp": 2.2,
+    "placed_modules": 4,
+    "placed_tables": 1,
+    "supports": 3,
+    "tables": 1,
+    "unknown_ground_tables": 0
+   }
+  },
+  {
+   "step": "place_on_terrain repeat reuses the stored placement",
+   "ok": true
+  },
+  {
+   "step": "get_placement_summary",
+   "ok": true
+  },
+  {
+   "step": "get_placement_items tables: L = 11.1 m, min clearance 0.5 m at (4, 4)",
+   "ok": true,
+   "lower_edge_z_m": 11.1,
+   "min_clearance_m": 0.5,
+   "min_clearance_at_xy_m": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "step": "get_placement_items pages all modules once by cursor",
+   "ok": true,
+   "pages": 2
+  },
+  {
+   "step": "get_placement_items supports: 0.725, 0.5, 0.725 m above ground",
+   "ok": true,
+   "above_ground_m": [
+    0.725,
+    0.5,
+    0.725
+   ]
+  },
+  {
+   "step": "get_placement_items invalid cursor -> INVALID_CURSOR",
+   "ok": true
+  },
+  {
+   "step": "export_placement json",
+   "ok": true,
+   "path": "plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-placement.json",
+   "sha256": "300f163170b8feaead6b64ba82f17009d1650cd57839613d69d537633707c350",
+   "bytes": 6206
+  },
+  {
+   "step": "export_placement csv",
+   "ok": true,
+   "path": "plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-modules.csv",
+   "sha256": "d7afd6f56592fb99059a02abcc71f63658c88af7e204426a584a247733dfb73b",
+   "bytes": 399
+  },
+  {
+   "step": "export_placement supports_csv",
+   "ok": true,
+   "path": "plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-supports.csv",
+   "sha256": "48dd384eab248c4e817b67a37f95bcbc63d72a1970d73ebe30d6019866cdf846",
+   "bytes": 254
+  },
+  {
+   "step": "verify_stored_placement",
+   "ok": true,
+   "checks": {
+    "schema": true,
+    "contract_fields": true,
+    "identity": true,
+    "source_linkage": true,
+    "datum": true,
+    "status_records": true,
+    "coverage": true,
+    "clearance": true,
+    "lift_policy": true,
+    "clearance_report": true,
+    "elevations": true,
+    "slope": true,
+    "supports": true,
+    "module_geometry": true,
+    "totals": true,
+    "payload_integrity": true
+   }
+  },
+  {
+   "step": "place_on_terrain with another vertical reference -> DATUM_MISMATCH",
+   "ok": true,
+   "error": {
+    "code": "DATUM_MISMATCH",
+    "message": "expected_vertical {'kind': 'local', 'crs': None, 'id': 'local:other-benchmark'} differs from the terrain's vertical reference {'kind': 'local', 'crs': None, 'id': 'local:fixture-datum'}; no vertical transformation is performed",
+    "field": "expected_vertical",
+    "details": {
+     "expected": {
+      "kind": "local",
+      "crs": null,
+      "id": "local:other-benchmark"
+     },
+     "terrain": {
+      "kind": "local",
+      "crs": null,
+      "id": "local:fixture-datum"
+     }
+    }
+   }
+  },
+  {
+   "step": "unknown placement -> PLACEMENT_NOT_FOUND",
+   "ok": true
+  },
+  {
+   "step": "wire transcript retained",
+   "ok": true,
+   "wire_lines": 41,
+   "tool_calls": 18
+  }
+ ]
+}

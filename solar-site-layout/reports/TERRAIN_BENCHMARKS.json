@@ -82,13 +82,13 @@
  "phases": {
   "terrain_import": {
    "exit": 0,
-   "wall_s": 14.58,
-   "peak_tree_rss_mib": 600.8,
-   "rss_samples": 1262,
+   "wall_s": 12.076,
+   "peak_tree_rss_mib": 599.3,
+   "rss_samples": 1035,
    "stderr_tail": "",
    "phase": "import",
-   "imports_s": 0.3627430369999729,
-   "parse_s": 0.8910834659999978,
+   "imports_s": 0.3458600439998918,
+   "parse_s": 0.5077742559999479,
    "terrain_id": "ter_8b1eaac7fc7a45189652362d",
    "info": {
     "bbox_xy_m": [
@@ -118,18 +118,18 @@
     ]
    },
    "reused": false,
-   "work_s": 13.987698753000018,
+   "work_s": 11.52985980099993,
    "ok": true,
    "stages": {}
   },
   "placement": {
    "exit": 0,
-   "wall_s": 8.076,
-   "peak_tree_rss_mib": 343.4,
-   "rss_samples": 697,
+   "wall_s": 7.777,
+   "peak_tree_rss_mib": 338.3,
+   "rss_samples": 673,
    "stderr_tail": "",
    "phase": "place",
-   "imports_s": 0.4048329319999766,
+   "imports_s": 0.3623778990001938,
    "placement_id": "plc_26a0d2da0c5de2a67faa6895",
    "payload_digest": "1fabd09e8b69e3607464fe0a64ca62b3f651354c088aa093ce1352b722c81e33",
    "reused": false,
@@ -183,29 +183,29 @@
     "starlette": "1.10.0",
     "uvicorn": "0.54.0"
    },
-   "source_commit": "a04a3cbb7515b0e58af366a05b37adb10ae778dc",
+   "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
    "source_tree_dirty": false,
-   "work_s": 7.521968658000048,
+   "work_s": 7.267870380999966,
    "ok": true,
    "stages": {
-    "load_layout_records_s": 0.1247317639999892,
-    "load_terrain_arrays_s": 0.03283648199999334,
-    "engine_s": 3.939494508999985,
-    "independent_verification_s": 3.0210101129999885,
-    "persistence_s": 0.21036255199999232
+    "load_layout_records_s": 0.16290026100000432,
+    "load_terrain_arrays_s": 0.030479701000103887,
+    "engine_s": 3.6031247209998583,
+    "independent_verification_s": 3.079068189000054,
+    "persistence_s": 0.20479300200008765
    }
   },
   "cold_workflow": {
    "exit": 0,
-   "wall_s": 21.419,
-   "peak_tree_rss_mib": 606.4,
-   "rss_samples": 1879,
+   "wall_s": 20.37,
+   "peak_tree_rss_mib": 603.0,
+   "rss_samples": 1764,
    "stderr_tail": "",
    "phase": "cold",
-   "imports_s": 0.35941140999995014,
-   "layout_s": 1.4651455120000492,
-   "import_s": 12.298193093999998,
-   "place_s": 7.1656582849999495,
+   "imports_s": 0.33499976799998876,
+   "layout_s": 1.4157535520000692,
+   "import_s": 10.761063818000139,
+   "place_s": 7.719204070999922,
    "placement_id": "plc_26a0d2da0c5de2a67faa6895",
    "payload_digest": "1fabd09e8b69e3607464fe0a64ca62b3f651354c088aa093ce1352b722c81e33",
    "reused": false,
@@ -259,23 +259,23 @@
     "starlette": "1.10.0",
     "uvicorn": "0.54.0"
    },
-   "source_commit": "a04a3cbb7515b0e58af366a05b37adb10ae778dc",
+   "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
    "source_tree_dirty": false,
-   "work_s": 20.929196773,
+   "work_s": 19.896261129000095,
    "ok": true,
    "stages": {
-    "load_layout_records_s": 0.1324468870000146,
-    "load_terrain_arrays_s": 0.016414731999986998,
-    "engine_s": 3.6213190429999713,
-    "independent_verification_s": 3.0279030629999966,
-    "persistence_s": 0.20355107399996086
+    "load_layout_records_s": 0.1239172979999239,
+    "load_terrain_arrays_s": 0.01621823100003894,
+    "engine_s": 3.6615442759998587,
+    "independent_verification_s": 3.518944357999999,
+    "persistence_s": 0.22687061400006314
    }
   }
  },
  "td02": {
   "requirement": "placement (independent verification and persistence included, layout and prepared terrain already stored) <= 30 s process wall time including interpreter start, and <= 1 GiB peak process-tree memory",
-  "process_wall_s": 8.076,
-  "peak_tree_rss_mib": 343.4,
+  "process_wall_s": 7.777,
+  "peak_tree_rss_mib": 338.3,
   "wall_target_s": 30.0,
   "memory_target_mib": 1024.0,
   "all_tables_placed": true,

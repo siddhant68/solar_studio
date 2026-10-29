@@ -1,0 +1,2056 @@
+$ git clone -q --branch feat/module-02-terrain-t1 https://github.com/siddhant68/solar_studio <tmp>/solar_studio
+# exit 0 in 3.0s
+
+
+
+$ uv sync --frozen --python 3.12
+# exit 0 in 2.6s
+
+warning: The `UV_NATIVE_TLS` environment variable is deprecated and will be removed in a future release. Use `UV_SYSTEM_CERTS` instead.
+Using CPython 3.12.3 interpreter at: /usr/bin/python3.12
+Creating virtual environment at: .venv
+   Building solar-site-layout @ file:///tmp/terrain-repro-8h8_6crv/solar_studio/solar-site-layout
+Downloading numpy (16.0MiB)
+Downloading fonttools (5.2MiB)
+Downloading cryptography (4.5MiB)
+Downloading ezdxf (5.9MiB)
+Downloading pygments (1.2MiB)
+Downloading pydantic-core (2.1MiB)
+Downloading shapely (2.2MiB)
+ Downloaded pygments
+ Downloaded pydantic-core
+ Downloaded shapely
+ Downloaded cryptography
+ Downloaded fonttools
+ Downloaded ezdxf
+      Built solar-site-layout @ file:///tmp/terrain-repro-8h8_6crv/solar_studio/solar-site-layout
+ Downloaded numpy
+Prepared 43 packages in 2.45s
+Installed 43 packages in 71ms
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.10.23
+ + cffi==2.1.1
+ + click==8.5.0
+ + cryptography==50.0.2
+ + ezdxf==1.4.5
+ + fonttools==4.67.0
+ + h11==0.16.0
+ + httpcore==1.0.9
+ + httpcore2==2.16.0
+ + httpx==0.28.1
+ + httpx2==2.16.0
+ + idna==3.20
+ + iniconfig==2.3.1
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + mcp==2.3.0
+ + mcp-types==2.3.0
+ + numpy==2.5.4
+ + opentelemetry-api==1.45.1
+ + packaging==26.3
+ + pluggy==1.7.0
+ + psutil==7.2.2
+ + pycparser==3.12
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + pygments==2.21.0
+ + pyjwt==2.15.1
+ + pyparsing==3.3.3
+ + pytest==9.1.1
+ + python-multipart==0.0.32
+ + referencing==0.37.0
+ + rpds-py==2026.9.1
+ + shapely==2.2.0
+ + solar-site-layout==0.1.0 (from file:///tmp/terrain-repro-8h8_6crv/solar_studio/solar-site-layout)
+ + sse-starlette==3.5.1
+ + starlette==1.10.0
+ + truststore==0.10.5
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + uvicorn==0.54.0
+
+
+$ bash scripts/bootstrap_browser.sh
+# exit 0 in 1.1s
+playwright 1.63.0 chromium 153.0.8010.12
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data generate <tmp>/solar_studio/handoffs/module-01/fixtures/rectangle.request.json
+# exit 0 in 1.6s
+_keepout_positive": "minimum Euclidean distance from the footprint to the exclusion polygon must be >= keepout_m",
+    "exclusion_keepout_zero": "footprint and exclusion interiors must be disjoint (GEOS relate, exact predicate); touching is allowed",
+    "partial_tables": "never; an inadmissible table is dropped whole",
+    "pitch_tolerance_m": 1e-09,
+    "serialization": "shortest round-trip decimal (Python repr) for every float; -0.0 written as 0.0",
+    "setback": "minimum Euclidean distance from the footprint to every site boundary ring (outer and holes, all components) must be >= perimeter_setback_m",
+    "version": "geom-policy/1"
+   },
+   "identity": {
+    "algorithm_version": "lattice-fixed-and-phase3x3/1",
+    "geometry_policy_version": "geom-policy/1",
+    "result_id_derivation": "res_ + sha256(result schema | algorithm version | geometry policy version | input digest)[:24]"
+   },
+   "input_digest": "9210e69797916b72039bdc1c0f54557138acf6cfd1b08e27de4852e61d2a1c7b",
+   "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
+   "placement": {
+    "anchor_xy_m": [
+     1.0,
+     1.0
+    ],
+    "clear_row_gap_m": 1.0,
+    "lattice_period_u_m": 3.0,
+    "minimum_clear_row_gap_m": 1.0,
+    "mode": "fixed_lattice",
+    "optimality": "fixed_lattice_no_search",
+    "phase_candidates": [
+     {
+      "candidates": 56,
+      "module_count": 24,
+      "offset_u_m": 0.0,
+      "offset_v_m": 0.0,
+      "phase_index": [
+       0,
+       0
+      ],
+      "table_count": 6
+     }
+    ],
+    "row_pitch_m": 5.0,
+    "selected_offset_u_m": 0.0,
+    "selected_offset_v_m": 0.0,
+    "selected_phase_index": [
+     0,
+     0
+    ],
+    "table_gap_m": 1.0
+   },
+   "quantities": {
+    "buildable_area_bounds_m2": [
+     119.99668665411444,
+     120.0
+    ],
+    "buildable_area_m2": 120.0,
+    "dc_capacity_kwp": 13.2,
+    "gross_site_area_m2": 168.0,
+    "module_count": 24,
+    "module_ground_coverage_buildable": 0.4,
+    "module_ground_coverage_gross": 0.2857142857142857,
+    "module_power_wp": 550.0,
+    "modules_per_table": 4,
+    "outer_ring_area_m2": 168.0,
+    "physical_module_area_m2": 48.0,
+    "projected_module_area_m2": 48.0,
+    "table_count": 6,
+    "table_footprint_area_m2": 48.0
+   },
+   "rejections": [
+    {
+     "i": -1,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 0,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 2,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": -1,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 0,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 1,
+     "reason": "outside_site"
+    },
+    {
+     "i": -1,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 0,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 2,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": 2,
+     "reason": "outside_site"
+    },
+    {
+     "i": 3,
+     "j": 0,
+     "reason": "perimeter_setback"
+    },
+    {
+     "i": 3,
+     "j": 1,
+     "reason": "perimeter_setback"
+    }
+   ],
+   "result_id": "res_410d496155af5459caa61028",
+   "schema_version": "solar.layout.result/1",
+   "warnings": [],
+   "z_kind": "relative_flat_datum",
+   "z_reference": "z = 0 is the layout's synthetic flat datum; heights are not surveyed elevations"
+  },
+  "verification": {
+   "checks": {
+    "areas": true,
+    "dimensions": true,
+    "exclusions": true,
+    "footprint_shape": true,
+    "identity_and_membership": true,
+    "lattice_positions": true,
+    "module_geometry": true,
+    "module_within_table": true,
+    "payload_integrity": true,
+    "perimeter_setback": true,
+    "quantities": true,
+    "record_fields": true,
+    "record_totals": true,
+    "site_containment": true,
+    "tables_disjoint": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain import <tmp>/solar_studio/handoffs/module-02-terrain/fixtures/surfaces/plane-rectangle.surface.json
+# exit 0 in 0.6s
+{
+ "ok": true,
+ "result": {
+  "created_at": "2026-10-29T18:12:05.418103Z",
+  "frame": {
+   "axes": {
+    "x": "east",
+    "y": "north"
+   },
+   "crs": null,
+   "id": "local:analytic-site",
+   "kind": "local_cartesian",
+   "units": "m"
+  },
+  "identity": {
+   "terrain_id_derivation": "ter_ + sha256('solar.terrain.surface/1|' + terrain_digest)[:24]; terrain_digest = sha256(canonical {frame, vertical, vertices_xyz_m, triangles}); name and source are not part of the identity"
+  },
+  "info": {
+   "bbox_xy_m": [
+    0.0,
+    0.0,
+    12.0,
+    14.0
+   ],
+   "boundary_segment_count": 4,
+   "exact_arithmetic": {
+    "orientations_evaluated": 20,
+    "orientations_exact_expansion": 0,
+    "orientations_exact_rational": 0,
+    "rational_point_tests": 0,
+    "slope_decisions_exact": 0,
+    "support_limit_exact_recomputations": 0
+   },
+   "overlap_candidate_pairs": 1,
+   "referenced_vertex_count": 4,
+   "t_junction_count": 0,
+   "triangle_count": 2,
+   "unreferenced_vertex_count": 0,
+   "vertex_count": 4,
+   "z_range_m": [
+    100.0,
+    102.0
+   ]
+  },
+  "name": "Plane G = 100 + 0.05 x + 0.10 y over the rectangle site",
+  "provenance": {
+   "created_at": "2026-10-29T18:12:05.418103Z",
+   "dependencies": {
+    "geos": "3.14.1",
+    "jsonschema": "4.26.0",
+    "mcp": "2.3.0",
+    "numpy": "2.5.4",
+    "python": "3.12.3",
+    "shapely": "2.2.0",
+    "starlette": "1.10.0",
+    "uvicorn": "0.54.0"
+   },
+   "platform": "Linux x86_64",
+   "schema_version": "solar.terrain.surface/1",
+   "software_version": "0.2.0",
+   "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+   "source_tree_dirty": false
+  },
+  "reused_existing_terrain": false,
+  "schema_version": "solar.terrain.surface/1",
+  "source": {
+   "description": "Two triangles over [0,12] x [0,14]; G(x, y) = 100 + 0.05 x + 0.10 y",
+   "kind": "synthetic_analytic"
+  },
+  "terrain_digest": "f619dde2da8fbc3b81483c2e991cf3ac1bdbab3d3f4461b5ed1fa025e1a0d260",
+  "terrain_id": "ter_0bd7bacad2881da43cc5bed7",
+  "vertical": {
+   "crs": null,
+   "id": "local:fixture-datum",
+   "kind": "local",
+   "positive": "up",
+   "units": "m"
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain place <tmp>/T01.request.json
+# exit 0 in 0.5s
+y": {
+    "coverage": "mark_unknown_ground",
+    "limits": {
+     "max_ground_slope_deg": 20.0,
+     "max_support_above_ground_m": 2.0
+    },
+    "minimum_clearance_m": 0.5,
+    "numerical_policy": "terrain-policy/1",
+    "policy": "minimum_clearance_vertical_lift",
+    "structure_depth_m": 0.0,
+    "supports_model": "explicit_table_local"
+   },
+   "provenance": {
+    "algorithm_version": "terrain-vertical-lift/1",
+    "created_at": "2026-10-29T18:12:05.966710Z",
+    "dependencies": {
+     "geos": "3.14.1",
+     "jsonschema": "4.26.0",
+     "mcp": "2.3.0",
+     "numpy": "2.5.4",
+     "python": "3.12.3",
+     "shapely": "2.2.0",
+     "starlette": "1.10.0",
+     "uvicorn": "0.54.0"
+    },
+    "platform": "Linux x86_64",
+    "policy_version": "terrain-policy/1",
+    "schema_version": "solar.terrain.placement.result/1",
+    "software_version": "0.2.0",
+    "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+    "source_tree_dirty": false
+   },
+   "schema_version": "solar.terrain.placement.result/1",
+   "source_layout": {
+    "algorithm_version": "lattice-fixed-and-phase3x3/1",
+    "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
+    "result_id": "res_410d496155af5459caa61028",
+    "schema_version": "solar.layout.result/1"
+   },
+   "statistics": {
+    "covered_area_m2_total": 48.0,
+    "lower_edge_z_m_range": [
+     101.15,
+     101.95
+    ],
+    "max_clearance_m_range": [
+     0.9999999999999858,
+     1.0000000000000142
+    ],
+    "max_ground_slope_deg": 6.379370208442812,
+    "min_clearance_m_range": [
+     0.5,
+     0.5
+    ],
+    "slope_limit_tan": 0.36397023426620234,
+    "support_above_ground_m_range": [
+     0.5749999999999886,
+     0.9250000000000114
+    ],
+    "uncovered_area_m2_total": 0.0,
+    "vertical_lift_m_range": [
+     100.35000000000001,
+     101.15
+    ]
+   },
+   "terrain": {
+    "terrain_digest": "f619dde2da8fbc3b81483c2e991cf3ac1bdbab3d3f4461b5ed1fa025e1a0d260",
+    "terrain_id": "ter_0bd7bacad2881da43cc5bed7"
+   },
+   "verification": {
+    "candidates": {
+     "candidate_triangles_max_per_table": 2,
+     "candidate_triangles_total": 12,
+     "grid_assignments": 2,
+     "grid_cell_m": 14.0,
+     "grid_cells": [
+      1,
+      1
+     ],
+     "method": "uniform grid over triangle bounding boxes",
+     "triangles_indexed": 2
+    },
+    "checks": {
+     "clearance": {
+      "ok": true
+     },
+     "clearance_report": {
+      "ok": true
+     },
+     "contract_fields": {
+      "ok": true
+     },
+     "coverage": {
+      "ok": true
+     },
+     "datum": {
+      "ok": true
+     },
+     "elevations": {
+      "ok": true
+     },
+     "identity": {
+      "ok": true
+     },
+     "lift_policy": {
+      "ok": true
+     },
+     "module_geometry": {
+      "ok": true
+     },
+     "payload_integrity": {
+      "ok": true
+     },
+     "schema": {
+      "ok": true
+     },
+     "slope": {
+      "ok": true
+     },
+     "source_linkage": {
+      "ok": true
+     },
+     "status_records": {
+      "ok": true
+     },
+     "supports": {
+      "ok": true
+     },
+     "totals": {
+      "ok": true
+     }
+    },
+    "exact_rational_evaluations": 55,
+    "ok": true,
+    "verifier": "solar_terrain.verify, independent of the engine (own candidate grid, exact arithmetic, clipping and boundary reconstruction)"
+   },
+   "vertical": {
+    "crs": null,
+    "id": "local:fixture-datum",
+    "kind": "local",
+    "positive": "up",
+    "units": "m"
+   },
+   "warnings": [],
+   "z_kind": "terrain_vertical_reference"
+  },
+  "terrain_id": "ter_0bd7bacad2881da43cc5bed7",
+  "verification": {
+   "checks": {
+    "clearance": true,
+    "clearance_report": true,
+    "contract_fields": true,
+    "coverage": true,
+    "datum": true,
+    "elevations": true,
+    "identity": true,
+    "lift_policy": true,
+    "module_geometry": true,
+    "payload_integrity": true,
+    "schema": true,
+    "slope": true,
+    "source_linkage": true,
+    "status_records": true,
+    "supports": true,
+    "totals": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain items plc_b4681609662850a5f0f65e21 --kind tables --limit 500
+# exit 0 in 0.5s
+   ],
+    "min_clearance_at_xy_m": [
+     3.0,
+     5.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 0,
+    "status": "placed",
+    "table_id": "T_j0_i0",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 101.15,
+    "vertical_lift_m": 100.35000000000001
+   },
+   {
+    "covered_area_m2": 8.0,
+    "footprint_xy_m": [
+     [
+      4.0,
+      1.0
+     ],
+     [
+      6.0,
+      1.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      4.0,
+      5.0
+     ]
+    ],
+    "lower_edge_z_m": 101.3,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442812,
+    "mean_ground_gradient_uv": [
+     0.049999999999999524,
+     0.10000000000000041
+    ],
+    "min_clearance_at_xy_m": [
+     6.0,
+     5.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 1,
+    "status": "placed",
+    "table_id": "T_j0_i1",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 101.3,
+    "vertical_lift_m": 100.5
+   },
+   {
+    "covered_area_m2": 8.0,
+    "footprint_xy_m": [
+     [
+      7.0,
+      1.0
+     ],
+     [
+      9.0,
+      1.0
+     ],
+     [
+      9.0,
+      5.0
+     ],
+     [
+      7.0,
+      5.0
+     ]
+    ],
+    "lower_edge_z_m": 101.44999999999999,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442812,
+    "mean_ground_gradient_uv": [
+     0.049999999999999524,
+     0.10000000000000041
+    ],
+    "min_clearance_at_xy_m": [
+     9.0,
+     5.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 2,
+    "status": "placed",
+    "table_id": "T_j0_i2",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 101.44999999999999,
+    "vertical_lift_m": 100.64999999999999
+   },
+   {
+    "covered_area_m2": 8.0,
+    "footprint_xy_m": [
+     [
+      1.0,
+      6.0
+     ],
+     [
+      3.0,
+      6.0
+     ],
+     [
+      3.0,
+      10.0
+     ],
+     [
+      1.0,
+      10.0
+     ]
+    ],
+    "lower_edge_z_m": 101.65,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442812,
+    "mean_ground_gradient_uv": [
+     0.049999999999999524,
+     0.10000000000000041
+    ],
+    "min_clearance_at_xy_m": [
+     3.0,
+     10.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 3,
+    "status": "placed",
+    "table_id": "T_j1_i0",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 101.65,
+    "vertical_lift_m": 100.85000000000001
+   },
+   {
+    "covered_area_m2": 8.0,
+    "footprint_xy_m": [
+     [
+      4.0,
+      6.0
+     ],
+     [
+      6.0,
+      6.0
+     ],
+     [
+      6.0,
+      10.0
+     ],
+     [
+      4.0,
+      10.0
+     ]
+    ],
+    "lower_edge_z_m": 101.8,
+    "max_clearance_m": 0.9999999999999858,
+    "max_ground_slope_deg": 6.379370208442812,
+    "mean_ground_gradient_uv": [
+     0.04999999999999952,
+     0.10000000000000041
+    ],
+    "min_clearance_at_xy_m": [
+     6.0,
+     10.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 4,
+    "status": "placed",
+    "table_id": "T_j1_i1",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 101.8,
+    "vertical_lift_m": 101.0
+   },
+   {
+    "covered_area_m2": 8.0,
+    "footprint_xy_m": [
+     [
+      7.0,
+      6.0
+     ],
+     [
+      9.0,
+      6.0
+     ],
+     [
+      9.0,
+      10.0
+     ],
+     [
+      7.0,
+      10.0
+     ]
+    ],
+    "lower_edge_z_m": 101.95,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442812,
+    "mean_ground_gradient_uv": [
+     0.049999999999999524,
+     0.10000000000000042
+    ],
+    "min_clearance_at_xy_m": [
+     9.0,
+     10.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 5,
+    "status": "placed",
+    "table_id": "T_j1_i2",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 101.95,
+    "vertical_lift_m": 101.15
+   }
+  ],
+  "kind": "tables",
+  "limit": 500,
+  "next_cursor": null,
+  "next_offset": null,
+  "offset": 0,
+  "placement_id": "plc_b4681609662850a5f0f65e21",
+  "total": 6
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_b4681609662850a5f0f65e21 --format json
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_b4681609662850a5f0f65e21/v1/plc_b4681609662850a5f0f65e21-placement.json",
+  "bytes": 15310,
+  "context": "result_only",
+  "file_name": "plc_b4681609662850a5f0f65e21-placement.json",
+  "format": "json",
+  "media_type": "application/json",
+  "path": "plc_b4681609662850a5f0f65e21/v1/plc_b4681609662850a5f0f65e21-placement.json",
+  "placement_id": "plc_b4681609662850a5f0f65e21",
+  "sha256": "754d16fbd9d2ba9bcc3a9dd43ad0806bf30facbe4d4bd60e6e803042acf981d8"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_b4681609662850a5f0f65e21 --format csv
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_b4681609662850a5f0f65e21/v1/plc_b4681609662850a5f0f65e21-modules.csv",
+  "bytes": 2243,
+  "context": "result_only",
+  "file_name": "plc_b4681609662850a5f0f65e21-modules.csv",
+  "format": "csv",
+  "media_type": "text/csv; charset=utf-8",
+  "path": "plc_b4681609662850a5f0f65e21/v1/plc_b4681609662850a5f0f65e21-modules.csv",
+  "placement_id": "plc_b4681609662850a5f0f65e21",
+  "sha256": "c2a31276e822a14f8fa4cbb681fad3a656772be7ded27f2cb02e7f18af1670aa"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_b4681609662850a5f0f65e21 --format supports_csv
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_b4681609662850a5f0f65e21/v1/plc_b4681609662850a5f0f65e21-supports.csv",
+  "bytes": 1748,
+  "context": "result_only",
+  "file_name": "plc_b4681609662850a5f0f65e21-supports.csv",
+  "format": "supports_csv",
+  "media_type": "text/csv; charset=utf-8",
+  "path": "plc_b4681609662850a5f0f65e21/v1/plc_b4681609662850a5f0f65e21-supports.csv",
+  "placement_id": "plc_b4681609662850a5f0f65e21",
+  "sha256": "603f987a38fc7d3bdaa9435e9fdea5a9fd2f971792c027d88cc55c7d45a1cb47"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain verify plc_b4681609662850a5f0f65e21
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "candidates": {
+   "candidate_triangles_max_per_table": 2,
+   "candidate_triangles_total": 12,
+   "grid_assignments": 2,
+   "grid_cell_m": 14.0,
+   "grid_cells": [
+    1,
+    1
+   ],
+   "method": "uniform grid over triangle bounding boxes",
+   "triangles_indexed": 2
+  },
+  "checks": {
+   "clearance": {
+    "failures": [],
+    "ok": true
+   },
+   "clearance_report": {
+    "failures": [],
+    "ok": true
+   },
+   "contract_fields": {
+    "failures": [],
+    "ok": true
+   },
+   "coverage": {
+    "failures": [],
+    "ok": true
+   },
+   "datum": {
+    "failures": [],
+    "ok": true
+   },
+   "elevations": {
+    "failures": [],
+    "ok": true
+   },
+   "identity": {
+    "failures": [],
+    "ok": true
+   },
+   "lift_policy": {
+    "failures": [],
+    "ok": true
+   },
+   "module_geometry": {
+    "failures": [],
+    "ok": true
+   },
+   "payload_integrity": {
+    "failures": [],
+    "ok": true
+   },
+   "schema": {
+    "failures": [],
+    "ok": true
+   },
+   "slope": {
+    "failures": [],
+    "ok": true
+   },
+   "source_linkage": {
+    "failures": [],
+    "ok": true
+   },
+   "status_records": {
+    "failures": [],
+    "ok": true
+   },
+   "supports": {
+    "failures": [],
+    "ok": true
+   },
+   "totals": {
+    "failures": [],
+    "ok": true
+   }
+  },
+  "exact_rational_evaluations": 55,
+  "ok": true,
+  "placement_id": "plc_b4681609662850a5f0f65e21"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data generate <tmp>/solar_studio/handoffs/module-02-terrain/fixtures/layouts/single-flat-4x2.layout-request.json
+# exit 0 in 0.5s
+  "units": "m"
+   },
+   "geometry_policy": {
+    "admissible_region_display": "site.buffer(-setback) minus union(exclusion.buffer(keepout)), round joins, 64 segments per quarter circle; used for display and buildable area only, never for placement decisions",
+    "borderline": "float distance margins within 1e-09 m of the requirement are re-decided exactly with rational arithmetic on the represented coordinates",
+    "buildable_area_bounds": "lower bound uses arc radius r/cos(pi/(4*q)) (polygon outside the true arc), upper bound uses chords on the true arc",
+    "computation_frame": "world coordinates translated by the placement anchor (x_local = x_world - anchor_x); no rotation or scaling of the site",
+    "containment": "a complete table footprint must be covered by the site polygon (GEOS covers, exact predicate); tangency to the boundary is allowed",
+    "exclusion_keepout_positive": "minimum Euclidean distance from the footprint to the exclusion polygon must be >= keepout_m",
+    "exclusion_keepout_zero": "footprint and exclusion interiors must be disjoint (GEOS relate, exact predicate); touching is allowed",
+    "partial_tables": "never; an inadmissible table is dropped whole",
+    "pitch_tolerance_m": 1e-09,
+    "serialization": "shortest round-trip decimal (Python repr) for every float; -0.0 written as 0.0",
+    "setback": "minimum Euclidean distance from the footprint to every site boundary ring (outer and holes, all components) must be >= perimeter_setback_m",
+    "version": "geom-policy/1"
+   },
+   "identity": {
+    "algorithm_version": "lattice-fixed-and-phase3x3/1",
+    "geometry_policy_version": "geom-policy/1",
+    "result_id_derivation": "res_ + sha256(result schema | algorithm version | geometry policy version | input digest)[:24]"
+   },
+   "input_digest": "ab69797ba9f0c87c9ac628c1956c101fe6dd7ed71037986fe2809f475eab88d4",
+   "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+   "placement": {
+    "anchor_xy_m": [
+     2.0,
+     3.0
+    ],
+    "clear_row_gap_m": 8.0,
+    "lattice_period_u_m": 5.0,
+    "minimum_clear_row_gap_m": 1.0,
+    "mode": "fixed_lattice",
+    "optimality": "fixed_lattice_no_search",
+    "phase_candidates": [
+     {
+      "candidates": 35,
+      "module_count": 4,
+      "offset_u_m": 0.0,
+      "offset_v_m": 0.0,
+      "phase_index": [
+       0,
+       0
+      ],
+      "table_count": 1
+     }
+    ],
+    "row_pitch_m": 10.0,
+    "selected_offset_u_m": 0.0,
+    "selected_offset_v_m": 0.0,
+    "selected_phase_index": [
+     0,
+     0
+    ],
+    "table_gap_m": 1.0
+   },
+   "quantities": {
+    "buildable_area_bounds_m2": [
+     64.0,
+     64.0
+    ],
+    "buildable_area_m2": 64.0,
+    "dc_capacity_kwp": 2.2,
+    "gross_site_area_m2": 64.0,
+    "module_count": 4,
+    "module_ground_coverage_buildable": 0.125,
+    "module_ground_coverage_gross": 0.125,
+    "module_power_wp": 550.0,
+    "modules_per_table": 4,
+    "outer_ring_area_m2": 64.0,
+    "physical_module_area_m2": 8.0,
+    "projected_module_area_m2": 8.0,
+    "table_count": 1,
+    "table_footprint_area_m2": 8.0
+   },
+   "rejections": [
+    {
+     "i": -1,
+     "j": 0,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "reason": "outside_site"
+    }
+   ],
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+   "schema_version": "solar.layout.result/1",
+   "warnings": [],
+   "z_kind": "relative_flat_datum",
+   "z_reference": "z = 0 is the layout's synthetic flat datum; heights are not surveyed elevations"
+  },
+  "verification": {
+   "checks": {
+    "areas": true,
+    "dimensions": true,
+    "exclusions": true,
+    "footprint_shape": true,
+    "identity_and_membership": true,
+    "lattice_positions": true,
+    "module_geometry": true,
+    "module_within_table": true,
+    "payload_integrity": true,
+    "perimeter_setback": true,
+    "quantities": true,
+    "record_fields": true,
+    "record_totals": true,
+    "site_containment": true,
+    "tables_disjoint": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain import <tmp>/solar_studio/handoffs/module-02-terrain/fixtures/surfaces/hill-fan.surface.json
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "created_at": "2026-10-29T18:12:09.432315Z",
+  "frame": {
+   "axes": {
+    "x": "east",
+    "y": "north"
+   },
+   "crs": null,
+   "id": "local:analytic-site",
+   "kind": "local_cartesian",
+   "units": "m"
+  },
+  "identity": {
+   "terrain_id_derivation": "ter_ + sha256('solar.terrain.surface/1|' + terrain_digest)[:24]; terrain_digest = sha256(canonical {frame, vertical, vertices_xyz_m, triangles}); name and source are not part of the identity"
+  },
+  "info": {
+   "bbox_xy_m": [
+    0.0,
+    0.0,
+    8.0,
+    8.0
+   ],
+   "boundary_segment_count": 4,
+   "exact_arithmetic": {
+    "orientations_evaluated": 112,
+    "orientations_exact_expansion": 16,
+    "orientations_exact_rational": 0,
+    "rational_point_tests": 0,
+    "slope_decisions_exact": 0,
+    "support_limit_exact_recomputations": 0
+   },
+   "overlap_candidate_pairs": 6,
+   "referenced_vertex_count": 5,
+   "t_junction_count": 0,
+   "triangle_count": 4,
+   "unreferenced_vertex_count": 0,
+   "vertex_count": 5,
+   "z_range_m": [
+    10.0,
+    10.6
+   ]
+  },
+  "name": "Fan with a raised centre vertex",
+  "provenance": {
+   "created_at": "2026-10-29T18:12:09.432315Z",
+   "dependencies": {
+    "geos": "3.14.1",
+    "jsonschema": "4.26.0",
+    "mcp": "2.3.0",
+    "numpy": "2.5.4",
+    "python": "3.12.3",
+    "shapely": "2.2.0",
+    "starlette": "1.10.0",
+    "uvicorn": "0.54.0"
+   },
+   "platform": "Linux x86_64",
+   "schema_version": "solar.terrain.surface/1",
+   "software_version": "0.2.0",
+   "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+   "source_tree_dirty": false
+  },
+  "reused_existing_terrain": false,
+  "schema_version": "solar.terrain.surface/1",
+  "source": {
+   "description": "Square [0,8]^2 at z = 10 with one interior vertex (4, 4, 10.6); four triangles, CCW",
+   "kind": "synthetic_analytic"
+  },
+  "terrain_digest": "4f7d0a6e25b8918dd8ea15da78f40bbb04a18c6cb04d75c61fc145ed6fda95cc",
+  "terrain_id": "ter_b3a23946bd49d8aa30483fef",
+  "vertical": {
+   "crs": null,
+   "id": "local:fixture-datum",
+   "kind": "local",
+   "positive": "up",
+   "units": "m"
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain place <tmp>/T03.request.json
+# exit 0 in 0.5s
+,
+   "policy": {
+    "coverage": "mark_unknown_ground",
+    "limits": {
+     "max_ground_slope_deg": 20.0,
+     "max_support_above_ground_m": 2.0
+    },
+    "minimum_clearance_m": 0.5,
+    "numerical_policy": "terrain-policy/1",
+    "policy": "minimum_clearance_vertical_lift",
+    "structure_depth_m": 0.0,
+    "supports_model": "explicit_table_local"
+   },
+   "provenance": {
+    "algorithm_version": "terrain-vertical-lift/1",
+    "created_at": "2026-10-29T18:12:09.928146Z",
+    "dependencies": {
+     "geos": "3.14.1",
+     "jsonschema": "4.26.0",
+     "mcp": "2.3.0",
+     "numpy": "2.5.4",
+     "python": "3.12.3",
+     "shapely": "2.2.0",
+     "starlette": "1.10.0",
+     "uvicorn": "0.54.0"
+    },
+    "platform": "Linux x86_64",
+    "policy_version": "terrain-policy/1",
+    "schema_version": "solar.terrain.placement.result/1",
+    "software_version": "0.2.0",
+    "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+    "source_tree_dirty": false
+   },
+   "schema_version": "solar.terrain.placement.result/1",
+   "source_layout": {
+    "algorithm_version": "lattice-fixed-and-phase3x3/1",
+    "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+    "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+    "schema_version": "solar.layout.result/1"
+   },
+   "statistics": {
+    "covered_area_m2_total": 8.0,
+    "lower_edge_z_m_range": [
+     11.1,
+     11.1
+    ],
+    "max_clearance_m_range": [
+     0.7999999999999989,
+     0.7999999999999989
+    ],
+    "max_ground_slope_deg": 8.530765609948128,
+    "min_clearance_m_range": [
+     0.5,
+     0.5
+    ],
+    "slope_limit_tan": 0.36397023426620234,
+    "support_above_ground_m_range": [
+     0.5,
+     0.7249999999999996
+    ],
+    "uncovered_area_m2_total": 0.0,
+    "vertical_lift_m_range": [
+     10.299999999999999,
+     10.299999999999999
+    ]
+   },
+   "terrain": {
+    "terrain_digest": "4f7d0a6e25b8918dd8ea15da78f40bbb04a18c6cb04d75c61fc145ed6fda95cc",
+    "terrain_id": "ter_b3a23946bd49d8aa30483fef"
+   },
+   "verification": {
+    "candidates": {
+     "candidate_triangles_max_per_table": 4,
+     "candidate_triangles_total": 4,
+     "grid_assignments": 4,
+     "grid_cell_m": 8.0,
+     "grid_cells": [
+      1,
+      1
+     ],
+     "method": "uniform grid over triangle bounding boxes",
+     "triangles_indexed": 4
+    },
+    "checks": {
+     "clearance": {
+      "ok": true
+     },
+     "clearance_report": {
+      "ok": true
+     },
+     "contract_fields": {
+      "ok": true
+     },
+     "coverage": {
+      "ok": true
+     },
+     "datum": {
+      "ok": true
+     },
+     "elevations": {
+      "ok": true
+     },
+     "identity": {
+      "ok": true
+     },
+     "lift_policy": {
+      "ok": true
+     },
+     "module_geometry": {
+      "ok": true
+     },
+     "payload_integrity": {
+      "ok": true
+     },
+     "schema": {
+      "ok": true
+     },
+     "slope": {
+      "ok": true
+     },
+     "source_linkage": {
+      "ok": true
+     },
+     "status_records": {
+      "ok": true
+     },
+     "supports": {
+      "ok": true
+     },
+     "totals": {
+      "ok": true
+     }
+    },
+    "exact_rational_evaluations": 8,
+    "ok": true,
+    "verifier": "solar_terrain.verify, independent of the engine (own candidate grid, exact arithmetic, clipping and boundary reconstruction)"
+   },
+   "vertical": {
+    "crs": null,
+    "id": "local:fixture-datum",
+    "kind": "local",
+    "positive": "up",
+    "units": "m"
+   },
+   "warnings": [],
+   "z_kind": "terrain_vertical_reference"
+  },
+  "terrain_id": "ter_b3a23946bd49d8aa30483fef",
+  "verification": {
+   "checks": {
+    "clearance": true,
+    "clearance_report": true,
+    "contract_fields": true,
+    "coverage": true,
+    "datum": true,
+    "elevations": true,
+    "identity": true,
+    "lift_policy": true,
+    "module_geometry": true,
+    "payload_integrity": true,
+    "schema": true,
+    "slope": true,
+    "source_linkage": true,
+    "status_records": true,
+    "supports": true,
+    "totals": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain items plc_411aa6a57e2cebc84d12ebfb --kind tables --limit 500
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "items": [
+   {
+    "covered_area_m2": 8.0,
+    "footprint_xy_m": [
+     [
+      2.0,
+      3.0
+     ],
+     [
+      6.0,
+      3.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      2.0,
+      5.0
+     ]
+    ],
+    "lower_edge_z_m": 11.1,
+    "max_clearance_m": 0.7999999999999989,
+    "max_ground_slope_deg": 8.530765609948128,
+    "mean_ground_gradient_uv": [
+     0.0,
+     0.0
+    ],
+    "min_clearance_at_xy_m": [
+     4.0,
+     4.0
+    ],
+    "min_clearance_m": 0.5,
+    "module_count": 4,
+    "reasons": [],
+    "seq": 0,
+    "status": "placed",
+    "table_id": "T_j0_i0",
+    "uncovered_area_m2": 0.0,
+    "upper_edge_z_m": 11.1,
+    "vertical_lift_m": 10.299999999999999
+   }
+  ],
+  "kind": "tables",
+  "limit": 500,
+  "next_cursor": null,
+  "next_offset": null,
+  "offset": 0,
+  "placement_id": "plc_411aa6a57e2cebc84d12ebfb",
+  "total": 1
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_411aa6a57e2cebc84d12ebfb --format json
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-placement.json",
+  "bytes": 6206,
+  "context": "result_only",
+  "file_name": "plc_411aa6a57e2cebc84d12ebfb-placement.json",
+  "format": "json",
+  "media_type": "application/json",
+  "path": "plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-placement.json",
+  "placement_id": "plc_411aa6a57e2cebc84d12ebfb",
+  "sha256": "d22f4573c6dcf4396281d0ae390fff3fe1bfef2deb0427e5ca8bf2ff7a593981"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_411aa6a57e2cebc84d12ebfb --format csv
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-modules.csv",
+  "bytes": 399,
+  "context": "result_only",
+  "file_name": "plc_411aa6a57e2cebc84d12ebfb-modules.csv",
+  "format": "csv",
+  "media_type": "text/csv; charset=utf-8",
+  "path": "plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-modules.csv",
+  "placement_id": "plc_411aa6a57e2cebc84d12ebfb",
+  "sha256": "d7afd6f56592fb99059a02abcc71f63658c88af7e204426a584a247733dfb73b"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_411aa6a57e2cebc84d12ebfb --format supports_csv
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-supports.csv",
+  "bytes": 254,
+  "context": "result_only",
+  "file_name": "plc_411aa6a57e2cebc84d12ebfb-supports.csv",
+  "format": "supports_csv",
+  "media_type": "text/csv; charset=utf-8",
+  "path": "plc_411aa6a57e2cebc84d12ebfb/v1/plc_411aa6a57e2cebc84d12ebfb-supports.csv",
+  "placement_id": "plc_411aa6a57e2cebc84d12ebfb",
+  "sha256": "48dd384eab248c4e817b67a37f95bcbc63d72a1970d73ebe30d6019866cdf846"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain verify plc_411aa6a57e2cebc84d12ebfb
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "candidates": {
+   "candidate_triangles_max_per_table": 4,
+   "candidate_triangles_total": 4,
+   "grid_assignments": 4,
+   "grid_cell_m": 8.0,
+   "grid_cells": [
+    1,
+    1
+   ],
+   "method": "uniform grid over triangle bounding boxes",
+   "triangles_indexed": 4
+  },
+  "checks": {
+   "clearance": {
+    "failures": [],
+    "ok": true
+   },
+   "clearance_report": {
+    "failures": [],
+    "ok": true
+   },
+   "contract_fields": {
+    "failures": [],
+    "ok": true
+   },
+   "coverage": {
+    "failures": [],
+    "ok": true
+   },
+   "datum": {
+    "failures": [],
+    "ok": true
+   },
+   "elevations": {
+    "failures": [],
+    "ok": true
+   },
+   "identity": {
+    "failures": [],
+    "ok": true
+   },
+   "lift_policy": {
+    "failures": [],
+    "ok": true
+   },
+   "module_geometry": {
+    "failures": [],
+    "ok": true
+   },
+   "payload_integrity": {
+    "failures": [],
+    "ok": true
+   },
+   "schema": {
+    "failures": [],
+    "ok": true
+   },
+   "slope": {
+    "failures": [],
+    "ok": true
+   },
+   "source_linkage": {
+    "failures": [],
+    "ok": true
+   },
+   "status_records": {
+    "failures": [],
+    "ok": true
+   },
+   "supports": {
+    "failures": [],
+    "ok": true
+   },
+   "totals": {
+    "failures": [],
+    "ok": true
+   }
+  },
+  "exact_rational_evaluations": 8,
+  "ok": true,
+  "placement_id": "plc_411aa6a57e2cebc84d12ebfb"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data generate <tmp>/solar_studio/handoffs/module-02-terrain/fixtures/layouts/single-flat-4x2.layout-request.json
+# exit 0 in 0.6s
+  "units": "m"
+   },
+   "geometry_policy": {
+    "admissible_region_display": "site.buffer(-setback) minus union(exclusion.buffer(keepout)), round joins, 64 segments per quarter circle; used for display and buildable area only, never for placement decisions",
+    "borderline": "float distance margins within 1e-09 m of the requirement are re-decided exactly with rational arithmetic on the represented coordinates",
+    "buildable_area_bounds": "lower bound uses arc radius r/cos(pi/(4*q)) (polygon outside the true arc), upper bound uses chords on the true arc",
+    "computation_frame": "world coordinates translated by the placement anchor (x_local = x_world - anchor_x); no rotation or scaling of the site",
+    "containment": "a complete table footprint must be covered by the site polygon (GEOS covers, exact predicate); tangency to the boundary is allowed",
+    "exclusion_keepout_positive": "minimum Euclidean distance from the footprint to the exclusion polygon must be >= keepout_m",
+    "exclusion_keepout_zero": "footprint and exclusion interiors must be disjoint (GEOS relate, exact predicate); touching is allowed",
+    "partial_tables": "never; an inadmissible table is dropped whole",
+    "pitch_tolerance_m": 1e-09,
+    "serialization": "shortest round-trip decimal (Python repr) for every float; -0.0 written as 0.0",
+    "setback": "minimum Euclidean distance from the footprint to every site boundary ring (outer and holes, all components) must be >= perimeter_setback_m",
+    "version": "geom-policy/1"
+   },
+   "identity": {
+    "algorithm_version": "lattice-fixed-and-phase3x3/1",
+    "geometry_policy_version": "geom-policy/1",
+    "result_id_derivation": "res_ + sha256(result schema | algorithm version | geometry policy version | input digest)[:24]"
+   },
+   "input_digest": "ab69797ba9f0c87c9ac628c1956c101fe6dd7ed71037986fe2809f475eab88d4",
+   "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+   "placement": {
+    "anchor_xy_m": [
+     2.0,
+     3.0
+    ],
+    "clear_row_gap_m": 8.0,
+    "lattice_period_u_m": 5.0,
+    "minimum_clear_row_gap_m": 1.0,
+    "mode": "fixed_lattice",
+    "optimality": "fixed_lattice_no_search",
+    "phase_candidates": [
+     {
+      "candidates": 35,
+      "module_count": 4,
+      "offset_u_m": 0.0,
+      "offset_v_m": 0.0,
+      "phase_index": [
+       0,
+       0
+      ],
+      "table_count": 1
+     }
+    ],
+    "row_pitch_m": 10.0,
+    "selected_offset_u_m": 0.0,
+    "selected_offset_v_m": 0.0,
+    "selected_phase_index": [
+     0,
+     0
+    ],
+    "table_gap_m": 1.0
+   },
+   "quantities": {
+    "buildable_area_bounds_m2": [
+     64.0,
+     64.0
+    ],
+    "buildable_area_m2": 64.0,
+    "dc_capacity_kwp": 2.2,
+    "gross_site_area_m2": 64.0,
+    "module_count": 4,
+    "module_ground_coverage_buildable": 0.125,
+    "module_ground_coverage_gross": 0.125,
+    "module_power_wp": 550.0,
+    "modules_per_table": 4,
+    "outer_ring_area_m2": 64.0,
+    "physical_module_area_m2": 8.0,
+    "projected_module_area_m2": 8.0,
+    "table_count": 1,
+    "table_footprint_area_m2": 8.0
+   },
+   "rejections": [
+    {
+     "i": -1,
+     "j": 0,
+     "reason": "outside_site"
+    },
+    {
+     "i": 1,
+     "j": 0,
+     "reason": "outside_site"
+    }
+   ],
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+   "schema_version": "solar.layout.result/1",
+   "warnings": [],
+   "z_kind": "relative_flat_datum",
+   "z_reference": "z = 0 is the layout's synthetic flat datum; heights are not surveyed elevations"
+  },
+  "verification": {
+   "checks": {
+    "areas": true,
+    "dimensions": true,
+    "exclusions": true,
+    "footprint_shape": true,
+    "identity_and_membership": true,
+    "lattice_positions": true,
+    "module_geometry": true,
+    "module_within_table": true,
+    "payload_integrity": true,
+    "perimeter_setback": true,
+    "quantities": true,
+    "record_fields": true,
+    "record_totals": true,
+    "site_containment": true,
+    "tables_disjoint": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain import <tmp>/solar_studio/handoffs/module-02-terrain/fixtures/surfaces/void-ring.surface.json
+# exit 0 in 0.6s
+{
+ "ok": true,
+ "result": {
+  "created_at": "2026-10-29T18:12:13.524352Z",
+  "frame": {
+   "axes": {
+    "x": "east",
+    "y": "north"
+   },
+   "crs": null,
+   "id": "local:analytic-site",
+   "kind": "local_cartesian",
+   "units": "m"
+  },
+  "identity": {
+   "terrain_id_derivation": "ter_ + sha256('solar.terrain.surface/1|' + terrain_digest)[:24]; terrain_digest = sha256(canonical {frame, vertical, vertices_xyz_m, triangles}); name and source are not part of the identity"
+  },
+  "info": {
+   "bbox_xy_m": [
+    0.0,
+    0.0,
+    8.0,
+    8.0
+   ],
+   "boundary_segment_count": 8,
+   "exact_arithmetic": {
+    "orientations_evaluated": 368,
+    "orientations_exact_expansion": 24,
+    "orientations_exact_rational": 0,
+    "rational_point_tests": 0,
+    "slope_decisions_exact": 0,
+    "support_limit_exact_recomputations": 0
+   },
+   "overlap_candidate_pairs": 20,
+   "referenced_vertex_count": 8,
+   "t_junction_count": 0,
+   "triangle_count": 8,
+   "unreferenced_vertex_count": 0,
+   "vertex_count": 8,
+   "z_range_m": [
+    10.0,
+    10.0
+   ]
+  },
+  "name": "Flat ring with an unsurveyed 1 x 1 m hole",
+  "provenance": {
+   "created_at": "2026-10-29T18:12:13.524352Z",
+   "dependencies": {
+    "geos": "3.14.1",
+    "jsonschema": "4.26.0",
+    "mcp": "2.3.0",
+    "numpy": "2.5.4",
+    "python": "3.12.3",
+    "shapely": "2.2.0",
+    "starlette": "1.10.0",
+    "uvicorn": "0.54.0"
+   },
+   "platform": "Linux x86_64",
+   "schema_version": "solar.terrain.surface/1",
+   "software_version": "0.2.0",
+   "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+   "source_tree_dirty": false
+  },
+  "reused_existing_terrain": false,
+  "schema_version": "solar.terrain.surface/1",
+  "source": {
+   "description": "Square [0,8]^2 at z = 10 without triangles over [3.5,4.5]^2 (a void, not a pit)",
+   "kind": "synthetic_analytic"
+  },
+  "terrain_digest": "722656cc35cfb728371bf92d2e97b8d429811283bc151f5e9e0e9436be30532f",
+  "terrain_id": "ter_a1dcaca58e3781c15b023566",
+  "vertical": {
+   "crs": null,
+   "id": "local:fixture-datum",
+   "kind": "local",
+   "positive": "up",
+   "units": "m"
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain place <tmp>/T04.request.json
+# exit 0 in 0.5s
+5abbc20db4ea61f921ba1b688b22c78",
+   "placement_id": "plc_ecc878a38115a31a316010ce",
+   "policy": {
+    "coverage": "mark_unknown_ground",
+    "limits": {
+     "max_ground_slope_deg": 20.0,
+     "max_support_above_ground_m": 2.0
+    },
+    "minimum_clearance_m": 0.5,
+    "numerical_policy": "terrain-policy/1",
+    "policy": "minimum_clearance_vertical_lift",
+    "structure_depth_m": 0.0,
+    "supports_model": "explicit_table_local"
+   },
+   "provenance": {
+    "algorithm_version": "terrain-vertical-lift/1",
+    "created_at": "2026-10-29T18:12:14.062824Z",
+    "dependencies": {
+     "geos": "3.14.1",
+     "jsonschema": "4.26.0",
+     "mcp": "2.3.0",
+     "numpy": "2.5.4",
+     "python": "3.12.3",
+     "shapely": "2.2.0",
+     "starlette": "1.10.0",
+     "uvicorn": "0.54.0"
+    },
+    "platform": "Linux x86_64",
+    "policy_version": "terrain-policy/1",
+    "schema_version": "solar.terrain.placement.result/1",
+    "software_version": "0.2.0",
+    "source_commit": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+    "source_tree_dirty": false
+   },
+   "schema_version": "solar.terrain.placement.result/1",
+   "source_layout": {
+    "algorithm_version": "lattice-fixed-and-phase3x3/1",
+    "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+    "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+    "schema_version": "solar.layout.result/1"
+   },
+   "statistics": {
+    "covered_area_m2_total": 7.0,
+    "lower_edge_z_m_range": null,
+    "max_clearance_m_range": null,
+    "max_ground_slope_deg": null,
+    "min_clearance_m_range": null,
+    "slope_limit_tan": 0.36397023426620234,
+    "support_above_ground_m_range": null,
+    "uncovered_area_m2_total": 1.0,
+    "vertical_lift_m_range": null
+   },
+   "terrain": {
+    "terrain_digest": "722656cc35cfb728371bf92d2e97b8d429811283bc151f5e9e0e9436be30532f",
+    "terrain_id": "ter_a1dcaca58e3781c15b023566"
+   },
+   "verification": {
+    "candidates": {
+     "candidate_triangles_max_per_table": 8,
+     "candidate_triangles_total": 8,
+     "grid_assignments": 8,
+     "grid_cell_m": 6.25,
+     "grid_cells": [
+      1,
+      1
+     ],
+     "method": "uniform grid over triangle bounding boxes",
+     "triangles_indexed": 8
+    },
+    "checks": {
+     "clearance": {
+      "ok": true
+     },
+     "clearance_report": {
+      "ok": true
+     },
+     "contract_fields": {
+      "ok": true
+     },
+     "coverage": {
+      "ok": true
+     },
+     "datum": {
+      "ok": true
+     },
+     "elevations": {
+      "ok": true
+     },
+     "identity": {
+      "ok": true
+     },
+     "lift_policy": {
+      "ok": true
+     },
+     "module_geometry": {
+      "ok": true
+     },
+     "payload_integrity": {
+      "ok": true
+     },
+     "schema": {
+      "ok": true
+     },
+     "slope": {
+      "ok": true
+     },
+     "source_linkage": {
+      "ok": true
+     },
+     "status_records": {
+      "ok": true
+     },
+     "supports": {
+      "ok": true
+     },
+     "totals": {
+      "ok": true
+     }
+    },
+    "exact_rational_evaluations": 1,
+    "ok": true,
+    "verifier": "solar_terrain.verify, independent of the engine (own candidate grid, exact arithmetic, clipping and boundary reconstruction)"
+   },
+   "vertical": {
+    "crs": null,
+    "id": "local:fixture-datum",
+    "kind": "local",
+    "positive": "up",
+    "units": "m"
+   },
+   "warnings": [
+    "1 of 1 tables are on unknown ground (footprint not wholly inside the surveyed surface) and are not placed"
+   ],
+   "z_kind": "terrain_vertical_reference"
+  },
+  "terrain_id": "ter_a1dcaca58e3781c15b023566",
+  "verification": {
+   "checks": {
+    "clearance": true,
+    "clearance_report": true,
+    "contract_fields": true,
+    "coverage": true,
+    "datum": true,
+    "elevations": true,
+    "identity": true,
+    "lift_policy": true,
+    "module_geometry": true,
+    "payload_integrity": true,
+    "schema": true,
+    "slope": true,
+    "source_linkage": true,
+    "status_records": true,
+    "supports": true,
+    "totals": true
+   },
+   "ok": true
+  }
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain items plc_ecc878a38115a31a316010ce --kind tables --limit 500
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "items": [
+   {
+    "covered_area_m2": 7.0,
+    "footprint_xy_m": [
+     [
+      2.0,
+      3.0
+     ],
+     [
+      6.0,
+      3.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      2.0,
+      5.0
+     ]
+    ],
+    "module_count": 4,
+    "reasons": [
+     "footprint_not_fully_covered"
+    ],
+    "seq": 0,
+    "status": "unknown_ground",
+    "table_id": "T_j0_i0",
+    "uncovered_area_m2": 1.0
+   }
+  ],
+  "kind": "tables",
+  "limit": 500,
+  "next_cursor": null,
+  "next_offset": null,
+  "offset": 0,
+  "placement_id": "plc_ecc878a38115a31a316010ce",
+  "total": 1
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_ecc878a38115a31a316010ce --format json
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_ecc878a38115a31a316010ce/v1/plc_ecc878a38115a31a316010ce-placement.json",
+  "bytes": 4951,
+  "context": "result_only",
+  "file_name": "plc_ecc878a38115a31a316010ce-placement.json",
+  "format": "json",
+  "media_type": "application/json",
+  "path": "plc_ecc878a38115a31a316010ce/v1/plc_ecc878a38115a31a316010ce-placement.json",
+  "placement_id": "plc_ecc878a38115a31a316010ce",
+  "sha256": "b67e18d90d2c9c922592f2a673faf4d68d4589f62dc17d63fae75b701292b068"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_ecc878a38115a31a316010ce --format csv
+# exit 0 in 0.6s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_ecc878a38115a31a316010ce/v1/plc_ecc878a38115a31a316010ce-modules.csv",
+  "bytes": 103,
+  "context": "result_only",
+  "file_name": "plc_ecc878a38115a31a316010ce-modules.csv",
+  "format": "csv",
+  "media_type": "text/csv; charset=utf-8",
+  "path": "plc_ecc878a38115a31a316010ce/v1/plc_ecc878a38115a31a316010ce-modules.csv",
+  "placement_id": "plc_ecc878a38115a31a316010ce",
+  "sha256": "8d926fe2a1b2d0ad78d136e6ce39471b74fd029454591ce3a8bd57c66e312d09"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain export plc_ecc878a38115a31a316010ce --format supports_csv
+# exit 0 in 0.5s
+{
+ "ok": true,
+ "result": {
+  "absolute_path": "/tmp/terrain-repro-8h8_6crv/data/terrain-exports/plc_ecc878a38115a31a316010ce/v1/plc_ecc878a38115a31a316010ce-supports.csv",
+  "bytes": 70,
+  "context": "result_only",
+  "file_name": "plc_ecc878a38115a31a316010ce-supports.csv",
+  "format": "supports_csv",
+  "media_type": "text/csv; charset=utf-8",
+  "path": "plc_ecc878a38115a31a316010ce/v1/plc_ecc878a38115a31a316010ce-supports.csv",
+  "placement_id": "plc_ecc878a38115a31a316010ce",
+  "sha256": "7eb5fe86a3d557ba44935a88a676b19b8ea4d6a38fe841d0c4d0f6c2164dd920"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/solar-layout --data-dir <tmp>/data terrain verify plc_ecc878a38115a31a316010ce
+# exit 0 in 0.6s
+{
+ "ok": true,
+ "result": {
+  "candidates": {
+   "candidate_triangles_max_per_table": 8,
+   "candidate_triangles_total": 8,
+   "grid_assignments": 8,
+   "grid_cell_m": 6.25,
+   "grid_cells": [
+    1,
+    1
+   ],
+   "method": "uniform grid over triangle bounding boxes",
+   "triangles_indexed": 8
+  },
+  "checks": {
+   "clearance": {
+    "failures": [],
+    "ok": true
+   },
+   "clearance_report": {
+    "failures": [],
+    "ok": true
+   },
+   "contract_fields": {
+    "failures": [],
+    "ok": true
+   },
+   "coverage": {
+    "failures": [],
+    "ok": true
+   },
+   "datum": {
+    "failures": [],
+    "ok": true
+   },
+   "elevations": {
+    "failures": [],
+    "ok": true
+   },
+   "identity": {
+    "failures": [],
+    "ok": true
+   },
+   "lift_policy": {
+    "failures": [],
+    "ok": true
+   },
+   "module_geometry": {
+    "failures": [],
+    "ok": true
+   },
+   "payload_integrity": {
+    "failures": [],
+    "ok": true
+   },
+   "schema": {
+    "failures": [],
+    "ok": true
+   },
+   "slope": {
+    "failures": [],
+    "ok": true
+   },
+   "source_linkage": {
+    "failures": [],
+    "ok": true
+   },
+   "status_records": {
+    "failures": [],
+    "ok": true
+   },
+   "supports": {
+    "failures": [],
+    "ok": true
+   },
+   "totals": {
+    "failures": [],
+    "ok": true
+   }
+  },
+  "exact_rational_evaluations": 1,
+  "ok": true,
+  "placement_id": "plc_ecc878a38115a31a316010ce"
+ }
+}
+
+
+
+$ <tmp>/solar_studio/solar-site-layout/.venv/bin/python -m pytest -p no:cacheprovider -o addopts= -q -rfEs
+# exit 0 in 87.7s
+........................................................................ [ 20%]
+........................................................................ [ 40%]
+........................................................................ [ 60%]
+........................................................................ [ 80%]
+........................................................................ [100%]
+360 passed in 86.58s (0:01:26)
+
+

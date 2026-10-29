@@ -1,0 +1,41 @@
+{
+ "evidence_dir": "/home/user/solar_studio/solar-site-layout/reports/terrain/acceptance-run",
+ "tests": {
+  "total": 360,
+  "passed": 360
+ },
+ "browser": {
+  "checks": 24,
+  "failed": [],
+  "browser": {
+   "channel": "chromium",
+   "version": "153.0.8010.12"
+  },
+  "playwright": "1.63.0"
+ },
+ "mcp": {
+  "steps": 17,
+  "failed": [],
+  "wire_messages": 37,
+  "first_method": "initialize"
+ },
+ "terrain_mcp": {
+  "steps": 20,
+  "failed": [],
+  "wire_messages": 41,
+  "first_method": "initialize",
+  "tools_called": [
+   "export_placement",
+   "generate_layout",
+   "get_placement_items",
+   "get_placement_summary",
+   "get_terrain",
+   "import_terrain",
+   "place_on_terrain",
+   "validate_terrain",
+   "verify_stored_placement"
+  ]
+ },
+ "passed": true,
+ "problems": []
+}

@@ -58,7 +58,7 @@ Module 02 is a placement-and-check tool for a flat-site layout on known ground. 
 
 - Every surface declares `vertical = {kind, crs | id, units: m, positive: up}`, where `kind` is `orthometric`, `ellipsoidal` or `local` (a named benchmark). There is no default; a missing `vertical` is `INVALID_TERRAIN`.
 - A placement's elevations are expressed **in the terrain's vertical reference**, and the result's `z_kind` is `terrain_vertical_reference`. Module 01's `relative_flat_datum` heights are not surveyed elevations and are never reinterpreted as such. They are only offset (section 5.1).
-- A request may assert the reference it expects (`vertical.expected_*`). If that differs from the terrain's, the request fails with `DATUM_MISMATCH`.
+- A request may assert the complete reference it expects (`expected_vertical`: `kind` plus `crs` or `id`; `CONTRACTS.md` §3). If that differs from the terrain's, the request fails with `DATUM_MISMATCH`.
 - **No vertical datum transformation is performed or attempted.** The library probe (`research/library-probes.json`) shows why. Offline and without the geoid grid, PROJ 9.5.1 turns WGS 84 ellipsoidal height into EGM96 height with a "ballpark" no-op: 100 m in, 100 m out, accuracy unknown (-1), and no warning or error. This held even with `only_best=True`, `PROJ_ONLY_BEST_DEFAULT=YES` and `errcheck=True`.
 - A later transformation feature would have to name the grid, verify it is installed, and refuse ballpark operations. That is an owner decision, not part of this plan.
 

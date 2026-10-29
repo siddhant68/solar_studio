@@ -1,0 +1,25 @@
+{
+ "tested_commit": "e194fb20a6b8a58b9cee409df3eaf3d62f2d382d",
+ "github": {
+  "GITHUB_EVENT_NAME": "pull_request",
+  "GITHUB_REF": "refs/pull/4/merge",
+  "GITHUB_SHA": "e194fb20a6b8a58b9cee409df3eaf3d62f2d382d",
+  "GITHUB_RUN_ID": "40928517340",
+  "GITHUB_RUN_ATTEMPT": "1",
+  "GITHUB_WORKFLOW": "Module 01 and terrain T1 tests (browser and MCP required)",
+  "PR_HEAD_SHA": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+  "PR_BASE_SHA": "9a123fbf89176eb078346ac72add6551fd9953fb"
+ },
+ "run_url": "https://github.com/siddhant68/solar_studio/actions/runs/40928517340",
+ "runner": {
+  "os": "ubuntu24",
+  "image_version": "20261026.354.1",
+  "arch": "x86_64"
+ },
+ "python": "3.12.3",
+ "uv": "uv 0.11.32 (x86_64-unknown-linux-gnu)",
+ "node": "v22.23.4",
+ "npm": "10.9.9",
+ "playwright": "1.63.0",
+ "playwright_pinned": "1.63.0"
+}

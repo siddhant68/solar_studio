@@ -248,3 +248,19 @@ They are result-only, write-once (unique staging, publication lock, re-hashed on
 5. **Coverage defined topologically and exactly.** A micro-gap fixture (T11) was added.
 6. **T1 limits** reduced to 1 M vertices / 2 M triangles; `terrain` must be a stored ID; `supports.model` beyond explicit points is rejected in T1.
 7. **Performance measurement defined** (PLAN.md §11). Bounded candidate selection is required in both the engine and the verifier.
+
+## 10. Clarifications recorded during the T1 implementation
+
+These neither change a schema nor relax a rule. They make explicit what the implementation does where the text above was silent.
+
+1. **Unreferenced vertices.** A vertex used by no triangle is allowed and stored, and it is part of the identity (vertex order is part of identity). It takes no part in the surface: it is not an overlay point, does not split edges and does not count as a T-junction. It still counts for the duplicate-plan-vertex rule.
+2. **Decimal thresholds.** The 1e-9 m² area minimum and the 1e-9 m T-junction allowance are compared as the exact decimal rationals 1/10⁹, not as their nearest doubles. The 1e-9 m support band is only the trigger for the exact recomputation and is evaluated in double.
+3. **Non-finite numbers.** Through the CLI, HTTP and MCP, a surface arrives as JSON text. `NaN`, `Infinity` and numbers that overflow are not valid JSON there, so the strict parser rejects them as `INVALID_INPUT` before validation. A non-finite value passed through the Python API is `INVALID_TERRAIN` (TC01). An integer too large to convert to a double is `RESOURCE_LIMIT` (outside the envelope).
+4. **Field of a missing property.** A schema error for a missing required property names that property (for example `vertical`), not its parent.
+5. **Triangle indices** may be JSON integers or integral numbers (JSON Schema treats `1.0` as an integer). They are stored and hashed as integers. Booleans are rejected everywhere.
+6. **HTTP body limit.** Surface import and validation accept bodies up to 256 MiB; every other endpoint keeps Module 01's 20 MiB. Oversized bodies are `RESOURCE_LIMIT` (413).
+7. **Time limit.** `SOLAR_TERRAIN_TIMEOUT_S` applies to imports as well as placements. It is checked between stages and between tables, and once more before writing.
+8. **Verifier assumption.** The verifier rebuilds the coverage boundary from candidate triangles. It assumes the stored surface passed import validation (in particular, no overlaps). Stored arrays are checked against their SHA-256 on every load.
+9. **Fixture path bases.** In `fixtures/cases/*.json`, `layout.request` is relative to `fixtures/`, while `surface` is relative to `fixtures/cases/`.
+10. **JSON export determinism.** The JSON export carries the stored summary, including `provenance.created_at`. Its bytes are identical in every process for the same stored placement. Two independent stores differ only in `created_at`, and the CSV exports are byte-identical (TV03).
+
