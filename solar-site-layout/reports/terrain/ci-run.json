@@ -1,0 +1,92 @@
+{
+ "schema": "solar.terrain.ci-run/1",
+ "inspected_at": "2026-10-29",
+ "how": "read through the GitHub API (workflow run, jobs, artifacts); both artifacts downloaded, their SHA-256 compared with the digests GitHub recorded, and their contents read",
+ "run_id": 40928517340,
+ "run_url": "https://github.com/siddhant68/solar_studio/actions/runs/40928517340",
+ "workflow": ".github/workflows/module-01.yml",
+ "event": "pull_request (PR #4)",
+ "pr": "https://github.com/siddhant68/solar_studio/pull/4",
+ "head_sha": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+ "tested_merge_commit": "e194fb20a6b8a58b9cee409df3eaf3d62f2d382d",
+ "merge_tree_equals_head_tree": true,
+ "trees": {
+  "solar-site-layout/src": "b9d3abc9c720a38903c934d5d4e1f96a6f3ee16a",
+  "solar-site-layout/tests": "e63c19a252e8e7d628e4560b3092665013d95246",
+  "solar-site-layout/scripts": "86fafbddb2f2b2ae9c2ee7b6ce13b0dcf0b7b09d",
+  "solar-site-layout/pyproject.toml": "69a0cc3d7132482e0fa40f41d3df69f19f299ff9",
+  "solar-site-layout/uv.lock": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
+  "solar-site-layout/fixtures": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
+  "handoffs/module-02-terrain/contracts": "b0f7b21a2a416055a95895490247cd61fc022de5",
+  "handoffs/module-02-terrain/fixtures": "0de30c7183897ff2abc05d3707d933ab22f241ac",
+  ".github": "f3a80fbcaa07924f36187a3bd5cfa717f5e1475a"
+ },
+ "jobs": [
+  {
+   "name": "Full suite (Linux, Python 3.12, Chromium required)",
+   "id": 123640404522,
+   "conclusion": "success",
+   "url": "https://github.com/siddhant68/solar_studio/actions/runs/40928517340/job/123640404522",
+   "started": "2026-10-29T18:11:59Z",
+   "completed": "2026-10-29T18:14:13Z"
+  },
+  {
+   "name": "Terrain benchmark TD02 (500k triangles, 10,192 modules)",
+   "id": 123640404165,
+   "conclusion": "success",
+   "url": "https://github.com/siddhant68/solar_studio/actions/runs/40928517340/job/123640404165",
+   "started": "2026-10-29T18:11:58Z",
+   "completed": "2026-10-29T18:12:42Z"
+  }
+ ],
+ "artifacts": [
+  {
+   "name": "module-01-evidence-run40928517340-attempt1",
+   "id": 12920739475,
+   "bytes": 2209682,
+   "sha256": "3c8800c9966581263e5169de972894fd9f5769d9921aab4977288a53bd715bdb",
+   "digest_matches_download": true,
+   "url": "https://github.com/siddhant68/solar_studio/actions/runs/40928517340/artifacts/12920739475",
+   "expires_at": "2026-11-28T18:14:07Z",
+   "copied_here": [
+    "ci-evidence/ci-check.json",
+    "ci-evidence/ci-environment.json",
+    "ci-evidence/pytest-junit.xml",
+    "ci-evidence/terrain-mcp/"
+   ]
+  },
+  {
+   "name": "terrain-benchmark-run40928517340-attempt1",
+   "id": 12922150889,
+   "bytes": 3278,
+   "sha256": "f68f91b3b33d8f633cef817dbcb8eef928aefaf37c52f3713fd37eb9ea80060f",
+   "digest_matches_download": true,
+   "url": "https://github.com/siddhant68/solar_studio/actions/runs/40928517340/artifacts/12922150889",
+   "expires_at": "2026-11-28T18:12:38Z",
+   "copied_here": [
+    "ci-benchmark/TERRAIN_BENCHMARKS.json",
+    "ci-benchmark/benchmark-output.txt",
+    "ci-benchmark/tested-commit.txt"
+   ]
+  }
+ ],
+ "evidence_gate": {
+  "passed": true,
+  "tests": {
+   "total": 360,
+   "passed": 360
+  },
+  "browser_checks": 24,
+  "mcp_steps": 17,
+  "terrain_mcp_steps": 20,
+  "problems": []
+ },
+ "terrain_mcp_steps_ok": true,
+ "earlier_run": {
+  "run_id": 40927836400,
+  "url": "https://github.com/siddhant68/solar_studio/actions/runs/40927836400",
+  "head_sha": "3b1d8d1a9b87b9784b06e52c96d58df0cda8f67e",
+  "conclusion": "success",
+  "note": "same source and test trees; scripts tree differed (acceptance scripts added in 2dcf16c)"
+ }
+}

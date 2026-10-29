@@ -1,0 +1,73 @@
+{
+ "schema_version": "solar.terrain.surface/1",
+ "name": "Hill fan, rotated 30 deg CCW and translated into EPSG:32633",
+ "frame": {
+  "kind": "projected_cartesian",
+  "id": "utm33n",
+  "crs": "EPSG:32633",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "vertical": {
+  "kind": "orthometric",
+  "crs": "EPSG:5773",
+  "units": "m",
+  "positive": "up"
+ },
+ "source": {
+  "kind": "synthetic_analytic",
+  "description": "Square [0,8]^2 at z = 10 with one interior vertex (4, 4, 10.6); four triangles, CCW"
+ },
+ "vertices_xyz_m": [
+  [
+   446000.0,
+   4412000.0,
+   10.0
+  ],
+  [
+   446006.92820323026,
+   4412004.0,
+   10.0
+  ],
+  [
+   446002.92820323026,
+   4412010.928203231,
+   10.0
+  ],
+  [
+   445996.0,
+   4412006.928203231,
+   10.0
+  ],
+  [
+   446001.4641016151,
+   4412005.464101615,
+   10.6
+  ]
+ ],
+ "triangles": [
+  [
+   0,
+   1,
+   4
+  ],
+  [
+   1,
+   2,
+   4
+  ],
+  [
+   2,
+   3,
+   4
+  ],
+  [
+   3,
+   0,
+   4
+  ]
+ ]
+}

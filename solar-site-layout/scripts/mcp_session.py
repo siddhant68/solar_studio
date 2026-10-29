@@ -51,6 +51,8 @@ async def run(out: Path, data_dir: Path) -> int:
             tools = await s.list_tools()
             names = [t.name for t in tools.tools]
             expected = ["validate_request", "calculate_row_pitch", "create_project", "get_project", "update_project", "generate_layout", "get_layout_summary", "get_layout_items", "export_layout"]
+            # Module 02 T1 adds its terrain tools to the same server (scripts/terrain_mcp_session.py exercises them).
+            expected += ["validate_terrain", "import_terrain", "get_terrain", "place_on_terrain", "get_placement_summary", "get_placement_items", "export_placement", "verify_stored_placement"]
             step("tools/list", names == expected, tools=names)
 
             async def call(name: str, args: dict):

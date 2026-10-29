@@ -27,7 +27,7 @@ def _emit(obj: Any) -> None:
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="solar-layout", description="Solar Studio Module 01: site to layout")
+    p = argparse.ArgumentParser(prog="solar-layout", description="Solar Studio Module 01 (site to layout) and Module 02 T1 (terrain placement)")
     p.add_argument("--data-dir", default=None, help="state directory (default: $SOLAR_DATA_DIR or ./data)")
     sub = p.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("validate", help="validate and normalize a layout request")
@@ -65,11 +65,57 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--format", required=True)
     s = sub.add_parser("verify", help="re-run the independent verifier on a stored result")
     s.add_argument("result_id")
+    ter = sub.add_parser("terrain", help="Module 02: terrain surfaces and placements")
+    tsub = ter.add_subparsers(dest="tcmd", required=True)
+    s = tsub.add_parser("validate", help="validate a terrain surface (solar.terrain.surface/1) without storing it")
+    s.add_argument("surface")
+    s = tsub.add_parser("import", help="validate and store a terrain surface (immutable, content-addressed)")
+    s.add_argument("surface")
+    s = tsub.add_parser("get", help="read a stored terrain's metadata")
+    s.add_argument("terrain_id")
+    s = tsub.add_parser("place", help="place a stored layout on a stored terrain (solar.terrain.placement.request/1)")
+    s.add_argument("request")
+    s = tsub.add_parser("summary", help="read a placement summary")
+    s.add_argument("placement_id")
+    s = tsub.add_parser("items", help="page through a placement's tables, modules or supports")
+    s.add_argument("placement_id")
+    s.add_argument("--kind", default="tables", choices=["tables", "modules", "supports"])
+    s.add_argument("--offset", type=int)
+    s.add_argument("--cursor")
+    s.add_argument("--limit", type=int)
+    s = tsub.add_parser("export", help="publish (or reuse) a placement export: json, csv, supports_csv")
+    s.add_argument("placement_id")
+    s.add_argument("--format", required=True)
+    s = tsub.add_parser("verify", help="re-run the independent verifier on a stored placement")
+    s.add_argument("placement_id")
     s = sub.add_parser("serve", help="run the local HTTP API and browser interface")
     s.add_argument("--host", default="127.0.0.1")
     s.add_argument("--port", type=int, default=8765)
     sub.add_parser("mcp", help="run the stdio MCP server")
     return p
+
+
+def _terrain(svc: Any, args: argparse.Namespace) -> Any:
+    from solar_terrain.service import TerrainService
+
+    ts = TerrainService(svc, args.data_dir, interface="cli")
+    if args.tcmd == "validate":
+        return ts.validate_terrain(_read_json(args.surface))
+    if args.tcmd == "import":
+        return ts.import_terrain(_read_json(args.surface))
+    if args.tcmd == "get":
+        return ts.get_terrain(args.terrain_id)
+    if args.tcmd == "place":
+        return ts.place_on_terrain(_read_json(args.request))
+    if args.tcmd == "summary":
+        return ts.get_placement_summary(args.placement_id)
+    if args.tcmd == "items":
+        return ts.get_placement_items(args.placement_id, args.kind, offset=args.offset, cursor=args.cursor, limit=args.limit)
+    if args.tcmd == "export":
+        out = ts.export_placement(args.placement_id, args.format)
+        out["absolute_path"] = str(ts.store.export_root / out["path"])
+        return out
+    return ts.verify_stored_placement(args.placement_id)
 
 
 def run(argv: list[str] | None = None) -> int:
@@ -117,6 +163,8 @@ def run(argv: list[str] | None = None) -> int:
             out["absolute_path"] = str(svc.store.export_root / out["path"])
         elif args.cmd == "verify":
             out = svc.verify_stored_result(args.result_id)
+        elif args.cmd == "terrain":
+            out = _terrain(svc, args)
         else:  # pragma: no cover
             raise DomainError(INTERNAL_ERROR, f"unknown command {args.cmd}")
     except DomainError as e:

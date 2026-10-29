@@ -1,0 +1,555 @@
+{
+ "case_id": "T01",
+ "title": "Planar terrain under the six-table rectangle layout",
+ "layout": {
+  "request": "../../module-01/fixtures/rectangle.request.json",
+  "observed_result_id": "res_410d496155af5459caa61028",
+  "observed_payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc",
+  "modules_per_table": 4,
+  "power_wp": 550,
+  "table_width_W_m": 2.0,
+  "table_depth_D_m": 4.0,
+  "tan_tilt": 0.0,
+  "lower_edge_height_m": 0.8
+ },
+ "surface": "../surfaces/plane-rectangle.surface.json",
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "source_layout": {
+   "result_id": "res_410d496155af5459caa61028",
+   "payload_digest": "450141e5c44c2d6f9816debfbe96c6369f20efc0b29c85768dc0794827207ffc"
+  },
+  "terrain": "ter_0bd7bacad2881da43cc5bed7",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.0
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     3.5
+    ],
+    [
+     1.5,
+     0.5
+    ],
+    [
+     1.5,
+     3.5
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 20.0,
+   "max_support_above_ground_m": 2.0
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "formula": "planar ground G = z0 + gx x + gy y; L = max over footprint corners of (G - d tan(beta)) + c + s; clearance(a, d) = L + d tan(beta) - s - G; support above-ground height = top - ground",
+ "plane": {
+  "z0": 100.0,
+  "gx": 0.05,
+  "gy": 0.1
+ },
+ "expected": {
+  "tables": [
+   {
+    "table_id": "T_j0_i0",
+    "origin_xy_m": [
+     1.0,
+     1.0
+    ],
+    "footprint_xy_m": [
+     [
+      1.0,
+      1.0
+     ],
+     [
+      3.0,
+      1.0
+     ],
+     [
+      3.0,
+      5.0
+     ],
+     [
+      1.0,
+      5.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 101.15,
+    "upper_edge_z_m": 101.15,
+    "vertical_lift_m": 100.35,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442804,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       1.5,
+       1.5
+      ],
+      "ground_z_m": 100.225,
+      "top_z_m": 101.15,
+      "above_ground_m": 0.925
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       1.5,
+       4.5
+      ],
+      "ground_z_m": 100.525,
+      "top_z_m": 101.15,
+      "above_ground_m": 0.625
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       2.5,
+       1.5
+      ],
+      "ground_z_m": 100.275,
+      "top_z_m": 101.15,
+      "above_ground_m": 0.875
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       2.5,
+       4.5
+      ],
+      "ground_z_m": 100.575,
+      "top_z_m": 101.15,
+      "above_ground_m": 0.575
+     }
+    ]
+   },
+   {
+    "table_id": "T_j0_i1",
+    "origin_xy_m": [
+     4.0,
+     1.0
+    ],
+    "footprint_xy_m": [
+     [
+      4.0,
+      1.0
+     ],
+     [
+      6.0,
+      1.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      4.0,
+      5.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 101.3,
+    "upper_edge_z_m": 101.3,
+    "vertical_lift_m": 100.5,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442804,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       4.5,
+       1.5
+      ],
+      "ground_z_m": 100.375,
+      "top_z_m": 101.3,
+      "above_ground_m": 0.925
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       4.5,
+       4.5
+      ],
+      "ground_z_m": 100.675,
+      "top_z_m": 101.3,
+      "above_ground_m": 0.625
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       5.5,
+       1.5
+      ],
+      "ground_z_m": 100.425,
+      "top_z_m": 101.3,
+      "above_ground_m": 0.875
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       5.5,
+       4.5
+      ],
+      "ground_z_m": 100.725,
+      "top_z_m": 101.3,
+      "above_ground_m": 0.575
+     }
+    ]
+   },
+   {
+    "table_id": "T_j0_i2",
+    "origin_xy_m": [
+     7.0,
+     1.0
+    ],
+    "footprint_xy_m": [
+     [
+      7.0,
+      1.0
+     ],
+     [
+      9.0,
+      1.0
+     ],
+     [
+      9.0,
+      5.0
+     ],
+     [
+      7.0,
+      5.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 101.45,
+    "upper_edge_z_m": 101.45,
+    "vertical_lift_m": 100.65,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442804,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       7.5,
+       1.5
+      ],
+      "ground_z_m": 100.525,
+      "top_z_m": 101.45,
+      "above_ground_m": 0.925
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       7.5,
+       4.5
+      ],
+      "ground_z_m": 100.825,
+      "top_z_m": 101.45,
+      "above_ground_m": 0.625
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       8.5,
+       1.5
+      ],
+      "ground_z_m": 100.575,
+      "top_z_m": 101.45,
+      "above_ground_m": 0.875
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       8.5,
+       4.5
+      ],
+      "ground_z_m": 100.875,
+      "top_z_m": 101.45,
+      "above_ground_m": 0.575
+     }
+    ]
+   },
+   {
+    "table_id": "T_j1_i0",
+    "origin_xy_m": [
+     1.0,
+     6.0
+    ],
+    "footprint_xy_m": [
+     [
+      1.0,
+      6.0
+     ],
+     [
+      3.0,
+      6.0
+     ],
+     [
+      3.0,
+      10.0
+     ],
+     [
+      1.0,
+      10.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 101.65,
+    "upper_edge_z_m": 101.65,
+    "vertical_lift_m": 100.85,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442804,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       1.5,
+       6.5
+      ],
+      "ground_z_m": 100.725,
+      "top_z_m": 101.65,
+      "above_ground_m": 0.925
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       1.5,
+       9.5
+      ],
+      "ground_z_m": 101.025,
+      "top_z_m": 101.65,
+      "above_ground_m": 0.625
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       2.5,
+       6.5
+      ],
+      "ground_z_m": 100.775,
+      "top_z_m": 101.65,
+      "above_ground_m": 0.875
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       2.5,
+       9.5
+      ],
+      "ground_z_m": 101.075,
+      "top_z_m": 101.65,
+      "above_ground_m": 0.575
+     }
+    ]
+   },
+   {
+    "table_id": "T_j1_i1",
+    "origin_xy_m": [
+     4.0,
+     6.0
+    ],
+    "footprint_xy_m": [
+     [
+      4.0,
+      6.0
+     ],
+     [
+      6.0,
+      6.0
+     ],
+     [
+      6.0,
+      10.0
+     ],
+     [
+      4.0,
+      10.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 101.8,
+    "upper_edge_z_m": 101.8,
+    "vertical_lift_m": 101.0,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442804,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       4.5,
+       6.5
+      ],
+      "ground_z_m": 100.875,
+      "top_z_m": 101.8,
+      "above_ground_m": 0.925
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       4.5,
+       9.5
+      ],
+      "ground_z_m": 101.175,
+      "top_z_m": 101.8,
+      "above_ground_m": 0.625
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       5.5,
+       6.5
+      ],
+      "ground_z_m": 100.925,
+      "top_z_m": 101.8,
+      "above_ground_m": 0.875
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       5.5,
+       9.5
+      ],
+      "ground_z_m": 101.225,
+      "top_z_m": 101.8,
+      "above_ground_m": 0.575
+     }
+    ]
+   },
+   {
+    "table_id": "T_j1_i2",
+    "origin_xy_m": [
+     7.0,
+     6.0
+    ],
+    "footprint_xy_m": [
+     [
+      7.0,
+      6.0
+     ],
+     [
+      9.0,
+      6.0
+     ],
+     [
+      9.0,
+      10.0
+     ],
+     [
+      7.0,
+      10.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 101.95,
+    "upper_edge_z_m": 101.95,
+    "vertical_lift_m": 101.15,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.0,
+    "max_ground_slope_deg": 6.379370208442804,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       7.5,
+       6.5
+      ],
+      "ground_z_m": 101.025,
+      "top_z_m": 101.95,
+      "above_ground_m": 0.925
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 3.5,
+      "xy_m": [
+       7.5,
+       9.5
+      ],
+      "ground_z_m": 101.325,
+      "top_z_m": 101.95,
+      "above_ground_m": 0.625
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 0.5,
+      "xy_m": [
+       8.5,
+       6.5
+      ],
+      "ground_z_m": 101.075,
+      "top_z_m": 101.95,
+      "above_ground_m": 0.875
+     },
+     {
+      "a_m": 1.5,
+      "d_m": 3.5,
+      "xy_m": [
+       8.5,
+       9.5
+      ],
+      "ground_z_m": 101.375,
+      "top_z_m": 101.95,
+      "above_ground_m": 0.575
+     }
+    ]
+   }
+  ],
+  "placed_tables": 6,
+  "placed_modules": 24,
+  "placed_dc_kwp": 13.2
+ },
+ "notes": "Every table is placed. The highest ground under a table is at its north-east corner; the lowest clearance (0.5 m) is there and the highest (1.0 m) at the south-west corner."
+}

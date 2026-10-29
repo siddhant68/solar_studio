@@ -1,0 +1,46 @@
+{
+ "flat-micro-gap": {
+  "terrain_digest": "0e71f9d9a08b7fb2138ae41c23e8a10774a3cd3542e390f5da2e1ced9399289d",
+  "terrain_id": "ter_99b9de2d543263aaae637da0"
+ },
+ "hill-fan": {
+  "terrain_digest": "4f7d0a6e25b8918dd8ea15da78f40bbb04a18c6cb04d75c61fc145ed6fda95cc",
+  "terrain_id": "ter_b3a23946bd49d8aa30483fef"
+ },
+ "hill-fan-rotated": {
+  "terrain_digest": "93fe60286eb5fb492a0e63ace09a375dc984b699e229c33d354399ac68c24236",
+  "terrain_id": "ter_a0811e805f5f13060daae9be"
+ },
+ "hill-fan-tjunction-consistent": {
+  "terrain_digest": "791c59d85c233ea2d73378a08ca5e432a364b921e69ea87e7ea71a2b09073d4d",
+  "terrain_id": "ter_a2c16bb86ab629cb786282be"
+ },
+ "hill-fan-tjunction-cracked": {
+  "terrain_digest": "bb5a632bfd9a8bb265dfe4f25068f1be5ac594ea0658f87def8dcf4fca0f8228",
+  "terrain_id": "ter_81829a84185083fe0751d43c"
+ },
+ "plane-north-0p25": {
+  "terrain_digest": "4e419e4e571cab7408947f1b9666aa1164a2e898db345b52feffb462e2ccd06c",
+  "terrain_id": "ter_a6a6c4f23d9b293da1b3e0f2"
+ },
+ "plane-north-0p5": {
+  "terrain_digest": "28c70d19daf765d4aeeceb8ffaa2132be693bcbce272f5c8854b6eec1b597743",
+  "terrain_id": "ter_cd4444954ee891db75345fcc"
+ },
+ "plane-north-0p6": {
+  "terrain_digest": "fc9d86b0f9c69c02e1b2bfefc47ee7b61c7eb35f78a6da21a925108d0fa24f3e",
+  "terrain_id": "ter_264b03a1a08199b69d137351"
+ },
+ "plane-rectangle": {
+  "terrain_digest": "f619dde2da8fbc3b81483c2e991cf3ac1bdbab3d3f4461b5ed1fa025e1a0d260",
+  "terrain_id": "ter_0bd7bacad2881da43cc5bed7"
+ },
+ "plane-rectangle-west-half": {
+  "terrain_digest": "df28d61504cc8c833887984ea47642c748069a2820afacad3955f6a5fb729f95",
+  "terrain_id": "ter_4f84037f29fda89622237250"
+ },
+ "void-ring": {
+  "terrain_digest": "722656cc35cfb728371bf92d2e97b8d429811283bc151f5e9e0e9436be30532f",
+  "terrain_id": "ter_a1dcaca58e3781c15b023566"
+ }
+}

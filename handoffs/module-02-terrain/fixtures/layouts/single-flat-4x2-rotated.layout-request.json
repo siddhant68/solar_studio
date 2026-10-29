@@ -1,0 +1,69 @@
+{
+ "schema_version": "solar.layout.request/1",
+ "name": "Single flat 4 x 2 table, rotated 30 deg CCW and translated into EPSG:32633",
+ "frame": {
+  "kind": "projected_cartesian",
+  "id": "utm33n",
+  "crs": "EPSG:32633",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "boundary": {
+  "type": "Polygon",
+  "coordinates": [
+   [
+    [
+     446000.0,
+     4412000.0
+    ],
+    [
+     446006.92820323026,
+     4412004.0
+    ],
+    [
+     446002.92820323026,
+     4412010.928203231
+    ],
+    [
+     445996.0,
+     4412006.928203231
+    ],
+    [
+     446000.0,
+     4412000.0
+    ]
+   ]
+  ]
+ },
+ "perimeter_setback_m": 0.0,
+ "exclusions": [],
+ "module": {
+  "model_id": "SYNTHETIC-1x2-550",
+  "width_m": 1.0,
+  "length_m": 2.0,
+  "power_wp": 550.0,
+  "orientation": "portrait"
+ },
+ "table": {
+  "rows": 1,
+  "columns": 4,
+  "module_gap_x_m": 0.0,
+  "module_gap_y_m": 0.0,
+  "tilt_deg": 0.0,
+  "facing_azimuth_deg": 150.0,
+  "lower_edge_height_m": 0.8
+ },
+ "placement": {
+  "mode": "fixed_lattice",
+  "anchor_xy_m": [
+   446000.23205080756,
+   4412003.598076211
+  ],
+  "table_gap_m": 1.0,
+  "row_pitch_m": 10.0,
+  "minimum_clear_row_gap_m": 1.0
+ }
+}

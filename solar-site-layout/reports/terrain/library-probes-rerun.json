@@ -1,0 +1,83 @@
+{
+ "authority": "runtime probe of library behaviour (not REA; not a terrain engine)",
+ "versions": {
+  "python": "3.12.3",
+  "pyproj": "3.7.2",
+  "proj": "9.5.1",
+  "scipy": "1.16.2",
+  "numpy": "2.3.4",
+  "rasterio": "1.4.3",
+  "gdal": "3.9.3"
+ },
+ "vertical_datum": {
+  "question": "WGS 84 (EPSG:4979) ellipsoidal height to EGM96 height (EPSG:4326+5773) without the geoid grid installed",
+  "proj_network_enabled": false,
+  "default_transformer": "axis order change (2D) + Inverse of Transformation from EGM96 height to WGS 84 (ballpark vertical transformation, without ellipsoid height to vertical height correction) + axis order change (2D)",
+  "default_result_h_for_input_100m": 100.0,
+  "default_accuracy_m": -1.0,
+  "description_says_ballpark": true,
+  "transformer_group_warnings": [
+   "Best transformation is not available due to missing Grid(short_name=us_nga_egm96_15.tif, full_name=, package_name=, url=https://cdn.proj.org/us_nga_egm96_15.tif, direct_download=True, open_license=Tru"
+  ],
+  "available_operations": [
+   "axis order change (2D) + Inverse of Transformation from EGM96 height to WGS 84 (ballpark vertical transformation, without ellipsoid height to vertical height correction) + axis order change (2D)"
+  ],
+  "unavailable_operations": [
+   "WGS 84 to EGM96 height (1)"
+  ],
+  "only_best": {
+   "constructed": true,
+   "warnings_or_errors": "none (warnings were turned into errors)",
+   "description": "axis order change (2D) + Inverse of Transformation from EGM96 height to WGS 84 (ballpark vertical transformation, without ellipsoid height to vertical height correction) + axis order change (2D)",
+   "h": 100.0,
+   "accuracy_m": -1.0
+  }
+ },
+ "tin_across_hole": {
+  "question": "scipy Delaunay + LinearNDInterpolator over points with an unsurveyed 4 x 4 m interior gap",
+  "points": 96,
+  "triangles": 150,
+  "value_at_gap_centre_5_5": 0.5,
+  "find_simplex_at_gap_centre": 24,
+  "value_outside_hull_12_5": null,
+  "observation": "the gap is triangulated and interpolated (value is finite); only points outside the convex hull return NaN"
+ },
+ "raster": {
+  "geotiff": {
+   "nodata": -9999.0,
+   "masked_cells": 1,
+   "area_or_point": "Area",
+   "sample_unmasked_at_nodata_cell": -9999.0,
+   "sample_masked_at_nodata_cell_is_masked": true,
+   "pixel_centre_of_row0_col0": [
+    500000.5,
+    4100002.5
+   ]
+  },
+  "esri_ascii_xllcenter": {
+   "header": {
+    "ncols": 3,
+    "nrows": 2,
+    "xllcenter": 10,
+    "yllcenter": 20,
+    "cellsize": 2
+   },
+   "gdal_bounds": [
+    9.0,
+    19.0,
+    15.0,
+    23.0
+   ],
+   "expected_lower_left_corner": [
+    9.0,
+    19.0
+   ],
+   "pvplant_formula_lower_left_corner": [
+    7.0,
+    18.0
+   ],
+   "nodata": -9999.0,
+   "masked_cells": 1
+  }
+ }
+}

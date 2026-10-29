@@ -1,0 +1,152 @@
+{
+ "case_id": "T06",
+ "title": "Support above-ground limit makes a table infeasible",
+ "layout": {
+  "request": "layouts/single-flat-4x2.layout-request.json",
+  "observed_result_id": "res_4c0feedc2e9bff7e31ebdefc",
+  "observed_payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+  "modules_per_table": 4,
+  "power_wp": 550,
+  "table_width_W_m": 4.0,
+  "table_depth_D_m": 2.0,
+  "tan_tilt": 0.0,
+  "lower_edge_height_m": 0.8
+ },
+ "surface": "../surfaces/plane-north-0p6.surface.json",
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "source_layout": {
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+   "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e"
+  },
+  "terrain": "ter_264b03a1a08199b69d137351",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.0
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     1.5
+    ],
+    [
+     3.5,
+     0.5
+    ],
+    [
+     3.5,
+     1.5
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 35.0,
+   "max_support_above_ground_m": 1.2
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "formula": "planar ground G = z0 + gx x + gy y; L = max over footprint corners of (G - d tan(beta)) + c + s; clearance(a, d) = L + d tan(beta) - s - G; support above-ground height = top - ground",
+ "plane": {
+  "z0": 20.0,
+  "gx": 0.0,
+  "gy": 0.6
+ },
+ "expected": {
+  "tables": [
+   {
+    "table_id": "T_j0_i0",
+    "origin_xy_m": [
+     2.0,
+     3.0
+    ],
+    "footprint_xy_m": [
+     [
+      2.0,
+      3.0
+     ],
+     [
+      6.0,
+      3.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      2.0,
+      5.0
+     ]
+    ],
+    "status": "infeasible",
+    "reasons": [
+     "support_above_ground_exceeds_limit"
+    ],
+    "lower_edge_z_m": 23.5,
+    "upper_edge_z_m": 23.5,
+    "vertical_lift_m": 22.7,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.7,
+    "max_ground_slope_deg": 30.96375653207352,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       2.5,
+       3.5
+      ],
+      "ground_z_m": 22.1,
+      "top_z_m": 23.5,
+      "above_ground_m": 1.4
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 1.5,
+      "xy_m": [
+       2.5,
+       4.5
+      ],
+      "ground_z_m": 22.7,
+      "top_z_m": 23.5,
+      "above_ground_m": 0.8
+     },
+     {
+      "a_m": 3.5,
+      "d_m": 0.5,
+      "xy_m": [
+       5.5,
+       3.5
+      ],
+      "ground_z_m": 22.1,
+      "top_z_m": 23.5,
+      "above_ground_m": 1.4
+     },
+     {
+      "a_m": 3.5,
+      "d_m": 1.5,
+      "xy_m": [
+       5.5,
+       4.5
+      ],
+      "ground_z_m": 22.7,
+      "top_z_m": 23.5,
+      "above_ground_m": 0.8
+     }
+    ]
+   }
+  ],
+  "placed_tables": 0,
+  "placed_modules": 0,
+  "placed_dc_kwp": 0.0
+ },
+ "notes": "L = 20 + 0.6 x 5 + 0.5 = 23.5. Front supports (d = 0.5, y = 3.5) stand 1.4 m above ground > 1.2 m limit; rear supports 0.8 m. Slope 30.96 deg is within 35 deg."
+}

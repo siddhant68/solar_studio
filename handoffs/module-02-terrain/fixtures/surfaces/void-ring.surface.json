@@ -1,0 +1,108 @@
+{
+ "schema_version": "solar.terrain.surface/1",
+ "name": "Flat ring with an unsurveyed 1 x 1 m hole",
+ "frame": {
+  "kind": "local_cartesian",
+  "id": "local:analytic-site",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "vertical": {
+  "kind": "local",
+  "id": "local:fixture-datum",
+  "crs": null,
+  "units": "m",
+  "positive": "up"
+ },
+ "source": {
+  "kind": "synthetic_analytic",
+  "description": "Square [0,8]^2 at z = 10 without triangles over [3.5,4.5]^2 (a void, not a pit)"
+ },
+ "vertices_xyz_m": [
+  [
+   0.0,
+   0.0,
+   10.0
+  ],
+  [
+   8.0,
+   0.0,
+   10.0
+  ],
+  [
+   8.0,
+   8.0,
+   10.0
+  ],
+  [
+   0.0,
+   8.0,
+   10.0
+  ],
+  [
+   3.5,
+   3.5,
+   10.0
+  ],
+  [
+   4.5,
+   3.5,
+   10.0
+  ],
+  [
+   4.5,
+   4.5,
+   10.0
+  ],
+  [
+   3.5,
+   4.5,
+   10.0
+  ]
+ ],
+ "triangles": [
+  [
+   0,
+   1,
+   5
+  ],
+  [
+   0,
+   5,
+   4
+  ],
+  [
+   1,
+   2,
+   6
+  ],
+  [
+   1,
+   6,
+   5
+  ],
+  [
+   2,
+   3,
+   7
+  ],
+  [
+   2,
+   7,
+   6
+  ],
+  [
+   3,
+   0,
+   4
+  ],
+  [
+   3,
+   4,
+   7
+  ]
+ ]
+}

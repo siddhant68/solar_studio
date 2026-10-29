@@ -1,0 +1,148 @@
+{
+ "gate": "TD03",
+ "passed": true,
+ "source": "git clone --branch feat/module-02-terrain-t1 https://github.com/siddhant68/solar_studio into an empty temporary directory",
+ "head": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+ "trees": {
+  "solar-site-layout/src": "b9d3abc9c720a38903c934d5d4e1f96a6f3ee16a",
+  "solar-site-layout/tests": "e63c19a252e8e7d628e4560b3092665013d95246",
+  "solar-site-layout/scripts": "86fafbddb2f2b2ae9c2ee7b6ce13b0dcf0b7b09d",
+  "handoffs/module-02-terrain/contracts": "b0f7b21a2a416055a95895490247cd61fc022de5",
+  "handoffs/module-02-terrain/fixtures": "0de30c7183897ff2abc05d3707d933ab22f241ac",
+  ".github": "f3a80fbcaa07924f36187a3bd5cfa717f5e1475a"
+ },
+ "uv": "uv 0.11.32 (x86_64-unknown-linux-gnu)",
+ "uv_cache": "empty temporary UV_CACHE_DIR (every package fetched per uv.lock)",
+ "analytic_cli_checks": {
+  "T01": true,
+  "T03": true,
+  "T04": true
+ },
+ "steps": {
+  "git clone": {
+   "exit": 0,
+   "seconds": 3.0
+  },
+  "uv sync --frozen": {
+   "exit": 0,
+   "seconds": 2.6
+  },
+  "bootstrap browser": {
+   "exit": 0,
+   "seconds": 1.1
+  },
+  "T01 generate": {
+   "exit": 0,
+   "seconds": 1.6
+  },
+  "T01 terrain import": {
+   "exit": 0,
+   "seconds": 0.6
+  },
+  "T01 terrain place": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T01 terrain items": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T01 terrain export json": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T01 terrain export csv": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T01 terrain export supports_csv": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T01 terrain verify": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 generate": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain import": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain place": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain items": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain export json": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain export csv": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain export supports_csv": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T03 terrain verify": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T04 generate": {
+   "exit": 0,
+   "seconds": 0.6
+  },
+  "T04 terrain import": {
+   "exit": 0,
+   "seconds": 0.6
+  },
+  "T04 terrain place": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T04 terrain items": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T04 terrain export json": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T04 terrain export csv": {
+   "exit": 0,
+   "seconds": 0.6
+  },
+  "T04 terrain export supports_csv": {
+   "exit": 0,
+   "seconds": 0.5
+  },
+  "T04 terrain verify": {
+   "exit": 0,
+   "seconds": 0.6
+  },
+  "pytest (full suite)": {
+   "exit": 0,
+   "seconds": 87.7,
+   "tail": "360 passed in 86.58s (0:01:26)",
+   "browser_required": true
+  }
+ },
+ "commands": [
+  "git clone --branch feat/module-02-terrain-t1 https://github.com/siddhant68/solar_studio solar_studio && cd solar_studio/solar-site-layout",
+  "UV_CACHE_DIR=$(mktemp -d) uv sync --frozen --python 3.12",
+  "scripts/bootstrap_browser.sh",
+  ".venv/bin/solar-layout --data-dir DATA generate <case layout request>",
+  ".venv/bin/solar-layout --data-dir DATA terrain import <case surface>",
+  ".venv/bin/solar-layout --data-dir DATA terrain place <case placement request>",
+  ".venv/bin/solar-layout --data-dir DATA terrain items|export|verify <placement_id>",
+  "SOLAR_REQUIRE_BROWSER=1 .venv/bin/python -m pytest -p no:cacheprovider"
+ ],
+ "private_paths_or_accounts_needed": "none"
+}

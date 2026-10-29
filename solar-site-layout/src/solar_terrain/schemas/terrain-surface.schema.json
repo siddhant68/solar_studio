@@ -1,0 +1,199 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://solar-studio.invalid/schemas/solar.terrain.surface/1",
+ "title": "solar.terrain.surface/1",
+ "description": "A triangulated ground surface (TIN) in the same metric Cartesian frame as a Module 01 layout, with an explicit vertical reference. Structural checks only. Semantic rules (counter-clockwise triangles, plan area, no plan overlap, no duplicate plan vertices, crack-free T-junctions, coordinate magnitudes and count limits) are enforced by the validator; see CONTRACTS.md section 2. For large surfaces the validator applies this schema to the document with the two arrays checked separately by the same rules.",
+ "type": "object",
+ "additionalProperties": false,
+ "required": [
+  "schema_version",
+  "frame",
+  "vertical",
+  "vertices_xyz_m",
+  "triangles"
+ ],
+ "properties": {
+  "schema_version": {
+   "const": "solar.terrain.surface/1"
+  },
+  "name": {
+   "type": "string",
+   "maxLength": 200
+  },
+  "frame": {
+   "description": "Identical object to the Module 01 request frame. Terrain and layout frames must be equal; no horizontal transformation is performed.",
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "kind",
+    "id",
+    "units",
+    "axes"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "local_cartesian",
+      "projected_cartesian"
+     ]
+    },
+    "id": {
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 200
+    },
+    "crs": {
+     "type": [
+      "string",
+      "null"
+     ],
+     "maxLength": 200
+    },
+    "units": {
+     "const": "m"
+    },
+    "axes": {
+     "type": "object",
+     "additionalProperties": false,
+     "required": [
+      "x",
+      "y"
+     ],
+     "properties": {
+      "x": {
+       "const": "east"
+      },
+      "y": {
+       "const": "north"
+      }
+     }
+    }
+   }
+  },
+  "vertical": {
+   "description": "Vertical reference of every z value. Required; no default and no transformation between references.",
+   "type": "object",
+   "additionalProperties": false,
+   "required": [
+    "kind",
+    "units",
+    "positive"
+   ],
+   "properties": {
+    "kind": {
+     "enum": [
+      "orthometric",
+      "ellipsoidal",
+      "local"
+     ]
+    },
+    "crs": {
+     "type": [
+      "string",
+      "null"
+     ]
+    },
+    "id": {
+     "type": "string",
+     "minLength": 1,
+     "maxLength": 200
+    },
+    "units": {
+     "const": "m"
+    },
+    "positive": {
+     "const": "up"
+    }
+   },
+   "oneOf": [
+    {
+     "properties": {
+      "kind": {
+       "enum": [
+        "orthometric",
+        "ellipsoidal"
+       ]
+      },
+      "crs": {
+       "type": "string",
+       "minLength": 1,
+       "maxLength": 200
+      }
+     },
+     "required": [
+      "crs"
+     ],
+     "not": {
+      "required": [
+       "id"
+      ]
+     }
+    },
+    {
+     "properties": {
+      "kind": {
+       "const": "local"
+      },
+      "crs": {
+       "type": "null"
+      }
+     },
+     "required": [
+      "id"
+     ]
+    }
+   ]
+  },
+  "source": {
+   "type": "object",
+   "properties": {
+    "kind": {
+     "enum": [
+      "survey_tin",
+      "synthetic_analytic",
+      "dem_derived",
+      "landxml_import"
+     ]
+    },
+    "description": {
+     "type": "string"
+    },
+    "surveyed_on": {
+     "type": "string"
+    },
+    "provider": {
+     "type": "string"
+    }
+   }
+  },
+  "vertices_xyz_m": {
+   "type": "array",
+   "minItems": 3,
+   "maxItems": 1000000,
+   "description": "Plan x (east), y (north) and elevation z. |x|, |y| <= 1e7 and |z| <= 2e4 are envelope limits (RESOURCE_LIMIT), checked by the validator.",
+   "items": {
+    "type": "array",
+    "minItems": 3,
+    "maxItems": 3,
+    "items": {
+     "type": "number"
+    }
+   }
+  },
+  "triangles": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 2000000,
+   "description": "Vertex index triples, counter-clockwise in plan. Coverage is exactly the closed union of these triangles; there is no implicit triangulation.",
+   "items": {
+    "type": "array",
+    "minItems": 3,
+    "maxItems": 3,
+    "items": {
+     "type": "integer",
+     "minimum": 0
+    }
+   }
+  }
+ }
+}

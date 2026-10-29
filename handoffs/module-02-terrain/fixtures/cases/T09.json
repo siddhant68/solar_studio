@@ -1,0 +1,59 @@
+{
+ "case_id": "T09",
+ "title": "Translated and rotated survey frame gives the same placement",
+ "base_case": "T03",
+ "transform": {
+  "rotate_ccw_deg": 30.0,
+  "about_xy_m": [
+   0.0,
+   0.0
+  ],
+  "then_translate_xy_m": [
+   446000.0,
+   4412000.0
+  ],
+  "facing_azimuth_deg_after": 150.0,
+  "frame_after": {
+   "kind": "projected_cartesian",
+   "id": "utm33n",
+   "crs": "EPSG:32633",
+   "units": "m",
+   "axes": {
+    "x": "east",
+    "y": "north"
+   }
+  },
+  "vertical_after": {
+   "kind": "orthometric",
+   "crs": "EPSG:5773",
+   "units": "m",
+   "positive": "up"
+  }
+ },
+ "rule": "Apply the transform to the Module 01 boundary and anchor (azimuth A -> A - 30 for a counter-clockwise rotation) and to every TIN vertex (z unchanged).",
+ "expected": "Same table and module IDs, status, lower/upper edge elevations, clearances and support heights as T03 (|difference| <= 1e-9 m); plan coordinates equal the transformed T03 coordinates within 1e-6 m.",
+ "inputs": {
+  "layout_request": "layouts/single-flat-4x2-rotated.layout-request.json",
+  "surface": "surfaces/hill-fan-rotated.surface.json",
+  "observed_result_id": "res_a9f1db03663ea4c6e6d10f35",
+  "observed_payload_digest": "3fa089f7d8e9a634808bbf48bc595f20373b018ad1411011e7a0fcdbb2a9b1ef"
+ },
+ "expected_footprint_xy_m": [
+  [
+   446000.23205080756,
+   4412003.598076211
+  ],
+  [
+   446003.6961524227,
+   4412005.598076211
+  ],
+  [
+   446002.6961524227,
+   4412007.3301270185
+  ],
+  [
+   445999.23205080756,
+   4412005.3301270185
+  ]
+ ]
+}

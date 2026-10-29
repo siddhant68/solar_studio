@@ -1,0 +1,69 @@
+{
+ "case_id": "T10",
+ "title": "Corrupted placement outputs the independent verifier must reject",
+ "base_case": "T03 (and T01 for multi-table checks)",
+ "mutations": [
+  {
+   "change": "tables[0].lower_edge_z_m -= 0.3 and every module z of that table -= 0.3",
+   "must_fail": [
+    "clearance"
+   ]
+  },
+  {
+   "change": "one module corner z += 0.01",
+   "must_fail": [
+    "module_geometry",
+    "payload_integrity"
+   ]
+  },
+  {
+   "change": "tables[0].min_clearance_m reported as 0.8 (corner value)",
+   "must_fail": [
+    "clearance_report"
+   ]
+  },
+  {
+   "change": "T04 table reported as placed at 10.5",
+   "must_fail": [
+    "coverage"
+   ]
+  },
+  {
+   "change": "a support above_ground_m changed by +0.1",
+   "must_fail": [
+    "supports"
+   ]
+  },
+  {
+   "change": "source payload_digest in the summary replaced",
+   "must_fail": [
+    "source_linkage"
+   ]
+  },
+  {
+   "change": "a T01 table record's footprint shifted by 0.1 m in x",
+   "must_fail": [
+    "source_linkage"
+   ]
+  },
+  {
+   "change": "placed_dc_kwp changed while records unchanged",
+   "must_fail": [
+    "totals"
+   ]
+  },
+  {
+   "change": "vertical.crs in the summary changed",
+   "must_fail": [
+    "datum"
+   ]
+  },
+  {
+   "change": "table lifted 1 m higher than the minimum (clearance still satisfied)",
+   "must_fail": [
+    "lift_policy"
+   ],
+   "why": "the minimum-clearance policy also fixes the lift; extra lift is not this policy's result"
+  }
+ ]
+}

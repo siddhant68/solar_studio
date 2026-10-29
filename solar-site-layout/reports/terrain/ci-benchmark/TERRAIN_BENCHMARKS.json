@@ -1,0 +1,287 @@
+{
+ "schema": "solar.terrain.benchmarks/1",
+ "gate": "TD02",
+ "machine": {
+  "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+  "logical_cpus": 4,
+  "physical_cpus": 2,
+  "memory_total_mib": 15984,
+  "os": "Linux-7.0.0-1017-azure-x86_64-with-glibc2.39",
+  "python": "3.12.3",
+  "runner": "GitHub Actions ubuntu-24.04"
+ },
+ "method": "fresh child process per phase; process-tree RSS (child and descendants) sampled every 10 ms with psutil; wall time from process start to exit, interpreter start included",
+ "layout": {
+  "fixture": "fixtures/benchmark-10k.request.json",
+  "result_id": "res_d1bbb8a940f5c1d227f55119",
+  "module_count": 10192,
+  "table_count": 364
+ },
+ "terrain_construction": {
+  "grid_vertices": "501 x 501",
+  "vertices": 251001,
+  "triangles": 500000,
+  "bbox_xy_m": [
+   499990.0,
+   4199990.0,
+   500325.36,
+   4200178.0
+  ],
+  "cell_m": [
+   0.670719999999972,
+   0.376
+  ],
+  "covers": "site boundary bounding box plus a 10 m margin",
+  "diagonal": "each cell split as (i,j)-(i+1,j)-(i+1,j+1) and (i,j)-(i+1,j+1)-(i,j+1)",
+  "z": "100 + 0.02 x' + 0.03 y' + 0.4 sin(x'/9) cos(y'/13), x' = x - bbox_min_x, y' = y - bbox_min_y",
+  "surface_json_bytes": 24666007,
+  "surface_json_sha256": "cf78a1cb20ac4ef30b97bb8bf775d23f5b69c218319d695b496cedf0a211c836"
+ },
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.1
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.0,
+     0.0
+    ],
+    [
+     8.068,
+     0.0
+    ],
+    [
+     16.136,
+     0.0
+    ],
+    [
+     0.0,
+     4.14726443347971
+    ],
+    [
+     8.068,
+     4.14726443347971
+    ],
+    [
+     16.136,
+     4.14726443347971
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 30.0,
+   "max_support_above_ground_m": 10.0
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "phases": {
+  "terrain_import": {
+   "exit": 0,
+   "wall_s": 7.001,
+   "peak_tree_rss_mib": 602.9,
+   "rss_samples": 533,
+   "stderr_tail": "",
+   "phase": "import",
+   "imports_s": 0.24535607499996104,
+   "parse_s": 0.49235139000001027,
+   "terrain_id": "ter_8b1eaac7fc7a45189652362d",
+   "info": {
+    "bbox_xy_m": [
+     499990.0,
+     4199990.0,
+     500325.36,
+     4200178.0
+    ],
+    "boundary_segment_count": 2000,
+    "exact_arithmetic": {
+     "orientations_evaluated": 76784144,
+     "orientations_exact_expansion": 1051688,
+     "orientations_exact_rational": 0,
+     "rational_point_tests": 0,
+     "slope_decisions_exact": 0,
+     "support_limit_exact_recomputations": 0
+    },
+    "overlap_candidate_pairs": 4238008,
+    "referenced_vertex_count": 251001,
+    "t_junction_count": 0,
+    "triangle_count": 500000,
+    "unreferenced_vertex_count": 0,
+    "vertex_count": 251001,
+    "z_range_m": [
+     100.0,
+     112.40114198137945
+    ]
+   },
+   "reused": false,
+   "work_s": 6.624904380000032,
+   "ok": true,
+   "stages": {}
+  },
+  "placement": {
+   "exit": 0,
+   "wall_s": 6.377,
+   "peak_tree_rss_mib": 342.5,
+   "rss_samples": 476,
+   "stderr_tail": "",
+   "phase": "place",
+   "imports_s": 0.253856600000006,
+   "placement_id": "plc_26a0d2da0c5de2a67faa6895",
+   "payload_digest": "1fabd09e8b69e3607464fe0a64ca62b3f651354c088aa093ce1352b722c81e33",
+   "reused": false,
+   "counts": {
+    "infeasible_tables": 0,
+    "placed_dc_capacity_kwp": 5911.36,
+    "placed_modules": 10192,
+    "placed_tables": 364,
+    "supports": 2184,
+    "tables": 364,
+    "unknown_ground_tables": 0
+   },
+   "verification_ok": true,
+   "engine_diagnostics": {
+    "boundary_segment_candidates_total": 0,
+    "candidate_selection": "STR-tree over triangle bounding boxes (triangles whose box meets the layout's box), queried with each footprint",
+    "candidate_triangles_max_per_table": 624,
+    "candidate_triangles_total": 219312,
+    "exact_area_fallbacks": 0,
+    "exact_arithmetic": {
+     "orientations_evaluated": 13864492,
+     "orientations_exact_expansion": 0,
+     "orientations_exact_rational": 0,
+     "rational_point_tests": 4004,
+     "slope_decisions_exact": 0,
+     "support_limit_exact_recomputations": 0
+    },
+    "overlay_points_total": 149072,
+    "triangles_indexed": 366540
+   },
+   "verifier_candidates": {
+    "candidate_triangles_max_per_table": 832,
+    "candidate_triangles_total": 263120,
+    "grid_assignments": 1139976,
+    "grid_cell_m": 0.670719999994617,
+    "grid_cells": [
+     446,
+     230
+    ],
+    "method": "uniform grid over triangle bounding boxes",
+    "triangles_indexed": 366540
+   },
+   "verifier_exact_rational_evaluations": 4860,
+   "dependencies": {
+    "geos": "3.14.1",
+    "jsonschema": "4.26.0",
+    "mcp": "2.3.0",
+    "numpy": "2.5.4",
+    "python": "3.12.3",
+    "shapely": "2.2.0",
+    "starlette": "1.10.0",
+    "uvicorn": "0.54.0"
+   },
+   "source_commit": "e194fb20a6b8a58b9cee409df3eaf3d62f2d382d",
+   "source_tree_dirty": false,
+   "work_s": 6.035987846000012,
+   "ok": true,
+   "stages": {
+    "load_layout_records_s": 0.10331254800001943,
+    "load_terrain_arrays_s": 0.020922147000021596,
+    "engine_s": 3.029387965000012,
+    "independent_verification_s": 2.504354962999969,
+    "persistence_s": 0.19648172500001237
+   }
+  },
+  "cold_workflow": {
+   "exit": 0,
+   "wall_s": 14.183,
+   "peak_tree_rss_mib": 608.8,
+   "rss_samples": 1068,
+   "stderr_tail": "",
+   "phase": "cold",
+   "imports_s": 0.25440241799998375,
+   "layout_s": 1.2436129170000072,
+   "import_s": 6.657653313000026,
+   "place_s": 5.930854247000013,
+   "placement_id": "plc_26a0d2da0c5de2a67faa6895",
+   "payload_digest": "1fabd09e8b69e3607464fe0a64ca62b3f651354c088aa093ce1352b722c81e33",
+   "reused": false,
+   "counts": {
+    "infeasible_tables": 0,
+    "placed_dc_capacity_kwp": 5911.36,
+    "placed_modules": 10192,
+    "placed_tables": 364,
+    "supports": 2184,
+    "tables": 364,
+    "unknown_ground_tables": 0
+   },
+   "verification_ok": true,
+   "engine_diagnostics": {
+    "boundary_segment_candidates_total": 0,
+    "candidate_selection": "STR-tree over triangle bounding boxes (triangles whose box meets the layout's box), queried with each footprint",
+    "candidate_triangles_max_per_table": 624,
+    "candidate_triangles_total": 219312,
+    "exact_area_fallbacks": 0,
+    "exact_arithmetic": {
+     "orientations_evaluated": 13864492,
+     "orientations_exact_expansion": 0,
+     "orientations_exact_rational": 0,
+     "rational_point_tests": 4004,
+     "slope_decisions_exact": 0,
+     "support_limit_exact_recomputations": 0
+    },
+    "overlay_points_total": 149072,
+    "triangles_indexed": 366540
+   },
+   "verifier_candidates": {
+    "candidate_triangles_max_per_table": 832,
+    "candidate_triangles_total": 263120,
+    "grid_assignments": 1139976,
+    "grid_cell_m": 0.670719999994617,
+    "grid_cells": [
+     446,
+     230
+    ],
+    "method": "uniform grid over triangle bounding boxes",
+    "triangles_indexed": 366540
+   },
+   "verifier_exact_rational_evaluations": 4860,
+   "dependencies": {
+    "geos": "3.14.1",
+    "jsonschema": "4.26.0",
+    "mcp": "2.3.0",
+    "numpy": "2.5.4",
+    "python": "3.12.3",
+    "shapely": "2.2.0",
+    "starlette": "1.10.0",
+    "uvicorn": "0.54.0"
+   },
+   "source_commit": "e194fb20a6b8a58b9cee409df3eaf3d62f2d382d",
+   "source_tree_dirty": false,
+   "work_s": 13.83230136100002,
+   "ok": true,
+   "stages": {
+    "load_layout_records_s": 0.12000248499998634,
+    "load_terrain_arrays_s": 0.010923513999955503,
+    "engine_s": 2.8164884430000257,
+    "independent_verification_s": 2.6231844719999913,
+    "persistence_s": 0.2069242000000031
+   }
+  }
+ },
+ "td02": {
+  "requirement": "placement (independent verification and persistence included, layout and prepared terrain already stored) <= 30 s process wall time including interpreter start, and <= 1 GiB peak process-tree memory",
+  "process_wall_s": 6.377,
+  "peak_tree_rss_mib": 342.5,
+  "wall_target_s": 30.0,
+  "memory_target_mib": 1024.0,
+  "all_tables_placed": true,
+  "verified": true,
+  "fresh_computation": true,
+  "pass": true
+ },
+ "not_targets": "terrain import and the cold workflow have no T1 target; they are reported"
+}

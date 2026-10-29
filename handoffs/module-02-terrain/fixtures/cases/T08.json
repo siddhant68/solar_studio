@@ -1,0 +1,157 @@
+{
+ "case_id": "T08",
+ "title": "Rejected requests (typed errors; nothing stored)",
+ "cases": [
+  {
+   "name": "frame mismatch",
+   "change": "surface.frame.id = 'local:other-site' for case T03",
+   "expected_error": "FRAME_MISMATCH",
+   "why": "the terrain and the layout must declare the identical horizontal frame; no transformation is attempted"
+  },
+  {
+   "name": "vertical datum mismatch",
+   "change": "T09 inputs (surface vertical = orthometric EPSG:5773) with request.expected_vertical = {kind: orthometric, crs: EPSG:5703}",
+   "expected_error": "DATUM_MISMATCH",
+   "why": "no vertical transformation in Module 02 (PROJ falls back to a no-op ballpark transformation offline; see research/library-probes.json)"
+  },
+  {
+   "name": "vertical kind mismatch",
+   "change": "T03 (local datum local:fixture-datum) with request.expected_vertical = {kind: local, id: local:other-benchmark}",
+   "expected_error": "DATUM_MISMATCH",
+   "why": "a different local benchmark is a different reference"
+  },
+  {
+   "name": "empty expected_vertical",
+   "change": "request.expected_vertical = {}",
+   "expected_error": "INVALID_INPUT",
+   "why": "assertions must be complete"
+  },
+  {
+   "name": "partial expected_vertical",
+   "change": "request.expected_vertical = {kind: orthometric}",
+   "expected_error": "INVALID_INPUT",
+   "why": "kind without crs is not a supported assertion"
+  },
+  {
+   "name": "matching expected_vertical",
+   "change": "T09 with request.expected_vertical = {kind: orthometric, crs: EPSG:5773}",
+   "expected_error": null,
+   "why": "accepted; result identical to T09 except parameters_digest and placement_id"
+  },
+  {
+   "name": "missing vertical datum",
+   "change": "delete surface.vertical",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "elevations without a declared vertical reference are not accepted"
+  },
+  {
+   "name": "source mismatch",
+   "change": "request.source_layout.payload_digest = 64 zeros",
+   "expected_error": "SOURCE_MISMATCH",
+   "why": "a placement names the layout by result_id and payload_digest together"
+  },
+  {
+   "name": "unknown layout",
+   "change": "request.source_layout.result_id = res_000000000000000000000000",
+   "expected_error": "RESULT_NOT_FOUND",
+   "why": ""
+  },
+  {
+   "name": "degenerate triangle",
+   "change": "hill-fan triangle [0, 1, 4] replaced by [0, 1, 1]",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "zero plan area"
+  },
+  {
+   "name": "overlapping triangles",
+   "change": "append triangle [0, 1, 2] to hill-fan",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "a 2.5D surface maps each plan point to one elevation"
+  },
+  {
+   "name": "clockwise triangle",
+   "change": "hill-fan triangle [0, 1, 4] written as [0, 4, 1]",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "orientation is part of the contract (counter-clockwise in plan)"
+  },
+  {
+   "name": "non-finite elevation",
+   "change": "vertex 4 z = NaN",
+   "expected_error": "INVALID_TERRAIN",
+   "why": ""
+  },
+  {
+   "name": "duplicate plan vertex",
+   "change": "append vertex (4, 4, 11.0)",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "two elevations at one plan point"
+  },
+  {
+   "name": "cracked T-junction",
+   "surface": "surfaces/hill-fan-tjunction-cracked.surface.json",
+   "expected_error": "INVALID_TERRAIN",
+   "why": "the edge (8,0)-(4,4) interpolates to 10.3 at (6, 2) on one side and the junction vertex says 10.5: a crack with two elevations along one line"
+  },
+  {
+   "name": "coordinate beyond envelope",
+   "change": "hill-fan vertex 0 x = 20000000",
+   "expected_error": "RESOURCE_LIMIT",
+   "why": "|x| <= 1e7"
+  },
+  {
+   "name": "elevation beyond envelope",
+   "change": "hill-fan vertex 4 z = 30000",
+   "expected_error": "RESOURCE_LIMIT",
+   "why": "|z| <= 2e4"
+  },
+  {
+   "name": "too many triangles",
+   "change": "a surface with more triangles than the configured limit (tests lower the limit; the T1 limit is 2,000,000)",
+   "expected_error": "RESOURCE_LIMIT",
+   "why": "checked before geometric work"
+  },
+  {
+   "name": "placement time limit",
+   "change": "SOLAR_TERRAIN_TIMEOUT_S = 0 for T01",
+   "expected_error": "RESOURCE_LIMIT",
+   "why": "finite time limit; nothing stored"
+  },
+  {
+   "name": "unknown terrain",
+   "change": "request.terrain = ter_000000000000000000000000",
+   "expected_error": "TERRAIN_NOT_FOUND",
+   "why": ""
+  },
+  {
+   "name": "unsupported support model",
+   "change": "supports = {model: uniform_rows, ...}",
+   "expected_error": "UNSUPPORTED_OPERATION",
+   "why": "generated rows are T2"
+  },
+  {
+   "name": "support outside footprint",
+   "change": "supports.points_ad_m = [[4.5, 1.0]] for case T03 (W = 4)",
+   "expected_error": "INVALID_INPUT",
+   "why": "supports are inside the table footprint"
+  },
+  {
+   "name": "negative clearance",
+   "change": "placement.minimum_clearance_m = -0.1",
+   "expected_error": "INVALID_INPUT",
+   "why": ""
+  },
+  {
+   "name": "unsupported policy",
+   "change": "placement.policy = 'follow_terrain_reorientation'",
+   "expected_error": "UNSUPPORTED_OPERATION",
+   "why": "reorientation is a later, separately approved milestone"
+  }
+ ],
+ "accepted_variants": [
+  {
+   "name": "consistent T-junction",
+   "surface": "surfaces/hill-fan-tjunction-consistent.surface.json",
+   "expected": "valid surface; see case T12 (T03 placement unchanged, L = 11.1 m)"
+  }
+ ]
+}

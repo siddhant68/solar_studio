@@ -1,0 +1,150 @@
+{
+ "case_id": "T13",
+ "title": "Support exactly at the height limit is within it",
+ "layout": {
+  "request": "layouts/single-flat-4x2.layout-request.json",
+  "observed_result_id": "res_4c0feedc2e9bff7e31ebdefc",
+  "observed_payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+  "modules_per_table": 4,
+  "power_wp": 550,
+  "table_width_W_m": 4.0,
+  "table_depth_D_m": 2.0,
+  "tan_tilt": 0.0,
+  "lower_edge_height_m": 0.8
+ },
+ "surface": "../surfaces/plane-north-0p5.surface.json",
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "source_layout": {
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+   "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e"
+  },
+  "terrain": "ter_cd4444954ee891db75345fcc",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.0
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.5,
+     0.5
+    ],
+    [
+     0.5,
+     1.5
+    ],
+    [
+     3.5,
+     0.5
+    ],
+    [
+     3.5,
+     1.5
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 35.0,
+   "max_support_above_ground_m": 1.25
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "formula": "planar ground G = z0 + gx x + gy y; L = max over footprint corners of (G - d tan(beta)) + c + s; clearance(a, d) = L + d tan(beta) - s - G; support above-ground height = top - ground",
+ "plane": {
+  "z0": 20.0,
+  "gx": 0.0,
+  "gy": 0.5
+ },
+ "expected": {
+  "tables": [
+   {
+    "table_id": "T_j0_i0",
+    "origin_xy_m": [
+     2.0,
+     3.0
+    ],
+    "footprint_xy_m": [
+     [
+      2.0,
+      3.0
+     ],
+     [
+      6.0,
+      3.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      2.0,
+      5.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 23.0,
+    "upper_edge_z_m": 23.0,
+    "vertical_lift_m": 22.2,
+    "min_clearance_m": 0.5,
+    "max_clearance_m": 1.5,
+    "max_ground_slope_deg": 26.56505117707799,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 0.5,
+      "xy_m": [
+       2.5,
+       3.5
+      ],
+      "ground_z_m": 21.75,
+      "top_z_m": 23.0,
+      "above_ground_m": 1.25
+     },
+     {
+      "a_m": 0.5,
+      "d_m": 1.5,
+      "xy_m": [
+       2.5,
+       4.5
+      ],
+      "ground_z_m": 22.25,
+      "top_z_m": 23.0,
+      "above_ground_m": 0.75
+     },
+     {
+      "a_m": 3.5,
+      "d_m": 0.5,
+      "xy_m": [
+       5.5,
+       3.5
+      ],
+      "ground_z_m": 21.75,
+      "top_z_m": 23.0,
+      "above_ground_m": 1.25
+     },
+     {
+      "a_m": 3.5,
+      "d_m": 1.5,
+      "xy_m": [
+       5.5,
+       4.5
+      ],
+      "ground_z_m": 22.25,
+      "top_z_m": 23.0,
+      "above_ground_m": 0.75
+     }
+    ]
+   }
+  ],
+  "placed_tables": 1,
+  "placed_modules": 4,
+  "placed_dc_kwp": 2.2
+ },
+ "notes": "L = 20 + 0.5 x 5 + 0.5 = 23.0; front supports at y = 3.5 stand exactly 1.25 m above ground (all values dyadic, so exact in double). Equality is within the limit: placed. With max_support_above_ground_m = 1.2499999999 the same table is infeasible (support_above_ground_exceeds_limit); the decision is made by the exact band (CONTRACTS.md 4.3)."
+}

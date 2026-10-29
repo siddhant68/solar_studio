@@ -1,0 +1,379 @@
+{
+ "schema": "solar.terrain.acceptance/1",
+ "milestone": "Module 02 T1",
+ "built_at": "2026-10-29T18:19:22+00:00",
+ "head": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+ "bound_trees": {
+  "solar-site-layout/src": "b9d3abc9c720a38903c934d5d4e1f96a6f3ee16a",
+  "solar-site-layout/tests": "e63c19a252e8e7d628e4560b3092665013d95246",
+  "solar-site-layout/scripts": "86fafbddb2f2b2ae9c2ee7b6ce13b0dcf0b7b09d",
+  "solar-site-layout/pyproject.toml": "69a0cc3d7132482e0fa40f41d3df69f19f299ff9",
+  "solar-site-layout/uv.lock": "b6a51a9c56255d3091a71ff3ec65927eb86b5fc5",
+  "solar-site-layout/fixtures": "ac2ee3e5ea20d4396328e087dd12e715914ac71b",
+  "handoffs/module-02-terrain/contracts": "b0f7b21a2a416055a95895490247cd61fc022de5",
+  "handoffs/module-02-terrain/fixtures": "0de30c7183897ff2abc05d3707d933ab22f241ac",
+  ".github": "f3a80fbcaa07924f36187a3bd5cfa717f5e1475a"
+ },
+ "local_run": {
+  "head": "2dcf16c77415ead29fb97bc698a928e398e6de0a",
+  "fresh": true,
+  "pytest_exit": 0,
+  "ci_gate_exit": 0,
+  "tests": {
+   "total": 360,
+   "passed": 360
+  }
+ },
+ "counts": {
+  "pass": 33,
+  "unexecuted": 5
+ },
+ "t1_gates_all_pass": true,
+ "gates": {
+  "TR01": {
+   "title": "Sources, commits, licences and authorities recorded; observations of other software kept separate",
+   "status": "pass",
+   "evidence": [
+    "handoffs/module-02-terrain/research/SOURCES.json",
+    "handoffs/module-02-terrain/RESEARCH.md"
+   ],
+   "detail": "8 sources, each with its authority (source-read, runtime-probe, repository-search, not-inspected)"
+  },
+  "TR02": {
+   "title": "Library probes re-run with the recorded versions; behaviours behind the contract decisions unchanged",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/library-probes-rerun.json",
+    "handoffs/module-02-terrain/research/library-probes.json",
+    "tests/test_terrain_errors.py::test_tc02_no_transformation_library_is_used"
+   ],
+   "detail": "re-run with {'python': '3.12.3', 'pyproj': '3.7.2', 'proj': '9.5.1', 'scipy': '1.16.2', 'numpy': '2.3.4', 'rasterio': '1.4.3', 'gdal': '3.9.3'} is identical to the recorded probes; PROJ still returns 100 m -> 100 m with accuracy -1 (ballpark), SciPy still interpolates across the gap; the T1 package imports none of the probed libraries"
+  },
+  "TR03": {
+   "title": "Final schemas valid; fixtures validate; regeneration byte-identical; checker passes; terrain IDs equal the index",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_contracts.py::test_*",
+    "handoffs/module-02-terrain/PACKAGE_VALIDATION.json"
+   ],
+   "detail": "8 test cases passed"
+  },
+  "TC01": {
+   "title": "Invalid surfaces: INVALID_TERRAIN with the field (incl. cracked T-junction) or RESOURCE_LIMIT; nothing stored",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_errors.py::test_tc01_*"
+   ],
+   "detail": "14 test cases passed"
+  },
+  "TC02": {
+   "title": "Typed request errors (frame, datum, expected_vertical, source, result, terrain, unsupported); no transformation",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_errors.py::test_tc02_*",
+    "tests/test_terrain_errors.py::test_non_finite_json_text*"
+   ],
+   "detail": "21 test cases passed"
+  },
+  "TC03": {
+   "title": "T01 planar terrain, six tables: elevations, clearances, supports, slope, 24 modules / 13.2 kWp",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T01]*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC04": {
+   "title": "T02 tilted 3-4-5 table: L = 51.0 m, upper edge 54.0 m, lift +50.2 m, supports 0.75/2.25 m",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T02]*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC05": {
+   "title": "T03 interior hill: L = 11.1 m, minimum clearance 0.5 m at (4, 4), corner value 10.8 m not produced",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T03]*",
+    "tests/test_terrain_fixtures.py::test_tc05_*"
+   ],
+   "detail": "2 test cases passed"
+  },
+  "TC06": {
+   "title": "T04 internal void: unknown_ground, 7.0 / 1.0 m2, no elevations, modules or supports",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T04]*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC07": {
+   "title": "T05 survey edge on table edges: covered and placed; tables beyond unknown_ground; 16 modules / 8.8 kWp",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T05]*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC08": {
+   "title": "T06 support-height limit: infeasible, elevations and supports kept, excluded from placed counts",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T06]*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC09": {
+   "title": "T07 slope limit: infeasible (ground_slope_exceeds_limit)",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T07]*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC10": {
+   "title": "T09 rotated 30 deg into EPSG:32633: same IDs and elevations (1e-9 m), plan coordinates within 1e-6 m",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_tc10_*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TC11": {
+   "title": "z_kind terrain_vertical_reference; exact not_computed list; no pile length or embedment field",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_tc20_tc11_*"
+   ],
+   "detail": "10 test cases passed"
+  },
+  "TC12": {
+   "title": "Module 01 result, payload digest and issued exports unchanged (path, bytes, inode)",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_tc12_*"
+   ],
+   "detail": "2 test cases passed"
+  },
+  "TC13": {
+   "title": "Identities: equivalent inputs give the same IDs (equal to the index); changes change them; repeats reuse",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_tc13_*",
+    "tests/test_terrain_contracts.py::test_terrain_ids_equal_the_fixture_index*"
+   ],
+   "detail": "3 test cases passed"
+  },
+  "TC14": {
+   "title": "Count, envelope and time limits return RESOURCE_LIMIT before unbounded work; nothing stored",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_errors.py::test_tc14_*",
+    "tests/test_terrain_service.py::test_http_terrain_body_limit*"
+   ],
+   "detail": "5 test cases passed"
+  },
+  "TC15": {
+   "title": "Generated support rows (T2)",
+   "status": "unexecuted",
+   "evidence": [],
+   "detail": "out of T1 scope (T2/T3)"
+  },
+  "TC16": {
+   "title": "DEM import adapter (T3)",
+   "status": "unexecuted",
+   "evidence": [],
+   "detail": "out of T1 scope (T2/T3)"
+  },
+  "TC17": {
+   "title": "LandXML import adapter (T3)",
+   "status": "unexecuted",
+   "evidence": [],
+   "detail": "out of T1 scope (T2/T3)"
+  },
+  "TC18": {
+   "title": "T11 micro-gap: unknown_ground, uncovered area 2 x (4.000001 - 4) m2 within 1e-12",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T11]*",
+    "tests/test_terrain_fixtures.py::test_tc18_*"
+   ],
+   "detail": "2 test cases passed"
+  },
+  "TC19": {
+   "title": "T12 consistent T-junction accepted with the T03 placement; cracked T-junction rejected",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T12]*",
+    "tests/test_terrain_fixtures.py::test_tc19_*",
+    "tests/test_terrain_errors.py::test_tc01_cracked_t_junction*"
+   ],
+   "detail": "3 test cases passed"
+  },
+  "TC20": {
+   "title": "Status-dependent records validate against the final schema; count relations checked",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_tc20_tc11_*",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[*"
+   ],
+   "detail": "20 test cases passed"
+  },
+  "TC21": {
+   "title": "T13 exact support-limit tie: 1.25 m at the limit is placed; a limit 1e-10 m lower is infeasible",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_fixture_case_values[T13]*",
+    "tests/test_terrain_fixtures.py::test_tc21_*"
+   ],
+   "detail": "2 test cases passed"
+  },
+  "TV01": {
+   "title": "Verifier passes every fixture; shares no geometry code with the engine; own bounded candidates reported",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_fixtures.py::test_tv01_*",
+    "tests/test_terrain_verifier.py::test_import_boundary*",
+    "tests/test_terrain_verifier.py::test_verifier_does_not_call_the_engine*",
+    "tests/test_terrain_predicates.py::test_*"
+   ],
+   "detail": "21 test cases passed"
+  },
+  "TV02": {
+   "title": "Verifier rejects every T10 corruption naming the failing check",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_verifier.py::test_tv02_*",
+    "tests/test_terrain_verifier.py::test_t10_lists_exactly_these_mutations*",
+    "tests/test_terrain_verifier.py::test_verification_failure_stores_nothing*"
+   ],
+   "detail": "12 test cases passed"
+  },
+  "TV03": {
+   "title": "Exports round-trip every record; write-once with tamper restore; identical across processes and hash seeds",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_tv03_*"
+   ],
+   "detail": "3 test cases passed"
+  },
+  "TV04": {
+   "title": "DXF / SVG / report exports (T2)",
+   "status": "unexecuted",
+   "evidence": [],
+   "detail": "out of T1 scope (T2/T3)"
+  },
+  "TS01": {
+   "title": "CLI, HTTP and MCP give the same identities and typed errors",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_ts01_*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TS02": {
+   "title": "Bounded stable paging with typed invalid-cursor errors; summary reads load no records",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_ts02_*"
+   ],
+   "detail": "2 test cases passed"
+  },
+  "TS03": {
+   "title": "Restart reads everything back; a process killed at fault points leaves no rows; the request then succeeds",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_ts03_*"
+   ],
+   "detail": "7 test cases passed"
+  },
+  "TS04": {
+   "title": "Provenance: algorithm and policy versions, source commit, dependency versions",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_ts04_*"
+   ],
+   "detail": "1 test cases passed"
+  },
+  "TS05": {
+   "title": "Real MCP client session: import, place, paging, export, typed DATUM_MISMATCH; wire transcript kept",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/acceptance-run/pytest-junit.xml",
+    "tests/test_terrain_service.py::test_ts05_*",
+    "reports/terrain/acceptance-run/terrain-mcp/terrain-mcp-session-steps.json",
+    "reports/terrain/acceptance-run/terrain-mcp/terrain-mcp-wire-transcript.jsonl"
+   ],
+   "detail": "1 test cases passed; 20 session steps passed, wire transcript retained"
+  },
+  "TS06": {
+   "title": "Read-only browser view of a placement (T2)",
+   "status": "unexecuted",
+   "evidence": [],
+   "detail": "out of T1 scope (T2/T3)"
+  },
+  "TD01": {
+   "title": "GitHub Actions: full suite with browser and MCP required plus terrain, terrain MCP evidence, benchmark job",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/ci-run.json",
+    "reports/terrain/ci-benchmark/TERRAIN_BENCHMARKS.json",
+    "https://github.com/siddhant68/solar_studio/actions/runs/40928517340"
+   ],
+   "detail": "run 40928517340 on 2dcf16c774: jobs [('Full suite (Linux, Python 3.12, Chromium required)', 'success'), ('Terrain benchmark TD02 (500k triangles, 10,192 modules)', 'success')]; evidence gate passed=True; tests {'total': 360, 'passed': 360}; artifacts ['module-01-evidence-run40928517340-attempt1', 'terrain-benchmark-run40928517340-attempt1']"
+  },
+  "TD02": {
+   "title": "Placement <= 30 s process wall and <= 1 GiB peak process-tree memory (PLAN.md section 11)",
+   "status": "pass",
+   "evidence": [
+    "reports/TERRAIN_BENCHMARKS.json",
+    "reports/terrain/ci-benchmark/TERRAIN_BENCHMARKS.json"
+   ],
+   "detail": "local (Intel(R) Xeon(R) Processor @ 2.10GHz): placement 7.777 s, 338.3 MiB, pass=True; GitHub Actions (AMD EPYC 9V74 80-Core Processor): placement 6.377 s, 342.5 MiB, pass=True (targets 30 s, 1024 MiB)"
+  },
+  "TD03": {
+   "title": "Fresh clone with a locked install runs the analytic CLI workflow and the full test suite",
+   "status": "pass",
+   "evidence": [
+    "reports/terrain/reproduction/reproduction.json",
+    "reports/terrain/reproduction/reproduction-log.txt"
+   ],
+   "detail": "clone of 2dcf16c774: analytic CLI checks {'T01': True, 'T03': True, 'T04': True}; pytest: 360 passed in 86.58s (0:01:26) (browser required=True)"
+  },
+  "TD04": {
+   "title": "Delivery report separates verified behaviour, implementation claims, research observations and untested behaviour",
+   "status": "pass",
+   "evidence": [
+    "solar-site-layout/TERRAIN_DELIVERY_REPORT.md"
+   ],
+   "detail": "sections present: Independently verified behaviour, Implementation claims, Research observations, Untested behaviour"
+  }
+ }
+}

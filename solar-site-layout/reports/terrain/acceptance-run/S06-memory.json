@@ -1,0 +1,15 @@
+{
+ "result_id": "res_ba5deb098de9eab2dae1f89d",
+ "module_count": 11284,
+ "stored_module_record_bytes": 3534574,
+ "peak_bytes_summary_read": 50795,
+ "peak_bytes_page_read_100": 240537,
+ "query_plan": [
+  [
+   "7",
+   "0",
+   "0",
+   "SEARCH layout_modules USING INDEX sqlite_autoindex_layout_modules_1 (result_id=? AND seq>?)"
+  ]
+ ]
+}

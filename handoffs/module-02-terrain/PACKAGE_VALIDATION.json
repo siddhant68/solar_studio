@@ -1,0 +1,29 @@
+{
+ "scope": "checks of the Module 02 contract package (schemas and fixtures); implementation evidence is in solar-site-layout/reports/TERRAIN_ACCEPTANCE.json",
+ "checks": {
+  "schemas_valid_draft_2020_12": true,
+  "surfaces_validate": {
+   "passed": true,
+   "errors": {},
+   "count": 11
+  },
+  "placement_requests_validate": {
+   "passed": true,
+   "errors": {},
+   "count": 10
+  },
+  "fixture_regeneration_byte_identical": {
+   "passed": true,
+   "tree_sha256": "44a5c592bb4bd8854e4e4299c1db3e0bb6bf2d2e1325925366c3e0c5f551938e"
+  },
+  "independent_fixture_checker": {
+   "passed": true,
+   "output": "OK: 21 table expectations in 13 cases re-derived from the TINs"
+  }
+ },
+ "tools": {
+  "python": "3.12.3",
+  "jsonschema": "4.26.0"
+ },
+ "passed": true
+}

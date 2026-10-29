@@ -1,0 +1,58 @@
+{
+ "schema_version": "solar.terrain.surface/1",
+ "name": "Plane G = 20 + 0.5 y (dyadic slope)",
+ "frame": {
+  "kind": "local_cartesian",
+  "id": "local:analytic-site",
+  "units": "m",
+  "axes": {
+   "x": "east",
+   "y": "north"
+  }
+ },
+ "vertical": {
+  "kind": "local",
+  "id": "local:fixture-datum",
+  "crs": null,
+  "units": "m",
+  "positive": "up"
+ },
+ "source": {
+  "kind": "synthetic_analytic",
+  "description": "Two triangles over [0,8] x [0,8]; G = 20 + 0.5 y; every value in case T13 is exactly representable"
+ },
+ "vertices_xyz_m": [
+  [
+   0.0,
+   0.0,
+   20.0
+  ],
+  [
+   8.0,
+   0.0,
+   20.0
+  ],
+  [
+   8.0,
+   8.0,
+   24.0
+  ],
+  [
+   0.0,
+   8.0,
+   24.0
+  ]
+ ],
+ "triangles": [
+  [
+   0,
+   1,
+   2
+  ],
+  [
+   0,
+   2,
+   3
+  ]
+ ]
+}

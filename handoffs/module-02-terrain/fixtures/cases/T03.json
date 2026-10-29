@@ -1,0 +1,187 @@
+{
+ "case_id": "T03",
+ "title": "Hill under the middle of a flat table; every corner is lower",
+ "layout": {
+  "request": "layouts/single-flat-4x2.layout-request.json",
+  "observed_result_id": "res_4c0feedc2e9bff7e31ebdefc",
+  "observed_payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e",
+  "modules_per_table": 4,
+  "power_wp": 550,
+  "table_width_W_m": 4.0,
+  "table_depth_D_m": 2.0,
+  "tan_tilt": 0.0,
+  "lower_edge_height_m": 0.8
+ },
+ "surface": "../surfaces/hill-fan.surface.json",
+ "placement_request": {
+  "schema_version": "solar.terrain.placement.request/1",
+  "source_layout": {
+   "result_id": "res_4c0feedc2e9bff7e31ebdefc",
+   "payload_digest": "e0eebb4b07ffd1682fe94f2fd98557b0c2305ac256a30740d412332bbf92491e"
+  },
+  "terrain": "ter_b3a23946bd49d8aa30483fef",
+  "placement": {
+   "policy": "minimum_clearance_vertical_lift",
+   "minimum_clearance_m": 0.5,
+   "structure_depth_m": 0.0
+  },
+  "supports": {
+   "model": "explicit_table_local",
+   "points_ad_m": [
+    [
+     0.5,
+     1.0
+    ],
+    [
+     2.0,
+     1.0
+    ],
+    [
+     3.5,
+     1.0
+    ]
+   ]
+  },
+  "limits": {
+   "max_ground_slope_deg": 20.0,
+   "max_support_above_ground_m": 2.0
+  },
+  "coverage": "mark_unknown_ground"
+ },
+ "formula": "piecewise-linear TIN; G - d tan(beta) is linear on each triangle, so its maximum over the footprint is at an overlay vertex: footprint corners, TIN vertices inside the footprint, and TIN-edge / footprint-edge intersections",
+ "overlay_vertices_xy_m": [
+  [
+   2,
+   3
+  ],
+  [
+   6,
+   3
+  ],
+  [
+   6,
+   5
+  ],
+  [
+   2,
+   5
+  ],
+  [
+   4,
+   4
+  ],
+  [
+   3,
+   3
+  ],
+  [
+   5,
+   5
+  ],
+  [
+   5,
+   3
+  ],
+  [
+   3,
+   5
+  ]
+ ],
+ "expected": {
+  "ground_z_at_overlay_vertices_m": {
+   "2,3": 10.3,
+   "6,3": 10.3,
+   "6,5": 10.3,
+   "2,5": 10.3,
+   "4,4": 10.6,
+   "3,3": 10.45,
+   "5,5": 10.45,
+   "5,3": 10.45,
+   "3,5": 10.45
+  },
+  "tables": [
+   {
+    "table_id": "T_j0_i0",
+    "origin_xy_m": [
+     2.0,
+     3.0
+    ],
+    "footprint_xy_m": [
+     [
+      2.0,
+      3.0
+     ],
+     [
+      6.0,
+      3.0
+     ],
+     [
+      6.0,
+      5.0
+     ],
+     [
+      2.0,
+      5.0
+     ]
+    ],
+    "status": "placed",
+    "reasons": [],
+    "lower_edge_z_m": 11.1,
+    "upper_edge_z_m": 11.1,
+    "vertical_lift_m": 10.3,
+    "min_clearance_m": 0.5,
+    "min_clearance_at_xy_m": [
+     4.0,
+     4.0
+    ],
+    "clearance_at_footprint_corners_m": 0.8,
+    "max_ground_slope_deg": 8.530765609948133,
+    "covered_area_m2": 8.0,
+    "uncovered_area_m2": 0.0,
+    "supports": [
+     {
+      "a_m": 0.5,
+      "d_m": 1.0,
+      "xy_m": [
+       2.5,
+       4.0
+      ],
+      "ground_z_m": 10.375,
+      "top_z_m": 11.1,
+      "above_ground_m": 0.725
+     },
+     {
+      "a_m": 2.0,
+      "d_m": 1.0,
+      "xy_m": [
+       4.0,
+       4.0
+      ],
+      "ground_z_m": 10.6,
+      "top_z_m": 11.1,
+      "above_ground_m": 0.5
+     },
+     {
+      "a_m": 3.5,
+      "d_m": 1.0,
+      "xy_m": [
+       5.5,
+       4.0
+      ],
+      "ground_z_m": 10.375,
+      "top_z_m": 11.1,
+      "above_ground_m": 0.725
+     }
+    ]
+   }
+  ],
+  "placed_tables": 1,
+  "placed_modules": 4,
+  "placed_dc_kwp": 2.2
+ },
+ "must_not": {
+  "corner_only_lower_edge_z_m": 10.8,
+  "why": "Sampling only the four corners (all at 10.3) gives 10.8, which leaves 0.2 m over the 10.6 m hill top: 0.3 m short of the 0.5 m clearance."
+ },
+ "notes": "Each fan triangle rises 0.15 m per metre towards (4, 4). The table must be raised for the hill top, not the corners."
+}

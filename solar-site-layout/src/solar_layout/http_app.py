@@ -25,16 +25,26 @@ from .jsonio import loads_strict
 from .service import SolarService
 
 MAX_BODY_BYTES = 20 * 1024 * 1024
+# Terrain surfaces (Module 02) are larger: up to 1,000,000 vertices and 2,000,000 triangles.
+MAX_TERRAIN_BODY_BYTES = 256 * 1024 * 1024
 
 
 def _error(e: DomainError) -> JSONResponse:
     return JSONResponse({"error": e.to_dict()}, status_code=HTTP_STATUS.get(e.code, 500))
 
 
-async def _body(request: Request) -> Any:
-    raw = await request.body()
-    if len(raw) > MAX_BODY_BYTES:
-        raise DomainError(RESOURCE_LIMIT, f"Request body exceeds {MAX_BODY_BYTES} bytes", details={"limit": "max_body_bytes"})
+async def _body(request: Request, limit: int = MAX_BODY_BYTES) -> Any:
+    declared = request.headers.get("content-length")
+    if declared is not None and declared.isdigit() and int(declared) > limit:
+        raise DomainError(RESOURCE_LIMIT, f"Request body exceeds {limit} bytes", details={"limit": "max_body_bytes", "max": limit})
+    chunks = []
+    size = 0
+    async for chunk in request.stream():
+        size += len(chunk)
+        if size > limit:
+            raise DomainError(RESOURCE_LIMIT, f"Request body exceeds {limit} bytes", details={"limit": "max_body_bytes", "max": limit})
+        chunks.append(chunk)
+    raw = b"".join(chunks)
     if not raw:
         raise DomainError(INVALID_INPUT, "Request body is empty", field="")
     return loads_strict(raw)
@@ -51,7 +61,11 @@ def _int_param(request: Request, name: str) -> int | None:
 
 
 def create_app(data_dir: str | None = None) -> Starlette:
+    from solar_terrain.exports import MEDIA_TYPES as TERRAIN_MEDIA_TYPES
+    from solar_terrain.service import TerrainService
+
     svc = SolarService(data_dir, interface="http")
+    terrain = TerrainService(svc, data_dir, interface="http")
 
     def handler(fn):
         async def endpoint(request: Request):
@@ -138,6 +152,43 @@ def create_app(data_dir: str | None = None) -> Starlette:
             return await run_in_threadpool(svc.export_layout, rid, fmt)
         return await _serve_export(rid, fmt, download=True)
 
+    # ---- Module 02 terrain placement -----------------------------------------------------
+    async def terrain_validate(request: Request):
+        return await run_in_threadpool(terrain.validate_terrain, await _body(request, MAX_TERRAIN_BODY_BYTES))
+
+    async def terrains(request: Request):
+        return await run_in_threadpool(terrain.import_terrain, await _body(request, MAX_TERRAIN_BODY_BYTES))
+
+    async def terrain_get(request: Request):
+        return await run_in_threadpool(terrain.get_terrain, request.path_params["terrain_id"])
+
+    async def placements(request: Request):
+        return await run_in_threadpool(terrain.place_on_terrain, await _body(request))
+
+    async def placement(request: Request):
+        return await run_in_threadpool(terrain.get_placement_summary, request.path_params["placement_id"])
+
+    async def placement_items(request: Request):
+        return await run_in_threadpool(
+            terrain.get_placement_items,
+            request.path_params["placement_id"],
+            request.query_params.get("kind", "tables"),
+            _int_param(request, "offset"),
+            request.query_params.get("cursor"),
+            _int_param(request, "limit"),
+        )
+
+    async def placement_export(request: Request):
+        pid, fmt = request.path_params["placement_id"], request.path_params["fmt"]
+        if request.method == "POST":
+            return await run_in_threadpool(terrain.export_placement, pid, fmt)
+        fh, meta = await run_in_threadpool(terrain.open_export, pid, fmt)
+        headers = {"X-Content-SHA256": meta["sha256"], "Content-Length": str(meta["bytes"]), "Content-Disposition": 'attachment; filename="%s"' % meta["file_name"]}
+        return StreamingResponse(_chunks(fh), media_type=TERRAIN_MEDIA_TYPES[fmt], headers=headers)
+
+    async def placement_verify(request: Request):
+        return await run_in_threadpool(terrain.verify_stored_placement, request.path_params["placement_id"])
+
     async def plan_svg(request: Request):
         return await _serve_export(request.path_params["result_id"], "svg", download=False)
 
@@ -163,10 +214,19 @@ def create_app(data_dir: str | None = None) -> Starlette:
         Route("/api/layouts/{result_id}/items", handler(items)),
         Route("/api/layouts/{result_id}/plan.svg", handler(plan_svg)),
         Route("/api/layouts/{result_id}/exports/{fmt}", handler(export), methods=["GET", "POST"]),
+        Route("/api/terrains/validate", handler(terrain_validate), methods=["POST"]),
+        Route("/api/terrains", handler(terrains), methods=["POST"]),
+        Route("/api/terrains/{terrain_id}", handler(terrain_get)),
+        Route("/api/placements", handler(placements), methods=["POST"]),
+        Route("/api/placements/{placement_id}", handler(placement)),
+        Route("/api/placements/{placement_id}/items", handler(placement_items)),
+        Route("/api/placements/{placement_id}/exports/{fmt}", handler(placement_export), methods=["GET", "POST"]),
+        Route("/api/placements/{placement_id}/verify", handler(placement_verify), methods=["POST"]),
         Mount("/static", app=StaticFiles(directory=web_dir), name="static"),
     ]
     app = Starlette(routes=routes)
     app.state.service = svc
+    app.state.terrain = terrain
     return app
 
 

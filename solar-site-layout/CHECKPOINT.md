@@ -17,7 +17,10 @@ Branch `claude/kind-cerf-gu33em` of `siddhant68/solar_studio`. Pushing to this b
 | 9 | `d935ff2` | Repairs for F1–F5, the browser 404 and the PYTHONHASHSEED-dependent DXF bytes; regressions; pinned browser tooling. Its acceptance run passed 232 tests but failed the D03 timeout demonstration | Timeout fixed in 10 |
 | 10 | `fe15c5f` | **Source commit under acceptance**: the generation time limit also covers record construction and verification. (This commit also carries the outputs of the `d935ff2` run, kept as a record.) | — |
 | 11 | `4594c5f` | Acceptance evidence for `fe15c5f`: 233 tests passed, 0 skipped; 24/24 browser checks; MCP session and Inspector cross-check; examples; benchmarks | — |
-| 12 | *(delivery commit)* | `reports/ACCEPTANCE.json` (36/36 pass, bound to `fe15c5f`), packaging and fresh-clone reproduction of `4594c5f`, delivery report, this checkpoint | Pull request into `main` for review; not merged |
+| 12 | `82f11f0` | Delivery: `reports/ACCEPTANCE.json` (36/36 pass, bound to `fe15c5f`), packaging and fresh-clone reproduction of `4594c5f`, delivery report, this checkpoint | — |
+| 13 | `9a123fb` | Independent follow-up review published (`reviews/module-01/2026-10-26-followup/`): repairs accepted in the exercised cases at `82f11f0`; macOS/Chrome run with 233 tests, 24 browser checks and 17 MCP steps | PR #1 open; merge and tag are owner decisions |
+| 14 | branch `ci/module-01-browser-required` | Status documentation for the verification; GitHub Actions CI that requires the browser and MCP tests and uploads their evidence; a fix for the browser test's dead `SOLAR_REQUIRE_BROWSER` check (changes the `tests` tree, so its evidence is the CI run on that branch, not the `fe15c5f` acceptance run). Its own PR, based on PR #1's branch | Owner review |
+| 15 | branch `feat/module-02-terrain-t1` (PR #4) | Module 02 milestone T1, built on PR #2 + PR #3. All 33 in-scope T1 gates pass at `2dcf16c`. See `TERRAIN_CHECKPOINT.md` and `TERRAIN_DELIVERY_REPORT.md` | Owner review; merge order #1 → #2 → #3 → #4 |
 
 ## How to resume
 
@@ -31,6 +34,6 @@ SOLAR_REQUIRE_BROWSER=1 .venv/bin/python -m pytest -q
 .venv/bin/python scripts/build_acceptance_report.py
 ```
 
-Next operation: review and merge the pull request into `main` (owner decision), and decide the new-code licence (Apache-2.0 is only proposed). Module 02 (terrain) has not been started; its outline is in `DELIVERY_REPORT.md`.
+Status: the repairs are **independently accepted** (follow-up review), but PR #1 is **not merged**, nothing is tagged and the licence is undecided. Owner decisions pending: merge and tag PR #1; choose the licence (Apache-2.0 is only proposed); approve the Module 02 scope once the terrain proposal (branch `docs/module-02-terrain-plan`) is reviewed. Module 02 milestone T1 is implemented on branch `feat/module-02-terrain-t1` (PR #4, not merged); see `TERRAIN_CHECKPOINT.md`.
 
 The reference build itself is outside this repository and is reproducible from `references/manifest.json` (build recipe and per-file hashes).
