@@ -29,7 +29,13 @@ def validator(name: str, definition: str | None = None) -> jsonschema.Draft20201
 
 
 def error_path(err: jsonschema.ValidationError) -> str:
+    """Field path of a schema error; a missing required property is named itself."""
+    parts = list(err.absolute_path)
+    if err.validator == "required" and isinstance(err.instance, dict):
+        missing = [p for p in err.validator_value if p not in err.instance]
+        if missing:
+            parts.append(missing[0])
     out = ""
-    for part in err.absolute_path:
+    for part in parts:
         out += f"[{part}]" if isinstance(part, int) else (f".{part}" if out else str(part))
     return out
